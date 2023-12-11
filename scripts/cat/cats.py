@@ -161,6 +161,7 @@ class Cat():
         }
 
         vitiligo = ['PHANTOM', 'POWDER', 'BLEACHED', 'VITILIGO', 'VITILIGOTWO', 'SMOKEY']
+        self.genotype.vitiligo = choice([True, False, False, False, False, False, False, False])
 
         #white patterns
 
