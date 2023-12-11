@@ -1,0 +1,348 @@
+{
+  "#image_button": {
+    "colours": {
+      "normal_bg": "#00000000",
+      "hovered_bg": "#00000000",
+      "disabled_bg": "#00000000",
+      "selected_bg": "#00000000",
+      "active_bg": "#00000000",
+      "normal_text": "#00000000",
+      "hovered_text": "#00000000",
+      "selected_text": "#00000000",
+      "disabled_text": "#00000000",
+      "link_text": "#00000000",
+      "link_hover": "#00000000",
+      "link_selected": "#00000000",
+      "text_shadow": "#00000000",
+      "normal_border": "#00000000",
+      "hovered_border": "#00000000",
+      "disabled_border": "#00000000",
+      "active_border": "#00000000",
+      "selected_border": "#00000000",
+      "normal_text_shadow": "#00000000"
+    },
+    "misc": {
+      "shadow_width": "0",
+      "tool_tip_delay": "0"
+    }
+  },
+  "#random_dice_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/random_dice_large.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/random_dice_large_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/random_dice_large_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/random_dice_large_unavailable.png"
+            }
+        }
+    },
+    "#add_button":
+      {
+          "prototype": "#image_button",
+          "images":
+          {
+              "normal_image":
+              {
+                  "path": "resources/images/buttons/add.png"
+              },
+              "hovered_image":
+              {
+                  "path": "resources/images/buttons/add.png"
+              },
+              "selected_image":
+              {
+                  "path": "resources/images/buttons/add.png"
+              },
+              "disabled_image":
+              {
+                  "path":"resources/images/buttons/add.png"
+              }
+          }
+      },
+      "#minus_button":
+        {
+            "prototype": "#image_button",
+            "images":
+            {
+                "normal_image":
+                {
+                    "path": "resources/images/buttons/remove.png"
+                },
+                "hovered_image":
+                {
+                    "path": "resources/images/buttons/remove.png"
+                },
+                "selected_image":
+                {
+                    "path": "resources/images/buttons/remove.png"
+                },
+                "disabled_image":
+                {
+                    "path":"resources/images/buttons/remove.png"
+                }
+            }
+        },
+  "#back_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/back.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/back_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/back_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/back_unavailable.png"
+            }
+        }
+    },
+  "#done_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/done.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/done_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/done_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/done_unavailable.png"
+            }
+        }
+    },
+  "#general_tab_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/general.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/general_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/general_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/general_selected.png"
+            }
+        }
+    },
+  "#pattern_tab_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/pattern.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/pattern_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/pattern_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/pattern_selected.png"
+            }
+        }
+    },
+  "#extra_tab_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/extra.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/extra_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/extra_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/extra_selected.png"
+            }
+        }
+    },
+  "#clear_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/clear.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/clear_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/clear_hover.png"
+            },
+            "disabled_image":
+            {
+                "path":"resources/images/buttons/clear_hover.png"
+            }
+        }
+    },
+  "#checked_checkbox":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/checkmark_on.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/checkmark_on_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/checkmark_on_hover.png"
+            }
+        }
+    },
+    "#unchecked_checkbox":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/checkmark_off.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/checkmark_off_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/checkmark_off_hover.png"
+            }
+        }
+    },
+    "#last_page_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_l.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_l_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_l_hover.png"
+            },
+            "disabled_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_l_unavailable.png"
+            }
+        }
+    },
+    "#next_page_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_r.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_r_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_r_hover.png"
+            },
+            "disabled_image":
+            {
+                "path": "resources/images/buttons/relationship_list_arrow_r_unavailable.png"
+            }
+        }
+    },
+    "#general_info_tab_button":
+    {
+        "prototype": "#image_button",
+		"images":
+        {
+            "normal_image":
+            {
+                "path": "resources/images/buttons/general_info.png"
+            },
+            "hovered_image":
+            {
+                "path": "resources/images/buttons/general_info_hover.png"
+            },
+			"selected_image":
+            {
+                "path": "resources/images/buttons/general_info_hover.png"
+            },
+            "disabled_image":
+            {
+                "path": "resources/images/buttons/general_info_selected.png"
+            }
+        }
+    }
+}
+
+
+
+
+
