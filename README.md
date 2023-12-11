@@ -1,20 +1,17 @@
-# ClanGen CatMaker
+# ClanGen CatMaker - Genemod edition
 
-### By: Keyraven 
+### By: Chinchbug, Original by KeyRaven 
 
-Current version: 0.4.1beta
+Current version: 0.5
 
-ClanGen Catmaker allows you to create cats using [ClanGen's](https://sablesteel.itch.io/clan-gen-fan-edit) art assets! All created cats are valid to create in [ClanGen](https://sablesteel.itch.io/clan-gen-fan-edit). 
+ClanGen Catmaker allows you to create cats using [ClanGen's](https://sablesteel.itch.io/clan-gen-fan-edit) and the [Genetic mod's](https://github.com/Chinch-Bug/clangen-genemod) art assets!
 
 Future Plans:
-- Save created cats to revist them later. 
-- Export cats as .json files that can be copy and pasted into ClanGen save files. 
-- Export Cats as transparent png. 
+- Add chimeras
 
+This modded version takes [KeyRaven](https://github.com/keyraven)'s CatMaker codes and alters it to fit with how phenotypes are created and visualised by my Clangen mod
 
 Please don't sell any images created, and provide proper attribution. 
 
 
-Nightly builds can be found [here](https://nightly.link/keyraven/clangen_catmaker/workflows/build/main).
-
-A more persistant version can be found on [itch.io](https://keyraven.itch.io/clangen-catmaker).
+Nightly builds can be found [here](https://nightly.link/Chinch-Bug/clangen_catmaker-modded/workflows/build/main).
