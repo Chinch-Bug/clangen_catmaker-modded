@@ -195,7 +195,7 @@ class CreationScreen(base_screens.Screens):
             if event.ui_element == self.dropdown_menus["color_select"]:
                 global_vars.CREATED_CAT.phenotype.SetBaseColour(event.text.lower())
 
-                if global_vars.CREATED_CAT.genotype.pinkdilute[0] == 'dp' or global_vars.CREATED_CAT.genotype.pointgene[0] == 'c':
+                if global_vars.CREATED_CAT.genotype.pinkdilute[0] == 'dp' or global_vars.CREATED_CAT.genotype.pointgene[0] == 'c' or (global_vars.CREATED_CAT.genotype.pointgene[0] != 'C' and global_vars.CREATED_CAT.genotype.pointgene[1] == 'c'):
                     global_vars.CREATED_CAT.phenotype.pigone = 'albino'
                     global_vars.CREATED_CAT.phenotype.pigtwo = 'albino'
                     global_vars.CREATED_CAT.phenotype.pigext = 'albino'
@@ -987,7 +987,7 @@ class CreationScreen(base_screens.Screens):
                                                                            pygame.Rect((450, 180), (75, 30)),
                                                                            container=self.pattern_tab)
         self.dropdown_menus["sectype_select"] = pygame_gui.elements.UIDropDownMenu(['N/A', '1', '2', '3', '4', '5', '6'],
-                                                                                  global_vars.CREATED_CAT.genotype.extraeye if global_vars.CREATED_CAT.genotype.extraeye else 'N/A',
+                                                                                  global_vars.CREATED_CAT.genotype.extraeye.replace('sectoral', '') if global_vars.CREATED_CAT.genotype.extraeye else 'N/A',
                                                                            pygame.Rect((450, 155), (100, 25)),
                                                                            container=self.pattern_tab)
         #self.dropdown_menus["vit_select"] = pygame_gui.elements.UIDropDownMenu(global_vars.vit.values(),
@@ -1311,6 +1311,11 @@ class CreationScreen(base_screens.Screens):
                                                                       "",
                                                                       object_id="#unchecked_checkbox",
                                                                       container=self.pattern_tab)
+
+        if global_vars.CREATED_CAT.phenotype.tortie:
+            self.checkboxes["brindled_bicolour"].enable()
+        else:
+            self.checkboxes["brindled_bicolour"].disable()
 
         # Bleaching
         

@@ -982,13 +982,15 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             nose2.blit(nose, (0, 0), special_flags=pygame.BLEND_RGBA_MIN)
 
             whitesprite.blit(nose2, (0, 0))
-            gensprite.blit(whitesprite, (0, 0))
-            if(genotype.white_pattern and 'dorsal1' in genotype.white_pattern):
-                gensprite.blit(sprites.sprites['dorsal1' + cat_sprite], (0, 0))
-            if(genotype.white_pattern and 'dorsal2' in genotype.white_pattern):
-                gensprite.blit(sprites.sprites['dorsal2' + cat_sprite], (0, 0))
-            if(genotype.white_pattern and genotype.white_pattern[0] in vitiligo):
-                gensprite.blit(sprites.sprites[genotype.white_pattern[0] + cat_sprite], (0, 0))
+
+            if phenotype.maincolour != 'white' and phenotype.maincolour != 'albino':
+                gensprite.blit(whitesprite, (0, 0))
+                if(genotype.white_pattern and 'dorsal1' in genotype.white_pattern):
+                    gensprite.blit(sprites.sprites['dorsal1' + cat_sprite], (0, 0))
+                if(genotype.white_pattern and 'dorsal2' in genotype.white_pattern):
+                    gensprite.blit(sprites.sprites['dorsal2' + cat_sprite], (0, 0))
+                if(genotype.white_pattern and genotype.white_pattern[0] in vitiligo):
+                    gensprite.blit(sprites.sprites[genotype.white_pattern[0] + cat_sprite], (0, 0))
 
 
             if(genotype.fold[0] != 'Fd' or genotype.curl[0] == 'Cu'):

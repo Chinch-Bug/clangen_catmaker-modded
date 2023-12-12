@@ -316,7 +316,7 @@ class Phenotype():
         elif value == 'mocha':
             gene = ['cm', 'cm']
         elif value == 'mocha-albino':
-            gene = ['cm', 'cs']
+            gene = ['cm', 'c']
 
         self.genotype.pointgene = gene
             
