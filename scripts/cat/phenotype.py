@@ -42,6 +42,8 @@ class Phenotype():
             
         if not self.genotype.tortiepattern:
             self.genotype.tortiepattern = choice(list(tortie_patches_shapes.keys()))
+        if not self.genotype.chimerapattern:
+            self.genotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
 
     def SilverGoldFinder(self):
         self.silvergold = ""

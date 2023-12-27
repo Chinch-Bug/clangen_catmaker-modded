@@ -134,7 +134,7 @@ genemod_white = bidict({None: 'None',
 points = ['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']
 
 vit = bidict({None: 'None', 'VITILIGO': 'Vitiligo 1', 'VITILIGOTWO': 'Vitiligo 2',
-              'PHANTOM': 'Phantom', 'POWDER': 'Powder', 'BLEACHED': 'Bleached', "SMOKEY": "Smokey"})
+              'MOON': 'Moon', 'PHANTOM': 'Phantom', 'POWDER': 'Powder', 'BLEACHED': 'Bleached', "SMOKEY": "Smokey"})
 #vit = sort_bidict(vit, None)
 
 scars = bidict({None: "None", "ONE": "Chest", "TWO": "Shoulder", "THREE": "Over Eye", "TAILSCAR": "Tail",

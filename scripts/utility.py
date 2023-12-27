@@ -514,7 +514,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         
                         whichmain.blit(stripebase, (0, 0))
                     elif("cm" in genotype.pointgene):
-                        colour = None
+                        colour = whichcolour
                         coloursurface = None
                         if(whichcolour == "black" and genotype.pointgene[0] == "cm"):
                             whichmain.blit(sprites.sprites['lightbasecolours2'], (0, 0)) 
