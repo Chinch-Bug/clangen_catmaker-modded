@@ -34,6 +34,8 @@ class CreationScreen(base_screens.Screens):
         self.labels = {}
         self.selectedbasegame = None
         self.selectedgenemod = None
+        self.selectedbasegamechim = None
+        self.selectedgenemodchim = None
         self.selectedwhite = 'None'
 
         super().__init__(name)
@@ -196,6 +198,97 @@ class CreationScreen(base_screens.Screens):
 
                 self.build_dropdown_menus()
                 self.update_cat_image()
+
+
+            elif event.ui_element == self.checkboxes["carameltogglec"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.dilutemd[0] == 'Dm':
+                    global_vars.CREATED_CAT.genotype.chimerageno.dilutemd[0] = 'dm'
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.dilutemd[0] = 'Dm'
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.checkboxes["tortiec"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.sexgene == ['O', 'o']:
+                    global_vars.CREATED_CAT.genotype.chimerageno.sexgene = ['o', 'o']
+                    global_vars.CREATED_CAT.chimpheno.tortie = False
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.sexgene = ['O', 'o']
+                    global_vars.CREATED_CAT.chimpheno.tortie = True
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.checkboxes["revtortiec"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern and 'rev' in global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern:
+                    global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern = global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern.replace('rev', '')
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern = 'rev' + global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.checkboxes["brindled_bicolourc"]:
+                global_vars.CREATED_CAT.genotype.chimerageno.brindledbi = not \
+                    global_vars.CREATED_CAT.genotype.chimerageno.brindledbi
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.checkboxes["bleachingc"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.bleach[0] == 'lb':
+                    global_vars.CREATED_CAT.genotype.chimerageno.bleach[0] = 'Lb'
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.bleach[0] = 'lb'
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.checkboxes["ghostingc"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.ghosting[0] == 'Gh':
+                    global_vars.CREATED_CAT.genotype.chimerageno.ghosting[0] = 'gh'
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.ghosting[0] = 'Gh'
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.checkboxes["satinc"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.satin[0] == 'st':
+                    global_vars.CREATED_CAT.genotype.chimerageno.satin[0] = 'St'
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.satin[0] = 'st'
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            
+            elif event.ui_element == self.checkboxes["silver_checkboxc"]:
+                if global_vars.CREATED_CAT.genotype.chimerageno.silver[0] == 'I':
+                    global_vars.CREATED_CAT.genotype.chimerageno.silver[0] = 'i'
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.silver[0] = 'I'
+
+                global_vars.CREATED_CAT.chimpheno.SilverGoldFinder()
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["add_basegamec"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.white_pattern.append(self.selectedbasegame)
+
+                self.build_dropdown_menus()
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["add_genemodc"]:
+
+                if 'None' not in self.selectedgenemodchim:
+                    global_vars.CREATED_CAT.genotype.chimerageno.white_pattern.append(self.selectedgenemodchim)
+
+                self.build_dropdown_menus()
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["remove_whitec"]:
+
+                while self.selectedwhitechim in global_vars.CREATED_CAT.genotype.chimerageno.white_pattern:
+                    global_vars.CREATED_CAT.genotype.chimerageno.white_pattern.remove(self.selectedwhitechim)
+                
+                self.selectedwhitechim = 'None'
+
+                self.build_dropdown_menus()
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["clear_whitec"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.white_pattern = [global_vars.CREATED_CAT.genotype.chimerageno.white_pattern[0]]
+                
+                self.selectedwhitechim = 'None'
+
+                self.build_dropdown_menus()
+                self.update_cat_image()
         
         # Here if where all the dropdown menu actions are handled. ---------------------------------------------
         elif event.type == pygame_gui.UI_DROP_DOWN_MENU_CHANGED:
@@ -214,6 +307,25 @@ class CreationScreen(base_screens.Screens):
                     if global_vars.CREATED_CAT.phenotype.pigext == 'albino':
                         global_vars.CREATED_CAT.phenotype.pigext = 'P1'
                 global_vars.CREATED_CAT.phenotype.UpdateEyes()
+
+                self.update_checkboxes_and_disable_dropdowns()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["color_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.SetBaseColour(event.text.lower())
+
+                if global_vars.CREATED_CAT.genotype.chimerageno.pinkdilute[0] == 'dp' or global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] == 'c' or (global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] != 'C' and global_vars.CREATED_CAT.genotype.chimerageno.pointgene[1] == 'c'):
+                    global_vars.CREATED_CAT.chimpheno.pigone = 'albino'
+                    global_vars.CREATED_CAT.chimpheno.pigtwo = 'albino'
+                    global_vars.CREATED_CAT.chimpheno.pigext = 'albino'
+                else:
+                    if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pigtwo == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
 
                 self.update_checkboxes_and_disable_dropdowns()
 
@@ -312,6 +424,76 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.genotype.tortiepattern = None
                     if global_vars.CREATED_CAT.genotype.sexgene == ['O', 'o']:
                         global_vars.CREATED_CAT.genotype.sexgene = ['o', 'o']
+
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["tabby_pattern_selectc"]:
+
+                global_vars.CREATED_CAT.chimpheno.SetTabbyPattern(global_vars.tabbies.inverse[event.text])
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["agouti_selectc"]:
+
+                global_vars.CREATED_CAT.chimpheno.SetTabbyType(event.text)
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["sokoke_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.soktype = event.text.lower()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["wideband_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.wbtype = event.text.lower()
+                global_vars.CREATED_CAT.chimpheno.SilverGoldFinder()
+                
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["rufousing_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.ruftype = event.text.lower()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["corin_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.sunshine[0] = global_vars.corin.inverse[event.text]
+                global_vars.CREATED_CAT.genotype.chimerageno.sunshine[1] = global_vars.corin.inverse[event.text]
+                global_vars.CREATED_CAT.chimpheno.SilverGoldFinder()
+                
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["extention_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.ext[0] = global_vars.extention.inverse[event.text]
+                global_vars.CREATED_CAT.genotype.chimerageno.ext[1] = global_vars.extention.inverse[event.text]
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["specred_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.specialred = event.text.lower()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["vitiligo_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.white_pattern[0] = global_vars.vit.inverse[event.text]
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["basegame_selectc"]:
+
+                self.selectedbasegamechim = global_vars.white_patches.inverse[event.text]
+            elif event.ui_element == self.dropdown_menus["genemod_selectc"]:
+
+                self.selectedgenemodchim = global_vars.genemod_white.inverse[event.text]
+            elif event.ui_element == self.dropdown_menus["white_selectc"]:
+
+                self.selectedwhitechim = event.text
+            elif event.ui_element == self.dropdown_menus["torte_patches_shapec"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern = global_vars.tortie_patches_shapes.inverse[event.text]
+                if global_vars.CREATED_CAT.genotype.chimerageno.sexgene == ['o', 'o'] and event.text != 'None':    
+                    global_vars.CREATED_CAT.genotype.chimerageno.sexgene = ['O', 'o']
+                elif event.text == 'None':
+                    global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern = None
+                    if global_vars.CREATED_CAT.genotype.chimerageno.sexgene == ['O', 'o']:
+                        global_vars.CREATED_CAT.genotype.chimerageno.sexgene = ['o', 'o']
 
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
@@ -461,16 +643,129 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.genotype.extraeye = None
 
                 self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["karpati_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.fade = event.text
+
+                if event.text == 'None':
+                    global_vars.CREATED_CAT.genotype.chimerageno.karp = ['k', 'k']
+                elif event.text == 'Homozygous':
+                    global_vars.CREATED_CAT.genotype.chimerageno.karp = ['K', 'K']
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.karp = ['K', 'k']
+                
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["points_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.SetPoints(event.text)
+
+                if global_vars.CREATED_CAT.genotype.chimerageno.pinkdilute[0] == 'dp' or 'c' in global_vars.CREATED_CAT.genotype.chimerageno.pointgene:
+                    global_vars.CREATED_CAT.chimpheno.pigone = 'albino'
+                    global_vars.CREATED_CAT.chimpheno.pigtwo = 'albino'
+                    global_vars.CREATED_CAT.chimpheno.pigext = 'albino'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] == 'cs':
+                    global_vars.CREATED_CAT.chimpheno.pigone = 'blue'
+                    global_vars.CREATED_CAT.chimpheno.pigtwo = 'blue'
+                    global_vars.CREATED_CAT.chimpheno.pigext = 'blue'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene == ['cb', 'cs']:
+                    if global_vars.CREATED_CAT.chimpheno.pigone not in ['P1', 'blue']:
+                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pigtwo not in ['P1', 'blue']:
+                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pigext not in ['P1', 'blue']:
+                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                else:
+                    if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pigtwo == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+                
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["ref1_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.refone = event.text
+                
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["ref2_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.reftwo = event.text
+                
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["ref3_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.refext = event.text
+                
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["pig1_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.pigone = event.text
+                
+                if global_vars.CREATED_CAT.genotype.chimerageno.pinkdilute[0] == 'dp' or 'c' in global_vars.CREATED_CAT.genotype.chimerageno.pointgene:
+                    global_vars.CREATED_CAT.chimpheno.pigone = 'albino'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] == 'cs':
+                    global_vars.CREATED_CAT.chimpheno.pigone = 'blue'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene == ['cb', 'cs']:
+                    if global_vars.CREATED_CAT.chimpheno.pigone not in ['P1', 'blue']:
+                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+                else:
+                    if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["pig2_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.pigtwo = event.text
+                
+                if global_vars.CREATED_CAT.genotype.chimerageno.pinkdilute[0] == 'dp' or 'c' in global_vars.CREATED_CAT.genotype.chimerageno.pointgene:
+                    global_vars.CREATED_CAT.chimpheno.pigtwo = 'albino'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] == 'cs':
+                    global_vars.CREATED_CAT.chimpheno.pigtwo = 'blue'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene == ['cb', 'cs']:
+                    if global_vars.CREATED_CAT.chimpheno.pigtwo not in ['P1', 'blue']:
+                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+                else:
+                    if global_vars.CREATED_CAT.chimpheno.pigtwo == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["pig3_selectc"]:
+                global_vars.CREATED_CAT.chimpheno.pigext = event.text
+                
+                if global_vars.CREATED_CAT.genotype.chimerageno.pinkdilute[0] == 'dp' or 'c' in global_vars.CREATED_CAT.genotype.chimerageno.pointgene:
+                    global_vars.CREATED_CAT.chimpheno.pigext = 'albino'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] == 'cs':
+                    global_vars.CREATED_CAT.chimpheno.pigext = 'blue'
+                elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene == ['cb', 'cs']:
+                    if global_vars.CREATED_CAT.chimpheno.pigext not in ['P1', 'blue']:
+                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                else:
+                    if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
+                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["sectype_selectc"]:
+                if event.text != 'N/A':    
+                    global_vars.CREATED_CAT.genotype.chimerageno.extraeye = 'sectoral' + event.text
+                else:
+                    global_vars.CREATED_CAT.genotype.chimerageno.extraeye = None
+
+                self.update_cat_image()
 
     def show_tab(self, container):
-        for x in [self.pattern_tab, self.pattern_tab2, self.pattern_tab3, self.general_tab, self.extras_tab]:
+        for x in [self.pattern_tab, self.pattern_tab2, self.pattern_tab3, self.pattern_tab4, self.pattern_tab5, self.pattern_tab6, self.general_tab, self.extras_tab]:
             if x == container:
                 x.show()
                 self.visable_tab = x
             else:
                 x.hide()
                 
-        tab_buttons = [((self.pattern_tab, self.pattern_tab2, self.pattern_tab3), self.pattern_tab_button),
+        tab_buttons = [((self.pattern_tab, self.pattern_tab2, self.pattern_tab3, self.pattern_tab4, self.pattern_tab5, self.pattern_tab6), self.pattern_tab_button),
                        ([self.general_tab], self.general_tab_button),
                        ([self.extras_tab], self.extras_tab_button)]
         
@@ -488,6 +783,11 @@ class CreationScreen(base_screens.Screens):
         pages = [
             [self.pattern_tab, self.pattern_tab2, self.pattern_tab3]
         ]
+
+        if global_vars.CREATED_CAT and global_vars.CREATED_CAT.genotype.chimera:
+            pages = [
+            [self.pattern_tab, self.pattern_tab2, self.pattern_tab3, self.pattern_tab4, self.pattern_tab5, self.pattern_tab6]
+            ]
         
         for x in pages:
             if self.visable_tab in x:    
@@ -586,6 +886,18 @@ class CreationScreen(base_screens.Screens):
         self.pattern_tab3 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
                                                                     visible=False)
+        
+        self.pattern_tab4 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
+                                                                    global_vars.MANAGER,
+                                                                    visible=False)
+        
+        self.pattern_tab5 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
+                                                                    global_vars.MANAGER,
+                                                                    visible=False)
+        
+        self.pattern_tab6 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
+                                                                    global_vars.MANAGER,
+                                                                    visible=False)
 
         self.extras_tab = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                    global_vars.MANAGER,
@@ -667,26 +979,15 @@ class CreationScreen(base_screens.Screens):
                                                            container=self.pattern_tab,
                                                            object_id="#dropdown_label")
 
-        #self.labels["base pattern"] = pygame_gui.elements.UILabel(pygame.Rect((185, 15), (150, 25)), "Base Pattern:",
-        #                                                          container=self.pattern_tab,
-        #                                                          object_id="#dropdown_label")
         self.labels["Tortie Patches shape"] = pygame_gui.elements.UILabel(pygame.Rect((185, 15), (165, 25)),
                                                                           "Tortie Patches Pattern:",
                                                                           container=self.pattern_tab,
                                                                           object_id="#dropdown_label")
 
-        #self.labels["white_patches"] = pygame_gui.elements.UILabel(pygame.Rect((375, 15), (150, 25)), "White Patches:",
-        #                                                           container=self.pattern_tab,
-        #                                                           object_id="#dropdown_label")
-        
         self.labels["points"] = pygame_gui.elements.UILabel(pygame.Rect((375, 15), (-1, 25)), "Colour Restriction:",
                                                                    container=self.pattern_tab,
                                                                    object_id="#dropdown_label")
         
-        #self.labels["vit"] = pygame_gui.elements.UILabel(pygame.Rect((220, 70), (-1, 25)), "Vitiligo:",
-        #                                                           container=self.pattern_tab,
-        #                                                           object_id="#dropdown_label")
-
         self.labels["caramel"] = pygame_gui.elements.UILabel(pygame.Rect((54, 80), (150, 25)), "Caramel",
                                                                  container=self.pattern_tab,
                                                                  object_id="#dropdown_label")
@@ -727,32 +1028,65 @@ class CreationScreen(base_screens.Screens):
         self.labels["sec"] = pygame_gui.elements.UILabel(pygame.Rect((375, 160), (150, 25)), "Sectoral:",
                                                                  container=self.pattern_tab,
                                                                  object_id="#dropdown_label")
+        
+        
+        # -------------------------------------------------------------------------------------------------------------
+        # Pattern Tab Labels CHIMERA ------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
 
-        #self.labels["eye color 1"] = pygame_gui.elements.UILabel(pygame.Rect((20, 125), (150, 25)), "Eye Color:",
-        #                                                         container=self.pattern_tab,
-        #                                                         object_id="#dropdown_label")
+        self.labels["colorc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 15), (150, 25)), "Base Color:",
+                                                           container=self.pattern_tab4,
+                                                           object_id="#dropdown_label")
 
-        #self.labels["eye color 2"] = pygame_gui.elements.UILabel(pygame.Rect((385, 125), (150, 25)), "Second Eye Color:",
-        #                                                         container=self.pattern_tab,
-        #                                                         object_id="#dropdown_label")
+        self.labels["Tortie Patches shapec"] = pygame_gui.elements.UILabel(pygame.Rect((185, 15), (165, 25)),
+                                                                          "Tortie Patches Pattern:",
+                                                                          container=self.pattern_tab4,
+                                                                          object_id="#dropdown_label")
 
-        #self.labels["tint"] = pygame_gui.elements.UILabel(pygame.Rect((200, 180), (150, 25)), "Tint:",
-        #                                                  container=self.pattern_tab,
-        #                                                  object_id="#dropdown_label")
+        self.labels["pointsc"] = pygame_gui.elements.UILabel(pygame.Rect((375, 15), (-1, 25)), "Colour Restriction:",
+                                                                   container=self.pattern_tab4,
+                                                                   object_id="#dropdown_label")
+        
+        self.labels["caramelc"] = pygame_gui.elements.UILabel(pygame.Rect((54, 80), (150, 25)), "Caramel",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
 
-        #self.labels["white_patches_tint"] = pygame_gui.elements.UILabel(pygame.Rect((360, 180), (-1, 25)),
-        #                                                                "White Patches/Points Tint:",
-        #                                                                container=self.pattern_tab,
-        #                                                                object_id="#dropdown_label")
+        self.labels["revtortc"] = pygame_gui.elements.UILabel(pygame.Rect((159, 80), (150, 25)), "Reverse Tortie",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        
+        self.labels["brindlebic"] = pygame_gui.elements.UILabel(pygame.Rect((304, 80), (150, 25)), "Brindled Bicolour",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
 
-        #self.labels["Skin Color"] = pygame_gui.elements.UILabel(pygame.Rect((20, 180), (150, 25)), "Skin Color:",
-        #                                                        container=self.pattern_tab,
-        #                                                        object_id="#dropdown_label")
+        self.labels["bleachc"] = pygame_gui.elements.UILabel(pygame.Rect((54, 125), (150, 25)), "Bleaching",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
 
-        #self.labels["hetero"] = pygame_gui.elements.UILabel(pygame.Rect((244, 145), (150, 25)), "Heterochromia",
-        #                                                    container=self.pattern_tab,
-        #                                                    object_id="#dropdown_label")
-
+        self.labels["ghostc"] = pygame_gui.elements.UILabel(pygame.Rect((159, 125), (150, 25)), "Ghosting",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        
+        self.labels["satc"] = pygame_gui.elements.UILabel(pygame.Rect((304, 125), (150, 25)), "Satin",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        self.labels["karpc"] = pygame_gui.elements.UILabel(pygame.Rect((375, 100), (150, 25)), "Karpati:",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        self.labels["tortiec"] = pygame_gui.elements.UILabel(pygame.Rect((500, 80), (150, 25)), "Tortie",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        
+        
+        self.labels["leftc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 160), (150, 25)), "Left Eye:",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        self.labels["rightc"] = pygame_gui.elements.UILabel(pygame.Rect((185, 160), (150, 25)), "Right Eye:",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
+        self.labels["secc"] = pygame_gui.elements.UILabel(pygame.Rect((375, 160), (150, 25)), "Sectoral:",
+                                                                 container=self.pattern_tab4,
+                                                                 object_id="#dropdown_label")
         
         
         # -------------------------------------------------------------------------------------------------------------
@@ -786,22 +1120,39 @@ class CreationScreen(base_screens.Screens):
         self.labels["specred"] = pygame_gui.elements.UILabel(pygame.Rect((400, 125), (150, 25)), "Special Red:",
                                                             container=self.pattern_tab2,
                                                             object_id="#dropdown_label")
+        # -------------------------------------------------------------------------------------------------------------
+        # Pattern 2 Tab Labels CHIMERA ----------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
+
+        self.labels["tabbyc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 15), (150, 25)), "Tabby Pattern:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["agoutic"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Agouti:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["sokokec"] = pygame_gui.elements.UILabel(pygame.Rect((400, 15), (150, 25)), "Sokoke:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["widebandc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 70), (150, 25)), "Wideband:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["rufousc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Rufousing:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["silverc"] = pygame_gui.elements.UILabel(pygame.Rect((54, 80), (150, 25)), "Silver",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["corinc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 125), (150, 25)), "CORIN gold:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["extentionc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 125), (150, 25)), "Extention:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["specredc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 125), (150, 25)), "Special Red:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+
         
-        #self.labels["Tortie Patches Color"] = pygame_gui.elements.UILabel(pygame.Rect((70, 15), (150, 25)),
-        #                                                                  "Tortie Patches Color",
-        #                                                                  container=self.pattern_tab2,
-        #                                                                  object_id="#dropdown_label")
-
-        #self.labels["Tortie Patches pattern"] = pygame_gui.elements.UILabel(pygame.Rect((230, 15), (190, 25)),
-        #                                                                  "Tortie Patches Pattern",
-        #                                                                  container=self.pattern_tab2,
-        #                                                                  object_id="#dropdown_label")
-
-        #self.labels["Tortie Patches shape"] = pygame_gui.elements.UILabel(pygame.Rect((420, 15), (190, 25)),
-        #                                                                  "Tortie Patches Shape",
-        #                                                                  container=self.pattern_tab2,
-        #                                                                  object_id="#dropdown_label")
-
         # -------------------------------------------------------------------------------------------------------------
         # Pattern 3 Tab Labels ----------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
@@ -817,6 +1168,22 @@ class CreationScreen(base_screens.Screens):
                                                             object_id="#dropdown_label")
         self.labels["vitiligo"] = pygame_gui.elements.UILabel(pygame.Rect((20, 125), (150, 25)), "Vitiligo:",
                                                             container=self.pattern_tab3,
+                                                            object_id="#dropdown_label")
+        # -------------------------------------------------------------------------------------------------------------
+        # Pattern 3 Tab Labels CHIMERA ----------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
+        
+        self.labels["basegamec"] = pygame_gui.elements.UILabel(pygame.Rect((20, 15), (150, 25)), "Basegame White:",
+                                                            container=self.pattern_tab6,
+                                                            object_id="#dropdown_label")
+        self.labels["remwhitec"] = pygame_gui.elements.UILabel(pygame.Rect((240, 15), (150, 25)), "Remove White:",
+                                                            container=self.pattern_tab6,
+                                                            object_id="#dropdown_label")
+        self.labels["genemodc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "Added White:",
+                                                            container=self.pattern_tab6,
+                                                            object_id="#dropdown_label")
+        self.labels["vitiligoc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 125), (150, 25)), "Vitiligo:",
+                                                            container=self.pattern_tab6,
                                                             object_id="#dropdown_label")
 
         # -------------------------------------------------------------------------------------------------------------
@@ -915,6 +1282,86 @@ class CreationScreen(base_screens.Screens):
                                                pygame.Rect((340, 165), (180, 30)),
                                                container=self.general_tab)
 
+        
+        # -------------------------------------------------------------------------------------------------------------
+        # Pattern Tab Contents CHIMERA ----------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
+
+        self.dropdown_menus["color_selectc"] = pygame_gui.elements.UIDropDownMenu(global_vars.colors,
+                                                                                 global_vars.CREATED_CAT.chimpheno.colour.capitalize(),
+                                                                                 pygame.Rect((20, 35), (155, 30)),
+                                                                                 container=self.pattern_tab4)
+
+
+        self.dropdown_menus["torte_patches_shapec"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
+                                               global_vars.tortie_patches_shapes.get(
+                                                  global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern.replace('rev', '')
+                                               ),
+                                               pygame.Rect((185, 35), (180, 30)),
+                                               container=self.pattern_tab4)
+
+        self.dropdown_menus["points_selectc"] = pygame_gui.elements.UIDropDownMenu(global_vars.points,
+                                                                                  global_vars.CREATED_CAT.chimpheno.point,
+                                                                           pygame.Rect((375, 35), (190, 30)),
+                                                                           container=self.pattern_tab4)
+        
+        self.dropdown_menus["karpati_selectc"] = pygame_gui.elements.UIDropDownMenu(['None', 'Heterozygous', 'Homozygous'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.fade,
+                                                                           pygame.Rect((375, 120), (190, 30)),
+                                                                           container=self.pattern_tab4)
+        
+        if global_vars.CREATED_CAT.genotype.chimerageno.pinkdilute[0] == 'dp' or 'c' in global_vars.CREATED_CAT.genotype.chimerageno.pointgene:
+            global_vars.CREATED_CAT.chimpheno.pigone = 'albino'
+            global_vars.CREATED_CAT.chimpheno.pigtwo = 'albino'
+            global_vars.CREATED_CAT.chimpheno.pigext = 'albino'
+        elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene[0] == 'cs':
+            global_vars.CREATED_CAT.chimpheno.pigone = 'blue'
+            global_vars.CREATED_CAT.chimpheno.pigtwo = 'blue'
+            global_vars.CREATED_CAT.chimpheno.pigext = 'blue'
+        elif global_vars.CREATED_CAT.genotype.chimerageno.pointgene == ['cb', 'cs']:
+            if global_vars.CREATED_CAT.chimpheno.pigone not in ['P1', 'blue']:
+                global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+            if global_vars.CREATED_CAT.chimpheno.pigtwo not in ['P1', 'blue']:
+                global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+            if global_vars.CREATED_CAT.chimpheno.pigext not in ['P1', 'blue']:
+                global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+        else:
+            if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
+                global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+            if global_vars.CREATED_CAT.chimpheno.pigtwo == 'albino':
+                global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+            if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
+                global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+        global_vars.CREATED_CAT.chimpheno.UpdateEyes()
+        self.dropdown_menus["ref1_selectc"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.refone,
+                                                                           pygame.Rect((20, 180), (75, 30)),
+                                                                           container=self.pattern_tab4)
+        self.dropdown_menus["ref2_selectc"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.reftwo,
+                                                                           pygame.Rect((185, 180), (75, 30)),
+                                                                           container=self.pattern_tab4)
+        self.dropdown_menus["ref3_selectc"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.refext,
+                                                                           pygame.Rect((375, 180), (75, 30)),
+                                                                           container=self.pattern_tab4)
+        self.dropdown_menus["pig1_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.pigone,
+                                                                           pygame.Rect((95, 180), (75, 30)),
+                                                                           container=self.pattern_tab4)
+        self.dropdown_menus["pig2_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.pigtwo,
+                                                                           pygame.Rect((260, 180), (75, 30)),
+                                                                           container=self.pattern_tab4)
+        self.dropdown_menus["pig3_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+                                                                                  global_vars.CREATED_CAT.chimpheno.pigext,
+                                                                           pygame.Rect((450, 180), (75, 30)),
+                                                                           container=self.pattern_tab4)
+        self.dropdown_menus["sectype_selectc"] = pygame_gui.elements.UIDropDownMenu(['N/A', '1', '2', '3', '4', '5', '6'],
+                                                                                  global_vars.CREATED_CAT.genotype.chimerageno.extraeye.replace('sectoral', '') if global_vars.CREATED_CAT.genotype.chimerageno.extraeye else 'N/A',
+                                                                           pygame.Rect((450, 155), (100, 25)),
+                                                                           container=self.pattern_tab4)
         
         # -------------------------------------------------------------------------------------------------------------
         # Pattern Tab Contents ----------------------------------------------------------------------------------------
@@ -1043,6 +1490,52 @@ class CreationScreen(base_screens.Screens):
                                                container=self.pattern_tab2)
 
         #------------------------------------------------------------------------------------------------------------
+        # PATTERN TAB CONTENTS Page 2 CHIMERA -------------------------------------------------------------------------------
+        #------------------------------------------------------------------------------------------------------------ 
+        
+         # Tabby Pattern
+        self.dropdown_menus["tabby_pattern_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.tabbies.values(),
+                                               global_vars.tabbies[global_vars.CREATED_CAT.chimpheno.GetTabbySprite()],
+                                               pygame.Rect((20, 35), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["agouti_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['Solid', 'Agouti', 'Midnight Charcoal', 'Twilight Charcoal'],
+                                               global_vars.CREATED_CAT.chimpheno.tabtype,
+                                               pygame.Rect((210, 35), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["sokoke_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['Normal markings', 'Mild fading', 'Full sokoke'],
+                                               global_vars.CREATED_CAT.genotype.chimerageno.soktype.capitalize(),
+                                               pygame.Rect((400, 35), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["wideband_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
+                                               global_vars.CREATED_CAT.genotype.chimerageno.wbtype.capitalize(),
+                                               pygame.Rect((210, 90), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["rufousing_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+                                               global_vars.CREATED_CAT.genotype.chimerageno.ruftype.capitalize(),
+                                               pygame.Rect((400, 90), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["corin_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
+                                               global_vars.corin[global_vars.CREATED_CAT.genotype.chimerageno.sunshine[0]],
+                                               pygame.Rect((20, 145), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["extention_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.extention.values(),
+                                               global_vars.extention[global_vars.CREATED_CAT.genotype.chimerageno.ext[0]],
+                                               pygame.Rect((210, 145), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["specred_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['None', 'Merle', 'Cameo', 'Pseudo-cinnamon', 'Blue-red', 'Blue-tipped'],
+                                               global_vars.CREATED_CAT.genotype.chimerageno.specialred.capitalize(),
+                                               pygame.Rect((400, 145), (175, 30)),
+                                               container=self.pattern_tab5)
+
+        #------------------------------------------------------------------------------------------------------------
         # PATTERN TAB CONTENTS Page 3 -------------------------------------------------------------------------------
         #------------------------------------------------------------------------------------------------------------ 
         
@@ -1082,6 +1575,47 @@ class CreationScreen(base_screens.Screens):
                                                global_vars.vit[global_vars.CREATED_CAT.genotype.white_pattern[0]],
                                                pygame.Rect((20, 145), (175, 30)),
                                                container=self.pattern_tab3)
+
+        #------------------------------------------------------------------------------------------------------------
+        # PATTERN TAB CONTENTS Page 3 CHIMERA -------------------------------------------------------------------------------
+        #------------------------------------------------------------------------------------------------------------ 
+        
+        self.dropdown_menus["basegame_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.white_patches.values(),
+                                               global_vars.white_patches[self.selectedbasegamechim],
+                                               pygame.Rect((20, 35), (175, 30)),
+                                               container=self.pattern_tab6)
+        
+        self.dropdown_menus['add_basegamec'] = custom_buttons.UIImageButton(pygame.Rect((200, 35), (30, 30)), "",
+                                                    object_id="#add_button",
+                                                    container=self.pattern_tab6)
+
+        self.dropdown_menus["genemod_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.genemod_white.values(),
+                                               global_vars.genemod_white[self.selectedgenemodchim],
+                                               pygame.Rect((20, 90), (175, 30)),
+                                               container=self.pattern_tab6)
+        
+        self.dropdown_menus['add_genemodc'] = custom_buttons.UIImageButton(pygame.Rect((200, 90), (30, 30)), "",
+                                                    object_id="#add_button",
+                                                    container=self.pattern_tab6)
+        self.dropdown_menus["white_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.genotype.chimerageno.white_pattern[1:] if len(global_vars.CREATED_CAT.genotype.chimerageno.white_pattern) > 1 else ['None'],
+                                               self.selectedwhite,
+                                               pygame.Rect((240, 35), (175, 30)),
+                                               container=self.pattern_tab6)
+        self.dropdown_menus['remove_whitec'] = custom_buttons.UIImageButton(pygame.Rect((420, 35), (30, 30)), "",
+                                                    object_id="#minus_button",
+                                                    container=self.pattern_tab6)
+        self.dropdown_menus['clear_whitec'] = custom_buttons.UIImageButton(pygame.Rect((450, 35), (30, 30)), "",
+                                                    object_id="#clear_button",
+                                                    container=self.pattern_tab6)
+
+        self.dropdown_menus["vitiligo_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.vit.values(),
+                                               global_vars.vit[global_vars.CREATED_CAT.genotype.chimerageno.white_pattern[0]],
+                                               pygame.Rect((20, 145), (175, 30)),
+                                               container=self.pattern_tab6)
 
         #------------------------------------------------------------------------------------------------------------
         # EXTRAS TAB CONTENTS ---------------------------------------------------------------------------------------
@@ -1302,19 +1836,104 @@ class CreationScreen(base_screens.Screens):
                                                                       object_id="#unchecked_checkbox",
                                                                       container=self.pattern_tab)
             
-        # Heterochromia
-        #if global_vars.CREATED_CAT.pelt.eye_colour2:
-        #    self.checkboxes["hetero_eyes"] = custom_buttons.UIImageButton(pygame.Rect((210, 140), (34, 34)),
-        #                                                                  "",
-        #                                                                  object_id="#checked_checkbox",
-        #                                                                  container=self.pattern_tab)
-        #    self.dropdown_menus["eye_color_2"].enable()
-        #else:
-        #    self.checkboxes["hetero_eyes"] = custom_buttons.UIImageButton(pygame.Rect((210, 140), (34, 34)),
-        #                                                                  "",
-        #                                                                  object_id="#unchecked_checkbox",
-        #                                                                  container=self.pattern_tab)
-        #    self.dropdown_menus["eye_color_2"].disable()
+        # -------------------------------------------------------------------------------------------------------------
+        # Pattern Tab CHIMERA -------------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
+
+        # Caramel
+        
+        if global_vars.CREATED_CAT.genotype.chimerageno.dilutemd[0] == 'Dm':
+            self.checkboxes["carameltogglec"] = custom_buttons.UIImageButton(pygame.Rect((20, 75), (34, 34)),
+                                                                          "",
+                                                                          object_id="#checked_checkbox",
+                                                                          container=self.pattern_tab4)
+        else:
+            self.checkboxes["carameltogglec"] = custom_buttons.UIImageButton(pygame.Rect((20, 75), (34, 34)),
+                                                                          "",
+                                                                          object_id="#unchecked_checkbox",
+                                                                          container=self.pattern_tab4)
+            
+        # Tortie
+        if global_vars.CREATED_CAT.genotype.chimerageno.sexgene == ['O', 'o']:
+            self.checkboxes["tortiec"] = custom_buttons.UIImageButton(pygame.Rect((466, 75), (34, 34)),
+                                                                      "",
+                                                                      object_id="#checked_checkbox",
+                                                                      container=self.pattern_tab4)
+        else:
+            self.checkboxes["tortiec"] = custom_buttons.UIImageButton(pygame.Rect((466, 75), (34, 34)),
+                                                                      "",
+                                                                      object_id="#unchecked_checkbox",
+                                                                      container=self.pattern_tab4)
+        if global_vars.CREATED_CAT.genotype.chimerageno.sexgene[1] == 'O':
+            self.checkboxes['tortiec'].disable()
+        else:
+            self.checkboxes['tortiec'].enable()
+
+        # Reverse tortie
+        if global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern and 'rev' in global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern:
+            self.checkboxes["revtortiec"] = custom_buttons.UIImageButton(pygame.Rect((125, 75), (34, 34)),
+                                                                      "",
+                                                                      object_id="#checked_checkbox",
+                                                                      container=self.pattern_tab4)
+        else:
+            self.checkboxes["revtortiec"] = custom_buttons.UIImageButton(pygame.Rect((125, 75), (34, 34)),
+                                                                      "",
+                                                                      object_id="#unchecked_checkbox",
+                                                                      container=self.pattern_tab4)
+            
+        # Brindled Bicolour
+        if global_vars.CREATED_CAT.genotype.chimerageno.brindledbi:
+            self.checkboxes["brindled_bicolourc"] = custom_buttons.UIImageButton(pygame.Rect((270, 75), (34, 34)),
+                                                                      "",
+                                                                      object_id="#checked_checkbox",
+                                                                      container=self.pattern_tab4)
+        else:
+            self.checkboxes["brindled_bicolourc"] = custom_buttons.UIImageButton(pygame.Rect((270, 75), (34, 34)),
+                                                                      "",
+                                                                      object_id="#unchecked_checkbox",
+                                                                      container=self.pattern_tab4)
+
+        if global_vars.CREATED_CAT.chimpheno.tortie:
+            self.checkboxes["brindled_bicolourc"].enable()
+        else:
+            self.checkboxes["brindled_bicolourc"].disable()
+
+        # Bleaching
+        
+        if global_vars.CREATED_CAT.genotype.chimerageno.bleach[0] == 'lb':
+            self.checkboxes["bleachingc"] = custom_buttons.UIImageButton(pygame.Rect((20, 120), (34, 34)),
+                                                                          "",
+                                                                          object_id="#checked_checkbox",
+                                                                          container=self.pattern_tab4)
+        else:
+            self.checkboxes["bleachingc"] = custom_buttons.UIImageButton(pygame.Rect((20, 120), (34, 34)),
+                                                                          "",
+                                                                          object_id="#unchecked_checkbox",
+                                                                          container=self.pattern_tab4)
+            
+        # Ghosting
+        if global_vars.CREATED_CAT.genotype.chimerageno.ghosting[0] == 'Gh':
+            self.checkboxes["ghostingc"] = custom_buttons.UIImageButton(pygame.Rect((125, 120), (34, 34)),
+                                                                      "",
+                                                                      object_id="#checked_checkbox",
+                                                                      container=self.pattern_tab4)
+        else:
+            self.checkboxes["ghostingc"] = custom_buttons.UIImageButton(pygame.Rect((125, 120), (34, 34)),
+                                                                      "",
+                                                                      object_id="#unchecked_checkbox",
+                                                                      container=self.pattern_tab4)
+            
+        # Satin/glitter
+        if global_vars.CREATED_CAT.genotype.chimerageno.satin[0] == 'st':
+            self.checkboxes["satinc"] = custom_buttons.UIImageButton(pygame.Rect((270, 120), (34, 34)),
+                                                                      "",
+                                                                      object_id="#checked_checkbox",
+                                                                      container=self.pattern_tab4)
+        else:
+            self.checkboxes["satinc"] = custom_buttons.UIImageButton(pygame.Rect((270, 120), (34, 34)),
+                                                                      "",
+                                                                      object_id="#unchecked_checkbox",
+                                                                      container=self.pattern_tab4)
             
         # -------------------------------------------------------------------------------------------------------------
         # Pattern 2 Tab -----------------------------------------------------------------------------------------------
@@ -1331,6 +1950,22 @@ class CreationScreen(base_screens.Screens):
                                                                               "",
                                                                               object_id="#unchecked_checkbox",
                                                                               container=self.pattern_tab2)
+        
+        # -------------------------------------------------------------------------------------------------------------
+        # Pattern 2 Tab CHIMERA -----------------------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------------------------------------
+        
+         # Silver Checkbox
+        if global_vars.CREATED_CAT.genotype.chimerageno.silver[0] == 'I':
+            self.checkboxes["silver_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 75), (34, 34)),
+                                                                              "",
+                                                                              object_id="#checked_checkbox",
+                                                                              container=self.pattern_tab5)
+        else:
+            self.checkboxes["silver_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 75), (34, 34)),
+                                                                              "",
+                                                                              object_id="#unchecked_checkbox",
+                                                                              container=self.pattern_tab5)
         
         # -------------------------------------------------------------------------------------------------------------
         # Extras Tab --------------------------------------------------------------------------------------------------
@@ -1386,6 +2021,15 @@ class CreationScreen(base_screens.Screens):
         
         self.pattern_tab3.kill()
         self.pattern_tab3 = None
+        
+        self.pattern_tab4.kill()
+        self.pattern_tab4 = None
+        
+        self.pattern_tab5.kill()
+        self.pattern_tab5 = None
+        
+        self.pattern_tab6.kill()
+        self.pattern_tab6 = None
 
         self.extras_tab.kill()
         self.extras_tab = None
