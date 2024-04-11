@@ -7,6 +7,7 @@ from scripts.game_structure.image_cache import load_image
 import scripts.game_structure.image_button as custom_buttons
 from scripts.cat.cats import Cat
 from scripts.game_structure.image_cache import load_image
+from scripts.screens.save_image import SaveAsImage
 
 class CreationScreen(base_screens.Screens):
 
@@ -16,6 +17,7 @@ class CreationScreen(base_screens.Screens):
         self.extras_tab = None
         self.cat_image = None
         self.back = None
+        self.save_image = None
         self.randomize = None
         self.clear = None
         self.tab_background = None
@@ -74,6 +76,8 @@ class CreationScreen(base_screens.Screens):
                 self.update_platform()
             elif event.ui_element == self.back:
                 self.change_screen('start screen')
+            elif event.ui_element == self.save_image_button:
+                SaveAsImage(global_vars.CREATED_CAT.sprite)
             # Here is where the cat creation checkboxes start.
             elif event.ui_element == self.checkboxes["reverse"]:
                 # This checkbox flips the car horizonally.
@@ -846,6 +850,8 @@ class CreationScreen(base_screens.Screens):
 
         self.back = custom_buttons.UIImageButton(pygame.Rect((50, 25), (105, 30)), "",
                                                  object_id="#back_button")
+    
+        self.save_image_button = custom_buttons.UIImageButton(pygame.Rect((50, 75), (125, 30)), "", object_id="#save_image_button")
 
         self.randomize = custom_buttons.UIImageButton(pygame.Rect((630, 291), (50, 50)), "",
                                                       object_id="#random_dice_button")
@@ -1974,6 +1980,8 @@ class CreationScreen(base_screens.Screens):
     def exit_screen(self):
         self.back.kill()
         self.back = None
+        self.save_image_button.kill()
+        self.save_image_button = None
 
         self.next_page.kill()
         self.next_page = None
@@ -2060,6 +2068,7 @@ class MoreDetailScreen(base_screens.Screens):
         
         self.back = custom_buttons.UIImageButton(pygame.Rect((50, 25), (105, 30)), "",
                                                  object_id="#back_button")
+        self.save_image_button = custom_buttons.UIImageButton(pygame.Rect((50, 75), (125, 30)), "", object_id="#save_image_button")
 
         # -----------------------------------------------------------------------------------------------------------
         # TAB BUTTONS -----------------------------------------------------------------------------------------------
