@@ -123,7 +123,7 @@ class SaveAsImage(UIWindow):
                 if system() == 'Darwin':
                     subprocess.Popen(["open", "-R", './saved_images'])
                 elif system() == 'Windows':
-                    os.startfile('.\saved_images')  # pylint: disable=no-member
+                    os.startfile('.\\saved_images')  # pylint: disable=no-member
                 elif system() == 'Linux':
                     try:
                         subprocess.Popen(['xdg-open', './saved_images'])
