@@ -93,7 +93,7 @@ class Cat():
 
             genotype.karp = choice([['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'K']])
             if global_vars.CREATED_CAT.genotype.karp == ['k', 'k']:
-                global_vars.CREATED_CAT.phenotype.fade = 'Normal'
+                global_vars.CREATED_CAT.phenotype.fade = 'None'
             elif global_vars.CREATED_CAT.genotype.karp == ['K', 'k']:
                 global_vars.CREATED_CAT.phenotype.fade = 'Heterozygous'
             else:
