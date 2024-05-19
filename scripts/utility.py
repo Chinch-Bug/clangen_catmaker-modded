@@ -463,7 +463,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         stripebase2 = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
 
                         if(whichcolour == "black" and genotype.pointgene[0] == "cm"):
-                            colour = 'lightbasecolours2'
+                            colour = 'cinnamon'
                         else:
                             colour = whichcolour
                 
