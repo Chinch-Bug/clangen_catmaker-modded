@@ -289,7 +289,8 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         
                         if("cm" in genotype.pointgene):
                             if(whichcolour == "black" and genotype.pointgene[0] == "cm"):
-                                stripebase.blit(CreateStripes('lightbasecolours2', whichbase), (0, 0))
+                                stripebase.blit(CreateStripes('lightbasecolours2', whichbase, pattern='agouti'), (0, 0))
+                                stripebase.set_alpha(100)
                                 colour = 'lightbasecolours2'
                             else:
                                 if("cb" in genotype.pointgene or genotype.pointgene[0] == "cm"):
@@ -533,7 +534,8 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
                             stripebase = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                         
-                            stripebase.blit(CreateStripes('cinnamon', 'solid'), (0, 0))
+                            stripebase.blit(CreateStripes('cinnamon', 'solid', pattern='fullbar'), (0, 0))
+                            stripebase.set_alpha(150)
                             
                             whichmain.blit(stripebase, (0, 0))
                         else:
