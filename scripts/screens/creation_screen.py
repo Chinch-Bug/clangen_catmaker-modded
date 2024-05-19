@@ -879,34 +879,50 @@ class CreationScreen(base_screens.Screens):
         # TAB CONTAINERS --------------------------------------------------------------------------------------------
         # -----------------------------------------------------------------------------------------------------------
         self.general_tab = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
-                                                                    global_vars.MANAGER)
+                                                                    global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False)
 
         self.pattern_tab = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
         
         self.pattern_tab2 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
         
         self.pattern_tab3 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
         
         self.pattern_tab4 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
         
         self.pattern_tab5 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
         
         self.pattern_tab6 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
 
         self.extras_tab = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                    global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                    visible=False)
         
         self.visable_tab = self.general_tab
@@ -2087,14 +2103,20 @@ class MoreDetailScreen(base_screens.Screens):
         # TAB CONTAINERS --------------------------------------------------------------------------------------------
         # -----------------------------------------------------------------------------------------------------------
         self.general_tab = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
-                                                                    global_vars.MANAGER)
+                                                                    global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False)
 
         self.trait_skill_tab = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                     global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                     visible=False)
         
         self.trait_skill_tab2 = pygame_gui.elements.UIScrollingContainer(pygame.Rect((150, 350), (600, 300)),
                                                                          global_vars.MANAGER,
+                                                                    allow_scroll_x=False,
+                                                                    allow_scroll_y=False,
                                                                          visible=False)
         
         self.visable_tab = self.general_tab
