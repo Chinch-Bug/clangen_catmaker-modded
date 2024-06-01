@@ -63,9 +63,9 @@ class Cat():
                                 "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
                                 "BODY" : "Body"}
         self.age = random.choice(list(self.pelt.current_poses.keys()))
-        length = choice(['Short', 'Long', 'Short rexed', 'Long rexed'])
+        length = choice(['Short', 'Long', 'Short Rexed', 'Long Rexed'])
         self.pelt.set_pelt_length(length)
-        self.phenotype.SetFurLength(length)
+        self.phenotype.SetFurLength(length.lower())
         self.phenotype.SetEarType(choice(['normal', 'folded', 'curled', 'folded curl']))
         self.phenotype.SetTailType(choice(['full', '3/4', '1/2', '1/3', 'stubby', 'none']))
         
