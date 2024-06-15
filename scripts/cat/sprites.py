@@ -224,7 +224,12 @@ class Sprites():
         self.make_group('Other/bleach', (0, 0), 'bleach')
         self.make_group('Other/caramel', (0, 0), 'caramel', 1, 1)
         self.make_group('Other/satin', (0, 0), 'satin', 1, 1)
+        self.make_group('Other/salmiak', (0, 0), 'salmiak')
 
+        self.make_group('Other/lykoi', (0, 0), 'lykoi')
+        self.make_group('Other/hairless', (0, 0), 'hairless')
+        self.make_group('Other/donskoy', (0, 0), 'donskoy')
+        self.make_group('Other/furpoint', (0, 0), 'furpoint')
 
         #genemod extra
         self.make_group('Other/ears', (0, 0), 'ears')
@@ -242,6 +247,7 @@ class Sprites():
             for a, y in enumerate(range(1, 12)):
                 self.make_group('Other/eyes_full', (a, b), f'R{y} ; {x}/', sprites_y=6)
 
+        self.make_group('Other/red_pupils', (0, 0), 'redpupils')
         # Line art
         self.make_group('lineart', (0, 0), 'lines')
         self.make_group('shadersnewwhite', (0, 0), 'shaders')

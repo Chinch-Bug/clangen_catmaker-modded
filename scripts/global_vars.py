@@ -42,7 +42,7 @@ tabbies = sort_bidict(tabbies)
 
 corin = bidict({"N": "None", "sh": "Sunshine", "sg": "Extreme Sunshine", "fg": "Flaxen Gold"})
 extention = bidict({"E": "Normal", "ea": "Amber", "er": "Russet", "ec": "Carnelian",
-                                  "Eg": "Chausie Grizzle"})
+                    "Eg": "Chausie Grizzle", 'ecc': 'Carnelian Carrier'})
 
 tortie_patches_shapes = bidict({"ONE": "One", "TWO": "Two", "THREE": "Three", "FOUR": "Four",  'REDTAIL': "Redtail",
                                 'DELILAH': "Delilah", 'MINIMALONE': "Minimal 1", 'MINIMALTWO': "Minimal 2",
@@ -225,6 +225,33 @@ lineart = ["Normal", "StarClan", "Dark Forest"]
 
 poses = {
     "short": {
+        "newborn": {
+            "1": 20,
+            "2": 20,
+            "3": 20
+        },
+        "kitten": {
+            "1": 0,
+            "2": 1,
+            "3": 2
+        },
+        "adolescent": {
+            "1": 3,
+            "2": 4,
+            "3": 5
+        },
+        "adult": {
+            "1": 6,
+            "2": 7,
+            "3": 8
+        },
+        "senior": {
+            "1": 12,
+            "2": 13,
+            "3": 14
+        }
+    },
+    "hairless": {
         "newborn": {
             "1": 20,
             "2": 20,

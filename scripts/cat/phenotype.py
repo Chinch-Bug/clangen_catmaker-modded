@@ -5,6 +5,7 @@ class Phenotype():
 
     def __init__(self, genotype):
         self.length = ""
+        self.furtype = ['', '']
 
         self.fade = "None"
         self.colour = "black"
@@ -187,7 +188,7 @@ class Phenotype():
         return chosen        
 
     def SetFurLength(self, type):
-        if 'long' in type:
+        if 'long' in type or 'lh' in type:
             self.genotype.furLength = ['l', 'l']
         else:
             self.genotype.furLength = ['L', 'L']
@@ -196,6 +197,15 @@ class Phenotype():
             self.genotype.wirehair = ['Wh', 'Wh']
         else:
             self.genotype.wirehair = ['wh', 'wh']    
+
+        if type == 'fur-point':
+            self.genotype.sedesp = ['hr', 're']
+        else:
+            self.genotype.sedesp[0] = "Hr"
+        if 'patchy' in type:
+            self.furtype[0] = 'patchy ';
+        else:
+            self.furtype[0] = ''
 
     def SetEarType(self, type):
         if type == 'folded curl':
@@ -494,7 +504,7 @@ class Phenotype():
             
             maincolour = colour
             
-            if (genes.agouti[0] != "a" and genes.ext[0] != "Eg") or (genes.ext[0] not in ['Eg', 'E'] and moons > 0):
+            if (genes.agouti[0] != "a" and genes.ext[0] != "Eg") or (genes.ext[0] not in ['Eg', 'E', 'ecc'] and moons > 0):
                 if genes.silver[0] == "I" or genes.brindledbi or (moons < 3 and genes.karp[0] == "K"):
                     if genes.sunshine[0] == "sg":
                         colour =  colour + "silver" + "chinchilla"

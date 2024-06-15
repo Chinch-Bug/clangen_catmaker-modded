@@ -241,7 +241,9 @@ class Pelt():
             self.current_poses[age] = pose
     
     def set_pelt_length(self, fur_length):
-        if 'Long' in fur_length:
+        if 'Hairless' in fur_length:
+            self.length = 'hairless'
+        elif 'Long' in fur_length or 'LH' in fur_length:
             self.length = 'long'
         else:
             self.length = 'short'
