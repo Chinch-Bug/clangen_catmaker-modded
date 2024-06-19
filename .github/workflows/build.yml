@@ -165,6 +165,7 @@ jobs:
       - name: Setup Python 3.11
         uses: conda-incubator/setup-miniconda@v2
         with:
+          miniconda-version: "latest"
           python-version: "3.11"
       # - name: Install poetry
       #   uses: abatilo/actions-poetry@v2
