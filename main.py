@@ -10,6 +10,7 @@ from scripts.game_structure.game_essentials import *
 import scripts.screens.all_screens
 
 
+os.makedirs('./saved_images', exist_ok=True)
 clock = pygame.time.Clock()
 scripts.screens.all_screens.start_screen.screen_switches()
 
