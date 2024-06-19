@@ -3,6 +3,7 @@ import os
 directory = os.path.dirname(__file__)
 if directory:
     os.chdir(directory)
+os.makedirs('/saved_images', exist_ok=True)
 import pygame
 import scripts.global_vars as global_vars
 import scripts.game_structure.game_essentials
