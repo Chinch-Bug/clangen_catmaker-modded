@@ -102,6 +102,8 @@ class SaveAsImage(UIWindow):
         file_name = self.file_name
         file_number = ""
         i = 0
+        
+        os.makedirs('./saved_images', exist_ok=True)
         while True:
             if os.path.isfile(f"{'./saved_images'}/{file_name + file_number}.png"):
                 i += 1
