@@ -408,8 +408,8 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["corin_select"]:
 
-                global_vars.CREATED_CAT.genotype.sunshine[0] = global_vars.corin.inverse[event.text]
-                global_vars.CREATED_CAT.genotype.sunshine[1] = global_vars.corin.inverse[event.text]
+                global_vars.CREATED_CAT.genotype.corin[0] = global_vars.corin.inverse[event.text]
+                global_vars.CREATED_CAT.genotype.corin[1] = global_vars.corin.inverse[event.text]
                 global_vars.CREATED_CAT.phenotype.SilverGoldFinder()
                 
                 self.update_cat_image()
@@ -485,8 +485,8 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["corin_selectc"]:
 
-                global_vars.CREATED_CAT.genotype.chimerageno.sunshine[0] = global_vars.corin.inverse[event.text]
-                global_vars.CREATED_CAT.genotype.chimerageno.sunshine[1] = global_vars.corin.inverse[event.text]
+                global_vars.CREATED_CAT.genotype.chimerageno.corin[0] = global_vars.corin.inverse[event.text]
+                global_vars.CREATED_CAT.genotype.chimerageno.corin[1] = global_vars.corin.inverse[event.text]
                 global_vars.CREATED_CAT.chimpheno.SilverGoldFinder()
                 
                 self.update_cat_image()
@@ -1536,7 +1536,7 @@ class CreationScreen(base_screens.Screens):
                                                container=self.pattern_tab2)
         self.dropdown_menus["corin_select"] = \
             pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
-                                               global_vars.corin[global_vars.CREATED_CAT.genotype.sunshine[0]],
+                                               global_vars.corin[global_vars.CREATED_CAT.genotype.corin[0]],
                                                pygame.Rect((20, 145), (175, 30)),
                                                container=self.pattern_tab2)
         self.dropdown_menus["extention_select"] = \
@@ -1582,7 +1582,7 @@ class CreationScreen(base_screens.Screens):
                                                container=self.pattern_tab5)
         self.dropdown_menus["corin_selectc"] = \
             pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
-                                               global_vars.corin[global_vars.CREATED_CAT.genotype.chimerageno.sunshine[0]],
+                                               global_vars.corin[global_vars.CREATED_CAT.genotype.chimerageno.corin[0]],
                                                pygame.Rect((20, 145), (175, 30)),
                                                container=self.pattern_tab5)
         self.dropdown_menus["extention_selectc"] = \

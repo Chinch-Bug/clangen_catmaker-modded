@@ -46,7 +46,7 @@ class Genotype:
         self.pinkdilute = ["Dp", "Dp"]
         self.dilutemd = ["dm", "dm"]
         self.ext = ["E", "E"]
-        self.sunshine = ["N", "N"]
+        self.corin = ["N", "N"]
         self.karp = ["k", "k"]
         self.bleach = ["Lb", "Lb"]
         self.ghosting = ["gh", "gh"]

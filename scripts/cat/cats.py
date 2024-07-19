@@ -141,7 +141,7 @@ class Cat():
             genotype.ruftype = choice(['low', 'medium', 'rufoused'])
 
             genotype.ext[0] = choice(['E', 'E', 'E', 'E', choice(['Eg', 'ea', 'ea', 'er', 'ea', 'ec'])])
-            genotype.sunshine[0] = choice(['N', 'N', 'N', 'N', choice(['sh', 'sh', 'sg', 'fg'])])
+            genotype.corin[0] = choice(['N', 'N', 'N', 'N', choice(['sh', 'sh', 'sg', 'fg'])])
 
             maingame_white = {
                 'low':{
