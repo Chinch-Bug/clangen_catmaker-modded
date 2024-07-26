@@ -498,6 +498,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                                     whichmain.blit(pointbase, (0, 0))
                                     pointbase.blit(whichmain, (0, 0))
                                     coloursurface = pointbase
+                                    colour = whichcolour
                                     
                                     whichmain = ApplySmokeEffects(whichmain)
                             else:
