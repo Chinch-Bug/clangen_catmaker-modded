@@ -112,9 +112,9 @@ white_patches = sort_bidict(white_patches, None)
 
 genemod_white = bidict({None: 'None',
                         'None1': '-Right Front Leg-',
-                        'right front toes' : 'RF Toes', 'right front mitten' : 'RF Mitten', 'right front low sock' : 'RF Low Sock', 'right front high sock' : 'RF High Sock', 'right front bicolour1' : 'RF Bicolour1', 'right front bicolour2' : 'RF Bicolour2', 'break/right front mitten' : 'RF No Mitten',
+                        'right front toes' : 'RF Toes', 'right front mitten' : 'RF Mitten', 'right front low sock' : 'RF Low Sock', 'right front high sock' : 'RF High Sock', 'right front bicolour1' : 'RF Bicolour1', 'right front bicolour2' : 'RF Bicolour2', 'break/right front mitten' : 'RF No Mitten', 'break/bracelet right' : 'RF Dark Band',
                         'None2' : '-Left Front Leg-',
-                        'left front toes' : 'LF Toes', 'left front mitten' : 'LF Mitten', 'left front low sock' : 'LF Low Sock', 'left front high sock' : 'LF High Sock', 'left front bicolour1' : 'LF Bicolour1', 'left front bicolour2' : 'LF Bicolour2', 'break/left front mitten' : 'LF No Mitten',
+                        'left front toes' : 'LF Toes', 'left front mitten' : 'LF Mitten', 'left front low sock' : 'LF Low Sock', 'left front high sock' : 'LF High Sock', 'left front bicolour1' : 'LF Bicolour1', 'left front bicolour2' : 'LF Bicolour2', 'break/left front mitten' : 'LF No Mitten', 'break/bracelet left' : 'LF Dark Band',
                         'None3' : '-Right Back Leg-',
                         'right back toes' : 'RB Toes', 'right back mitten' : 'RB Mitten', 'right back low sock' : 'RB Low Sock', 'right back high sock' : 'RB High Sock', 'right back bicolour1' : 'RB Bicolour1', 'right back bicolour2' : 'RB Bicolour2', 'break/right back mitten' : 'RB No Mitten',
                         'None4' : '-Left Back Leg-',
@@ -122,13 +122,15 @@ genemod_white = bidict({None: 'None',
                         'None5' : '-Underbelly-',
                         'belly tuft' : 'Belly Tuft', 'chest tuft' : 'Chest Tuft', 'belly spot' : 'Belly Spot', 'locket' : 'Locket', 'belly' : 'Belly', 'bib' : 'Bib', 'chest' : 'Chest', 'beard' : 'Beard', 'underbelly1' : 'Underbelly', 'mask n mantle' : 'Underbelly2',
                         'None6' : '-Head-',
-                        'chin' : 'Chin', 'mustache' : 'Mustache', 'muzzle': 'Muzzle', 'blaze' : 'Blaze', 'break/nose1' : 'Coloured Nose', 'break/left ear' : 'No Left Ear', 'break/right ear' : 'No Right Ear', 'break/left face' : 'No Left Mask', 'break/right face' : 'No Right Mask',
+                        'chin' : 'White Chin', 'break/chin' : 'Dark Chin', 'mustache' : 'Mustache', 'muzzle': 'Muzzle', 'blaze' : 'Blaze', 'break/nose1' : 'Coloured Nose Patch', 'break/nose2' : 'Coloured Nose', 'break/left ear' : 'No Left Ear', 'break/right ear' : 'No Right Ear', 'break/left face' : 'No Left Mask', 'break/right face' : 'No Right Mask', 'break/bowl cut' : 'Head Patch',
                         'None7' : '-Dorsal-', 
-                        'dorsal1': 'Thin Stripe', 'dorsal2' : 'Thick Stripe',
+                        'dorsal1': 'Thin Stripe', 'dorsal2' : 'Thick Stripe', 'break/inverse thai' : 'Coloured Stripe',
                         'None8' : '-Full-',
-                        'van1' : 'Van 1', 'van2' : 'Van 2', 'van3' : 'Van 3', 'full white' : 'Full White', 'break/piebald1' : 'Piebald Patches 1', 'break/piebald2' : 'Piebald Patches 2',
-                        'None9' : '-Tail-',
-                        'tail tip' : 'Tail Tip', 'break/tail tip' : 'No Tail Tip', 'break/tail band': 'Colour Band', 'break/tail rings' : 'Colour Rings'
+                        'van1' : 'Van 1', 'van2' : 'Van 2', 'van3' : 'Van 3', 'full white' : 'Full White', 'break/piebald1' : 'Piebald Patches 1', 'break/piebald2' : 'Piebald Patches 2', 'break/left no' : 'Left \'No\'', 'break/right no' : 'Right \'No\'', 
+                        'None9' : '-Body-',
+                        'belt' : 'White Belt', 'pants' : 'White Pants', 'break/pants' : 'Dark Pants',
+                        'None10' : '-Tail-',
+                        'tail tip' : 'Tail Tip', 'break/tail tip' : 'No Tail Tip', 'break/tail band': 'Colour Band', 'break/tail rings' : 'Colour Rings', 'thai tail' : 'Partial Tail'
                         })
 
 points = ['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']
