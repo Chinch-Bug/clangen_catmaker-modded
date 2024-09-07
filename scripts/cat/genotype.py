@@ -74,6 +74,8 @@ class Genotype:
         self.ruftype = "medium"
         self.rufsum = 4
 
+        self.saturation = 3
+
         self.bengal = ""
         self.bengtype = "normal markings"
         self.bengsum = 0

@@ -39,6 +39,7 @@ class CreationScreen(base_screens.Screens):
         self.selectedbasegamechim = None
         self.selectedgenemodchim = None
         self.selectedwhite = 'None'
+        self.selectedwhitechim = 'None'
 
         super().__init__(name)
 
@@ -289,7 +290,7 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["add_basegamec"]:
 
-                global_vars.CREATED_CAT.genotype.chimerageno.white_pattern.append(self.selectedbasegame)
+                global_vars.CREATED_CAT.genotype.chimerageno.white_pattern.append(self.selectedbasegamechim)
 
                 self.build_dropdown_menus()
                 self.update_cat_image()
@@ -426,6 +427,11 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.genotype.specialred = event.text.lower()
 
                 self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["saturation_select"]:
+
+                global_vars.CREATED_CAT.genotype.saturation = int(event.text)
+                
+                self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["vitiligo_select"]:
 
                 global_vars.CREATED_CAT.genotype.white_pattern[0] = global_vars.vit.inverse[event.text]
@@ -502,6 +508,11 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["specred_selectc"]:
 
                 global_vars.CREATED_CAT.genotype.chimerageno.specialred = event.text.lower()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["saturation_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.saturation = int(event.text)
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["vitiligo_selectc"]:
@@ -1175,6 +1186,9 @@ class CreationScreen(base_screens.Screens):
         self.labels["specred"] = pygame_gui.elements.UILabel(pygame.Rect((400, 125), (150, 25)), "Special Red:",
                                                             container=self.pattern_tab2,
                                                             object_id="#dropdown_label")
+        self.labels["sat"] = pygame_gui.elements.UILabel(pygame.Rect((20, 180), (150, 25)), "Saturation:",
+                                                            container=self.pattern_tab2,
+                                                            object_id="#dropdown_label")
         # -------------------------------------------------------------------------------------------------------------
         # Pattern 2 Tab Labels CHIMERA ----------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
@@ -1200,10 +1214,13 @@ class CreationScreen(base_screens.Screens):
         self.labels["corinc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 125), (150, 25)), "CORIN gold:",
                                                             container=self.pattern_tab5,
                                                             object_id="#dropdown_label")
-        self.labels["extentionc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 125), (150, 25)), "Extention:",
+        self.labels["extentionc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 120), (150, 25)), "Extention:",
                                                             container=self.pattern_tab5,
                                                             object_id="#dropdown_label")
-        self.labels["specredc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 125), (150, 25)), "Special Red:",
+        self.labels["specredc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 120), (150, 25)), "Special Red:",
+                                                            container=self.pattern_tab5,
+                                                            object_id="#dropdown_label")
+        self.labels["satc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 180), (150, 25)), "Saturation:",
                                                             container=self.pattern_tab5,
                                                             object_id="#dropdown_label")
 
@@ -1549,6 +1566,11 @@ class CreationScreen(base_screens.Screens):
                                                global_vars.CREATED_CAT.genotype.specialred.capitalize(),
                                                pygame.Rect((400, 145), (175, 30)),
                                                container=self.pattern_tab2)
+        self.dropdown_menus["saturation_select"] = \
+            pygame_gui.elements.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
+                                               str(global_vars.CREATED_CAT.genotype.saturation),
+                                               pygame.Rect((20, 200), (175, 30)),
+                                               container=self.pattern_tab2)
 
         #------------------------------------------------------------------------------------------------------------
         # PATTERN TAB CONTENTS Page 2 CHIMERA -------------------------------------------------------------------------------
@@ -1594,6 +1616,11 @@ class CreationScreen(base_screens.Screens):
             pygame_gui.elements.UIDropDownMenu(['None', 'Merle', 'Cameo', 'Pseudo-cinnamon', 'Blue-red', 'Blue-tipped'],
                                                global_vars.CREATED_CAT.genotype.chimerageno.specialred.capitalize(),
                                                pygame.Rect((400, 145), (175, 30)),
+                                               container=self.pattern_tab5)
+        self.dropdown_menus["saturation_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
+                                               str(global_vars.CREATED_CAT.genotype.chimerageno.saturation),
+                                               pygame.Rect((20, 200), (175, 30)),
                                                container=self.pattern_tab5)
 
         #------------------------------------------------------------------------------------------------------------
@@ -1662,7 +1689,7 @@ class CreationScreen(base_screens.Screens):
                                                     container=self.pattern_tab6)
         self.dropdown_menus["white_selectc"] = \
             pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.genotype.chimerageno.white_pattern[1:] if len(global_vars.CREATED_CAT.genotype.chimerageno.white_pattern) > 1 else ['None'],
-                                               self.selectedwhite,
+                                               self.selectedwhitechim,
                                                pygame.Rect((240, 35), (175, 30)),
                                                container=self.pattern_tab6)
         self.dropdown_menus['remove_whitec'] = custom_buttons.UIImageButton(pygame.Rect((420, 35), (30, 30)), "",
@@ -2055,7 +2082,7 @@ class CreationScreen(base_screens.Screens):
                                                                       object_id="#unchecked_checkbox",
                                                                       container=self.pattern_tab3)
         # Salmiak
-        if global_vars.CREATED_CAT.genotype.white[0] == 'wsal':
+        if global_vars.CREATED_CAT.genotype.chimerageno.white[0] == 'wsal':
             self.checkboxes["salmiakc"] = custom_buttons.UIImageButton(pygame.Rect((20, 180), (34, 34)),
                                                                       "",
                                                                       object_id="#checked_checkbox",

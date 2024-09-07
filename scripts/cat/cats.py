@@ -102,6 +102,7 @@ class Cat():
             else:
                 global_vars.CREATED_CAT.phenotype.fade = 'Homozygous'
 
+            genotype.saturation = choice([0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6])
 
             phenotype.refone = 'R' + str(randint(1, 11))
             phenotype.refext = 'R' + str(randint(1, 11))

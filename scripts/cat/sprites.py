@@ -169,9 +169,19 @@ class Sprites():
 
         # genemod base colours
 
-        self.make_group('base/bases', (0, 0), 'basecolours', sprites_x=6, sprites_y=4)
+        for i, x in enumerate(["black", "chocolate", "cinnamon", 
+                               "blue", "lilac", "fawn", 
+                               "dove", "champagne", "buff", 
+                               "platinum", "lavender", "beige"]):
+            self.make_group('base/eumelanin', (0, i), f'{x}', sprites_x=7, sprites_y=1)
+        for i, x in enumerate(["lowred", "mediumred", "rufousedred", 
+                               "lowcream", "mediumcream", "rufousedcream", 
+                               "lowhoney", "mediumhoney", "rufousedhoney", 
+                               "lowivory", "mediumivory", "rufousedivory"]):
+            self.make_group('base/pheomelanin', (int(i%3), int(i/3)), f'{x}', sprites_x=1, sprites_y=1)
         self.make_group('base/lightbases', (0, 0), 'lightbasecolours', sprites_x=4, sprites_y=1)
 
+        
         # genemod tabby bases
 
         for x in ["black", "blue", "dove", "platinum",
@@ -301,16 +311,16 @@ class Sprites():
             
         # new new torties
         for a, i in enumerate(['ONE', 'TWO', 'THREE', 'FOUR', 'REDTAIL', 'DELILAH', 'HALF', 'STREAK', 'MASK', 'SMOKE']):
-            self.make_group('tortiepatchesmasks', (a, 0), f"tortiemask{i}")
+            self.make_group('tortiepatchesmasks', (a, 0), f"{i}")
         for a, i in enumerate(['MINIMALONE', 'MINIMALTWO', 'MINIMALTHREE', 'MINIMALFOUR', 'OREO', 'SWOOP', 'CHIMERA', 'CHEST', 'ARMTAIL', 'GRUMPYFACE']):
-            self.make_group('tortiepatchesmasks', (a, 1), f"tortiemask{i}")
+            self.make_group('tortiepatchesmasks', (a, 1), f"{i}")
         for a, i in enumerate(['MOTTLED', 'SIDEMASK', 'EYEDOT', 'BANDANA', 'PACMAN', 'STREAMSTRIKE', 'SMUDGED', 'DAUB', 'EMBER', 'BRIE']):
-            self.make_group('tortiepatchesmasks', (a, 2), f"tortiemask{i}")
+            self.make_group('tortiepatchesmasks', (a, 2), f"{i}")
         for a, i in enumerate(['ORIOLE', 'ROBIN', 'BRINDLE', 'PAIGE', 'ROSETAIL', 'SAFI', 'DAPPLENIGHT', 'BLANKET', 'BELOVED', 'BODY']):
-            self.make_group('tortiepatchesmasks', (a, 3), f"tortiemask{i}")
+            self.make_group('tortiepatchesmasks', (a, 3), f"{i}")
         for a, i in enumerate(['SHILOH', 'FRECKLED', 'HEARTBEAT']):
-            self.make_group('tortiepatchesmasks', (a, 4), f"tortiemask{i}")
-        self.make_group('Other/blue-tipped', (0, 0), 'tortiemaskBLUE-TIPPED')
+            self.make_group('tortiepatchesmasks', (a, 4), f"{i}")
+        self.make_group('Other/blue-tipped', (0, 0), 'kBLUE-TIPPED')
 
         self.load_scars()
 

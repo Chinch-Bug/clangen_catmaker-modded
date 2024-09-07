@@ -579,7 +579,7 @@ class Phenotype():
                         colour = "black"
                         self.caramel = ""
             
-            maincolour = colour
+            maincolour = colour + str(self.genotype.saturation)
 
             rufousing = ""
             banding = ""
@@ -608,7 +608,8 @@ class Phenotype():
                 
                 colour = colour + rufousing + banding + "0"
                 
-                    
+            else:
+                colour = maincolour        
 
 
             return [maincolour, colour, unders_colour, unders_opacity]
@@ -643,7 +644,7 @@ class Phenotype():
             else:
                 colour = "red"
         
-        maincolour += colour
+        maincolour += colour + '0'
         
         rufousing = ""
         banding = ""
@@ -701,20 +702,20 @@ class Phenotype():
             unders_opacity = self.GetRedUnders(banding)
         colour = colour + rufousing + banding + "0"
         
-        if(genes.specialred in ['blue-red', 'pseudo-cinnamon']) or special == 'blue-tipped':
+        if(genes.specialred in ['blue-red', 'cinnamon']) or special == 'blue-tipped':
             colour = colour.replace('cream', 'lilac')
             colour = colour.replace('red', 'blue')
             colour = colour.replace('honey', 'dove')
             colour = colour.replace('ivory', 'lavender')
-            if(genes.specialred == 'pseudo-cinnamon'):
+            if(genes.specialred == 'cinnamon'):
                 if('red' in maincolour):
-                    maincolour = 'cinnamon'
+                    maincolour = 'cinnamon3'
                 elif('cream' in maincolour or maincolour == 'apricot'):
-                    maincolour = 'fawn'
+                    maincolour = 'fawn3'
                 elif('honey' in maincolour):
-                    maincolour = 'buff'
+                    maincolour = 'buff3'
                 elif('ivory' in maincolour):
-                    maincolour = 'beige'
+                    maincolour = 'beige3'
                 
                 if('apricot' in maincolour):
                     self.caramel = 'caramel'
@@ -723,3 +724,4 @@ class Phenotype():
                 unders_opacity = 33
         
         return [maincolour, colour, unders_colour, unders_opacity]
+    
