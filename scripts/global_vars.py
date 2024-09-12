@@ -107,7 +107,7 @@ white_patches = bidict({None: 'None', 'MAO': 'Mao', 'LUNA': 'Luna', 'CHESTSPECK'
                         "BLOSSOMSTEP": "Blossomstep", "BULLSEYE": "Bullseye", "SHOOTINGSTAR" : "Shooting Star", "EYESPOT" : "Eye Spot", 
                         "PEBBLE": "Pebble", "TAILTWO": "Tail Two", "BUDDY": "Buddy", "FCONE": "FC One", "FCTWO": "FC Two", 
                         "MIA": "Mia", "DIGIT": "Digit", "SCAR": "Scar", "BUSTER": "Buster", "FINN": "Finn", "KROPKA": "Kropka", 
-                        "HAWKBLAZE": "Hawkblaze", "LOCKET": "Locket", "PRINCESS": "Princess", "ROSINA" : "Rosina", "CAKE" : "Cake"})
+                        "HAWKBLAZE": "Hawkblaze", "LOCKET": "Locket", "PRINCESS": "Princess", "ROSINA" : "Rosina", "CAKE" : "Cake", "BLAZEMASK" : 'Blazemask', "TEARS" : "Tears", "DOUGIE" : 'Dougie'})
 white_patches = sort_bidict(white_patches, None)
 
 genemod_white = bidict({None: 'None',
