@@ -320,7 +320,7 @@ class Sprites():
             self.make_group('tortiepatchesmasks', (a, 3), f"{i}")
         for a, i in enumerate(['SHILOH', 'FRECKLED', 'HEARTBEAT']):
             self.make_group('tortiepatchesmasks', (a, 4), f"{i}")
-        self.make_group('Other/blue-tipped', (0, 0), 'kBLUE-TIPPED')
+        self.make_group('Other/blue-tipped', (0, 0), 'BLUE-TIPPED')
 
         self.load_scars()
 
