@@ -24,7 +24,7 @@ class Genotype:
         self.white = ["w", "w"]
         self.whitegrade = randint(1, 5)
         self.white_pattern = [None]
-        self.vitiligo = False
+        self.vitiligo = True
         self.deaf = False
         self.fevercoat = False
         self.pointgene = ["C", "C"]
