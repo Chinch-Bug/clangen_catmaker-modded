@@ -44,43 +44,6 @@ corin = bidict({"N": "None", "sh": "Sunshine", "sg": "Extreme Sunshine", "fg": "
 extention = bidict({"E": "Normal", "ea": "Amber", "er": "Russet", "ec": "Carnelian",
                     "Eg": "Chausie Grizzle", 'ecc': 'Carnelian Carrier'})
 
-tortie_patches_shapes = bidict({"ONE": "One", "TWO": "Two", "THREE": "Three", "FOUR": "Four",  'REDTAIL': "Redtail",
-                                'DELILAH': "Delilah", 'MINIMALONE': "Minimal 1", 'MINIMALTWO': "Minimal 2",
-                                'MINIMALTHREE': "Minimal 3", 'MINIMALFOUR': "Minimal 4", 'OREO': "Oreo", 'SWOOP': "Swoop",
-                                'MOTTLED': "Mottled", 'SIDEMASK': "Sidemask", 'EYEDOT': "Eye dot",
-                                'BANDANA': "Bandana", 'PACMAN': "Pacman", 'STREAMSTRIKE': "Streamstrike",
-                                'ORIOLE': "Oriole", 'ROBIN': "Robin", 'BRINDLE': "Brindle", 'PAIGE': "Paige", 
-                                "ROSETAIL": "Rosetail", "SAFI": "Safi", "HALF": "Half", "CHIMERA": "Chimera", 
-                                "SMUDGED": "Smudged", "DAUB": "Daub", "DAPPLENIGHT": "Dapplenight", "STREAK": "Streak", 
-                                "MASK": "Mask", "CHEST": "Chest", "ARMTAIL": "Armtail", "EMBER": "Ember", "SMOKE": "Smoke", 
-                                "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
-                                "BODY" : "Body"})
-tortie_patches_shapes = sort_bidict(tortie_patches_shapes)
-
-eye_colors = bidict( {'YELLOW': "Yellow", 'AMBER': "Amber", 'HAZEL': "Hazel", 'PALEGREEN': "Pale Green",
-                      'GREEN': "Green", 'BLUE': "Blue", 'DARKBLUE': "Dark Blue", 'GREY': "Grey", 'CYAN': "Cyan",
-                      'EMERALD': "Emerald", 'PALEBLUE': "Pale Blue", 'PALEYELLOW': "Pale Yellow", 'GOLD': "Gold",
-                      'HEATHERBLUE': "Heather Blue", 'SAGE': "Sage", 'COBALT': "Cobalt",
-                      'SUNLITICE': "Sunlit Ice", "GREENYELLOW": "Green-Yellow", 'COPPER': 'Copper', 'BRONZE': 'Bronze',
-                      'SILVER': 'Silver'})
-eye_colors = sort_bidict(eye_colors)
-
-tints = bidict({"none": "None", "pink": "Pink", "gray": "Gray", "red": "Red", "black": "Black", "orange": "Orange",
-                "yellow": "Yellow", "purple": "Purple", "blue": "Blue"})
-tints = sort_bidict(tints, 'none')
-
-white_patches_tint = bidict({"none": "None", "darkcream": "Dark Cream", "cream": "Cream", "offwhite": "Blue",
-                             "gray": "Gray", "pink": "Pink"})
-
-skin_colors = bidict({'BLACK': "Black", 'RED': "Red", 'PINK': "Pink", 'DARKBROWN': "Dark Brown", 'BROWN': "Brown",
-                      'LIGHTBROWN': "Light Brown", 'DARK': "Dark", 'DARKGREY': "Dark Gray", 'GREY': "Gray",
-                      'DARKSALMON': "Dark Salmon", 'SALMON': 'Salmon', 'PEACH': 'Peach', 'DARKMARBLED': 'Dark Marbled',
-                      'MARBLED': 'Marbled', 'LIGHTMARBLED': 'Light Marbled', 'DARKBLUE': 'Dark Blue', 'BLUE': 'Blue',
-                      'LIGHTBLUE': 'Light Blue'})
-skin_colors = sort_bidict(skin_colors)
-
-colors = ['Black', 'Blue', 'Red', 'Cream', 'White', 'Albino', 'Chocolate', 'Lilac', 'Cinnamon', 'Fawn', 'Dove', 'Platinum', 
-          'Honey', 'Ivory', 'Champagne', 'Lavender', 'Buff', 'Beige']
 
 white_patches = bidict({None: 'None', 'MAO': 'Mao', 'LUNA': 'Luna', 'CHESTSPECK': 'Chest Speck', 'WINGS': 'Wings',
                         'PAINTED': 'Painted', 'BLACKSTAR': 'Blackstar', 'LITTLE': 'Little', 'TUXEDO': 'Tuxedo',
@@ -109,6 +72,59 @@ white_patches = bidict({None: 'None', 'MAO': 'Mao', 'LUNA': 'Luna', 'CHESTSPECK'
                         "MIA": "Mia", "DIGIT": "Digit", "SCAR": "Scar", "BUSTER": "Buster", "FINN": "Finn", "KROPKA": "Kropka", 
                         "HAWKBLAZE": "Hawkblaze", "LOCKET": "Locket", "PRINCESS": "Princess", "ROSINA" : "Rosina", "CAKE" : "Cake", "BLAZEMASK" : 'Blazemask', "TEARS" : "Tears", "DOUGIE" : 'Dougie'})
 white_patches = sort_bidict(white_patches, None)
+tortie_patches_shapes = bidict({"ONE": "One", "TWO": "Two", "THREE": "Three", "FOUR": "Four",  'REDTAIL': "Redtail",
+                                'DELILAH': "Delilah", 'MINIMALONE': "Minimal 1", 'MINIMALTWO': "Minimal 2",
+                                'MINIMALTHREE': "Minimal 3", 'MINIMALFOUR': "Minimal 4", 'OREO': "Oreo", 'SWOOP': "Swoop",
+                                'MOTTLED': "Mottled", 'SIDEMASK': "Sidemask", 'EYEDOT': "Eye dot",
+                                'BANDANA': "Bandana", 'PACMAN': "Pacman", 'STREAMSTRIKE': "Streamstrike",
+                                'ORIOLE': "Oriole", 'ROBIN': "Robin", 'BRINDLE': "Brindle", 'PAIGE': "Paige", 
+                                "ROSETAIL": "Rosetail", "SAFI": "Safi", "HALF": "Half", "CHIMERA": "Chimera", 
+                                "SMUDGED": "Smudged", "DAUB": "Daub", "DAPPLENIGHT": "Dapplenight", "STREAK": "Streak", 
+                                "MASK": "Mask", "CHEST": "Chest", "ARMTAIL": "Armtail", "EMBER": "Ember", "SMOKE": "Smoke", 
+                                "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
+                                "BODY" : "Body"})
+tortie_patches_shapes = sort_bidict(tortie_patches_shapes)
+tortie_patches_shapes.update(white_patches)
+
+merle_patches_shapes = bidict({None: 'None', 'DELILAH' : "Delilah", 'MOTTLED' : "Mottled", 'EYEDOT' : "Eye dot", 'BANDANA' : "Bandana", 
+                               'SMUDGED' : "Smudged", 'EMBER' : "Ember", 'BRINDLE' : "Brindle", 'SAFI' : "Safi", 'BELOVED' : "Beloved", 
+                               'BODY' : "Body", 'SHILOH' : "Shiloh", 'FRECKLED' : "Freckled", "BACKSPOT" : "Backspot", "BEARD" : "Beard", 
+                               "BELLY" : "Belly", "BIB" : "Bib", "revBLACKSTAR" : "Blackstar", "BLAZE" : "Blaze", "BLAZEMASK" : "Blaze mask", 
+                               "revBOOTS" : "Boots", "revCHESTSPECK" : "Chest speck", "ESTRELLA" : "Estrelle", 'ONE' : "One", 'TWO' : "Two", 
+                               'SMOKE' : "Smoke", 'MINIMALONE': "Minimal 1", 'MINIMALTWO': "Minimal 2", 'MINIMALTHREE': "Minimal 3", 
+                               'MINIMALFOUR': "Minimal 4", 'OREO' : "Oreo", 'CHIMERA' : "Chimera", 'CHEST' : "Chest", 'GRUMPYFACE' : "Grumpyface", 
+                               'SIDEMASK' : "Sidemask", 'PACMAN' : "Pacman", 'BRIE' : "Brie" ,'ORIOLE' : "Oriole", 'ROBIN' : "Robin", 
+                               'PAIGE' : "Paige", 'HEARTBEAT' : "Heartbeat", "EYEBAGS" : "Eyebags", "revEYESPOT": "Eye spot", 
+                               "revHEART": "Heart", "HONEY" : "Honey", "LEFTEAR": "Left ear", "LITTLE" : "Little", "PAWS" : "Paws", 
+                               "REVERSEEYE" : "Reverse eye", "REVERSEHEART" : "Reverse heart", "RIGHTEAR" : "Right ear", "SCOURGE" : "Scourge", 
+                               "SPARKLE" : "Sparkle", "revTAIL" : "Tail", 'revTAILTWO': "Tail 2", "TAILTIP": "Tailtip", "TEARS": "Tears", 
+                               "TIP": "Tip", "TOES": "Toes", "TOESTAIL": "Toes & Tail", "VEE" : "Vee"})
+merle_patches_shapes = sort_bidict(merle_patches_shapes)
+
+eye_colors = bidict( {'YELLOW': "Yellow", 'AMBER': "Amber", 'HAZEL': "Hazel", 'PALEGREEN': "Pale Green",
+                      'GREEN': "Green", 'BLUE': "Blue", 'DARKBLUE': "Dark Blue", 'GREY': "Grey", 'CYAN': "Cyan",
+                      'EMERALD': "Emerald", 'PALEBLUE': "Pale Blue", 'PALEYELLOW': "Pale Yellow", 'GOLD': "Gold",
+                      'HEATHERBLUE': "Heather Blue", 'SAGE': "Sage", 'COBALT': "Cobalt",
+                      'SUNLITICE': "Sunlit Ice", "GREENYELLOW": "Green-Yellow", 'COPPER': 'Copper', 'BRONZE': 'Bronze',
+                      'SILVER': 'Silver'})
+eye_colors = sort_bidict(eye_colors)
+
+tints = bidict({"none": "None", "pink": "Pink", "gray": "Gray", "red": "Red", "black": "Black", "orange": "Orange",
+                "yellow": "Yellow", "purple": "Purple", "blue": "Blue"})
+tints = sort_bidict(tints, 'none')
+
+white_patches_tint = bidict({"none": "None", "darkcream": "Dark Cream", "cream": "Cream", "offwhite": "Blue",
+                             "gray": "Gray", "pink": "Pink"})
+
+skin_colors = bidict({'BLACK': "Black", 'RED': "Red", 'PINK': "Pink", 'DARKBROWN': "Dark Brown", 'BROWN': "Brown",
+                      'LIGHTBROWN': "Light Brown", 'DARK': "Dark", 'DARKGREY': "Dark Gray", 'GREY': "Gray",
+                      'DARKSALMON': "Dark Salmon", 'SALMON': 'Salmon', 'PEACH': 'Peach', 'DARKMARBLED': 'Dark Marbled',
+                      'MARBLED': 'Marbled', 'LIGHTMARBLED': 'Light Marbled', 'DARKBLUE': 'Dark Blue', 'BLUE': 'Blue',
+                      'LIGHTBLUE': 'Light Blue'})
+skin_colors = sort_bidict(skin_colors)
+
+colors = ['Black', 'Blue', 'Red', 'Cream', 'White', 'Albino', 'Chocolate', 'Lilac', 'Cinnamon', 'Fawn', 'Dove', 'Platinum', 
+          'Honey', 'Ivory', 'Champagne', 'Lavender', 'Buff', 'Beige']
 
 genemod_white = bidict({None: 'None',
                         'None1': '-Right Front Leg-',

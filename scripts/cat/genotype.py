@@ -9,7 +9,7 @@ class Genotype:
         self.eumelanin = ["B", "B"]
         self.sexgene = ["o", "o"]
         self.specialred = "none"
-        self.tortiepattern = None
+        self.tortiepattern = []
         self.brindledbi = False
         self.chimera = False
         if spec:
@@ -17,6 +17,8 @@ class Genotype:
         else:
             self.chimerageno = Genotype('chimera')
         self.chimerapattern = None
+        self.pseudomerle = False
+        self.merlepattern = []
         self.gender = ""
         self.dilute = ["D", "D"]
         self.white = ["w", "w"]
@@ -24,6 +26,7 @@ class Genotype:
         self.white_pattern = [None]
         self.vitiligo = False
         self.deaf = False
+        self.fevercoat = False
         self.pointgene = ["C", "C"]
         self.silver = ["i", "i"]
         self.agouti = ["a", "a"]
@@ -64,7 +67,7 @@ class Genotype:
         self.ring = ["Rt", "Rt"]
         self.munch = ["mk", "mk"]
         self.poly = ["pd", "pd"]
-        self.altai = ["al", "al"]
+        self.pax3 = ["NoDBE", "NoDBE"]
 
         self.wideband = ""
         self.wbtype = "medium"
