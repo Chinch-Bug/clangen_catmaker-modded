@@ -1785,7 +1785,7 @@ class CreationScreen(base_screens.Screens):
 
         self.dropdown_menus["merle_select"] = \
             pygame_gui.elements.UIDropDownMenu(global_vars.merle_patches_shapes.values(),
-                                               global_vars.tortie_patches_shapes[self.selectedmerle],
+                                               global_vars.merle_patches_shapes[self.selectedmerle],
                                                pygame.Rect((20, 130), (175, 30)),
                                                container=self.tortie_tab)
         
@@ -1831,8 +1831,8 @@ class CreationScreen(base_screens.Screens):
                                                     container=self.chim_tortie_tab)
 
         self.dropdown_menus["merle_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
-                                               global_vars.tortie_patches_shapes[self.selectedmerle],
+            pygame_gui.elements.UIDropDownMenu(global_vars.merle_patches_shapes.values(),
+                                               global_vars.merle_patches_shapes[self.selectedmerle],
                                                pygame.Rect((20, 130), (175, 30)),
                                                container=self.chim_tortie_tab)
         
