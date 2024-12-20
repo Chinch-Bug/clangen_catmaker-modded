@@ -89,17 +89,17 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
     try:
         stripecolourdict = {
-                'rufousedapricot0' : 'lowred0',
-                'mediumapricot0' : 'rufousedcream0',
-                'lowapricot0' : 'mediumcream0',
+                'rufousedapricot' : 'lowred',
+                'mediumapricot' : 'rufousedcream',
+                'lowapricot' : 'mediumcream',
 
-                'rufousedhoney-apricot0' : 'lowred0',
-                'mediumhoney-apricot0' : 'rufousedhoney0',
-                'lowhoney-apricot0' : 'mediumhoney0',
+                'rufousedhoney-apricot' : 'lowred',
+                'mediumhoney-apricot' : 'rufousedhoney',
+                'lowhoney-apricot' : 'mediumhoney',
 
-                'rufousedivory-apricot0' : 'lowhoney0',
-                'mediumivory-apricot0' : 'rufousedivory0',
-                'lowivory-apricot0' : 'mediumivory0'
+                'rufousedivory-apricot' : 'lowhoney',
+                'mediumivory-apricot' : 'rufousedivory',
+                'lowivory-apricot' : 'mediumivory'
             }
         gensprite = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                 
