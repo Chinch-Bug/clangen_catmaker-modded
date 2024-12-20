@@ -75,7 +75,7 @@ class Cat():
         def SubRandomize(genotype, phenotype):
             phenotype.SetPoints(choice(['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']))
             genotype.tortiepattern = [choice(list(tortie_patches_shapes.keys()))]
-            if random() < 0.1:
+            if random.random() < 0.1:
                 genotype.merlepattern = [choice(list(tortie_patches_shapes.keys()))]
             genotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
             if genotype.sexgene is not ['O', 'O']:
@@ -87,7 +87,7 @@ class Cat():
             phenotype.SetBaseColour(choice(['Black', 'Blue', 'Red', 'Cream', 'White', 'Albino', 'Chocolate', 'Lilac', 'Cinnamon', 'Fawn', 'Dove', 'Platinum', 
             'Honey', 'Ivory', 'Champagne', 'Lavender', 'Buff', 'Beige']).lower())
 
-            if random() < 0.1:
+            if random.random() < 0.1:
                 genotype.specialred = choice(['cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'pseudo-cinnamon', 'blue-red', 'blue-tipped', 'blue-tipped'])
             else:
                 genotype.specialred = "none"
@@ -145,7 +145,7 @@ class Cat():
 
             genotype.soktype = choice(['normal markings', 'normal markings', 'normal markings', 'normal markings','normal markings' , 'full sokoke', 'mild fading', 'mild fading'])
 
-            genotype.fevercoat = random() < 0.1
+            genotype.fevercoat = random.random() < 0.1
             genotype.silver[0] = choice(['I', 'i', 'i'])
             genotype.wbtype = choice(['low', 'medium', 'high', 'shaded', 'chinchilla'])
             genotype.ruftype = choice(['low', 'medium', 'rufoused'])
