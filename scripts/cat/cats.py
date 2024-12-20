@@ -74,9 +74,7 @@ class Cat():
         
         def SubRandomize(genotype, phenotype):
             phenotype.SetPoints(choice(['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']))
-            genotype.tortiepattern = [choice(list(tortie_patches_shapes.keys()))]
-            if random.random() < 0.1:
-                genotype.merlepattern = [choice(list(tortie_patches_shapes.keys()))]
+            genotype.pseudomerle = random.random() < 0.1
             genotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
             if genotype.sexgene is not ['O', 'O']:
                 genotype.sexgene = choice([['o', 'o'], ['o', 'o'], ['O', 'o']])
@@ -97,10 +95,6 @@ class Cat():
             genotype.ghosting[0] = choice(['gh', 'gh', 'gh', 'gh', 'gh', 'Gh'])
             genotype.satin[0] = choice(['St', 'St', 'St', 'St', 'St', 'st'])
             genotype.brindledbi = (random.random() < 0.1)
-            if (random.random() < 0.1 and genotype.tortiepattern):
-                genotype.tortiepattern[0] = 'rev' + genotype.tortiepattern
-            elif genotype.tortiepattern:
-                genotype.tortiepattern[0] = genotype.tortiepattern.replace('rev', '')
 
             genotype.karp = choice([['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'K']])
             if global_vars.CREATED_CAT.genotype.karp == ['k', 'k']:
