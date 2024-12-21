@@ -1521,7 +1521,7 @@ class CreationScreen(base_screens.Screens):
                                                                                    pygame.Rect((340, 35), (150, 30)),
                                                                                    container=self.general_tab)
         self.dropdown_menus["chimera_shape"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
+            pygame_gui.elements.UIDropDownMenu(global_vars.chimera_patches_shapes.values(),
                                                global_vars.tortie_patches_shapes.get(
                                                   global_vars.CREATED_CAT.genotype.chimerapattern.replace('rev', '')
                                                ),

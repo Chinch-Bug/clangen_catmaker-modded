@@ -74,7 +74,6 @@ class Cat():
         
         def SubRandomize(genotype, phenotype):
             phenotype.SetPoints(choice(['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']))
-            genotype.pseudomerle = random.random() < 0.1
             genotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
             if genotype.sexgene is not ['O', 'O']:
                 genotype.sexgene = choice([['o', 'o'], ['o', 'o'], ['O', 'o']])
@@ -141,6 +140,10 @@ class Cat():
 
             genotype.fevercoat = random.random() < 0.1
             genotype.silver[0] = choice(['I', 'i', 'i'])
+            if genotype.silver[0] == 'I':
+                genotype.pseudomerle = random.random() < 0.1
+            else:
+                genotype.pseudomerle = False
             genotype.wbtype = choice(['low', 'medium', 'high', 'shaded', 'chinchilla'])
             genotype.ruftype = choice(['low', 'medium', 'rufoused'])
 

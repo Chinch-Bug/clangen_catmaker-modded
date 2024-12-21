@@ -225,8 +225,10 @@ class Phenotype():
     def SetFurLength(self, type):
         if 'long' in type or 'lh' in type:
             self.genotype.furLength = ['l', 'l']
+            self.length = 'longhaired'
         else:
             self.genotype.furLength = ['L', 'L']
+            self.length = 'shorthaired'
 
         if 'rexed' in type:
             self.genotype.wirehair = ['Wh', 'Wh']

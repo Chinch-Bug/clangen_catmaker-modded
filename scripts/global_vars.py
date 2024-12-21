@@ -84,6 +84,7 @@ tortie_patches_shapes = bidict({"ONE": "One", "TWO": "Two", "THREE": "Three", "F
                                 "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
                                 "BODY" : "Body"})
 tortie_patches_shapes = sort_bidict(tortie_patches_shapes)
+chimera_patches_shapes = tortie_patches_shapes.copy()
 tortie_patches_shapes.update(white_patches)
 
 merle_patches_shapes = bidict({None: 'None', 'DELILAH' : "Delilah", 'MOTTLED' : "Mottled", 'EYEDOT' : "Eye dot", 'BANDANA' : "Bandana", 
