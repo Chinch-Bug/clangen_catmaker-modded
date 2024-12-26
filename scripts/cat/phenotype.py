@@ -767,12 +767,12 @@ class Phenotype():
             unders_opacity = self.GetRedUnders(banding)
         colour = colour + rufousing + banding + "0"
         
-        if(genes.specialred in ['blue-red', 'cinnamon']) or special == 'blue-tipped':
+        if(genes.specialred in ['blue-red', 'pseudo-cinnamon']) or special == 'blue-tipped':
             colour = colour.replace('cream', 'lilac')
             colour = colour.replace('red', 'blue')
             colour = colour.replace('honey', 'dove')
             colour = colour.replace('ivory', 'lavender')
-            if(genes.specialred == 'cinnamon'):
+            if(genes.specialred == 'pseudo-cinnamon'):
                 if('red' in maincolour):
                     maincolour = 'cinnamon3'
                 elif('cream' in maincolour or maincolour == 'apricot'):
