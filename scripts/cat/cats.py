@@ -31,6 +31,7 @@ class Cat():
             "senior": 12,
         }
         self.platform = "None"
+        self.permanent_condition = []
 
         # Used only for export
         self.ID = "2"
