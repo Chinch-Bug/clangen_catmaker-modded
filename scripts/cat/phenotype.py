@@ -646,6 +646,9 @@ class Phenotype():
             
             maincolour = colour + str(self.genotype.saturation)
 
+            if self.genotype.saturation < 3 and colour in ['blue', 'lilac']:
+                colour = "pale_" + colour
+
             rufousing = ""
             banding = ""
             
@@ -669,7 +672,7 @@ class Phenotype():
                     unders_opacity = self.GetSilverUnders(banding)
                 else:
                     unders_colour = self.FindEumUnders(genes, banding, rufousing)
-                    unders_opacity = 33
+                    unders_opacity = 20
                 
                 colour = colour + rufousing + banding + "0"
                 
