@@ -646,13 +646,13 @@ class Phenotype():
             
             maincolour = colour + str(self.genotype.saturation)
 
-            if self.genotype.saturation < 3 and colour in ['blue', 'lilac']:
+            if self.genotype.saturation < 3 and colour in ['blue', 'lilac', 'fawn', 'dove']:
                 colour = "pale_" + colour
 
             rufousing = ""
             banding = ""
             
-            if ('masked' in self.silvergold and genes.wbsum > 15) or (genes.agouti[0] != "a" and genes.ext[0] != "Eg") or (genes.ext[0] not in ['Eg', 'E']):
+            if ('masked' in self.silvergold) or (genes.agouti[0] != "a" and genes.ext[0] != "Eg") or (genes.ext[0] not in ['Eg', 'E']):
                 if genes.silver[0] == "I" or genes.brindledbi or (moons < 3 and genes.karp[0] == "K"):
                     rufousing = "silver"
                 elif genes.pointgene[0] != "C" or genes.agouti[0] == "Apb":
