@@ -82,7 +82,7 @@ tortie_patches_shapes = bidict({"ONE": "One", "TWO": "Two", "THREE": "Three", "F
                                 "SMUDGED": "Smudged", "DAUB": "Daub", "DAPPLENIGHT": "Dapplenight", "STREAK": "Streak", 
                                 "MASK": "Mask", "CHEST": "Chest", "ARMTAIL": "Armtail", "EMBER": "Ember", "SMOKE": "Smoke", 
                                 "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
-                                "BODY" : "Body"})
+                                "BODY" : "Body", "CRYPTIC": "Cryptic"})
 tortie_patches_shapes = sort_bidict(tortie_patches_shapes)
 chimera_patches_shapes = tortie_patches_shapes.copy()
 tortie_patches_shapes.update(white_patches)

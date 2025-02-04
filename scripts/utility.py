@@ -246,8 +246,8 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 smokeUnders = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                 smokeUnders.blit(sprites.sprites["Tabby_unders" + cat_sprite], (0, 0))
                 smokeUnders.blit(white, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
-                smokeUnders.set_alpha(13)
-                white.set_alpha(13)
+                smokeUnders.set_alpha(10)
+                white.set_alpha(10)
                 smokeLayer = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                 smokeLayer.blit(white, (0, 0))
                 if(genotype.ext[0] == 'Eg' and genotype.agouti[0] != 'a'):
@@ -997,6 +997,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             chimerapatches = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
             chimerapatches.blit(sprites.sprites[cat.genotype.chimerapattern + cat_sprite], (0, 0))
             chimerapheno = Phenotype(cat.genotype.chimerageno)
+            chimerapheno.SpriteInfo(cat.moons)
             chimerapatches.blit(GenSprite(cat.genotype.chimerageno, chimerapheno, cat.moons), (0, 0), special_flags=pygame.BLEND_RGB_MULT)
             gensprite.blit(chimerapatches, (0, 0))
 

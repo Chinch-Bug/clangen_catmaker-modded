@@ -500,7 +500,7 @@ class Phenotype():
         self.patchunders = []
         self.patchcolour = ""
 
-        if(self.genotype.silver[0] == 'I' and self.genotype.pseudomerle):
+        if(self.genotype.pseudomerle):
             if not self.genotype.merlepattern:
                 self.genotype.merlepattern = self.ChooseTortiePattern(spec = 'merle')
 

@@ -573,6 +573,18 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["merle_remove"]:
 
                 self.selectedmerlerem = event.text
+            elif event.ui_element == self.dropdown_menus["tortie_selectc"]:
+
+                self.selectedtortiechim = global_vars.tortie_patches_shapes.inverse[event.text]
+            elif event.ui_element == self.dropdown_menus["tortie_removec"]:
+
+                self.selectedtortieremchim = event.text
+            elif event.ui_element == self.dropdown_menus["merle_selectc"]:
+
+                self.selectedmerlechim = global_vars.merle_patches_shapes.inverse[event.text]
+            elif event.ui_element == self.dropdown_menus["merle_removec"]:
+
+                self.selectedmerleremchim = event.text
             elif event.ui_element == self.dropdown_menus["basegame_select"]:
 
                 self.selectedbasegame = global_vars.white_patches.inverse[event.text]
@@ -1839,8 +1851,8 @@ class CreationScreen(base_screens.Screens):
         self.dropdown_menus['add_merlec'] = custom_buttons.UIImageButton(pygame.Rect((200, 130), (30, 30)), "",
                                                     object_id="#add_button",
                                                     container=self.chim_tortie_tab)
-        self.dropdown_menus["tortie_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.genotype.tortiepattern,
+        self.dropdown_menus["tortie_removec"] = \
+            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.genotype.chimerageno.tortiepattern,
                                                self.selectedtortierem,
                                                pygame.Rect((240, 35), (175, 30)),
                                                container=self.chim_tortie_tab)
@@ -1851,8 +1863,8 @@ class CreationScreen(base_screens.Screens):
                                                     object_id="#clear_button",
                                                     container=self.chim_tortie_tab)
         
-        self.dropdown_menus["merle_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.genotype.merlepattern,
+        self.dropdown_menus["merle_removec"] = \
+            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.genotype.chimerageno.merlepattern,
                                                self.selectedmerlerem,
                                                pygame.Rect((240, 130), (175, 30)),
                                                container=self.chim_tortie_tab)
