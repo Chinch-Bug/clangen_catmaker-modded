@@ -675,6 +675,7 @@ class Phenotype():
                     unders_opacity = 20
                 
                 colour = colour + rufousing + banding + "0"
+                self.banding = banding
                 
             else:
                 colour = maincolour        

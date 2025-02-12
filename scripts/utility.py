@@ -140,9 +140,15 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 charc_shading = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                 if(genotype.agouti[0] == "Apb" and ('red' not in stripecolour and 'cream' not in stripecolour and 'honey' not in stripecolour and 'ivory' not in stripecolour and 'apricot' not in stripecolour)):
                     charc_shading.blit(sprites.sprites['lightbasecolours0'], (0, 0))
-                    charc_shading.set_alpha(175)
-                    if 'shaded' in whichbase or 'chinchilla' in whichbase:
-                        charc_shading.set_alpha(100)
+                    modifiers = {
+                        "chinchilla" : 2,
+                        "shaded" : 3,
+                        "high" : 5,
+                        "medium" : 6,
+                        "low" : 7
+                    }
+                    opacity = int(25 * (modifiers.get(phenotype.banding, 5) / (1 * (int("silver" in whichbase) + 1))))
+                    charc_shading.set_alpha(opacity)
                     charc.blit(charc_shading, (0, 0))
                     charc.blit(sprites.sprites['charcoal' + cat_sprite], (0, 0))
                 
