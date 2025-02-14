@@ -117,12 +117,11 @@ jobs:
         run: poetry run python -m PyInstaller Catmaker.spec
       - name: Create archive (Linux)
         if: startsWith(matrix.os, 'ubuntu')
-        run: tar -caf ${{ matrix.artifact_name }}
+        run: tar -caf ${{ matrix.artifact_name }} -C dist Genemod_Catmaker
       - name: Create archive (Windows)
         if: startsWith(matrix.os, 'windows')
         shell: powershell
-        run: |
-          cp dist/ tar.exe -a ${{ matrix.artifact_name }} -C dist Genemod_Catmaker
+        run: tar.exe -a -c -f ${{ matrix.artifact_name }} -C dist Genemod_Catmaker
       - name: Create DMG (macOS)
         if: startsWith(matrix.os, 'macos')
         run: |
