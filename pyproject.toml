@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "clangen-catmaker-main"
+version = "0.1.0"
+description = ""
+authors = ["Chinch-Bug <77509218+Chinch-Bug@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pygame-gui = "^0.6.13"
+ujson = "^5.10.0"
+bidict = "^0.23.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
