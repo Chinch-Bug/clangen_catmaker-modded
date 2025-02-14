@@ -28,7 +28,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='Catmaker',
+    name='Genemod_Catmaker',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -49,11 +49,11 @@ coll = COLLECT(
     strip=False,
     upx=False,
     upx_exclude=[],
-    name='Catmaker',
+    name='Genemod_Catmaker',
 )
 app = BUNDLE(
     coll,
-    name='Catmaker.app',
+    name='Genemod_Catmaker.app',
     icon='resources/images/icon.png',
     bundle_identifier=None,
 )
