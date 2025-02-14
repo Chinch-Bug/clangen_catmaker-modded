@@ -122,7 +122,7 @@ jobs:
         if: startsWith(matrix.os, 'windows')
         shell: powershell
         run: |
-          cp dist/ tar.exe -a -c -f ${{ matrix.artifact_name }} -C dist Genemod_Catmaker
+          cp dist/ tar.exe -a -f ${{ matrix.artifact_name }} -C dist Genemod_Catmaker
       - name: Create DMG (macOS)
         if: startsWith(matrix.os, 'macos')
         run: |
