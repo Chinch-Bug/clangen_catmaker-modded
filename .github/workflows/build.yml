@@ -27,7 +27,7 @@ jobs:
         run: python3 -m PyInstaller Catmaker.spec
       - name: Create archive (.tar.xz)
         run: tar -caf Catmaker_Linux64_glibc2.31+.tar.xz -C dist Catmaker
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Catmaker_Linux64_glibc2.31+.tar.xz
           path: Catmaker_Linux64_glibc2.31+.tar.xz
@@ -56,7 +56,7 @@ jobs:
         run: python3 -m PyInstaller Catmaker.spec
       - name: Create archive (.tar.xz)
         run: tar -caf Catmaker_Linux64_glibc2.35+.tar.xz -C dist Catmaker
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Catmaker_Linux64_glibc2.35+.tar.xz
           path: Catmaker_Linux64_glibc2.35+.tar.xz
@@ -85,7 +85,7 @@ jobs:
         run: python -m PyInstaller Catmaker.spec
       - name: Create archive (.zip)
         run: tar.exe -a -c -f Catmaker_Win32.zip -C dist Catmaker
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Catmaker_Win32
           path: Catmaker_Win32.zip
@@ -114,7 +114,7 @@ jobs:
         run: python -m PyInstaller Catmaker.spec
       - name: Create archive (.zip)
         run: tar.exe -a -c -f Catmaker_Win32.zip -C dist Catmaker
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Catmaker_Win32
           path: Catmaker_Win32.zip
@@ -148,7 +148,7 @@ jobs:
         run: python -m PyInstaller Catmaker.spec
       - name: Create archive (.zip)
         run: tar.exe -a -c -f Catmaker_Win64_Windows10+.zip -C dist Catmaker
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Catmaker_Win64_Windows10+
           path: Catmaker_Win64_Windows10+.zip
@@ -192,7 +192,7 @@ jobs:
         run: "npm install -g appdmg"
       - name: Generate .dmg
         run: "appdmg appdmg.json Catmaker_macOS64.dmg"
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Catmaker_macOS64.dmg
           path: Catmaker_macOS64.dmg
