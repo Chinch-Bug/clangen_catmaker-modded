@@ -6,7 +6,7 @@ jobs:
   build_ubuntu_20_04:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python 3.11 x64
         uses: actions/setup-python@v4
         with:
@@ -35,7 +35,7 @@ jobs:
   build_ubuntu_22_04:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python 3.11 x64
         uses: actions/setup-python@v4
         with:
@@ -64,7 +64,7 @@ jobs:
   build_win32:
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python 3.8 x86
         uses: actions/setup-python@v4
         with:
@@ -93,7 +93,7 @@ jobs:
   build_win64:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python 3.8 x86
         uses: actions/setup-python@v4
         with:
@@ -122,7 +122,7 @@ jobs:
   build_win64_py311:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python 3.11 x64
         uses: actions/setup-python@v4
         with:
@@ -161,7 +161,7 @@ jobs:
       run:
         shell: bash -l {0}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Python 3.11 x64
         uses: conda-incubator/setup-miniconda@v2
         with:
