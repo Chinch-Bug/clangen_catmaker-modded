@@ -102,7 +102,7 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.os }}-cargo-
       - name: install dependencies
-        run: poetry install --with build -E discord
+        run: poetry install --with build
       - name: Build PyInstaller bootloader
         run: |
           git clone https://github.com/pyinstaller/pyinstaller.git
