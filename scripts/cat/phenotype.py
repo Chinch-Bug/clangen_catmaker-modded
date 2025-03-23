@@ -772,8 +772,8 @@ class Phenotype():
         colour = colour + rufousing + banding + "0"
         
         if(genes.specialred in ['blue-red', 'pseudo-cinnamon']) or special == 'blue-tipped':
-            colour = colour.replace('cream', 'lilac')
             colour = colour.replace('red', 'blue')
+            colour = colour.replace('cream', 'lilac')
             colour = colour.replace('honey', 'dove')
             colour = colour.replace('ivory', 'lavender')
             if(genes.specialred == 'pseudo-cinnamon'):
