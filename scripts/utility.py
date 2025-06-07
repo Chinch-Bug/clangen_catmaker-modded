@@ -274,7 +274,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     whichmain.blit(stripebase, (0, 0))
                     stripebase = CreateStripes(
                         whichcolour, whichbase, pattern="agouti", coloursurface=coloursurface)
-                    stripebase.set_alpha(150)
+                    stripebase.set_alpha(200)
                 elif ('ec' in genotype.ext and 'Eg' not in genotype.ext and not ('red' in whichcolour or 'cream' in whichcolour or 'honey' in whichcolour or 'ivory' in whichcolour or 'apricot' in whichcolour)):
                     stripebase = CreateStripes(
                         whichcolour, whichbase, coloursurface=coloursurface)
