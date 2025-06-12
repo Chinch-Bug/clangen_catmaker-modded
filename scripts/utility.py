@@ -394,47 +394,41 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
                 return sprite
 
-            def AddNose(sprite, override=None):
-                nose = pygame.Surface(
-                    (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+            def AddNose(sprite, maincolour, spritecolour, isred):
+                nose = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                 nose.blit(sprites.sprites['nose' + cat_sprite], (0, 0))
 
                 nose_dict = {
-                    'red': 0,
-                    'whit': 1,
-                    'tabby': 2,
-                    'black': 3,
-                    'chocolate': 4,
-                    'cinnamon': 5,
-                    'blue': 6,
-                    'lilac': 7,
-                    'fawn': 8,
-                    'dove': 9,
-                    'champagne': 10,
-                    'buff': 11,
-                    'platinum': 12,
-                    'lavender': 13,
-                    'beige': 14
+                    'red' : 0,
+                    'whit' : 1,
+                    'tabby' : 2,
+                    'black' : 3,
+                    'chocolate' : 4,
+                    'cinnamon' : 5,
+                    'blue' : 6,
+                    'lilac' : 7,
+                    'fawn' : 8,
+                    'dove' : 9,
+                    'champagne' : 10,
+                    'buff' : 11,
+                    'platinum' : 12,
+                    'lavender' : 13,
+                    'beige' : 14
                 }
 
-                if phenotype.maincolour == "white" or override == 'white':
-                    nose.blit(
-                        sprites.sprites['nosecolours1'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
-                elif ('amber' not in phenotype.colour or genotype.agouti[0] != 'a') and ('red' in phenotype.maincolour or 'cream' in phenotype.maincolour or 'honey' in phenotype.maincolour or 'ivory' in phenotype.maincolour or 'apricot' in phenotype.maincolour):
-                    nose.blit(
-                        sprites.sprites['nosecolours0'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                if maincolour == "white":
+                    nose.blit(sprites.sprites['nosecolours1'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                elif ('amber' not in phenotype.colour or phenotype.genotype.agouti[0] != 'a') and isred:
+                    nose.blit(sprites.sprites['nosecolours0'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
                 elif 'amber' in phenotype.colour:
                     phenotype.SpriteInfo(10)
-                    nose.blit(sprites.sprites['nosecolours' + str(nose_dict.get(
-                        phenotype.maincolour[:-1]))], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                    nose.blit(sprites.sprites['nosecolours' + str(nose_dict.get(phenotype.maincolour[:-1]))], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
                     phenotype.SpriteInfo(sprite_age)
-                elif phenotype.maincolour != phenotype.spritecolour and "masked" not in phenotype.silvergold:
-                    nose.blit(
-                        sprites.sprites['nosecolours2'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                elif maincolour != spritecolour and "masked" not in phenotype.silvergold:
+                    nose.blit(sprites.sprites['nosecolours2'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
                     nose.set_alpha(200)
                 else:
-                    nose.blit(sprites.sprites['nosecolours' + str(nose_dict.get(
-                        phenotype.maincolour[:-1]))], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                    nose.blit(sprites.sprites['nosecolours' + str(nose_dict.get(maincolour[:-1]))], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
 
                 sprite.blit(nose, (0, 0))
                 return sprite
@@ -963,6 +957,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         sprites.sprites['salmiak' + cat_sprite], (0, 0))
 
                 whichmain = AddPads(whichmain, whichcolour, is_red)
+                whichmain = AddNose(whichmain, whichcolour, whichbase, is_red)
 
                 return whichmain
 
@@ -1103,8 +1098,6 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     gensprite.blit(
                         sprites.sprites['bleach' + cat_sprite], (0, 0))
 
-            gensprite = AddNose(gensprite)
-
             whitesprite = pygame.Surface(
                 (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
             tintedwhitesprite = pygame.Surface(
@@ -1124,8 +1117,8 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
             leathers = pygame.Surface(
                 (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-            leathers = AddPads(leathers, "white", override="white")
-            leathers = AddNose(leathers, "white")
+            leathers = AddPads(leathers, "white")
+            leathers = AddNose(leathers, "white", "white", False)
             white_leathers = pygame.Surface(
                 (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
             white_leathers.blit(whitesprite, (0, 0))

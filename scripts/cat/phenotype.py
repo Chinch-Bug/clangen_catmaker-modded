@@ -74,6 +74,24 @@ class Phenotype():
             elif (self.genotype.corin[0] == 'fg'):
                 self.silvergold = 'flaxen gold '
 
+    def ExtFinder(self):
+        if('o' in self.genotype.sexgene):
+            if(self.genotype.ext[0] == 'ec'):
+                if(self.colour == ''):
+                    self.tortie = " " + self.tortie
+                self.colour = 'agouti carnelian'
+                if(self.genotype.agouti[0] == 'a'):
+                    self.colour = "non" + self.colour
+                if(self.genotype.dilute[0] == 'd' or self.genotype.pinkdilute[0] == 'dp'):
+                    self.colour = "light " + self.colour
+            
+            elif(self.genotype.ext[0] == 'er'):
+                self.colour += ' russet'
+            elif(self.genotype.ext[0] == 'ea'):
+                if(self.genotype.dilute[0] == 'd' or self.genotype.pinkdilute[0] == 'dp'):
+                    self.colour += " light"
+                self.colour += ' amber'
+    
     def GetTabbySprite(self, special=None):
         pattern = ""
 

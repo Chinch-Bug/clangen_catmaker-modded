@@ -572,9 +572,12 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["extention_select"]:
                 global_vars.CREATED_CAT.genotype.ext[0] = global_vars.extention.inverse[event.text]
                 if 'Carrier' in event.text:
+                    global_vars.CREATED_CAT.genotype.ext[0] = 'E'
                     global_vars.CREATED_CAT.genotype.ext[1] = 'ec'
                 else:
                     global_vars.CREATED_CAT.genotype.ext[1] = global_vars.extention.inverse[event.text]
+                
+                global_vars.CREATED_CAT.phenotype.ExtFinder()
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["specred_select"]:
