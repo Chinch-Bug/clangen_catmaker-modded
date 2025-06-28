@@ -40,6 +40,8 @@ tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Classic)", "
                   "rosetted" : "Rosetted"})
 tabbies = sort_bidict(tabbies)
 
+pangere = bidict({None: "None", "pangere small 1": "Small 1", "pangere small 2": "Small 2", "pangere medium 1": "Medium 1", "pangere medium 2": "Medium 2"})
+
 corin = bidict({"N": "None", "sh": "Sunshine", "sg": "Extreme Sunshine", "fg": "Flaxen Gold"})
 extention = bidict({"E": "Normal", "ea": "Amber", "er": "Russet", "ec": "Carnelian",
                     "Eg": "Chausie Grizzle", 'ecc': 'Carnelian Carrier'})

@@ -254,6 +254,20 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 if phenotype.caramel == 'caramel' and not is_red:
                     whichmain.blit(sprites.sprites['caramel0'], (0, 0))
 
+                if genotype.pangere:
+                    modifiers = {
+                        "chinchilla" : 9,
+                        "shaded" : 8,
+                        "high" : 7,
+                        "medium" : 6,
+                        "low" : 5
+                    }
+                    opacity = int(25 * (modifiers.get(phenotype.banding, 5)))
+                    pangere = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    pangere.blit(sprites.sprites[genotype.pangere + cat_sprite], (0, 0))
+                    pangere.set_alpha(opacity)
+                    whichmain.blit(pangere, (0, 0))
+
                 return whichmain
 
             def AddStripes(whichmain, whichcolour, whichbase, coloursurface=None):

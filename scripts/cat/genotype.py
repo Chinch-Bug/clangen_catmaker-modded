@@ -30,6 +30,7 @@ class Genotype:
         self.pointgene = ["C", "C"]
         self.silver = ["i", "i"]
         self.agouti = ["a", "a"]
+        self.pangere = None
         self.mack = ["Mc", "Mc"]
         self.ticked = ["ta", "ta"]
         self.breakthrough = False

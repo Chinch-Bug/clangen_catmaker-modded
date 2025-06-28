@@ -546,6 +546,11 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.phenotype.SetTabbyType(event.text)
 
                 self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["pangere_select"]:
+
+                global_vars.CREATED_CAT.genotype.pangere = global_vars.pangere.inverse[event.text]
+
+                self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["sokoke_select"]:
 
                 global_vars.CREATED_CAT.genotype.soktype = event.text.lower()
@@ -643,6 +648,11 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["agouti_selectc"]:
 
                 global_vars.CREATED_CAT.chimpheno.SetTabbyType(event.text)
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["pangere_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.pangere = global_vars.pangere.inverse[event.text]
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["sokoke_selectc"]:
@@ -1346,6 +1356,9 @@ class CreationScreen(base_screens.Screens):
         self.labels["corin"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "CORIN gold:",
                                                            container=self.tabby_pattern_tab,
                                                            object_id="#dropdown_label")
+        self.labels["pangere"] = pygame_gui.elements.UILabel(pygame.Rect((210, 125), (150, 25)), "'Pangere':",
+                                                            container=self.tabby_pattern_tab,
+                                                            object_id="#dropdown_label")
         # -------------------------------------------------------------------------------------------------------------
         # Pattern 2 Tab Labels CHIMERA ----------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
@@ -1369,6 +1382,9 @@ class CreationScreen(base_screens.Screens):
                                                              container=self.chim_tabby_pattern_tab,
                                                              object_id="#dropdown_label")
         self.labels["corinc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "CORIN gold:",
+                                                            container=self.chim_tabby_pattern_tab,
+                                                            object_id="#dropdown_label")
+        self.labels["pangerec"] = pygame_gui.elements.UILabel(pygame.Rect((210, 125), (150, 25)), "'Pangere':",
                                                             container=self.chim_tabby_pattern_tab,
                                                             object_id="#dropdown_label")
 
@@ -1823,6 +1839,12 @@ class CreationScreen(base_screens.Screens):
                                                pygame.Rect(
                                                    (20, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
+        self.dropdown_menus["pangere_select"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.pangere.values(),
+                                               global_vars.pangere[global_vars.CREATED_CAT.genotype.pangere],
+                                               pygame.Rect(
+                                                   (210, 145), (175, 30)),
+                                               container=self.tabby_pattern_tab)
 
         # ------------------------------------------------------------------------------------------------------------
         # PATTERN TAB CONTENTS Page 2 CHIMERA -------------------------------------------------------------------------------
@@ -1865,6 +1887,12 @@ class CreationScreen(base_screens.Screens):
                                                global_vars.corin[global_vars.CREATED_CAT.genotype.chimerageno.corin[0]],
                                                pygame.Rect(
                                                    (20, 90), (175, 30)),
+                                               container=self.chim_tabby_pattern_tab)
+        self.dropdown_menus["pangere_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(global_vars.pangere.values(),
+                                               global_vars.pangere[global_vars.CREATED_CAT.genotype.chimerageno.pangere],
+                                               pygame.Rect(
+                                                   (210, 145), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
 
         # ------------------------------------------------------------------------------------------------------------
