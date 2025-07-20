@@ -267,6 +267,24 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     pangere.blit(sprites.sprites[genotype.pangere + cat_sprite], (0, 0))
                     pangere.set_alpha(opacity)
                     whichmain.blit(pangere, (0, 0))
+                
+                if genotype.rednose and phenotype.tabtype == "Agouti":
+                    modifiers = {
+                        "chinchilla" : 1,
+                        "shaded" : 3,
+                        "high" : 7,
+                        "medium" : 7,
+                        "low" : 7
+                    }
+                    opacity = int(25 * (modifiers.get(phenotype.banding, 5)))
+                    rednose = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    rednose.blit(sprites.sprites["rednose" + cat_sprite], (0, 0))
+                    nose_colour = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    stripecolour = phenotype.FindRed(genotype, sprite_age, "red")[0]
+                    nose_colour.blit(sprites.sprites[stripecolourdict.get(stripecolour[:-1], stripecolour[:-1])+stripecolour[-1]], (0, 0))
+                    rednose.blit(nose_colour, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                    rednose.set_alpha(opacity)
+                    whichmain.blit(rednose, (0, 0))
 
                 return whichmain
 
@@ -745,7 +763,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                                         sprites.sprites['lightbasecolours1'], (0, 0))
                                     colour = 'lightbasecolours1'
                                     whichmain = ApplySmokeEffects(whichmain)
-                                elif ("chocolate" in whichcolour or "chocolate" in whichcolour):
+                                elif ("chocolate" in whichcolour or "cinnamon" in whichcolour):
                                     whichmain.blit(
                                         sprites.sprites['lightbasecolours0'], (0, 0))
                                     colour = 'lightbasecolours0'
@@ -855,7 +873,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                                 sprites.sprites['lightbasecolours2'], (0, 0))
                             colour = 'lightbasecolours2'
                             whichmain = ApplySmokeEffects(whichmain)
-                        elif ((("chocolate" in whichcolour and genotype.pointgene == ["cb", "cb"]) or ("chocolate" in whichcolour and "cb" in genotype.pointgene) or ("black" in whichcolour and genotype.pointgene == ["cs", "cs"])) and cat_sprite != "20") or (("chocolate" in whichcolour and genotype.pointgene == ["cb", "cb"]) or ("black" in whichcolour and "cb" in genotype.pointgene)):
+                        elif ((("cinnamon" in whichcolour and genotype.pointgene == ["cb", "cb"]) or ("chocolate" in whichcolour and "cb" in genotype.pointgene) or ("black" in whichcolour and genotype.pointgene == ["cs", "cs"])) and cat_sprite != "20") or (("chocolate" in whichcolour and genotype.pointgene == ["cb", "cb"]) or ("black" in whichcolour and "cb" in genotype.pointgene)):
                             whichmain.blit(
                                 sprites.sprites['lightbasecolours1'], (0, 0))
                             colour = 'lightbasecolours1'

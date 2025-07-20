@@ -208,6 +208,13 @@ class CreationScreen(base_screens.Screens):
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
                 self.build_dropdown_menus()
+
+            elif event.ui_element == self.checkboxes["rednose_checkbox"]:
+                global_vars.CREATED_CAT.genotype.rednose = not global_vars.CREATED_CAT.genotype.rednose
+
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+                self.build_dropdown_menus()
             elif event.ui_element == self.dropdown_menus["add_tortie"]:
 
                 if self.selectedtortie:
@@ -362,6 +369,12 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.genotype.chimerageno.silver[0] = 'I'
 
                 global_vars.CREATED_CAT.chimpheno.SilverGoldFinder()
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+                self.build_dropdown_menus()
+            elif event.ui_element == self.checkboxes["rednose_checkboxc"]:
+                global_vars.CREATED_CAT.genotype.chimerageno.rednose = not global_vars.CREATED_CAT.genotype.chimerageno.rednose
+
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
                 self.build_dropdown_menus()
@@ -567,6 +580,11 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.genotype.ruftype = event.text.lower()
 
                 self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["unders_rufousing_select"]:
+
+                global_vars.CREATED_CAT.genotype.unders_ruftype = event.text.lower()
+
+                self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["corin_select"]:
 
                 global_vars.CREATED_CAT.genotype.corin[0] = global_vars.corin.inverse[event.text]
@@ -669,6 +687,11 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["rufousing_selectc"]:
 
                 global_vars.CREATED_CAT.genotype.chimerageno.ruftype = event.text.lower()
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["unders_rufousing_selectc"]:
+
+                global_vars.CREATED_CAT.genotype.chimerageno.unders_ruftype = event.text.lower()
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["corin_selectc"]:
@@ -1350,7 +1373,13 @@ class CreationScreen(base_screens.Screens):
         self.labels["rufous"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Rufousing:",
                                                             container=self.tabby_pattern_tab,
                                                             object_id="#dropdown_label")
+        self.labels["u_rufous"] = pygame_gui.elements.UILabel(pygame.Rect((400, 125), (200, 25)), "Underside Rufousing:",
+                                                            container=self.tabby_pattern_tab,
+                                                            object_id="#dropdown_label")
         self.labels["silver"] = pygame_gui.elements.UILabel(pygame.Rect((54, 130), (150, 25)), "Silver",
+                                                            container=self.tabby_pattern_tab,
+                                                            object_id="#dropdown_label")
+        self.labels["rednose"] = pygame_gui.elements.UILabel(pygame.Rect((54, 160), (150, 25)), "Red Nosebridge",
                                                             container=self.tabby_pattern_tab,
                                                             object_id="#dropdown_label")
         self.labels["corin"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "CORIN gold:",
@@ -1378,7 +1407,13 @@ class CreationScreen(base_screens.Screens):
         self.labels["rufousc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Rufousing:",
                                                              container=self.chim_tabby_pattern_tab,
                                                              object_id="#dropdown_label")
+        self.labels["u_rufousc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 125), (200, 25)), "Underside Rufousing:",
+                                                             container=self.chim_tabby_pattern_tab,
+                                                             object_id="#dropdown_label")
         self.labels["silverc"] = pygame_gui.elements.UILabel(pygame.Rect((54, 130), (150, 25)), "Silver",
+                                                             container=self.chim_tabby_pattern_tab,
+                                                             object_id="#dropdown_label")
+        self.labels["rednosec"] = pygame_gui.elements.UILabel(pygame.Rect((54, 160), (150, 25)), "Red Nosebridge",
                                                              container=self.chim_tabby_pattern_tab,
                                                              object_id="#dropdown_label")
         self.labels["corinc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "CORIN gold:",
@@ -1833,6 +1868,12 @@ class CreationScreen(base_screens.Screens):
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
+        self.dropdown_menus["unders_rufousing_select"] = \
+            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+                                               global_vars.CREATED_CAT.genotype.unders_ruftype.capitalize(),
+                                               pygame.Rect(
+                                                   (400, 145), (175, 30)),
+                                               container=self.tabby_pattern_tab)
         self.dropdown_menus["corin_select"] = \
             pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
                                                global_vars.corin[global_vars.CREATED_CAT.genotype.corin[0]],
@@ -1881,6 +1922,12 @@ class CreationScreen(base_screens.Screens):
                                                global_vars.CREATED_CAT.genotype.chimerageno.ruftype.capitalize(),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
+                                               container=self.chim_tabby_pattern_tab)
+        self.dropdown_menus["unders_rufousing_selectc"] = \
+            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+                                               global_vars.CREATED_CAT.genotype.chimerageno.unders_ruftype.capitalize(),
+                                               pygame.Rect(
+                                                   (400, 145), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["corin_selectc"] = \
             pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
@@ -2514,6 +2561,18 @@ class CreationScreen(base_screens.Screens):
                                                                               object_id="#unchecked_checkbox",
                                                                               container=self.tabby_pattern_tab)
 
+         # Rednose Checkbox
+        if global_vars.CREATED_CAT.genotype.rednose:
+            self.checkboxes["rednose_checkbox"] = custom_buttons.UIImageButton(pygame.Rect((20, 155), (34, 34)),
+                                                                              "",
+                                                                              object_id="#checked_checkbox",
+                                                                              container=self.tabby_pattern_tab)
+        else:
+            self.checkboxes["rednose_checkbox"] = custom_buttons.UIImageButton(pygame.Rect((20, 155), (34, 34)),
+                                                                              "",
+                                                                              object_id="#unchecked_checkbox",
+                                                                              container=self.tabby_pattern_tab)
+                                                                              
         # -------------------------------------------------------------------------------------------------------------
         # Pattern 2 Tab CHIMERA -----------------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
@@ -2526,6 +2585,18 @@ class CreationScreen(base_screens.Screens):
                                                                                container=self.chim_tabby_pattern_tab)
         else:
             self.checkboxes["silver_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 125), (34, 34)),
+                                                                               "",
+                                                                               object_id="#unchecked_checkbox",
+                                                                               container=self.chim_tabby_pattern_tab)
+                                                                               
+         # Rednose Checkbox
+        if global_vars.CREATED_CAT.genotype.chimerageno.rednose:
+            self.checkboxes["rednose_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 155), (34, 34)),
+                                                                               "",
+                                                                               object_id="#checked_checkbox",
+                                                                               container=self.chim_tabby_pattern_tab)
+        else:
+            self.checkboxes["rednose_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 155), (34, 34)),
                                                                                "",
                                                                                object_id="#unchecked_checkbox",
                                                                                container=self.chim_tabby_pattern_tab)

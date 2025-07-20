@@ -78,6 +78,12 @@ class Genotype:
         self.ruftype = "medium"
         self.rufsum = 4
 
+        self.unders_ruf = ""
+        self.unders_ruftype = "medium"
+        self.unders_rufsum = 4
+
+        self.rednose = False
+
         self.saturation = 3
 
         self.bengal = ""
