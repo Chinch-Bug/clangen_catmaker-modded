@@ -268,7 +268,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     pangere.set_alpha(opacity)
                     whichmain.blit(pangere, (0, 0))
                 
-                if genotype.rednose and phenotype.tabtype == "Agouti":
+                if genotype.rednose and (phenotype.tabtype == "Agouti" or is_red):
                     modifiers = {
                         "chinchilla" : 1,
                         "shaded" : 3,
