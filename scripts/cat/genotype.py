@@ -4,7 +4,7 @@ from operator import xor
 
 
 class Genotype:
-    def __init__(self, spec=None):
+    def __init__(self):
         self.furLength = ["L", "L"]
         self.eumelanin = ["B", "B"]
         self.sexgene = ["o", "o"]
@@ -12,10 +12,6 @@ class Genotype:
         self.tortiepattern = []
         self.brindledbi = False
         self.chimera = False
-        if spec:
-            self.chimerageno = None
-        else:
-            self.chimerageno = Genotype('chimera')
         self.chimerapattern = None
         self.pseudomerle = False
         self.merlepattern = []

@@ -32,12 +32,14 @@ def sort_bidict(d: bidict, first_element=None):
     return temp
 
 
-tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Classic)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Classic)", 
+tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Blotched)", 
                   "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
                   "brokenpinsbraid" : "Broken Pinstripe-Braided", "pinsbraided" : "Pinstripe-Braided", 
-                  "leopard" : "Servaline-Rosseted", "classic" : "Blotched", "marbled" : "Marbled", "brokenmack" : "Broken Mackerel", 
+                  "leopard" : "Servaline-Rosseted", "blotched" : "Blotched", "marbled" : "Marbled", "brokenmack" : "Broken Mackerel", 
                   "mackerel" : "Mackerel", "spotted" : "Spotted", "brokenbraid" : "Broken Braided", "braided" : "Braided", 
-                  "rosetted" : "Rosetted"})
+                  "rosetted" : "Rosetted", "partialbraided": "Partial Braided", "partialbrokenbraided": "Partial Broken Braided", 
+                  "partialrosetted": "Partial Rosettes", "partialmarble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
+                  "sheetblotched": "Dense Blotched"})
 tabbies = sort_bidict(tabbies)
 
 pangere = bidict({None: "None", "pangere small 1": "Small 1", "pangere small 2": "Small 2", "pangere medium 1": "Medium 1", "pangere medium 2": "Medium 2"})

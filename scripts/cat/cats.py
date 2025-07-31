@@ -5,7 +5,6 @@ import os.path
 from scripts.utility import *
 from scripts.game_structure.game_essentials import *
 from scripts.cat.pelts import Pelt
-from .genotype import Genotype
 from .phenotype import Phenotype
 
 
@@ -43,9 +42,8 @@ class Cat():
         self.backstory = "clan_founder"
         self.moons = 0
         self.season = 'Newleaf'
-        self.genotype = Genotype()
-        self.phenotype = Phenotype(self.genotype)
-        self.chimpheno = Phenotype(self.genotype.chimerageno)
+        self.phenotype = Phenotype()
+        self.chimpheno = Phenotype()
 
         # Sprite sizes
         self.sprite = None
@@ -73,12 +71,12 @@ class Cat():
         self.phenotype.SetEarType(choice(['normal', 'folded', 'curled', 'folded curl']))
         self.phenotype.SetTailType(choice(['full', '3/4', '1/2', '1/3', 'stubby', 'none']))
         
-        def SubRandomize(genotype, phenotype):
+        def SubRandomize(phenotype):
             phenotype.SetPoints(choice(['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']))
-            genotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
-            if genotype.sexgene is not ['O', 'O']:
-                genotype.sexgene = choice([['o', 'o'], ['o', 'o'], ['O', 'o']])
-                if 'O' in genotype.sexgene:
+            phenotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
+            if phenotype.sexgene is not ['O', 'O']:
+                phenotype.sexgene = choice([['o', 'o'], ['o', 'o'], ['O', 'o']])
+                if 'O' in phenotype.sexgene:
                     phenotype.tortie = True
                 else:
                     phenotype.tortie = False
@@ -86,25 +84,25 @@ class Cat():
             'Honey', 'Ivory', 'Champagne', 'Lavender', 'Buff', 'Beige']).lower())
 
             if random.random() < 0.1:
-                genotype.specialred = choice(['cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'pseudo-cinnamon', 'blue-red', 'blue-tipped', 'blue-tipped'])
+                phenotype.specialred = choice(['cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'pseudo-cinnamon', 'blue-red', 'blue-tipped', 'blue-tipped'])
             else:
-                genotype.specialred = "none"
+                phenotype.specialred = "none"
 
-            genotype.dilutemd[0] = choice(['dm', 'dm', 'dm', 'dm', 'dm', 'Dm'])
-            genotype.bleach[0] = choice(['Lb', 'Lb', 'Lb', 'Lb', 'Lb', 'lb'])
-            genotype.ghosting[0] = choice(['gh', 'gh', 'gh', 'gh', 'gh', 'Gh'])
-            genotype.satin[0] = choice(['St', 'St', 'St', 'St', 'St', 'st'])
-            genotype.brindledbi = (random.random() < 0.1)
+            phenotype.dilutemd[0] = choice(['dm', 'dm', 'dm', 'dm', 'dm', 'Dm'])
+            phenotype.bleach[0] = choice(['Lb', 'Lb', 'Lb', 'Lb', 'Lb', 'lb'])
+            phenotype.ghosting[0] = choice(['gh', 'gh', 'gh', 'gh', 'gh', 'Gh'])
+            phenotype.satin[0] = choice(['St', 'St', 'St', 'St', 'St', 'st'])
+            phenotype.brindledbi = (random.random() < 0.1)
 
-            genotype.karp = choice([['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'K']])
-            if global_vars.CREATED_CAT.genotype.karp == ['k', 'k']:
+            phenotype.karp = choice([['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'K']])
+            if global_vars.CREATED_CAT.phenotype.karp == ['k', 'k']:
                 global_vars.CREATED_CAT.phenotype.fade = 'None'
-            elif global_vars.CREATED_CAT.genotype.karp == ['K', 'k']:
+            elif global_vars.CREATED_CAT.phenotype.karp == ['K', 'k']:
                 global_vars.CREATED_CAT.phenotype.fade = 'Heterozygous'
             else:
                 global_vars.CREATED_CAT.phenotype.fade = 'Homozygous'
 
-            genotype.saturation = choice([0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6])
+            phenotype.saturation = choice([0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6])
 
             phenotype.refone = 'R' + str(randint(1, 11))
             phenotype.refext = 'R' + str(randint(1, 11))
@@ -123,33 +121,35 @@ class Cat():
             phenotype.UpdateEyes()
 
             if random.random() < 0.1:
-                genotype.extraeye = 'sectoral' + str(randint(1, 6))
+                phenotype.extraeye = 'sectoral' + str(randint(1, 6))
             else:
-                genotype.extraeye = None
+                phenotype.extraeye = None
             
-            tabbies = {"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Classic)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Classic)", 
-                    "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
-                    "brokenpinsbraid" : "Broken Pinstripe-Braided", "pinsbraided" : "Pinstripe-Braided", 
-                    "leopard" : "Servaline-Rosseted", "classic" : "Blotched", "marbled" : "Marbled", "brokenmack" : "Broken Mackerel", 
-                    "mackerel" : "Mackerel", "spotted" : "Spotted", "brokenbraid" : "Broken Braided", "braided" : "Braided", 
-                    "rosetted" : "Rosetted"}
+            tabbies = {"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Blotched)", 
+                  "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
+                  "brokenpinsbraid" : "Broken Pinstripe-Braided", "pinsbraided" : "Pinstripe-Braided", 
+                  "leopard" : "Servaline-Rosseted", "blotched" : "Blotched", "marbled" : "Marbled", "brokenmack" : "Broken Mackerel", 
+                  "mackerel" : "Mackerel", "spotted" : "Spotted", "brokenbraid" : "Broken Braided", "braided" : "Braided", 
+                  "rosetted" : "Rosetted", "partialbraided": "Partial Braided", "partialbrokenbraided": "Partial Broken Braided", 
+                  "partialrosetted": "Partial Rosettes", "partialmarble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
+                  "sheetblotched": "Dense Blotched"}
             phenotype.SetTabbyPattern(choice(list(tabbies.keys())))
 
             phenotype.SetTabbyType(choice(['Solid', 'Solid', 'Solid', 'Agouti', 'Agouti', 'Agouti', 'Midnight Charcoal', 'Twilight Charcoal']))
 
-            genotype.soktype = choice(['normal markings', 'normal markings', 'normal markings', 'normal markings','normal markings' , 'full sokoke', 'mild fading', 'mild fading'])
+            phenotype.soktype = choice(['normal markings', 'normal markings', 'normal markings', 'normal markings','normal markings' , 'full sokoke', 'mild fading', 'mild fading'])
 
-            genotype.fevercoat = random.random() < 0.1
-            genotype.silver[0] = choice(['I', 'i', 'i'])
-            if genotype.silver[0] == 'I':
-                genotype.pseudomerle = random.random() < 0.1
+            phenotype.fevercoat = random.random() < 0.1
+            phenotype.silver[0] = choice(['I', 'i', 'i'])
+            if phenotype.silver[0] == 'I':
+                phenotype.pseudomerle = random.random() < 0.1
             else:
-                genotype.pseudomerle = False
-            genotype.wbtype = choice(['low', 'medium', 'high', 'shaded', 'chinchilla'])
-            genotype.ruftype = choice(['low', 'medium', 'rufoused'])
+                phenotype.pseudomerle = False
+            phenotype.wbtype = choice(['low', 'medium', 'high', 'shaded', 'chinchilla'])
+            phenotype.ruftype = choice(['low', 'medium', 'rufoused'])
 
-            genotype.ext[0] = choice(['E', 'E', 'E', 'E', choice(['Eg', 'ea', 'ea', 'er', 'ea', 'ec'])])
-            genotype.corin[0] = choice(['N', 'N', 'N', 'N', choice(['sh', 'sh', 'sg', 'fg'])])
+            phenotype.ext[0] = choice(['E', 'E', 'E', 'E', choice(['Eg', 'ea', 'ea', 'er', 'ea', 'ec'])])
+            phenotype.corin[0] = choice(['N', 'N', 'N', 'N', choice(['sh', 'sh', 'sg', 'fg'])])
 
             maingame_white = {
                 'low':{
@@ -175,31 +175,31 @@ class Cat():
             }
 
             vitiligo = ['MOON', 'PHANTOM', 'POWDER', 'BLEACHED', 'VITILIGO', 'VITILIGOTWO', 'SMOKEY']
-            genotype.vitiligo = choice([True, False, False, False, False, False, False, False])
+            phenotype.vitiligo = choice([True, False, False, False, False, False, False, False])
 
             #white patterns
 
-            if genotype.white[0] != 'W':
+            if phenotype.white[0] != 'W':
                 for i in range(2):
 
                     if randint(1, 25) == 1:
-                        genotype.white[i] = "wg"
+                        phenotype.white[i] = "wg"
                     elif randint(1, 25) == 1:
-                        genotype.white[i] = "wt"
+                        phenotype.white[i] = "wt"
                     elif randint(1, 2) == 1:
-                        genotype.white[i] = "ws"
+                        phenotype.white[i] = "ws"
                     else:
-                        genotype.white[i] = "w"
+                        phenotype.white[i] = "w"
                 
-                if genotype.white[0] == "wg":
-                    genotype.white[0] = genotype.white[1]
-                    genotype.white[1] = "wg"
-                elif genotype.white[0] == "w" and genotype.white[1] != "wg":
-                    genotype.white[0] = genotype.white[1]
-                    genotype.white[1] = "w"
-                elif genotype.white[0] == "wt" and genotype.white[1] != "wg" and genotype.white[1] != "w":
-                    genotype.white[0] = genotype.white[1]
-                    genotype.white[1] = "wt"
+                if phenotype.white[0] == "wg":
+                    phenotype.white[0] = phenotype.white[1]
+                    phenotype.white[1] = "wg"
+                elif phenotype.white[0] == "w" and phenotype.white[1] != "wg":
+                    phenotype.white[0] = phenotype.white[1]
+                    phenotype.white[1] = "w"
+                elif phenotype.white[0] == "wt" and phenotype.white[1] != "wg" and phenotype.white[1] != "w":
+                    phenotype.white[0] = phenotype.white[1]
+                    phenotype.white[1] = "wt"
 
             white_pattern = None
             
@@ -411,18 +411,18 @@ class Cat():
                     white_pattern = []
                 return white_pattern
 
-            genotype.white_pattern = GenerateWhite(genotype.white, genotype.whitegrade, genotype.vitiligo, white_pattern)
-            if len(genotype.white_pattern) == 0:
-                genotype.white_pattern = [None]
-            elif genotype.white_pattern[0] not in vitiligo:
-                genotype.white_pattern = [None] + genotype.white_pattern
+            phenotype.white_pattern = GenerateWhite(phenotype.white, phenotype.whitegrade, phenotype.vitiligo, white_pattern)
+            if len(phenotype.white_pattern) == 0:
+                phenotype.white_pattern = [None]
+            elif phenotype.white_pattern[0] not in vitiligo:
+                phenotype.white_pattern = [None] + phenotype.white_pattern
 
-        SubRandomize(self.genotype, self.phenotype)
-        SubRandomize(self.genotype.chimerageno, self.chimpheno)
+        SubRandomize(self.phenotype)
+        SubRandomize(self.chimpheno)
         if random.random() < 0.1:
-            self.genotype.chimera = True
+            self.phenotype.chimera = True
         else:
-            self.genotype.chimera = False
+            self.phenotype.chimera = False
 
     def generate_large_image(self):
         return
