@@ -1263,7 +1263,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
         if cat.phenotype.chimera:
             chimerapatches = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-            chimerapatches.blit(sprites.sprites[cat.chimpheno.chimerapattern + cat_sprite], (0, 0))
+            chimerapatches.blit(sprites.sprites[cat.phenotype.chimerapattern + cat_sprite], (0, 0))
             chimerapatches.blit(GenSprite(cat.chimpheno, cat.moons), (0, 0), special_flags=pygame.BLEND_RGB_MULT)
             gensprite.blit(chimerapatches, (0, 0))
 
