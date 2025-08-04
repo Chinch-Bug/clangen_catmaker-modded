@@ -751,8 +751,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                                 stripebase = pygame.Surface(
                                     (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
 
-                                stripebase.blit(CreateStripes(whichcolour.replace(
-                                    "black", "cinnamon"), 'solid', preset_pattern=["fullbar"]), (0, 0))
+                                stripebase.blit(CreateStripes("cinnamon2", 'solid', preset_pattern=["fullbaralt"]), (0, 0))
                                 stripebase.set_alpha(150)
 
                                 whichmain.blit(stripebase, (0, 0))
@@ -1159,7 +1158,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
             white_leathers.blit(whitesprite, (0, 0))
 
-            if (phenotype.vitiligo):
+            if (phenotype.white_pattern[0]):
                 for x in vitiligo:
                     if x in phenotype.white_pattern:
                         white_leathers.blit(

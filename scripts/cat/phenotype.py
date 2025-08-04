@@ -131,25 +131,25 @@ class Phenotype(Genotype):
         else:
             if (self.bengtype == "normal markings"):
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenmack', 'fullbar']
+                    all_patterns = ['brokenmack', 'fullbaralt']
                 elif (self.spotsum < 6):
-                    all_patterns = ['mackerel', 'fullbar']
+                    all_patterns = ['mackerel', 'fullbaralt']
                 else:
-                    all_patterns = ['spotted', 'fullbar']
+                    all_patterns = ['spotted', 'fullbaralt']
             elif (self.bengtype == "mild bengal"):
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenbraid', 'fullbar']
+                    all_patterns = ['brokenbraid', 'fullbaralt']
                 elif (self.spotsum < 6):
-                    all_patterns = ['braided', 'fullbar']
+                    all_patterns = ['braided', 'fullbaralt']
                 else:
-                    all_patterns = ['partialrosetted', 'fullbar']
+                    all_patterns = ['partialrosetted', 'fullbaralt']
             else:
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenbraid', 'fullbar']
+                    all_patterns = ['brokenbraid', 'fullbaralt']
                 elif (self.spotsum < 6):
-                    all_patterns = ['braided', 'fullbar']
+                    all_patterns = ['braided', 'fullbaralt']
                 else:
-                    all_patterns = ['rosetted', 'fullbar']
+                    all_patterns = ['rosetted', 'fullbaralt']
 
         if all_patterns[0] != "agouti":
             if self.bengtype != "normal markings":
@@ -704,7 +704,7 @@ class Phenotype(Genotype):
                 else:
                     rufousing = genes.ruftype
 
-                if genes.corin[0] == "sg" or genes.wbtype == "chinchilla":
+                if genes.corin[0] == "sg" or genes.wbtype == "chinchilla" or (genes.corin[0] != "N" and genes.wbtype == "shaded"):
                     banding = "chinchilla"
                 elif genes.wbtype == "shaded" or genes.corin[0] == "sh" or genes.corin[0] == "fg" or genes.ext[0] == 'ec' or (genes.ext[0] == 'ea' and moons > 3):
                     banding = "shaded"
@@ -771,7 +771,7 @@ class Phenotype(Genotype):
         else:
             rufousing = genes.ruftype
 
-        if genes.corin[0] == "sg" or genes.wbtype == "chinchilla":
+        if genes.corin[0] == "sg" or genes.wbtype == "chinchilla" or (genes.corin[0] != "N" and genes.wbtype == "shaded"):
             banding = "chinchilla"
         elif genes.corin[0] == "sh" or genes.corin[0] == "fg" or genes.wbtype == "shaded":
             banding = "shaded"
