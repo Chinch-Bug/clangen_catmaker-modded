@@ -1111,20 +1111,10 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     gensprite.blit(sprites.sprites['satin0'], (0, 0))
 
                 if (phenotype.fevercoat and sprite_age < 5):
-                    fevercoat = pygame.Surface(
-                        (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                    fevercoat.blit(
-                        sprites.sprites['bleach' + cat_sprite], (0, 0))
-                    fevercoat.blit(
-                        sprites.sprites['bleach' + cat_sprite], (0, 0))
-                    fevercoat.blit(
-                        sprites.sprites['bleach' + cat_sprite], (0, 0))
-                    fevercoat.blit(
-                        sprites.sprites['bleach' + cat_sprite], (0, 0))
-                    fevercoat.blit(
-                        sprites.sprites['bleach' + cat_sprite], (0, 0))
-                    fevercoat.blit(
-                        sprites.sprites['lightbasecolours0'], (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                    fevercoat = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    fevercoat.blit(sprites.sprites['bleach' + cat_sprite], (0, 0))
+                    fevercoat.blit(sprites.sprites['bleach' + cat_sprite], (0, 0))
+                    fevercoat.blit(sprites.sprites['bleach' + cat_sprite], (0, 0))
                     if (sprite_age > 2):
                         fevercoat.set_alpha(150)
                     gensprite.blit(fevercoat, (0, 0))

@@ -190,7 +190,7 @@ accessories = bidict({None: "None", "MAPLE LEAF": "Maple Leaf", "HOLLY": "Holly"
                       "CYANBELL": "Cyan Bell Collar", "REDBELL": "Red Bell Collar", "LIMEBELL": "Lime Bell Collar",
                       "GREENBELL": "Green Bell Collar", "RAINBOWBELL": "Rainbow Bell Color",
                       "BLACKBELL": "Black Bell Collar", "SPIKESBELL": "Spiked Bell Collar",
-                      "PINKBELL": "Pine Bell Collar", "PURPLEBELL": "Purple Bell Collar",
+                      "PINKBELL": "Pink Bell Collar", "PURPLEBELL": "Purple Bell Collar",
                       "MULTIBELL": "Mulitcolored Bell Color", "CRIMSONBOW": "Crimson Bow", "BLUEBOW": "Blue Bow",
                       "YELLOWBOW": "Yellow Bow", "CYANBOW": "Cyan Bow", "REDBOW": "Red Bow", "LIMEBOW": "Lime Bow",
                       "GREENBOW": "Green Bow", "RAINBOWBOW": "Rainbow Bow", "BLACKBOW": "Black Bow",
