@@ -8,6 +8,7 @@ import scripts.game_structure.image_button as custom_buttons
 from scripts.cat.cats import Cat
 from scripts.game_structure.image_cache import load_image
 from scripts.screens.save_image import SaveAsImage
+import math
 
 
 class CreationScreen(base_screens.Screens):
@@ -796,13 +797,6 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.phenotype.pigone = 'blue'
                     global_vars.CREATED_CAT.phenotype.pigtwo = 'blue'
                     global_vars.CREATED_CAT.phenotype.pigext = 'blue'
-                elif global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.phenotype.pigone not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.phenotype.pigone = 'P1'
-                    if global_vars.CREATED_CAT.phenotype.pigtwo not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.phenotype.pigtwo = 'P1'
-                    if global_vars.CREATED_CAT.phenotype.pigext not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.phenotype.pigext = 'P1'
                 else:
                     if global_vars.CREATED_CAT.phenotype.pigone == 'albino':
                         global_vars.CREATED_CAT.phenotype.pigone = 'P1'
@@ -810,6 +804,16 @@ class CreationScreen(base_screens.Screens):
                         global_vars.CREATED_CAT.phenotype.pigtwo = 'P1'
                     if global_vars.CREATED_CAT.phenotype.pigext == 'albino':
                         global_vars.CREATED_CAT.phenotype.pigext = 'P1'
+                    if global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.phenotype.pigone:
+                            val = int(global_vars.CREATED_CAT.phenotype.pigone.strip("P"))
+                            global_vars.CREATED_CAT.phenotype.pigone = f'P{math.ceil(val/2)}'
+                        if "P" in global_vars.CREATED_CAT.phenotype.pigtwo:
+                            val = int(global_vars.CREATED_CAT.phenotype.pigtwo.strip("P"))
+                            global_vars.CREATED_CAT.phenotype.pigtwo = f'P{math.ceil(val/2)}'
+                        if "P" in global_vars.CREATED_CAT.phenotype.pigext:
+                            val = int(global_vars.CREATED_CAT.phenotype.pigext.strip("P"))
+                            global_vars.CREATED_CAT.phenotype.pigext = f'P{math.ceil(val/2)}'
 
                 global_vars.CREATED_CAT.phenotype.UpdateEyes()
 
@@ -839,12 +843,13 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.phenotype.pigone = 'albino'
                 elif global_vars.CREATED_CAT.phenotype.pointgene[0] == 'cs':
                     global_vars.CREATED_CAT.phenotype.pigone = 'blue'
-                elif global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.phenotype.pigone not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.phenotype.pigone = 'P1'
                 else:
                     if global_vars.CREATED_CAT.phenotype.pigone == 'albino':
                         global_vars.CREATED_CAT.phenotype.pigone = 'P1'
+                    if global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.phenotype.pigone:
+                            val = int(global_vars.CREATED_CAT.phenotype.pigone.strip("P"))
+                            global_vars.CREATED_CAT.phenotype.pigone = f'P{math.ceil(val/2)}'
                 global_vars.CREATED_CAT.phenotype.UpdateEyes()
 
                 self.update_cat_image()
@@ -855,12 +860,13 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.phenotype.pigtwo = 'albino'
                 elif global_vars.CREATED_CAT.phenotype.pointgene[0] == 'cs':
                     global_vars.CREATED_CAT.phenotype.pigtwo = 'blue'
-                elif global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.phenotype.pigtwo not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.phenotype.pigtwo = 'P1'
                 else:
                     if global_vars.CREATED_CAT.phenotype.pigtwo == 'albino':
                         global_vars.CREATED_CAT.phenotype.pigtwo = 'P1'
+                    if global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.phenotype.pigtwo:
+                            val = int(global_vars.CREATED_CAT.phenotype.pigtwo.strip("P"))
+                            global_vars.CREATED_CAT.phenotype.pigtwo = f'P{math.ceil(val/2)}'
                 global_vars.CREATED_CAT.phenotype.UpdateEyes()
 
                 self.update_cat_image()
@@ -871,12 +877,13 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.phenotype.pigext = 'albino'
                 elif global_vars.CREATED_CAT.phenotype.pointgene[0] == 'cs':
                     global_vars.CREATED_CAT.phenotype.pigext = 'blue'
-                elif global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.phenotype.pigext not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.phenotype.pigext = 'P1'
                 else:
                     if global_vars.CREATED_CAT.phenotype.pigext == 'albino':
                         global_vars.CREATED_CAT.phenotype.pigext = 'P1'
+                    if global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.phenotype.pigext:
+                            val = int(global_vars.CREATED_CAT.phenotype.pigext.strip("P"))
+                            global_vars.CREATED_CAT.phenotype.pigext = f'P{math.ceil(val/2)}'
                 global_vars.CREATED_CAT.phenotype.UpdateEyes()
 
                 self.update_cat_image()
@@ -912,13 +919,6 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimpheno.pigone = 'blue'
                     global_vars.CREATED_CAT.chimpheno.pigtwo = 'blue'
                     global_vars.CREATED_CAT.chimpheno.pigext = 'blue'
-                elif global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.chimpheno.pigone not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
-                    if global_vars.CREATED_CAT.chimpheno.pigtwo not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
-                    if global_vars.CREATED_CAT.chimpheno.pigext not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
                 else:
                     if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
                         global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
@@ -926,6 +926,16 @@ class CreationScreen(base_screens.Screens):
                         global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
                     if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
                         global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.chimpheno.pigone:
+                            val = int(global_vars.CREATED_CAT.chimpheno.pigone.strip("P"))
+                            global_vars.CREATED_CAT.chimpheno.pigone = f'P{math.ceil(val/2)}'
+                        if "P" in global_vars.CREATED_CAT.chimpheno.pigtwo:
+                            val = int(global_vars.CREATED_CAT.chimpheno.pigtwo.strip("P"))
+                            global_vars.CREATED_CAT.chimpheno.pigtwo = f'P{math.ceil(val/2)}'
+                        if "P" in global_vars.CREATED_CAT.chimpheno.pigext:
+                            val = int(global_vars.CREATED_CAT.chimpheno.pigext.strip("P"))
+                            global_vars.CREATED_CAT.chimpheno.pigext = f'P{math.ceil(val/2)}'
 
                 global_vars.CREATED_CAT.chimpheno.UpdateEyes()
 
@@ -955,12 +965,13 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimpheno.pigone = 'albino'
                 elif global_vars.CREATED_CAT.chimpheno.pointgene[0] == 'cs':
                     global_vars.CREATED_CAT.chimpheno.pigone = 'blue'
-                elif global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.chimpheno.pigone not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
                 else:
                     if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
                         global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.chimpheno.pigone:
+                            val = int(global_vars.CREATED_CAT.chimpheno.pigone.strip("P"))
+                            global_vars.CREATED_CAT.chimpheno.pigone = f'P{math.ceil(val/2)}'
                 global_vars.CREATED_CAT.chimpheno.UpdateEyes()
 
                 self.update_cat_image()
@@ -971,12 +982,13 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimpheno.pigtwo = 'albino'
                 elif global_vars.CREATED_CAT.chimpheno.pointgene[0] == 'cs':
                     global_vars.CREATED_CAT.chimpheno.pigtwo = 'blue'
-                elif global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.chimpheno.pigtwo not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
                 else:
                     if global_vars.CREATED_CAT.chimpheno.pigtwo == 'albino':
                         global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.chimpheno.pigtwo:
+                            val = int(global_vars.CREATED_CAT.chimpheno.pigtwo.strip("P"))
+                            global_vars.CREATED_CAT.chimpheno.pigtwo = f'P{math.ceil(val/2)}'
                 global_vars.CREATED_CAT.chimpheno.UpdateEyes()
 
                 self.update_cat_image()
@@ -987,12 +999,13 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimpheno.pigext = 'albino'
                 elif global_vars.CREATED_CAT.chimpheno.pointgene[0] == 'cs':
                     global_vars.CREATED_CAT.chimpheno.pigext = 'blue'
-                elif global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
-                    if global_vars.CREATED_CAT.chimpheno.pigext not in ['P1', 'blue']:
-                        global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
                 else:
                     if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
                         global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                    if global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
+                        if "P" in global_vars.CREATED_CAT.chimpheno.pigext:
+                            val = int(global_vars.CREATED_CAT.chimpheno.pigext.strip("P"))
+                            global_vars.CREATED_CAT.chimpheno.pigext = f'P{math.ceil(val/2)}'
                 global_vars.CREATED_CAT.chimpheno.UpdateEyes()
 
                 self.update_cat_image()
@@ -1664,13 +1677,6 @@ class CreationScreen(base_screens.Screens):
             global_vars.CREATED_CAT.chimpheno.pigone = 'blue'
             global_vars.CREATED_CAT.chimpheno.pigtwo = 'blue'
             global_vars.CREATED_CAT.chimpheno.pigext = 'blue'
-        elif global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
-            if global_vars.CREATED_CAT.chimpheno.pigone not in ['P1', 'blue']:
-                global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
-            if global_vars.CREATED_CAT.chimpheno.pigtwo not in ['P1', 'blue']:
-                global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
-            if global_vars.CREATED_CAT.chimpheno.pigext not in ['P1', 'blue']:
-                global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
         else:
             if global_vars.CREATED_CAT.chimpheno.pigone == 'albino':
                 global_vars.CREATED_CAT.chimpheno.pigone = 'P1'
@@ -1678,6 +1684,16 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.chimpheno.pigtwo = 'P1'
             if global_vars.CREATED_CAT.chimpheno.pigext == 'albino':
                 global_vars.CREATED_CAT.chimpheno.pigext = 'P1'
+                if global_vars.CREATED_CAT.chimpheno.pointgene == ['cb', 'cs']:
+                    if "P" in global_vars.CREATED_CAT.chimpheno.pigone:
+                        val = int(global_vars.CREATED_CAT.chimpheno.pigone.strip("P"))
+                        global_vars.CREATED_CAT.chimpheno.pigone = f'P{math.ceil(val/2)}'
+                    if "P" in global_vars.CREATED_CAT.chimpheno.pigtwo:
+                        val = int(global_vars.CREATED_CAT.chimpheno.pigtwo.strip("P"))
+                        global_vars.CREATED_CAT.chimpheno.pigtwo = f'P{math.ceil(val/2)}'
+                    if "P" in global_vars.CREATED_CAT.chimpheno.pigext:
+                        val = int(global_vars.CREATED_CAT.chimpheno.pigext.strip("P"))
+                        global_vars.CREATED_CAT.chimpheno.pigext = f'P{math.ceil(val/2)}'
         global_vars.CREATED_CAT.chimpheno.UpdateEyes()
 
         self.dropdown_menus["extention_selectc"] = \
@@ -1760,13 +1776,6 @@ class CreationScreen(base_screens.Screens):
             global_vars.CREATED_CAT.phenotype.pigone = 'blue'
             global_vars.CREATED_CAT.phenotype.pigtwo = 'blue'
             global_vars.CREATED_CAT.phenotype.pigext = 'blue'
-        elif global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
-            if global_vars.CREATED_CAT.phenotype.pigone not in ['P1', 'blue']:
-                global_vars.CREATED_CAT.phenotype.pigone = 'P1'
-            if global_vars.CREATED_CAT.phenotype.pigtwo not in ['P1', 'blue']:
-                global_vars.CREATED_CAT.phenotype.pigtwo = 'P1'
-            if global_vars.CREATED_CAT.phenotype.pigext not in ['P1', 'blue']:
-                global_vars.CREATED_CAT.phenotype.pigext = 'P1'
         else:
             if global_vars.CREATED_CAT.phenotype.pigone == 'albino':
                 global_vars.CREATED_CAT.phenotype.pigone = 'P1'
@@ -1774,6 +1783,16 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.phenotype.pigtwo = 'P1'
             if global_vars.CREATED_CAT.phenotype.pigext == 'albino':
                 global_vars.CREATED_CAT.phenotype.pigext = 'P1'
+                if global_vars.CREATED_CAT.phenotype.pointgene == ['cb', 'cs']:
+                    if "P" in global_vars.CREATED_CAT.phenotype.pigone:
+                        val = int(global_vars.CREATED_CAT.phenotype.pigone.strip("P"))
+                        global_vars.CREATED_CAT.phenotype.pigone = f'P{math.ceil(val/2)}'
+                    if "P" in global_vars.CREATED_CAT.phenotype.pigtwo:
+                        val = int(global_vars.CREATED_CAT.phenotype.pigtwo.strip("P"))
+                        global_vars.CREATED_CAT.phenotype.pigtwo = f'P{math.ceil(val/2)}'
+                    if "P" in global_vars.CREATED_CAT.phenotype.pigext:
+                        val = int(global_vars.CREATED_CAT.phenotype.pigext.strip("P"))
+                        global_vars.CREATED_CAT.phenotype.pigext = f'P{math.ceil(val/2)}'
         global_vars.CREATED_CAT.phenotype.UpdateEyes()
 
         self.dropdown_menus["extention_select"] = \

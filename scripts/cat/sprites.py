@@ -110,12 +110,15 @@ class Sprites():
         del width, height # unneeded
 
         for x in [
-            'lineart',
-            'whitepatches', 'scars', 'missingscars',
+            "lineart", "lineartdf", "lineartdead", "lineartur", 
+            "line_sc_overlay", "line_ur_underlay", "line_ur_overlay",
+            "gradient_ur",
+            'whitepatches', 'tortiepatchesmasks', 
+            'scars', 'missingscars',
+            'medcatherbs', 'wild',
             'collars', 'bellcollars', 'bowcollars', 'nyloncollars',
-            'shadersnewwhite', 'lineartdead', 'tortiepatchesmasks', 
-            'medcatherbs', 'lineartdf', 'lightingnew', 'fademask',
-            'fadestarclan', 'fadedarkforest'
+            'shadersnewwhite', 'lightingnew', 
+            'fademask', 'fadestarclan', 'fadedarkforest', "fadeunknownresidence",
 
         ]:
             self.spritesheet(f"sprites/{x}.png", x)
@@ -330,75 +333,225 @@ class Sprites():
         """
         Loads scar sprites and puts them into groups.
         """
-        for a, i in enumerate(
-                ["ONE", "TWO", "THREE", "MANLEG", "BRIGHTHEART", "MANTAIL", 
-                 "BRIDGE", "RIGHTBLIND", "LEFTBLIND", "BOTHBLIND", "BURNPAWS", "BURNTAIL"]):
-            self.make_group('scars', (a, 0), f'scars{i}')
-        for a, i in enumerate(
-                ["BURNBELLY", "BEAKCHEEK", "BEAKLOWER", "BURNRUMP", "CATBITE", "RATBITE",
-                 "FROSTFACE", "FROSTTAIL", "FROSTMITT", "FROSTSOCK", "QUILLCHUNK", "QUILLSCRATCH"]):
-            self.make_group('scars', (a, 1), f'scars{i}')
-        for a, i in enumerate(
-                ["TAILSCAR", "SNOUT", "CHEEK", "SIDE", "THROAT", "TAILBASE", "BELLY", "TOETRAP", "SNAKE",
-                 "LEGBITE", "NECKBITE", "FACE"]):
-            self.make_group('scars', (a, 2), f'scars{i}')
+
+        # Define scars
+        scars_data = [
+            [
+                "ONE",
+                "TWO",
+                "THREE",
+                "MANLEG",
+                "BRIGHTHEART",
+                "MANTAIL",
+                "BRIDGE",
+                "RIGHTBLIND",
+                "LEFTBLIND",
+                "BOTHBLIND",
+                "BURNPAWS",
+                "BURNTAIL",
+            ],
+            [
+                "BURNBELLY",
+                "BEAKCHEEK",
+                "BEAKLOWER",
+                "BURNRUMP",
+                "CATBITE",
+                "RATBITE",
+                "FROSTFACE",
+                "FROSTTAIL",
+                "FROSTMITT",
+                "FROSTSOCK",
+                "QUILLCHUNK",
+                "QUILLSCRATCH",
+            ],
+            [
+                "TAILSCAR",
+                "SNOUT",
+                "CHEEK",
+                "SIDE",
+                "THROAT",
+                "TAILBASE",
+                "BELLY",
+                "TOETRAP",
+                "SNAKE",
+                "LEGBITE",
+                "NECKBITE",
+                "FACE",
+            ],
+            [
+                "HINDLEG",
+                "BACK",
+                "QUILLSIDE",
+                "SCRATCHSIDE",
+                "TOE",
+                "BEAKSIDE",
+                "CATBITETWO",
+                "SNAKETWO",
+                "FOUR",
+            ],
+        ]
+
+        # define missing parts
+        missing_parts_data = [
+            ["LEFTEAR", "RIGHTEAR", "NOTAIL", "NOLEFTEAR", "NORIGHTEAR", "NOEAR", "HALFTAIL", "NOPAW", "TNR"]
+        ]
+
+        # scars
+        for row, scars in enumerate(scars_data):
+            for col, scar in enumerate(scars):
+                self.make_group("scars", (col, row), f"scars{scar}")
+
         # missing parts
-        for a, i in enumerate(
-                ["LEFTEAR", "RIGHTEAR", "NOTAIL", "NOLEFTEAR", "NORIGHTEAR", "NOEAR", "HALFTAIL", "NOPAW"]):
-            self.make_group('missingscars', (a, 0), f'scars{i}')
+        for row, missing_parts in enumerate(missing_parts_data):
+            for col, missing_part in enumerate(missing_parts):
+                self.make_group("missingscars", (col, row), f"scars{missing_part}")
 
-            # Accessories
-        for a, i in enumerate([
-            "MAPLE LEAF", "HOLLY", "BLUE BERRIES", "FORGET ME NOTS", "RYE STALK", "LAUREL"]):
-            self.make_group('medcatherbs', (a, 0), f'acc_herbs{i}')
-        for a, i in enumerate([
-            "BLUEBELLS", "NETTLE", "POPPY", "LAVENDER", "HERBS", "PETALS"]):
-            self.make_group('medcatherbs', (a, 1), f'acc_herbs{i}')
-        for a, i in enumerate([
-            "OAK LEAVES", "CATMINT", "MAPLE SEED", "JUNIPER"]):
-            self.make_group('medcatherbs', (a, 3), f'acc_herbs{i}')
-        self.make_group('medcatherbs', (5, 2), 'acc_herbsDRY HERBS')
+        # accessories
+        # to my beloved modders, im very sorry for reordering everything <333 -clay
+        medcatherbs_data = [
+            [
+                "MAPLE LEAF",
+                "HOLLY",
+                "BLUE BERRIES",
+                "FORGET ME NOTS",
+                "RYE STALK",
+                "CATTAIL",
+                "POPPY",
+                "ORANGE POPPY",
+                "CYAN POPPY",
+                "WHITE POPPY",
+                "PINK POPPY",
+            ],
+            [
+                "BLUEBELLS",
+                "LILY OF THE VALLEY",
+                "SNAPDRAGON",
+                "HERBS",
+                "PETALS",
+                "NETTLE",
+                "HEATHER",
+                "GORSE",
+                "JUNIPER",
+                "RASPBERRY",
+                "LAVENDER",
+            ],
+            [
+                "OAK LEAVES",
+                "CATMINT",
+                "MAPLE SEED",
+                "LAUREL",
+                "BULB WHITE",
+                "BULB YELLOW",
+                "BULB ORANGE",
+                "BULB PINK",
+                "BULB BLUE",
+                "CLOVER",
+                "DAISY",
+            ],
+            [
+                "WISTERIA",
+                "ROSE MALLOW",
+                "PICKLEWEED",
+                "GOLDEN CREEPING JENNY",
+                "DESERT WILLOW",
+                "CACTUS FLOWER",
+                "PRAIRIE FIRE",
+                "VERBENA EAR",
+                "VERBENA PELT",
+            ],
+        ]
+        dryherbs_data = [["DRY HERBS", "DRY CATMINT", "DRY NETTLES", "DRY LAURELS"]]
+        wild_data = [
+            [
+                "RED FEATHERS",
+                "BLUE FEATHERS",
+                "JAY FEATHERS",
+                "GULL FEATHERS",
+                "SPARROW FEATHERS",
+                "MOTH WINGS",
+                "ROSY MOTH WINGS",
+                "MORPHO BUTTERFLY",
+                "MONARCH BUTTERFLY",
+                "CICADA WINGS",
+                "BLACK CICADA",
+            ],
+            [
+                "ROAD RUNNER FEATHER",
+            ],
+        ]
 
-        for a, i in enumerate([
-            "RED FEATHERS", "BLUE FEATHERS", "JAY FEATHERS", "MOTH WINGS", "CICADA WINGS"]):
-            self.make_group('medcatherbs', (a, 2), f'acc_wild{i}')
-        for a, i in enumerate(["CRIMSON", "BLUE", "YELLOW", "CYAN", "RED", "LIME"]):
-            self.make_group('collars', (a, 0), f'collars{i}')
-        for a, i in enumerate(["GREEN", "RAINBOW", "BLACK", "SPIKES", "WHITE"]):
-            self.make_group('collars', (a, 1), f'collars{i}')
-        for a, i in enumerate(["PINK", "PURPLE", "MULTI", "INDIGO"]):
-            self.make_group('collars', (a, 2), f'collars{i}')
-        for a, i in enumerate([
-            "CRIMSONBELL", "BLUEBELL", "YELLOWBELL", "CYANBELL", "REDBELL",
-            "LIMEBELL"
-        ]):
-            self.make_group('bellcollars', (a, 0), f'collars{i}')
-        for a, i in enumerate(
-                ["GREENBELL", "RAINBOWBELL", "BLACKBELL", "SPIKESBELL", "WHITEBELL"]):
-            self.make_group('bellcollars', (a, 1), f'collars{i}')
-        for a, i in enumerate(["PINKBELL", "PURPLEBELL", "MULTIBELL", "INDIGOBELL"]):
-            self.make_group('bellcollars', (a, 2), f'collars{i}')
-        for a, i in enumerate([
-            "CRIMSONBOW", "BLUEBOW", "YELLOWBOW", "CYANBOW", "REDBOW",
-            "LIMEBOW"
-        ]):
-            self.make_group('bowcollars', (a, 0), f'collars{i}')
-        for a, i in enumerate(
-                ["GREENBOW", "RAINBOWBOW", "BLACKBOW", "SPIKESBOW", "WHITEBOW"]):
-            self.make_group('bowcollars', (a, 1), f'collars{i}')
-        for a, i in enumerate(["PINKBOW", "PURPLEBOW", "MULTIBOW", "INDIGOBOW"]):
-            self.make_group('bowcollars', (a, 2), f'collars{i}')
-        for a, i in enumerate([
-            "CRIMSONNYLON", "BLUENYLON", "YELLOWNYLON", "CYANNYLON", "REDNYLON",
-            "LIMENYLON"
-        ]):
-            self.make_group('nyloncollars', (a, 0), f'collars{i}')
-        for a, i in enumerate(
-                ["GREENNYLON", "RAINBOWNYLON", "BLACKNYLON", "SPIKESNYLON", "WHITENYLON"]):
-            self.make_group('nyloncollars', (a, 1), f'collars{i}')
-        for a, i in enumerate(["PINKNYLON", "PURPLENYLON", "MULTINYLON", "INDIGONYLON"]):
-            self.make_group('nyloncollars', (a, 2), f'collars{i}')
-            
+        collars_data = [
+            ["CRIMSON", "BLUE", "YELLOW", "CYAN", "RED", "LIME"],
+            ["GREEN", "RAINBOW", "BLACK", "SPIKES", "WHITE"],
+            ["PINK", "PURPLE", "MULTI", "INDIGO"],
+        ]
+
+        bellcollars_data = [
+            [
+                "CRIMSONBELL",
+                "BLUEBELL",
+                "YELLOWBELL",
+                "CYANBELL",
+                "REDBELL",
+                "LIMEBELL",
+            ],
+            ["GREENBELL", "RAINBOWBELL", "BLACKBELL", "SPIKESBELL", "WHITEBELL"],
+            ["PINKBELL", "PURPLEBELL", "MULTIBELL", "INDIGOBELL"],
+        ]
+
+        bowcollars_data = [
+            ["CRIMSONBOW", "BLUEBOW", "YELLOWBOW", "CYANBOW", "REDBOW", "LIMEBOW"],
+            ["GREENBOW", "RAINBOWBOW", "BLACKBOW", "SPIKESBOW", "WHITEBOW"],
+            ["PINKBOW", "PURPLEBOW", "MULTIBOW", "INDIGOBOW"],
+        ]
+
+        nyloncollars_data = [
+            [
+                "CRIMSONNYLON",
+                "BLUENYLON",
+                "YELLOWNYLON",
+                "CYANNYLON",
+                "REDNYLON",
+                "LIMENYLON",
+            ],
+            ["GREENNYLON", "RAINBOWNYLON", "BLACKNYLON", "SPIKESNYLON", "WHITENYLON"],
+            ["PINKNYLON", "PURPLENYLON", "MULTINYLON", "INDIGONYLON"],
+        ]
+
+        # medcatherbs
+        for row, herbs in enumerate(medcatherbs_data):
+            for col, herb in enumerate(herbs):
+                self.make_group("medcatherbs", (col, row), f"acc_herbs{herb}")
+        # dryherbs
+        for row, dry in enumerate(dryherbs_data):
+            for col, dryherbs in enumerate(dry):
+                self.make_group("medcatherbs", (col, 4), f"acc_herbs{dryherbs}")
+        # wild
+        for row, wilds in enumerate(wild_data):
+            for col, wild in enumerate(wilds):
+                self.make_group("wild", (col, row), f"acc_wild{wild}")
+
+        # collars
+        for row, collars in enumerate(collars_data):
+            for col, collar in enumerate(collars):
+                self.make_group("collars", (col, row), f"collars{collar}")
+
+        # bellcollars
+        for row, bellcollars in enumerate(bellcollars_data):
+            for col, bellcollar in enumerate(bellcollars):
+                self.make_group("bellcollars", (col, row), f"collars{bellcollar}")
+
+        # bowcollars
+        for row, bowcollars in enumerate(bowcollars_data):
+            for col, bowcollar in enumerate(bowcollars):
+                self.make_group("bowcollars", (col, row), f"collars{bowcollar}")
+
+        # nyloncollars
+        for row, nyloncollars in enumerate(nyloncollars_data):
+            for col, nyloncollar in enumerate(nyloncollars):
+                self.make_group("nyloncollars", (col, row), f"collars{nyloncollar}")
+
+           
 
 # CREATE INSTANCE 
 sprites = Sprites()
