@@ -124,7 +124,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 stripebase = pygame.Surface(
                     (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
 
-                if not preset_pattern and not special and 'solid' not in whichbase:
+                if not special and 'solid' not in whichbase:
                     if ('chinchilla' in whichbase):
                         stripebase.blit(
                             sprites.sprites['chinchillashading' + cat_sprite], (0, 0))
@@ -228,24 +228,21 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
                 middle = pygame.Surface(
                     (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                if (phenotype.soktype == "full sokoke" and not preset_pattern and 'agouti' not in phenotype.tabby):
-                    middle.blit(stripebase, (0, 0))
-                    stripebase = pygame.Surface(
-                        (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                    middle.set_alpha(150)
-                    stripebase.blit(middle, (0, 0))
-                    middle = CreateStripes(
-                        stripecolour, whichbase, coloursurface, special="no_shading", preset_pattern=phenotype.GetTabbySprite(special='redbar'))
-                    stripebase.blit(middle, (0, 0))
-                elif (phenotype.soktype == "mild fading" and not preset_pattern and 'agouti' not in phenotype.tabby):
-                    middle.blit(stripebase, (0, 0))
-                    stripebase = pygame.Surface(
-                        (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                    middle.set_alpha(204)
-                    stripebase.blit(middle, (0, 0))
-                    middle = CreateStripes(
-                        stripecolour, whichbase, coloursurface, special="no_shading", preset_pattern=phenotype.GetTabbySprite(special='redbar'))
-                    stripebase.blit(middle, (0, 0))
+                if not preset_pattern and len(pattern) > 2:
+                    if phenotype.soktype == "full sokoke":
+                        stripebase = CreateStripes(
+                            stripecolour, whichbase, coloursurface, preset_pattern=pattern[1:])
+                        middle = CreateStripes(
+                            stripecolour, whichbase, coloursurface, special="no_shading", preset_pattern=pattern[:1])
+                        middle.set_alpha(150)
+                        stripebase.blit(middle, (0, 0))
+                    elif phenotype.soktype == "mild fading":
+                        stripebase = CreateStripes(
+                            stripecolour, whichbase, coloursurface, preset_pattern=pattern[1:])
+                        middle = CreateStripes(
+                            stripecolour, whichbase, coloursurface, special="no_shading", preset_pattern=pattern[:1])
+                        middle.set_alpha(204)
+                        stripebase.blit(middle, (0, 0))
 
 
                 return stripebase
