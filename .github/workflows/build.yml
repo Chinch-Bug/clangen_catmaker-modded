@@ -8,6 +8,7 @@ on:
       - "docs-resources/**"
       - "mkdocs.yml"
       - "Dockerfile"
+  workflow_dispatch:
 
 permissions:
   contents: write
