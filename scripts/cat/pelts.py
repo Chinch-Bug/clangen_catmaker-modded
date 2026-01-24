@@ -363,17 +363,17 @@ class Pelt():
         self.tint = tint
         self.white_patches_tint = white_patches_tint
         self.cat_sprites =  {
-            "kitten": kitten_sprite if kitten_sprite is not None else 0,
-            "adolescent": adol_sprite if adol_sprite is not None else 3,
-            "young adult": adult_sprite if adult_sprite is not None else 8,
-            "adult": adult_sprite if adult_sprite is not None else 8,
-            "senior adult": adult_sprite if adult_sprite is not None else 8,
-            "senior": senior_sprite if senior_sprite is not None else 12,
+            "kitten": kitten_sprite if kitten_sprite is not None else 3,
+            "adolescent": adol_sprite if adol_sprite is not None else 6,
+            "young adult": adult_sprite if adult_sprite is not None else 11,
+            "adult": adult_sprite if adult_sprite is not None else 11,
+            "senior adult": adult_sprite if adult_sprite is not None else 11,
+            "senior": senior_sprite if senior_sprite is not None else 15,
         }        
-        self.cat_sprites['newborn'] = 20
-        self.cat_sprites['para_young'] = 17
-        self.cat_sprites["sick_adult"] = 18
-        self.cat_sprites["sick_young"] = 19
+        self.cat_sprites['newborn'] = 0
+        self.cat_sprites['para_young'] = 20
+        self.cat_sprites["sick_adult"] = 21
+        self.cat_sprites["sick_young"] = 22
         
         
         self.current_poses = {

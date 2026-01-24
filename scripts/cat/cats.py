@@ -21,13 +21,14 @@ class Cat():
         self.pelt = Pelt()
         self.dead = False
         self.df = False
+        self.ur = False
         self.shading = False
         self.cat_sprites = {
-            "newborn": 20,
-            "kitten": 0,
-            "adolescent": 3,
-            "adult": 8,
-            "senior": 12,
+            "newborn": 0,
+            "kitten": 3,
+            "adolescent": 6,
+            "adult": 11,
+            "senior": 15,
         }
         self.platform = "None"
         self.permanent_condition = []

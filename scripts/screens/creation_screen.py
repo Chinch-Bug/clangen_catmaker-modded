@@ -216,6 +216,13 @@ class CreationScreen(base_screens.Screens):
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
                 self.build_dropdown_menus()
+
+            elif event.ui_element == self.checkboxes["blacknose_checkbox"]:
+                global_vars.CREATED_CAT.phenotype.blacknose = not global_vars.CREATED_CAT.phenotype.blacknose
+
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+                self.build_dropdown_menus()
             elif event.ui_element == self.dropdown_menus["add_tortie"]:
 
                 if self.selectedtortie:
@@ -375,6 +382,12 @@ class CreationScreen(base_screens.Screens):
                 self.build_dropdown_menus()
             elif event.ui_element == self.checkboxes["rednose_checkboxc"]:
                 global_vars.CREATED_CAT.chimpheno.rednose = not global_vars.CREATED_CAT.chimpheno.rednose
+
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
+                self.build_dropdown_menus()
+            elif event.ui_element == self.checkboxes["blacknose_checkboxc"]:
+                global_vars.CREATED_CAT.chimpheno.blacknose = not global_vars.CREATED_CAT.chimpheno.blacknose
 
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
@@ -762,12 +775,19 @@ class CreationScreen(base_screens.Screens):
                 if event.text == "StarClan":
                     global_vars.CREATED_CAT.dead = True
                     global_vars.CREATED_CAT.df = False
+                    global_vars.CREATED_CAT.ur = False
                 elif event.text == "Dark Forest":
                     global_vars.CREATED_CAT.dead = True
                     global_vars.CREATED_CAT.df = True
+                    global_vars.CREATED_CAT.ur = False
+                elif event.text == "Unknown Res":
+                    global_vars.CREATED_CAT.dead = True
+                    global_vars.CREATED_CAT.df = False
+                    global_vars.CREATED_CAT.ur = True
                 else:
                     global_vars.CREATED_CAT.dead = False
                     global_vars.CREATED_CAT.df = False
+                    global_vars.CREATED_CAT.ur = False
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["platform_select"]:
@@ -1395,6 +1415,9 @@ class CreationScreen(base_screens.Screens):
         self.labels["rednose"] = pygame_gui.elements.UILabel(pygame.Rect((54, 160), (150, 25)), "Red Nosebridge",
                                                             container=self.tabby_pattern_tab,
                                                             object_id="#dropdown_label")
+        self.labels["blacknose"] = pygame_gui.elements.UILabel(pygame.Rect((54, 190), (150, 25)), "Dark Nose",
+                                                            container=self.tabby_pattern_tab,
+                                                            object_id="#dropdown_label")
         self.labels["corin"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "CORIN gold:",
                                                            container=self.tabby_pattern_tab,
                                                            object_id="#dropdown_label")
@@ -1427,6 +1450,9 @@ class CreationScreen(base_screens.Screens):
                                                              container=self.chim_tabby_pattern_tab,
                                                              object_id="#dropdown_label")
         self.labels["rednosec"] = pygame_gui.elements.UILabel(pygame.Rect((54, 160), (150, 25)), "Red Nosebridge",
+                                                             container=self.chim_tabby_pattern_tab,
+                                                             object_id="#dropdown_label")
+        self.labels["blacknosec"] = pygame_gui.elements.UILabel(pygame.Rect((54, 190), (150, 25)), "Dark Nose",
                                                              container=self.chim_tabby_pattern_tab,
                                                              object_id="#dropdown_label")
         self.labels["corinc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "CORIN gold:",
@@ -1634,6 +1660,8 @@ class CreationScreen(base_screens.Screens):
         if global_vars.CREATED_CAT.dead:
             if global_vars.CREATED_CAT.df:
                 lineart = global_vars.lineart[2]
+            elif global_vars.CREATED_CAT.ur:
+                lineart = global_vars.lineart[3]
             else:
                 lineart = global_vars.lineart[1]
         else:
@@ -1730,17 +1758,17 @@ class CreationScreen(base_screens.Screens):
                                                                                  pygame.Rect(
                                                                                      (375, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["pig1_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+        self.dropdown_menus["pig1_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                  global_vars.CREATED_CAT.chimpheno.pigone,
                                                                                  pygame.Rect(
                                                                                      (95, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["pig2_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+        self.dropdown_menus["pig2_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                  global_vars.CREATED_CAT.chimpheno.pigtwo,
                                                                                  pygame.Rect(
                                                                                      (260, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["pig3_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+        self.dropdown_menus["pig3_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                  global_vars.CREATED_CAT.chimpheno.pigext,
                                                                                  pygame.Rect(
                                                                                      (450, 155), (75, 30)),
@@ -1829,17 +1857,17 @@ class CreationScreen(base_screens.Screens):
                                                                                 pygame.Rect(
                                                                                     (375, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["pig1_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+        self.dropdown_menus["pig1_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                 global_vars.CREATED_CAT.phenotype.pigone,
                                                                                 pygame.Rect(
                                                                                     (95, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["pig2_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+        self.dropdown_menus["pig2_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                 global_vars.CREATED_CAT.phenotype.pigtwo,
                                                                                 pygame.Rect(
                                                                                     (260, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["pig3_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue'],
+        self.dropdown_menus["pig3_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                 global_vars.CREATED_CAT.phenotype.pigext,
                                                                                 pygame.Rect(
                                                                                     (450, 155), (75, 30)),
@@ -2591,6 +2619,17 @@ class CreationScreen(base_screens.Screens):
                                                                               "",
                                                                               object_id="#unchecked_checkbox",
                                                                               container=self.tabby_pattern_tab)
+         # Blacknose Checkbox
+        if global_vars.CREATED_CAT.phenotype.blacknose:
+            self.checkboxes["blacknose_checkbox"] = custom_buttons.UIImageButton(pygame.Rect((20, 185), (34, 34)),
+                                                                              "",
+                                                                              object_id="#checked_checkbox",
+                                                                              container=self.tabby_pattern_tab)
+        else:
+            self.checkboxes["blacknose_checkbox"] = custom_buttons.UIImageButton(pygame.Rect((20, 185), (34, 34)),
+                                                                              "",
+                                                                              object_id="#unchecked_checkbox",
+                                                                              container=self.tabby_pattern_tab)
                                                                               
         # -------------------------------------------------------------------------------------------------------------
         # Pattern 2 Tab CHIMERA -----------------------------------------------------------------------------------------------
@@ -2616,6 +2655,18 @@ class CreationScreen(base_screens.Screens):
                                                                                container=self.chim_tabby_pattern_tab)
         else:
             self.checkboxes["rednose_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 155), (34, 34)),
+                                                                               "",
+                                                                               object_id="#unchecked_checkbox",
+                                                                               container=self.chim_tabby_pattern_tab)
+                                                                               
+         # Blacknose Checkbox
+        if global_vars.CREATED_CAT.chimpheno.blacknose:
+            self.checkboxes["blacknose_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 185), (34, 34)),
+                                                                               "",
+                                                                               object_id="#checked_checkbox",
+                                                                               container=self.chim_tabby_pattern_tab)
+        else:
+            self.checkboxes["blacknose_checkboxc"] = custom_buttons.UIImageButton(pygame.Rect((20, 185), (34, 34)),
                                                                                "",
                                                                                object_id="#unchecked_checkbox",
                                                                                container=self.chim_tabby_pattern_tab)

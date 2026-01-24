@@ -11,6 +11,7 @@ class Phenotype(Genotype):
 
         self.fade = "None"
         self.colour = "black"
+        self.ext_colour = "black"
         self.tortie = False
         self.silvergold = ''
         self.tabby = ""
@@ -70,28 +71,31 @@ class Phenotype(Genotype):
             elif (self.corin[0] == 'sg' or self.wbtype in ['shaded', 'chinchilla']):
                 self.silvergold = 'golden '
             elif (self.corin[0] == 'sh'):
-                self.silvergold = 'sunshine '
+                if self.agouti[1] == "a":
+                    self.silvergold = "dark "
+                self.silvergold += 'sunshine '
             elif (self.corin[0] == 'fg'):
                 self.silvergold = 'flaxen gold '
 
     def ExtFinder(self):
+        self.ext_colour = self.colour
         if('o' in self.sexgene):
             if(self.ext[0] == 'ec'):
-                if(self.colour == ''):
+                if(self.ext_colour == ''):
                     pass
                     # self.tortie = " " + self.tortie
-                self.colour = 'agouti carnelian'
+                self.ext_colour = 'agouti carnelian'
                 if(self.agouti[0] == 'a'):
-                    self.colour = "non" + self.colour
+                    self.ext_colour = "non" + self.colour
                 if(self.dilute[0] == 'd' or self.pinkdilute[0] == 'dp'):
-                    self.colour = "light " + self.colour
+                    self.ext_colour = "light " + self.colour
             
             elif(self.ext[0] == 'er'):
-                self.colour += ' russet'
+                self.ext_colour += ' russet'
             elif(self.ext[0] == 'ea'):
                 if(self.dilute[0] == 'd' or self.pinkdilute[0] == 'dp'):
-                    self.colour += " light"
-                self.colour += ' amber'
+                    self.ext_colour += " light"
+                self.ext_colour += ' amber'
     
     def GetTabbySprite(self, special=None):
         all_patterns = []
@@ -604,7 +608,10 @@ class Phenotype(Genotype):
         if wideband in ["chinchilla", "shaded"]:
             colour = "lightbasecolours0"
         elif unders_ruf == "rufoused":
-            colour = rufousing + colour + "3"
+            if colour != "red":
+                colour = "low" + colour + "3"
+            else:
+                colour = rufousing + colour + "3"
         elif unders_ruf == "low":
             colour = colour + "low" + "shaded" + "0"
         elif rufousing != "rufoused":
@@ -708,7 +715,7 @@ class Phenotype(Genotype):
 
                 if genes.corin[0] == "sg" or genes.wbtype == "chinchilla" or (genes.corin[0] != "N" and genes.wbtype == "shaded"):
                     banding = "chinchilla"
-                elif genes.wbtype == "shaded" or genes.corin[0] == "sh" or genes.corin[0] == "fg" or genes.ext[0] == 'ec' or (genes.ext[0] == 'ea' and moons > 3):
+                elif genes.wbtype == "shaded" or genes.corin[0] == "sh" or genes.corin[0] == "sh2" or genes.corin[0] == "fg" or genes.ext[0] == 'ec' or (genes.ext[0] == 'ea' and moons > 3):
                     banding = "shaded"
                 else:
                     banding = genes.wbtype
@@ -775,7 +782,7 @@ class Phenotype(Genotype):
 
         if genes.corin[0] == "sg" or genes.wbtype == "chinchilla" or (genes.corin[0] != "N" and genes.wbtype == "shaded"):
             banding = "chinchilla"
-        elif genes.corin[0] == "sh" or genes.corin[0] == "fg" or genes.wbtype == "shaded":
+        elif genes.corin[0] == "sh" or genes.corin[0] == "sh2" or genes.corin[0] == "fg" or genes.wbtype == "shaded":
             banding = "shaded"
         else:
             banding = genes.wbtype

@@ -55,6 +55,7 @@ class Genotype:
 
         self.curl = ["cu", "cu"]
         self.fold = ["fd", "fd"]
+        self.fourear = ["Dup", "Dup"]
         self.manx = ["ab", "ab"]
         self.manxtype = choice(["long", "most", "most", "stubby", "stubby", "stubby", "stubby", "stubby", "stubby", "stumpy", "stumpy", "stumpy", "stumpy", "stumpy", "stumpy", "stumpy", "stumpy", "riser", "riser", "riser", "riser", "riser", "riser", "riser", "riser", "riser", "rumpy", "rumpy", "rumpy", "rumpy", "rumpy", "rumpy", "rumpy", "rumpy", "rumpy", "rumpy"])
         self.kab = ["Kab", "Kab"]
@@ -79,6 +80,7 @@ class Genotype:
         self.unders_rufsum = 4
 
         self.rednose = False
+        self.blacknose = False
 
         self.saturation = 3
 

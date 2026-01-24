@@ -42,9 +42,9 @@ tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", 
                   "sheetblotched": "Dense Blotched"})
 tabbies = sort_bidict(tabbies)
 
-pangere = bidict({None: "None", "pangere small 1": "Small 1", "pangere small 2": "Small 2", "pangere medium 1": "Medium 1", "pangere medium 2": "Medium 2"})
+pangere = bidict({None: "None", "pangere small 1": "Small 1", "pangere small 2": "Small 2", "pangere medium 1": "Medium 1", "pangere medium 2": "Medium 2", "pangere medium 1 + tail": "Medium 1+"})
 
-corin = bidict({"N": "None", "sh": "Sunshine", "sg": "Extreme Sunshine", "fg": "Flaxen Gold"})
+corin = bidict({"N": "None", "sh": "Sunshine", "sg": "Extreme Sunshine", "fg": "Flaxen Gold", "sh2": "Dark Sunshine"})
 extention = bidict({"E": "Normal", "ea": "Amber", "er": "Russet", "ec": "Carnelian",
                     "Eg": "Chausie Grizzle", 'ecc': 'Carnelian Carrier'})
 
@@ -275,78 +275,24 @@ platforms = {"None": None,
              "Dark Forest - Dark": "resources/images/platforms/darkforestplatform_dark.png",
              "StarClan": "resources/images/platforms/starclanplatform_dark.png"}
 
-lineart = ["Normal", "StarClan", "Dark Forest"]
+lineart = ["Normal", "StarClan", "Dark Forest", "Unknown Res"]
 
 poses = {
     "short": {
         "newborn": {
-            "1": 20,
-            "2": 20,
-            "3": 20
-        },
-        "kitten": {
             "1": 0,
             "2": 1,
             "3": 2
         },
-        "adolescent": {
+        "kitten": {
             "1": 3,
             "2": 4,
             "3": 5
         },
-        "adult": {
+        "adolescent": {
             "1": 6,
             "2": 7,
             "3": 8
-        },
-        "senior": {
-            "1": 12,
-            "2": 13,
-            "3": 14
-        }
-    },
-    "hairless": {
-        "newborn": {
-            "1": 20,
-            "2": 20,
-            "3": 20
-        },
-        "kitten": {
-            "1": 0,
-            "2": 1,
-            "3": 2
-        },
-        "adolescent": {
-            "1": 3,
-            "2": 4,
-            "3": 5
-        },
-        "adult": {
-            "1": 6,
-            "2": 7,
-            "3": 8
-        },
-        "senior": {
-            "1": 12,
-            "2": 13,
-            "3": 14
-        }
-    },
-    "long": {
-        "newborn": {
-            "1": 20,
-            "2": 20,
-            "3": 20
-        },
-        "kitten": {
-            "1": 0,
-            "2": 1,
-            "3": 2
-        },
-        "adolescent": {
-            "1": 3,
-            "2": 4,
-            "3": 5
         },
         "adult": {
             "1": 9,
@@ -354,9 +300,63 @@ poses = {
             "3": 11
         },
         "senior": {
+            "1": 15,
+            "2": 16,
+            "3": 17
+        }
+    },
+    "hairless": {
+        "newborn": {
+            "1": 0,
+            "2": 1,
+            "3": 2
+        },
+        "kitten": {
+            "1": 3,
+            "2": 4,
+            "3": 5
+        },
+        "adolescent": {
+            "1": 6,
+            "2": 7,
+            "3": 8
+        },
+        "adult": {
+            "1": 9,
+            "2": 10,
+            "3": 11
+        },
+        "senior": {
+            "1": 15,
+            "2": 16,
+            "3": 17
+        }
+    },
+    "long": {
+        "newborn": {
+            "1": 0,
+            "2": 1,
+            "3": 2
+        },
+        "kitten": {
+            "1": 3,
+            "2": 4,
+            "3": 5
+        },
+        "adolescent": {
+            "1": 6,
+            "2": 7,
+            "3": 8
+        },
+        "adult": {
             "1": 12,
             "2": 13,
             "3": 14
+        },
+        "senior": {
+            "1": 15,
+            "2": 16,
+            "3": 17
         }
     }
 }
