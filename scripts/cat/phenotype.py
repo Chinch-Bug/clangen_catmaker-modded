@@ -25,6 +25,7 @@ class Phenotype(Genotype):
 
         self.vitiligo = ""
 
+        self.black_pupils = False
         self.pigone = 'P11'
         self.pigtwo = 'P11'
         self.refone = 'R11'

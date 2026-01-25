@@ -177,6 +177,10 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.phenotype.fevercoat
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
+            elif event.ui_element == self.checkboxes["black_pupils"]:
+                global_vars.CREATED_CAT.phenotype.black_pupils = not global_vars.CREATED_CAT.phenotype.black_pupils
+                self.update_checkboxes_and_disable_dropdowns()
+                self.update_cat_image()
             elif event.ui_element == self.checkboxes["bleaching"]:
                 if global_vars.CREATED_CAT.phenotype.bleach[0] == 'lb':
                     global_vars.CREATED_CAT.phenotype.bleach[0] = 'Lb'
@@ -1317,15 +1321,19 @@ class CreationScreen(base_screens.Screens):
                                                              container=self.main_colour_tab,
                                                              object_id="#dropdown_label")
 
-        self.labels["bleach"] = pygame_gui.elements.UILabel(pygame.Rect((164, 200), (150, 25)), "Bleaching",
+        self.labels["black_pupils"] = pygame_gui.elements.UILabel(pygame.Rect((54, 200), (150, 25)), "Black Pupils",
                                                             container=self.main_colour_tab,
                                                             object_id="#dropdown_label")
 
-        self.labels["ghost"] = pygame_gui.elements.UILabel(pygame.Rect((269, 200), (150, 25)), "Ghosting",
+        self.labels["bleach"] = pygame_gui.elements.UILabel(pygame.Rect((169, 200), (150, 25)), "Bleaching",
+                                                            container=self.main_colour_tab,
+                                                            object_id="#dropdown_label")
+
+        self.labels["ghost"] = pygame_gui.elements.UILabel(pygame.Rect((274, 200), (150, 25)), "Ghosting",
                                                            container=self.main_colour_tab,
                                                            object_id="#dropdown_label")
 
-        self.labels["satin"] = pygame_gui.elements.UILabel(pygame.Rect((374, 200), (150, 25)), "Satin",
+        self.labels["satin"] = pygame_gui.elements.UILabel(pygame.Rect((379, 200), (150, 25)), "Satin",
                                                            container=self.main_colour_tab,
                                                            object_id="#dropdown_label")
 
@@ -1365,15 +1373,15 @@ class CreationScreen(base_screens.Screens):
                                                               container=self.chim_main_colour_tab,
                                                               object_id="#dropdown_label")
 
-        self.labels["bleachc"] = pygame_gui.elements.UILabel(pygame.Rect((164, 200), (150, 25)), "Bleaching",
+        self.labels["bleachc"] = pygame_gui.elements.UILabel(pygame.Rect((169, 200), (150, 25)), "Bleaching",
                                                              container=self.chim_main_colour_tab,
                                                              object_id="#dropdown_label")
 
-        self.labels["ghostc"] = pygame_gui.elements.UILabel(pygame.Rect((269, 200), (150, 25)), "Ghosting",
+        self.labels["ghostc"] = pygame_gui.elements.UILabel(pygame.Rect((274, 200), (150, 25)), "Ghosting",
                                                             container=self.chim_main_colour_tab,
                                                             object_id="#dropdown_label")
 
-        self.labels["satinc"] = pygame_gui.elements.UILabel(pygame.Rect((374, 200), (150, 25)), "Satin",
+        self.labels["satinc"] = pygame_gui.elements.UILabel(pygame.Rect((379, 200), (150, 25)), "Satin",
                                                             container=self.chim_main_colour_tab,
                                                             object_id="#dropdown_label")
 
@@ -2356,39 +2364,51 @@ class CreationScreen(base_screens.Screens):
                                                                     "",
                                                                     object_id="#unchecked_checkbox",
                                                                     container=self.general_tab)
-        # Bleaching
+        # Black Pupils
 
-        if global_vars.CREATED_CAT.phenotype.bleach[0] == 'lb':
-            self.checkboxes["bleaching"] = custom_buttons.UIImageButton(pygame.Rect((130, 195), (34, 34)),
+        if global_vars.CREATED_CAT.phenotype.black_pupils:
+            self.checkboxes["black_pupils"] = custom_buttons.UIImageButton(pygame.Rect((19, 195), (34, 34)),
                                                                         "",
                                                                         object_id="#checked_checkbox",
                                                                         container=self.main_colour_tab)
         else:
-            self.checkboxes["bleaching"] = custom_buttons.UIImageButton(pygame.Rect((130, 195), (34, 34)),
+            self.checkboxes["black_pupils"] = custom_buttons.UIImageButton(pygame.Rect((19, 195), (34, 34)),
+                                                                        "",
+                                                                        object_id="#unchecked_checkbox",
+                                                                        container=self.main_colour_tab)
+        # Bleaching
+
+        if global_vars.CREATED_CAT.phenotype.bleach[0] == 'lb':
+            self.checkboxes["bleaching"] = custom_buttons.UIImageButton(pygame.Rect((135, 195), (34, 34)),
+                                                                        "",
+                                                                        object_id="#checked_checkbox",
+                                                                        container=self.main_colour_tab)
+        else:
+            self.checkboxes["bleaching"] = custom_buttons.UIImageButton(pygame.Rect((135, 195), (34, 34)),
                                                                         "",
                                                                         object_id="#unchecked_checkbox",
                                                                         container=self.main_colour_tab)
 
         # Ghosting
         if global_vars.CREATED_CAT.phenotype.ghosting[0] == 'Gh':
-            self.checkboxes["ghosting"] = custom_buttons.UIImageButton(pygame.Rect((235, 195), (34, 34)),
+            self.checkboxes["ghosting"] = custom_buttons.UIImageButton(pygame.Rect((240, 195), (34, 34)),
                                                                        "",
                                                                        object_id="#checked_checkbox",
                                                                        container=self.main_colour_tab)
         else:
-            self.checkboxes["ghosting"] = custom_buttons.UIImageButton(pygame.Rect((235, 195), (34, 34)),
+            self.checkboxes["ghosting"] = custom_buttons.UIImageButton(pygame.Rect((240, 195), (34, 34)),
                                                                        "",
                                                                        object_id="#unchecked_checkbox",
                                                                        container=self.main_colour_tab)
 
         # Satin/glitter
         if global_vars.CREATED_CAT.phenotype.satin[0] == 'st':
-            self.checkboxes["satin"] = custom_buttons.UIImageButton(pygame.Rect((340, 195), (34, 34)),
+            self.checkboxes["satin"] = custom_buttons.UIImageButton(pygame.Rect((345, 195), (34, 34)),
                                                                     "",
                                                                     object_id="#checked_checkbox",
                                                                     container=self.main_colour_tab)
         else:
-            self.checkboxes["satin"] = custom_buttons.UIImageButton(pygame.Rect((340, 195), (34, 34)),
+            self.checkboxes["satin"] = custom_buttons.UIImageButton(pygame.Rect((345, 195), (34, 34)),
                                                                     "",
                                                                     object_id="#unchecked_checkbox",
                                                                     container=self.main_colour_tab)
