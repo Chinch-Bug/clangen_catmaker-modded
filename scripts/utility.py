@@ -1432,7 +1432,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             for scar in cat_scars:
                 if scar in cat.pelt.scars2:
                     new_sprite.blit(
-                        sprites.sprites['scars' + scar + cat_sprite], (0, 0), special_flags=blendmode)
+                        sprites.sprites['scars_missing_part' + scar + cat_sprite], (0, 0), special_flags=blendmode)
 
         # draw accessories
         if not acc_hidden:
