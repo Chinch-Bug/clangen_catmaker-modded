@@ -365,15 +365,15 @@ class Pelt():
         self.cat_sprites =  {
             "kitten": kitten_sprite if kitten_sprite is not None else 3,
             "adolescent": adol_sprite if adol_sprite is not None else 6,
-            "young adult": adult_sprite if adult_sprite is not None else 11,
-            "adult": adult_sprite if adult_sprite is not None else 11,
-            "senior adult": adult_sprite if adult_sprite is not None else 11,
-            "senior": senior_sprite if senior_sprite is not None else 15,
+            "young adult": adult_sprite if adult_sprite is not None else 14,
+            "adult": adult_sprite if adult_sprite is not None else 14,
+            "senior adult": adult_sprite if adult_sprite is not None else 14,
+            "senior": senior_sprite if senior_sprite is not None else 18,
         }        
         self.cat_sprites['newborn'] = 0
-        self.cat_sprites['para_young'] = 20
-        self.cat_sprites["sick_adult"] = 21
-        self.cat_sprites["sick_young"] = 22
+        self.cat_sprites['para_young'] = 23
+        self.cat_sprites["sick_adult"] = 24
+        self.cat_sprites["sick_young"] = 25
         
         
         self.current_poses = {
@@ -408,15 +408,13 @@ class Pelt():
            
         if age in ["young adult", "adult", "senior adult"]:
             for inter_age in ["young adult", "adult", "senior adult"]:
-                self.cat_sprites[inter_age] = global_vars.poses[
-                self.length]["adult"][pose]
+                self.cat_sprites[inter_age] = global_vars.poses[self.length]["adult"][pose]
 
                 # Adjust tracked poses.
             self.current_poses["adult"] = pose
         else:
             # Change the sprite number.
-            self.cat_sprites[age] = global_vars.poses[
-                self.length][age][pose]
+            self.cat_sprites[age] = global_vars.poses[self.length][age][pose]
 
             # Adjust tracked poses.
             self.current_poses[age] = pose
