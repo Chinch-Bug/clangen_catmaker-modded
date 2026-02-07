@@ -99,10 +99,6 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             'mediumapricot': 'rufousedcream',
             'lowapricot': 'mediumcream',
 
-            'rufousedhoney-apricot': 'lowred',
-            'mediumhoney-apricot': 'rufousedhoney',
-            'lowhoney-apricot': 'mediumhoney',
-
             'rufousedivory-apricot': 'lowhoney',
             'mediumivory-apricot': 'rufousedivory',
             'lowivory-apricot': 'mediumivory'
