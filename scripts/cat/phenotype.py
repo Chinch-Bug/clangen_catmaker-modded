@@ -105,7 +105,7 @@ class Phenotype(Genotype):
             all_patterns = ['redbaralt']
         elif(special == 'ghost'):
             all_patterns = ['fullbaralt']
-        elif (self.ticked[1] == "Ta" or ((not self.breakthrough or self.mack[0] == "mc") and self.ticked[0] == "Ta")):
+        elif self.ticked[1] == "Ta" or (not self.breakthrough and self.ticked[0] == "Ta"):
             if (self.ticktype == "agouti"):
                 all_patterns = ['agouti']
             elif (self.ticktype == 'reduced barring'):
@@ -489,13 +489,13 @@ class Phenotype(Genotype):
                 self.ticktype = 'reduced barring'
             else:
                 self.ticktype = 'full barring'
-        elif input in ['brokenpins', 'pinstripe', 'servaline', 'brokenpinsbraid', 'pinsbraided', 'leopard']:
+        elif input in ['brokenpins', 'pinstripe', 'servaline', 'brokenpinsbraid', 'pinsbraided', 'leopard', "ghost"]:
             self.ticked = ['Ta', 'ta']
             self.breakthrough = True
         else:
             self.ticked = ['ta', 'ta']
 
-        if input in ['redbarc', 'fullbarc', 'blotched', 'marbled', "partialmarble", "sheetmarble", "sheetblotched"]:
+        if input in ['redbarc', 'fullbarc', 'blotched', 'marbled', "partialmarble", "sheetmarble", "sheetblotched", "ghost"]:
             self.mack = ['mc', 'mc']
         else:
             self.mack = ['Mc', 'Mc']
@@ -550,7 +550,7 @@ class Phenotype(Genotype):
         if self.white[0] == "W" or self.pointgene[0] == "c" or ('DBEalt' not in self.pax3 and 'NoDBE' not in self.pax3) or (self.brindledbi and (('o' not in self.sexgene) or (self.ext[0] == 'ea' and ((moons > 11 and self.agouti[0] != 'a') or (moons > 23))) or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and (self.agouti[0] != 'a' or moons > 5)))):
             self.spritecolour = "white"
             self.maincolour = self.spritecolour
-        elif ('o' not in self.sexgene) or (self.ext[0] == 'ea' and ((moons > 11 and self.agouti[0] != 'a') or (moons > 23))) or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and moons > 0 and (self.agouti[0] != 'a' or moons > 5)):
+        elif ('o' not in self.sexgene) or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and moons > 0 and (self.agouti[0] != 'a' or moons > 5)):
             if self.specialred == 'blue-tipped':
                 self.tortiepattern = ['BLUE-TIPPED']
                 main = self.FindRed(self, moons)
@@ -692,6 +692,9 @@ class Phenotype(Genotype):
 
             maincolour = colour + str(self.saturation)
 
+            if (self.ext[0] == 'ea' and ((moons > 11 and self.agouti[0] != 'a') or (moons > 23))):
+                return [maincolour] + self.FindRed(genes, moons)[1:]
+
             if self.saturation < 3 and colour in ['blue', 'lilac', 'fawn', 'dove']:
                 colour = "pale_" + colour
 
@@ -708,7 +711,7 @@ class Phenotype(Genotype):
 
                 if genes.corin[0] == "sg" or genes.wbtype == "chinchilla" or (genes.corin[0] != "N" and genes.wbtype == "shaded"):
                     banding = "chinchilla"
-                elif genes.wbtype == "shaded" or genes.corin[0] == "sh" or genes.corin[0] == "sh2" or genes.corin[0] == "fg" or genes.ext[0] == 'ec' or (genes.ext[0] == 'ea' and moons > 3):
+                elif genes.wbtype == "shaded" or genes.corin[0] == "sh" or genes.corin[0] == "sh2" or genes.corin[0] == "fg" or genes.ext[0] == 'ec' or (genes.ext[0] == 'ea' and (self.agouti[0] != "a" and moons > 3 or moons > 9)):
                     banding = "shaded"
                 else:
                     banding = genes.wbtype

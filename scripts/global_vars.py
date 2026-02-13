@@ -35,7 +35,7 @@ def sort_bidict(d: bidict, first_element=None):
 tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Blotched)", 
                   "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
                   "brokenpinsbraid" : "Broken Pinstripe-Braided", "pinsbraided" : "Pinstripe-Braided", 
-                  "leopard" : "Servaline-Rosseted", "blotched" : "Blotched", "marbled" : "Marbled", "brokenmack" : "Broken Mackerel", 
+                  "leopard" : "Servaline-Rosetted", "blotched" : "Blotched", "marbled" : "Marbled", "ghost" : "'Ghost'", "brokenmack" : "Broken Mackerel", 
                   "mackerel" : "Mackerel", "spotted" : "Spotted", "brokenbraid" : "Broken Braided", "braided" : "Braided", 
                   "rosetted" : "Rosetted", "partialbraided": "Partial Braided", "partialbrokenbraided": "Partial Broken Braided", 
                   "partialrosetted": "Partial Rosettes", "partialmarble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
