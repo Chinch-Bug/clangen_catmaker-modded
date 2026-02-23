@@ -200,6 +200,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 is_older_amber = is_amber and ((sprite_age > 35 and phenotype.agouti[0] != 'a') or (sprite_age > 59))
                 is_baby_amber = not_red and not is_amber and phenotype.ext[0] == 'ea' and ((sprite_age > 3 and phenotype.agouti[0] != "a") or sprite_age > 9)
                 
+                pattern = []
                 if preset_pattern:
                     for pat in preset_pattern:
                         pattern_sprite = pygame.Surface(
@@ -243,17 +244,17 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                             else:
                                 pattern_sprite.set_alpha(125)
                         stripebase.blit(pattern_sprite, (0, 0))
-                    if pattern[0] in ["marbled", "blotched"] and phenotype.sheeted:
-                        pattern_sprite = pygame.Surface(
-                            (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                        pattern_sprite.blit(
-                            sprites.sprites["sheeted" + cat_sprite], (0, 0))
-                        if 'chinchilla' in whichbase or is_amber:
-                            if phenotype.wbtype == "chinchilla" or is_older_amber:
-                                pattern_sprite.set_alpha(15)
-                            else:
-                                pattern_sprite.set_alpha(125)
-                        stripebase.blit(pattern_sprite, (0, 0))
+                if (preset_pattern and preset_pattern[0] in ["marbled", "blotched"] or pattern and pattern[0] in ["marbled", "blotched"]) and phenotype.sheeted:
+                    pattern_sprite = pygame.Surface(
+                        (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    pattern_sprite.blit(
+                        sprites.sprites["sheeted" + cat_sprite], (0, 0))
+                    if 'chinchilla' in whichbase or is_amber:
+                        if phenotype.wbtype == "chinchilla" or is_older_amber:
+                            pattern_sprite.set_alpha(15)
+                        else:
+                            pattern_sprite.set_alpha(125)
+                    stripebase.blit(pattern_sprite, (0, 0))
 
                 if not_red and special != "no_shading" and not is_amber:
                     stripebase.blit(
