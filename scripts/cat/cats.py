@@ -303,7 +303,7 @@ class Cat():
 
                                 #face
                                 if 'beard' or 'underbelly1' in white_pattern:
-                                    white_pattern.append(choice(['chin', 'chin', 'muzzle', 'muzzle', 'blaze', None, None]))
+                                    white_pattern.append(choice(['chin', 'chin', 'muzzle1', 'muzzle1', 'blaze', None, None]))
 
                                 #tail
                                 white_pattern.append(choice(['tail tip', None, None, None, None]))
@@ -329,7 +329,7 @@ class Cat():
                                         white_pattern.append(order[i] + choice([' high sock', ' bicolour1', ' bicolour1', ' bicolour2']))
 
                                 #face
-                                white_pattern.append(choice(['chin', 'muzzle', 'muzzle', 'muzzle', 'blaze']))
+                                white_pattern.append(choice(['chin', 'muzzle1', 'muzzle1', 'muzzle1', 'blaze']))
 
                                 #tail
                                 white_pattern.append(choice(['tail tip', None, None, None, None]))
@@ -360,7 +360,7 @@ class Cat():
                                         white_pattern.append(order[i] + choice([' bicolour1', ' bicolour2', ' bicolour2']))
 
                                 #face
-                                white_pattern.append(choice(['chin', 'muzzle', 'muzzle', 'muzzle', 'blaze', 'blaze']))
+                                white_pattern.append(choice(['chin', 'muzzle1', 'muzzle1', 'muzzle1', 'blaze', 'blaze']))
 
                                 #tail
                                 white_pattern.append(choice(['tail tip', None, None, None, None]))
@@ -381,7 +381,7 @@ class Cat():
                                 white_pattern.append(order[i] + ' bicolour2')
 
                             #face
-                            white_pattern.append(choice(['muzzle', 'muzzle', 'blaze', 'blaze']))
+                            white_pattern.append(choice(['muzzle1', 'muzzle1', 'blaze', 'blaze']))
 
                             #tail
                             white_pattern.append(choice(['tail tip', None, None, None, None]))
