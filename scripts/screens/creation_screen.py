@@ -161,11 +161,11 @@ class CreationScreen(base_screens.Screens):
                 else:
                     self.tortierev = "rev"
                 self.update_checkboxes_and_disable_dropdowns()
-            elif event.ui_element == self.checkboxes["brindled_bicolour"]:
-                global_vars.CREATED_CAT.phenotype.brindledbi = not \
-                    global_vars.CREATED_CAT.phenotype.brindledbi
-                self.update_checkboxes_and_disable_dropdowns()
-                self.update_cat_image()
+            # elif event.ui_element == self.checkboxes["brindled_bicolour"]:
+            #     global_vars.CREATED_CAT.phenotype.brindledbi = not \
+            #         global_vars.CREATED_CAT.phenotype.brindledbi
+            #     self.update_checkboxes_and_disable_dropdowns()
+            #     self.update_cat_image()
             elif event.ui_element == self.checkboxes["merle"]:
                 global_vars.CREATED_CAT.phenotype.pseudomerle = not \
                     global_vars.CREATED_CAT.phenotype.pseudomerle
@@ -341,11 +341,11 @@ class CreationScreen(base_screens.Screens):
                 else:
                     self.chimtortierev = "rev"
                 self.update_checkboxes_and_disable_dropdowns()
-            elif event.ui_element == self.checkboxes["brindled_bicolourc"]:
-                global_vars.CREATED_CAT.chimpheno.brindledbi = not \
-                    global_vars.CREATED_CAT.chimpheno.brindledbi
-                self.update_checkboxes_and_disable_dropdowns()
-                self.update_cat_image()
+            # elif event.ui_element == self.checkboxes["brindled_bicolourc"]:
+            #     global_vars.CREATED_CAT.chimpheno.brindledbi = not \
+            #         global_vars.CREATED_CAT.chimpheno.brindledbi
+            #     self.update_checkboxes_and_disable_dropdowns()
+            #     self.update_cat_image()
             elif event.ui_element == self.checkboxes["merlec"]:
                 global_vars.CREATED_CAT.chimpheno.pseudomerle = not \
                     global_vars.CREATED_CAT.chimpheno.pseudomerle
@@ -1493,9 +1493,9 @@ class CreationScreen(base_screens.Screens):
         self.labels["tortie"] = pygame_gui.elements.UILabel(pygame.Rect((287, 75), (-1, 25)), "Tortie",
                                                             container=self.tortie_tab,
                                                             object_id="#dropdown_label")
-        self.labels["brindlebi"] = pygame_gui.elements.UILabel(pygame.Rect((387, 75), (-1, 25)), "Brindled Bicolour",
-                                                               container=self.tortie_tab,
-                                                               object_id="#dropdown_label")
+        # self.labels["brindlebi"] = pygame_gui.elements.UILabel(pygame.Rect((387, 75), (-1, 25)), "Brindled Bicolour",
+        #                                                        container=self.tortie_tab,
+        #                                                        object_id="#dropdown_label")
 
         # self.labels["revmerle"] = pygame_gui.elements.UILabel(pygame.Rect((57, 170), (-1, 25)), "Reverse Patch",
         #                                                          container=self.tortie_tab,
@@ -1528,9 +1528,9 @@ class CreationScreen(base_screens.Screens):
         self.labels["tortiec"] = pygame_gui.elements.UILabel(pygame.Rect((287, 75), (-1, 25)), "Tortie",
                                                              container=self.chim_tortie_tab,
                                                              object_id="#dropdown_label")
-        self.labels["brindlebic"] = pygame_gui.elements.UILabel(pygame.Rect((387, 75), (-1, 25)), "Brindled Bicolour",
-                                                                container=self.chim_tortie_tab,
-                                                                object_id="#dropdown_label")
+        # self.labels["brindlebic"] = pygame_gui.elements.UILabel(pygame.Rect((387, 75), (-1, 25)), "Brindled Bicolour",
+        #                                                         container=self.chim_tortie_tab,
+        #                                                         object_id="#dropdown_label")
 
         # self.labels["revmerlec"] = pygame_gui.elements.UILabel(pygame.Rect((57, 170), (-1, 25)), "Reverse Patch",
         #                                                          container=self.chim_tortie_tab,
@@ -2499,21 +2499,21 @@ class CreationScreen(base_screens.Screens):
                                                                         container=self.tortie_tab)
 
         # Brindled Bicolour
-        if global_vars.CREATED_CAT.phenotype.brindledbi:
-            self.checkboxes["brindled_bicolour"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
-                                                                                "",
-                                                                                object_id="#checked_checkbox",
-                                                                                container=self.tortie_tab)
-        else:
-            self.checkboxes["brindled_bicolour"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
-                                                                                "",
-                                                                                object_id="#unchecked_checkbox",
-                                                                                container=self.tortie_tab)
+        # if global_vars.CREATED_CAT.phenotype.brindledbi:
+        #     self.checkboxes["brindled_bicolour"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
+        #                                                                         "",
+        #                                                                         object_id="#checked_checkbox",
+        #                                                                         container=self.tortie_tab)
+        # else:
+        #     self.checkboxes["brindled_bicolour"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
+        #                                                                         "",
+        #                                                                         object_id="#unchecked_checkbox",
+        #                                                                         container=self.tortie_tab)
 
-        if global_vars.CREATED_CAT.phenotype.tortie:
-            self.checkboxes["brindled_bicolour"].enable()
-        else:
-            self.checkboxes["brindled_bicolour"].disable()
+        # if global_vars.CREATED_CAT.phenotype.tortie:
+        #     self.checkboxes["brindled_bicolour"].enable()
+        # else:
+        #     self.checkboxes["brindled_bicolour"].disable()
 
         # # Reverse merle
         # if self.selectedmerle and 'rev' in self.selectedmerle:
@@ -2572,21 +2572,21 @@ class CreationScreen(base_screens.Screens):
                                                                          container=self.chim_tortie_tab)
 
         # Brindled Bicolour
-        if global_vars.CREATED_CAT.chimpheno.brindledbi:
-            self.checkboxes["brindled_bicolourc"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
-                                                                                 "",
-                                                                                 object_id="#checked_checkbox",
-                                                                                 container=self.chim_tortie_tab)
-        else:
-            self.checkboxes["brindled_bicolourc"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
-                                                                                 "",
-                                                                                 object_id="#unchecked_checkbox",
-                                                                                 container=self.chim_tortie_tab)
+        # if global_vars.CREATED_CAT.chimpheno.brindledbi:
+        #     self.checkboxes["brindled_bicolourc"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
+        #                                                                          "",
+        #                                                                          object_id="#checked_checkbox",
+        #                                                                          container=self.chim_tortie_tab)
+        # else:
+        #     self.checkboxes["brindled_bicolourc"] = custom_buttons.UIImageButton(pygame.Rect((350, 70), (34, 34)),
+        #                                                                          "",
+        #                                                                          object_id="#unchecked_checkbox",
+        #                                                                          container=self.chim_tortie_tab)
 
-        if global_vars.CREATED_CAT.chimpheno.tortie:
-            self.checkboxes["brindled_bicolourc"].enable()
-        else:
-            self.checkboxes["brindled_bicolourc"].disable()
+        # if global_vars.CREATED_CAT.chimpheno.tortie:
+        #     self.checkboxes["brindled_bicolourc"].enable()
+        # else:
+        #     self.checkboxes["brindled_bicolourc"].disable()
 
         # # Reverse merle
         # if self.selectedmerlechim and 'rev' in self.selectedmerlechim:
