@@ -386,7 +386,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
                     colours = phenotype.FindRed(
                         phenotype, sprite_age, special='low')
-                    sunshine = MakeCat(sunshine, colours[0], colours[1], [
+                    sunshine = make_cat(sunshine, colours[0], colours[1], [
                                        colours[2], colours[3]], special='copper')
 
                     sunshine.set_alpha(150)
@@ -594,7 +594,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 sprite.blit(nose, (0, 0))
                 return sprite
 
-            def MakeCat(whichmain, whichcolour, whichbase, cat_unders, special=None):
+            def make_cat(whichmain, whichcolour, whichbase, cat_unders, special=None):
                 is_red = (
                     'red' in whichcolour or 'cream' in whichcolour or 'honey' in whichcolour or 'ivory' in whichcolour or 'apricot' in whichcolour)
 
@@ -975,6 +975,13 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
                         whichmain.blit(pointbase, (0, 0))
 
+                if is_red and phenotype.specialred == "blue-tipped" and special != "blue-tipped":
+                    mask = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    mask.blit(sprites.sprites['BLUE-TIPPED' + cat_sprite], (0, 0))
+                    colours = phenotype.FindRed(phenotype, sprite_age, 'blue-tipped')
+                    mask.blit(make_cat(pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA), colours[0], colours[1], [colours[2], colours[3]], "blue-tipped"), (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                    whichmain.blit(mask, (0, 0))
+
                 seasondict = {
                     'Greenleaf': 'summer',
                     'Leaf-bare': 'winter'
@@ -1002,7 +1009,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             def ApplyPatchEffects(sprite):
                 if ('masked' in phenotype.silvergold):
                     masked = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                    masked = MakeCat(masked, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders, special="masked silver")
+                    masked = make_cat(masked, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders, special="masked silver")
                     masked2 = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                     masked2.blit(sprites.sprites["BLUE-TIPPED" + cat_sprite], (0, 0))
                     masked2.blit(masked, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
@@ -1031,7 +1038,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         phenotype, sprite_age, special='nosilver')
                     underbelly = pygame.Surface(
                         (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                    underbelly = MakeCat(underbelly, colours[0], colours[1], [
+                    underbelly = make_cat(underbelly, colours[0], colours[1], [
                                          colours[2], colours[3]], special='nounders')
                     sunshine.blit(underbelly, (0, 0),
                                   special_flags=pygame.BLEND_RGBA_MIN)
@@ -1042,10 +1049,10 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             is_white = 'W' in phenotype.white or phenotype.pointgene[0] == 'c' or phenotype.white_pattern == [
                 'full white']
             if (phenotype.patchmain != "" and 'rev' in phenotype.tortiepattern[0]):
-                gensprite = MakeCat(
+                gensprite = make_cat(
                     gensprite, phenotype.patchmain, phenotype.patchcolour, phenotype.patchunders)
             else:
-                gensprite = MakeCat(
+                gensprite = make_cat(
                     gensprite, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders)
 
             if not is_white:
@@ -1058,12 +1065,12 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         if 'rev' in pattern:
                             isred = not (
                                 'red' in phenotype.maincolour or 'cream' in phenotype.maincolour or 'honey' in phenotype.maincolour or 'ivory' in phenotype.maincolour or 'apricot' in phenotype.maincolour)
-                            tortpatches = MakeCat(
+                            tortpatches = make_cat(
                                 tortpatches, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders)
                         else:
                             isred = not (
                                 'red' in phenotype.patchmain or 'cream' in phenotype.patchmain or 'honey' in phenotype.patchmain or 'ivory' in phenotype.patchmain or 'apricot' in phenotype.patchmain)
-                            tortpatches = MakeCat(
+                            tortpatches = make_cat(
                                 tortpatches, phenotype.patchmain, phenotype.patchcolour, phenotype.patchunders)
                         if phenotype.caramel == 'caramel' and isred:
                             tortpatches.blit(
@@ -1177,7 +1184,6 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                 gensprite.blit(sprites.sprites['donskoy' + cat_sprite], (0, 0))
 
             if ('sparse' in cat.phenotype.furtype):
-                gensprite.blit(sprites.sprites['satin0'], (0, 0))
                 gensprite.blit(sprites.sprites['satin0'], (0, 0))
                 gensprite.blit(sprites.sprites['lykoi' + cat_sprite], (0, 0))
 
