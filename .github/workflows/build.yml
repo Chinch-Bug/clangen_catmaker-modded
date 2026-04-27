@@ -126,7 +126,6 @@ jobs:
 
   confirm_release:
     runs-on: ubuntu-22.04
-    if: ${{ vars.USE_UPDATE_API != '' && (github.ref == 'refs/heads/development' || startsWith(github.ref, 'refs/tags/')) }}
     needs: build
     steps:
       - name: Upload a Build Artifact
