@@ -39,6 +39,8 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
         no_not_working: If true, never use the not_working lineart.
                         If false, use the cat.not_working() to determine the no_working art. 
         """
+    poses: list = Sprites.POSE_DATA["poses"]
+    sprite_poses = {x: str(poses.index(x)) for x in poses}
 
     if life_state is not None:
         age = life_state
@@ -73,7 +75,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
         if age == 'elder':
             age = 'senior'
 
-        cat_sprite = str(cat.pelt.cat_sprites[age])
+        cat_sprite = sprite_poses[cat.pelt.cat_sprites[age]]
 
     alt_cat_sprite = str(int(cat_sprite)-3)
     new_sprite = pygame.Surface(

@@ -9,6 +9,17 @@ import scripts.global_vars as global_vars
     
 
 class Pelt():
+    # POSES
+    all_poses = Sprites.POSE_DATA["poses"]
+    newborn_poses = [x for x in all_poses if "newborn" in x]
+    kitten_poses = [x for x in all_poses if "kitten" in x]
+    adolescent_long_poses = [x for x in all_poses if "adolescent_long" in x]
+    adolescent_short_poses = [
+        x for x in all_poses if "adolescent" in x and "long" not in x
+    ]
+    adult_short_poses = [x for x in all_poses if "adult_short" in x and "para" not in x]
+    adult_long_poses = [x for x in all_poses if "adult_long" in x and "para" not in x]
+    senior_poses = [x for x in all_poses if "senior" in x]
     
     sprites_names = {
         "SingleColour": 'single',
@@ -366,20 +377,70 @@ class Pelt():
         ]
         self.tint = tint
         self.white_patches_tint = white_patches_tint
-        self.cat_sprites =  {
-            "kitten": kitten_sprite if kitten_sprite is not None else 3,
-            "adolescent": adol_sprite if adol_sprite is not None else 6,
-            "young adult": adult_sprite if adult_sprite is not None else 14,
-            "adult": adult_sprite if adult_sprite is not None else 14,
-            "senior adult": adult_sprite if adult_sprite is not None else 14,
-            "senior": senior_sprite if senior_sprite is not None else 18,
-        }        
-        self.cat_sprites['newborn'] = 0
-        self.cat_sprites['para_young'] = 23
-        self.cat_sprites['para_adult'] = 21
-        self.cat_sprites["sick_adult"] = 24
-        self.cat_sprites["sick_young"] = 25
+        # self.cat_sprites =  {
+        #     "kitten": kitten_sprite if kitten_sprite is not None else 3,
+        #     "adolescent": adol_sprite if adol_sprite is not None else 6,
+        #     "young adult": adult_sprite if adult_sprite is not None else 14,
+        #     "adult": adult_sprite if adult_sprite is not None else 14,
+        #     "senior adult": adult_sprite if adult_sprite is not None else 14,
+        #     "senior": senior_sprite if senior_sprite is not None else 18,
+        # }        
+        # self.cat_sprites['newborn'] = 0
+        # self.cat_sprites['para_young'] = 23
+        # self.cat_sprites['para_adult'] = 21
+        # self.cat_sprites["sick_adult"] = 24
+        # self.cat_sprites["sick_young"] = 25
+        adult_sprite = (
+            adult_sprite
+            if adult_sprite is not None
+            and (
+                adult_sprite in self.adult_short_poses
+                or adult_sprite in self.adult_long_poses
+            )
+            else "adult_short0"
+        )
+
+        if adol_sprite in ("adolescent0", "adolescent1", "adolescent2"):
+            if self.length == "long":
+                adol_sprite = choice(self.adolescent_long_poses)
+            else:
+                adol_sprite = f"adolescent_short{adol_sprite[-1]}"
+
+        self.cat_sprites = {
+            "newborn": "newborn0",
+            "kitten": "kitten0",
+            "adolescent": "adolescent_short0",
+            "young adult": "adult_short2",
+            "adult": "adult_short2",
+            "senior adult": "adult_short2",
+            "senior": "senior0",
+            "para_adult": "para_adult_short0",
+            "para_young": "para_young0",
+        }
         
+        if self.length != "long" and self.cat_sprites["adult"] not in self.adult_short_poses:
+            self.cat_sprites["adult"] = choice(self.adult_short_poses)
+            self.cat_sprites["young adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["senior adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["para_adult"] = "para_adult_short0"
+        if self.length != "long" and self.cat_sprites["adolescent"] not in self.adolescent_short_poses:
+            self.cat_sprites["adolescent"] = choice(self.adolescent_short_poses)
+        
+        if self.length == "long" and self.adult_long_poses and self.cat_sprites["adult"] not in self.adult_long_poses:
+            self.cat_sprites["adult"] = choice(
+                self.adult_long_poses
+                if self.adult_long_poses
+                else self.adult_short_poses
+            )
+            self.cat_sprites["young adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["senior adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["para_adult"] = "para_adult_long0"
+        if self.length == "long" and self.adolescent_long_poses and self.cat_sprites["adolescent"] not in self.adolescent_long_poses:
+            self.cat_sprites["adolescent"] = choice(
+                self.adolescent_long_poses
+                if self.adolescent_long_poses
+                else self.adolescent_short_poses
+            )
         
         self.current_poses = {
             "newborn": "1",
@@ -413,13 +474,13 @@ class Pelt():
            
         if age in ["young adult", "adult", "senior adult"]:
             for inter_age in ["young adult", "adult", "senior adult"]:
-                self.cat_sprites[inter_age] = global_vars.poses[self.length]["adult"][pose]
+                self.cat_sprites[inter_age] = self.all_poses[global_vars.poses[self.length]["adult"][pose]]
 
                 # Adjust tracked poses.
             self.current_poses["adult"] = pose
         else:
             # Change the sprite number.
-            self.cat_sprites[age] = global_vars.poses[self.length][age][pose]
+            self.cat_sprites[age] = self.all_poses[global_vars.poses[self.length][age][pose]]
 
             # Adjust tracked poses.
             self.current_poses[age] = pose
@@ -440,6 +501,31 @@ class Pelt():
         # Update the sprite numbers:
         for age in self.current_poses:
             self.set_pose(age, self.current_poses[age])
+
+        
+        if self.length != "long" and self.cat_sprites["adult"] not in self.adult_short_poses:
+            self.cat_sprites["adult"] = choice(self.adult_short_poses)
+            self.cat_sprites["young adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["senior adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["para_adult"] = "para_adult_short0"
+        if self.length != "long" and self.cat_sprites["adolescent"] not in self.adolescent_short_poses:
+            self.cat_sprites["adolescent"] = choice(self.adolescent_short_poses)
+        
+        if self.length == "long" and self.adult_long_poses and self.cat_sprites["adult"] not in self.adult_long_poses:
+            self.cat_sprites["adult"] = choice(
+                self.adult_long_poses
+                if self.adult_long_poses
+                else self.adult_short_poses
+            )
+            self.cat_sprites["young adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["senior adult"] = self.cat_sprites["adult"]
+            self.cat_sprites["para_adult"] = "para_adult_long0"
+        if self.length == "long" and self.adolescent_long_poses and self.cat_sprites["adolescent"] not in self.adolescent_long_poses:
+            self.cat_sprites["adolescent"] = choice(
+                self.adolescent_long_poses
+                if self.adolescent_long_poses
+                else self.adolescent_short_poses
+            )
 
     #-------------------------------------------------------------------------------------------------#
     #                               Randomize Functions                                                  #
