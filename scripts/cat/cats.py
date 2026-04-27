@@ -44,7 +44,7 @@ class Cat():
         self.moons = 0
         self.season = 'Newleaf'
         self.phenotype = Phenotype()
-        self.chimpheno = Phenotype()
+        self.chimerapheno = Phenotype()
 
         # Sprite sizes
         self.sprite = None
@@ -419,7 +419,7 @@ class Cat():
                 phenotype.white_pattern = [None] + phenotype.white_pattern
 
         SubRandomize(self.phenotype)
-        SubRandomize(self.chimpheno)
+        SubRandomize(self.chimerapheno)
         if random.random() < 0.1:
             self.phenotype.chimera = True
         else:
@@ -430,79 +430,82 @@ class Cat():
 
     def generate_save_file(self):
         """Generates a basic save file dictionary with all the looks-based info filled in. """
-        pelt_name = self.pelt.name
-        if pelt_name == "SingleColour" and self.white_patches:
-            pelt_name = "TwoColour"
-        if pelt_name == "Tortie" and self.white_patches:
-            pelt_name = "Calico"
 
         save = {
             "ID": self.ID,
             "name_prefix": "Prefix",
-            "name_suffix": "Suffix",
-            "gender": self.gender,
-            "gender_align": self.gender_align,
+            "name_suffix": "suffix",
+            "specsuffix_hidden": False,
+            "gender_align": "sam",
+            "pronouns": None,
             "birth_cooldown": 0,
-            "status": self.status,
+            "status": {
+                "group_history": [
+                    {
+                        "group": "1",
+                        "rank": "warrior",
+                        "moons_as": 0
+                    }
+                ],
+                "standing_history": [
+                    {
+                        "group": "1",
+                        "standing": [
+                            "member"
+                        ],
+                        "near": True
+                    }
+                ]
+            },
+            "dark_forest_affinity": 0,
+            "starclan_affinity": 0,
             "backstory": self.backstory,
-            "age": self.age,
             "moons": self.moons,
-            "trait": "wise",
+            "trait": self.trait,
             "parent1": None,
             "parent2": None,
+            "parent3": None,
+            "adoptive_parents": [],
+            "surrogate_parents": [],
+            "affair_parents": [],
             "mentor": None,
             "former_mentor": [],
             "patrol_with_mentor": 0,
-            "mentor_influence": [],
-            "mate": None,
-            "dead": False,
-            "died_by": [],
-            "paralyzed": self.paralyzed,
+            "mate": [],
+            "previous_mates": [],
+            "paralyzed": self.pelt.paralyzed,
             "no_kits": False,
-            "exiled": False,
-            "pelt_name": pelt_name,
-            "pelt_color": self.pelt.colour,
-            "pelt_white": bool(self.white_patches),
-            "pelt_length": self.pelt.length,
-            "spirit_kitten": self.age_sprites["kitten"],
-            "spirit_adolescent": self.age_sprites["adolescent"],
-            "spirit_young_adult": self.age_sprites["adult"],
-            "spirit_adult": self.age_sprites["adult"],
-            "spirit_senior_adult": self.age_sprites["adult"],
-            "spirit_elder": self.age_sprites["elder"],
-            "spirit_dead": None,
-            "eye_colour": self.eye_colour,
-            "eye_colour2": self.eye_colour2,
-            "reverse": self.reverse,
-            "white_patches": self.white_patches,
-            "vitiligo": self.vitiligo,
-            "points": self.points,
-            "white_patches_tint": self.white_patches_tint,
-            "pattern": self.pattern if self.pelt.name == "Tortie" else None,
-            "tortie_base": self.tortiebase if self.pelt.name == "Tortie" else None,
-            "tortie_color": self.tortiecolour if self.pelt.name == "Tortie" else None,
-            "tortie_pattern": self.tortiepattern if self.pelt.name == "Tortie" else None,
-            "skin": self.skin,
-            "tint": self.tint,
-            "skill": self.skill,
-            "scars": [x for x in self.scar_slot_list if x],
-            "accessory": self.accessory,
+            "no_retire": False,
+            "no_mates": False,
+            "genotype": self.phenotype.export(),
+            "chimerageno": self.chimerapheno.export() if self.phenotype.chimera else None,
+            "chimera_pattern": self.chimerapheno.chimerapattern if self.phenotype.chimera else None,
+            "passes_genotype" : 1,
+            "white_pattern" : self.phenotype.white_pattern[1:] if len(self.phenotype.white_pattern) > 1 else "No",
+            "chim_white" : self.chimerapheno.white_pattern[1:] if self.phenotype.chimera and len(self.chimerapheno.white_pattern) > 1 else "No",
+            "sprite_newborn": self.pelt.cat_sprites["newborn"],
+            "sprite_kitten": self.pelt.cat_sprites['kitten'],
+            "sprite_adolescent": self.pelt.cat_sprites['adolescent'],
+            "sprite_adult": self.pelt.cat_sprites['adult'],
+            "sprite_senior": self.pelt.cat_sprites['senior'],
+            "sprite_para_adult": self.pelt.cat_sprites['para_adult'],
+            "reverse": self.pelt.reverse,
+            "tint": None,
+            "white_tint": None,
+            "skill_dict": {
+                "primary": "FIGHTER,0,False",
+                "secondary": None,
+                "hidden": None
+            },
+            "scars": [x for x in self.pelt.scar_slot_list if x],
+            "accessory": [x for x in self.pelt.acc_slot_list if x],
             "experience": 0,
-            "dead_moons": 0,
             "current_apprentice": [],
             "former_apprentices": [],
-            "possible_scar": None,
-            "scar_event": [],
-            "df": False,
-            "outside": False,
-            "corruption": 0,
-            "life_givers": [],
-            "known_life_givers": [],
-            "virtues": [],
-            "retired": False,
             "faded_offspring": [],
             "opacity": 100,
-            "prevent_fading": False
+            "prevent_fading": False,
+            "favourite": 0,
         }
 
         return save

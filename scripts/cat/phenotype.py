@@ -1,6 +1,6 @@
 from .genotype import *
 from random import choice, randint
-
+from copy import deepcopy
 
 class Phenotype(Genotype):
 
@@ -167,7 +167,7 @@ class Phenotype(Genotype):
                     tail = "macktail"
             all_patterns.append(tail)
 
-            if self.wbtype == "chinchilla" or self.corin[0] == "sg":
+            if special != "list" and (self.wbtype == "chinchilla" or self.corin[0] == "sg"):
                 all_patterns.insert(0, "agouti")
 
         return all_patterns
@@ -278,6 +278,8 @@ class Phenotype(Genotype):
 
         if type == 'fur-point':
             self.sedesp = ['hr', 're']
+        elif type == 'hairless':
+            self.sedesp = ['hr', 'hr']
         else:
             self.sedesp[0] = "Hr"
         if 'patchy' in type:
@@ -349,7 +351,7 @@ class Phenotype(Genotype):
             self.white[0] = 'w'
 
         if base == 'albino':
-            self.pointgene[0] = 'c'
+            self.pointgene = ['c', 'c']
         else:
             self.SetPoints(self.point)
 
@@ -494,6 +496,7 @@ class Phenotype(Genotype):
             self.breakthrough = True
         else:
             self.ticked = ['ta', 'ta']
+            self.breakthrough = False
 
         if input in ['redbarc', 'fullbarc', 'blotched', 'marbled', "partialmarble", "sheetmarble", "sheetblotched", "ghost"]:
             self.mack = ['mc', 'mc']
@@ -502,10 +505,13 @@ class Phenotype(Genotype):
 
         if input in ['servaline', 'leopard', 'spotted', 'rosetted', "partialrosetted"]:
             self.spotsum = 8
+            self.spottype = "spotted"
         elif 'broken' in input:
             self.spotsum = 4
+            self.spottype = "broken stripes"
         else:
             self.spotsum = 0
+            self.spottype = "fully striped"
 
         if input in ['brokenpinsbraid', 'pinsbraided', 'leopard', 'marbled', 'braided', 'brokenbraid', 'rosetted', "sheetmarble"]:
             self.bengtype = 'bengal'
@@ -834,3 +840,9 @@ class Phenotype(Genotype):
                     unders_opacity = 25
 
         return [maincolour, colour, unders_colour, unders_opacity]
+
+    def export(self):
+        filled_geno = deepcopy(self)
+        filled_geno.fill()
+        filled_geno.genesort()
+        return filled_geno.toJSON()

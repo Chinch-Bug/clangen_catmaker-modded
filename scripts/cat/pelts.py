@@ -351,7 +351,11 @@ class Pelt():
         self.length=length
         self.type = 'Short'
         self.points = points
-        self.accessory = accessory
+        self.acc_slot_list = [
+            None,
+            None,
+            None
+        ]
         self.paralyzed = paralyzed
         self.opacity = opacity
         self.scar_slot_list = [
@@ -372,6 +376,7 @@ class Pelt():
         }        
         self.cat_sprites['newborn'] = 0
         self.cat_sprites['para_young'] = 23
+        self.cat_sprites['para_adult'] = 21
         self.cat_sprites["sick_adult"] = 24
         self.cat_sprites["sick_young"] = 25
         
@@ -422,10 +427,13 @@ class Pelt():
     def set_pelt_length(self, fur_length):
         if 'Hairless' in fur_length:
             self.length = 'hairless'
+            self.cat_sprites["para_adult"] = 21
         elif 'Long' in fur_length or 'LH' in fur_length:
             self.length = 'long'
+            self.cat_sprites["para_adult"] = 22
         else:
             self.length = 'short'
+            self.cat_sprites["para_adult"] = 21
         
         self.type = fur_length
 
@@ -478,8 +486,15 @@ class Pelt():
                 self.scar_slot_list[i] = random.choice(list(global_vars.scars.keys()))
         
     def init_accessories(self):
+        self.acc_slot_list = [
+            None,
+            None,
+            None
+        ]
         
-        self.accessory = random.choice(list(global_vars.accessories.keys()))
+        for i in range(0, len(self.acc_slot_list)):
+            if random.randint(0, 2):
+                self.acc_slot_list[i] = random.choice(list(global_vars.accessories.keys()))
 
     def init_pattern(self):
         

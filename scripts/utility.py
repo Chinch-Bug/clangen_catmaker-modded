@@ -1170,22 +1170,29 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
             gensprite.blit(tintedwhitesprite, (0, 0))
 
-            if cat.phenotype.sedesp == ['hr', 're'] or (cat.phenotype.sedesp[0] == 're' and sprite_age < 12) or (cat.phenotype.laperm[0] == 'Lp' and sprite_age < 4):
-                gensprite.blit(
-                    sprites.sprites['furpoint' + cat_sprite], (0, 0))
-                gensprite.blit(
-                    sprites.sprites['furpoint' + cat_sprite], (0, 0))
-            elif (cat.pelt.length == 'hairless'):
-                gensprite.blit(
-                    sprites.sprites['hairless' + cat_sprite], (0, 0))
-                gensprite.blit(
-                    sprites.sprites['furpoint' + cat_sprite], (0, 0))
-            elif ('patchy ' in cat.phenotype.furtype):
-                gensprite.blit(sprites.sprites['donskoy' + cat_sprite], (0, 0))
+            hairless = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+            if cat.phenotype.sedesp == ['hr', 're'] or (cat.phenotype.sedesp[0] == 're' and sprite_age < 12):
+                hairless.blit(sprites.sprites['furpoint' + cat_sprite], (0, 0))
+                hairless.blit(sprites.sprites['furpoint' + cat_sprite], (0, 0))
+            elif(cat.pelt.length == 'hairless' and (cat.phenotype.sedesp[0] == "hr" or cat.phenotype.ruhr[1] == "Hrbd" or sprite_age > 11)):
+                hairless.blit(sprites.sprites['hairless' + cat_sprite], (0, 0))
+                hairless.blit(sprites.sprites['break/nose1' + cat_sprite], (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
+                hairless.blit(sprites.sprites['furpoint' + cat_sprite], (0, 0))
+            elif cat.phenotype.laperm[0] == 'Lp' and sprite_age < 4:
+                hairless.blit(sprites.sprites['furpoint' + cat_sprite], (0, 0))
+                hairless.blit(sprites.sprites['furpoint' + cat_sprite], (0, 0))
+                hairless.set_alpha(120)
+            elif ('patchy ' in cat.phenotype.furtype) or (cat.pelt.length == 'hairless' and cat.phenotype.sedesp[0] != "hr" and cat.phenotype.ruhr[1] != "Hrbd" and sprite_age > 5):
+                hairless.blit(sprites.sprites['donskoy' + cat_sprite], (0, 0))
+            
+            if('sparse' in cat.phenotype.furtype):
+                hairless.blit(sprites.sprites['satin0'], (0, 0))
+                hairless.blit(sprites.sprites['lykoi' + cat_sprite], (0, 0))
+            
+            hairless.blit(sprites.sprites['nose' + cat_sprite], (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
+            gensprite.blit(hairless, (0, 0))
 
-            if ('sparse' in cat.phenotype.furtype):
-                gensprite.blit(sprites.sprites['satin0'], (0, 0))
-                gensprite.blit(sprites.sprites['lykoi' + cat_sprite], (0, 0))
+            gensprite.blit(white_leathers, (0, 0))
 
             gensprite.blit(white_leathers, (0, 0))
 
@@ -1268,7 +1275,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
         if cat.phenotype.chimera:
             chimerapatches = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
             chimerapatches.blit(sprites.sprites[cat.phenotype.chimerapattern + cat_sprite], (0, 0))
-            chimerapatches.blit(GenSprite(cat.chimpheno, cat.moons), (0, 0), special_flags=pygame.BLEND_RGB_MULT)
+            chimerapatches.blit(GenSprite(cat.chimerapheno, cat.moons), (0, 0), special_flags=pygame.BLEND_RGB_MULT)
             gensprite.blit(chimerapatches, (0, 0))
 
         if not scars_hidden:
@@ -1413,98 +1420,99 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
         # draw accessories
         if not acc_hidden:
-            if cat.pelt.accessory in cat.pelt.plant_accessories:
-                sprite_name = f"{sprites.PLANT_DATA['spritesheet']}{cat.pelt.accessory}{cat_sprite}"
-                new_sprite.blit(
-                    _recolor_lineart(
-                        sprites.sprites[sprite_name],
-                        lineart_color,
-                        gradient_surface,
-                    ),
-                    (0, 0),
-                )
-            elif cat.pelt.accessory in cat.pelt.wild_accessories:
-                sprite_name = f"{sprites.WILD_DATA['spritesheet']}{cat.pelt.accessory}{cat_sprite}"
-                new_sprite.blit(
-                    _recolor_lineart(
-                        sprites.sprites[sprite_name],
-                        lineart_color,
-                        gradient_surface,
-                    ),
-                    (0, 0),
-                )
-            elif cat.pelt.accessory in cat.pelt.collars:
-                collar_map = {
-                    "CRIMSON": "LEATHER_crimson",
-                    "BLUE": "LEATHER_blue",
-                    "YELLOW": "LEATHER_yellow",
-                    "CYAN": "LEATHER_cyan",
-                    "RED": "LEATHER_orange",
-                    "LIME": "LEATHER_lime",
-                    "GREEN": "LEATHER_green",
-                    "WHITE": "LEATHER_white",
-                    "BLACK": "LEATHER_black",
-                    "SPIKES": "LEATHER_SPIKE_black_gold",
-                    "PINK": "LEATHER_pink",
-                    "PURPLE": "LEATHER_purple",
-                    "MULTI": "LEATHER_rose",
-                    "INDIGO": "LEATHER_indigo",
-                    "RAINBOW": "LEATHER_GRADIENT_rainbow",
-                    "CRIMSONBELL": "LEATHER_BELL_crimson",
-                    "BLUEBELL": "LEATHER_BELL_blue",
-                    "YELLOWBELL": "LEATHER_BELL_yellow",
-                    "CYANBELL": "LEATHER_BELL_cyan",
-                    "REDBELL": "LEATHER_BELL_orange",
-                    "LIMEBELL": "LEATHER_BELL_lime",
-                    "GREENBELL": "LEATHER_BELL_green",
-                    "WHITEBELL": "LEATHER_BELL_white",
-                    "BLACKBELL": "LEATHER_BELL_black",
-                    "SPIKESBELL": "LEATHER_BELL_SPIKE_black_gold",
-                    "PINKBELL": "LEATHER_BELL_pink",
-                    "PURPLEBELL": "LEATHER_BELL_purple",
-                    "MULTIBELL": "LEATHER_BELL_rose",
-                    "INDIGOBELL": "LEATHER_BELL_indigo",
-                    "RAINBOWBELL": "LEATHER_BELL_GRADIENT_rainbow",
-                    "CRIMSONBOW": "BOW_crimson",
-                    "BLUEBOW": "BOW_blue",
-                    "YELLOWBOW": "BOW_yellow",
-                    "CYANBOW": "BOW_cyan",
-                    "REDBOW": "BOW_orange",
-                    "LIMEBOW": "BOW_lime",
-                    "GREENBOW": "BOW_green",
-                    "WHITEBOW": "BOW_white",
-                    "BLACKBOW": "BOW_black",
-                    "SPIKESBOW": "BOW_FOIL_black_gold",
-                    "PINKBOW": "BOW_pink",
-                    "PURPLEBOW": "BOW_purple",
-                    "MULTIBOW": "BOW_rose",
-                    "INDIGOBOW": "BOW_indigo",
-                    "RAINBOWBOW": "BOW_GRADIENT_rainbow",
-                    "CRIMSONNYLON": "NYLON_BELL_crimson",
-                    "BLUENYLON": "NYLON_BELL_blue",
-                    "YELLOWNYLON": "NYLON_BELL_yellow",
-                    "CYANNYLON": "NYLON_BELL_cyan",
-                    "REDNYLON": "NYLON_BELL_orange",
-                    "LIMENYLON": "NYLON_BELL_lime",
-                    "GREENNYLON": "NYLON_BELL_green",
-                    "WHITENYLON": "NYLON_BELL_white",
-                    "BLACKNYLON": "NYLON_BELL_black",
-                    "SPIKESNYLON": "NYLON_BELL_black_gold",
-                    "PINKNYLON": "NYLON_BELL_pink",
-                    "PURPLENYLON": "NYLON_BELL_purple",
-                    "MULTINYLON": "NYLON_BELL_rose",
-                    "INDIGONYLON": "NYLON_BELL_indigo",
-                    "RAINBOWNYLON": "NYLON_BELL_GRADIENT_rainbow"
-                }
-                sprite_name = f"{sprites.COLLAR_DATA['spritesheet']}{collar_map[cat.pelt.accessory]}{cat_sprite}"
-                new_sprite.blit(
-                    _recolor_lineart(
-                        sprites.sprites[sprite_name],
-                        lineart_color,
-                        gradient_surface,
-                    ),
-                    (0, 0),
-                )
+            for acc in cat.pelt.acc_slot_list:
+                if acc in cat.pelt.plant_accessories:
+                    sprite_name = f"{sprites.PLANT_DATA['spritesheet']}{acc}{cat_sprite}"
+                    new_sprite.blit(
+                        _recolor_lineart(
+                            sprites.sprites[sprite_name],
+                            lineart_color,
+                            gradient_surface,
+                        ),
+                        (0, 0),
+                    )
+                elif acc in cat.pelt.wild_accessories:
+                    sprite_name = f"{sprites.WILD_DATA['spritesheet']}{acc}{cat_sprite}"
+                    new_sprite.blit(
+                        _recolor_lineart(
+                            sprites.sprites[sprite_name],
+                            lineart_color,
+                            gradient_surface,
+                        ),
+                        (0, 0),
+                    )
+                elif acc in cat.pelt.collars:
+                    collar_map = {
+                        "CRIMSON": "LEATHER_crimson",
+                        "BLUE": "LEATHER_blue",
+                        "YELLOW": "LEATHER_yellow",
+                        "CYAN": "LEATHER_cyan",
+                        "RED": "LEATHER_orange",
+                        "LIME": "LEATHER_lime",
+                        "GREEN": "LEATHER_green",
+                        "WHITE": "LEATHER_white",
+                        "BLACK": "LEATHER_black",
+                        "SPIKES": "LEATHER_SPIKE_black_gold",
+                        "PINK": "LEATHER_pink",
+                        "PURPLE": "LEATHER_purple",
+                        "MULTI": "LEATHER_rose",
+                        "INDIGO": "LEATHER_indigo",
+                        "RAINBOW": "LEATHER_GRADIENT_rainbow",
+                        "CRIMSONBELL": "LEATHER_BELL_crimson",
+                        "BLUEBELL": "LEATHER_BELL_blue",
+                        "YELLOWBELL": "LEATHER_BELL_yellow",
+                        "CYANBELL": "LEATHER_BELL_cyan",
+                        "REDBELL": "LEATHER_BELL_orange",
+                        "LIMEBELL": "LEATHER_BELL_lime",
+                        "GREENBELL": "LEATHER_BELL_green",
+                        "WHITEBELL": "LEATHER_BELL_white",
+                        "BLACKBELL": "LEATHER_BELL_black",
+                        "SPIKESBELL": "LEATHER_BELL_SPIKE_black_gold",
+                        "PINKBELL": "LEATHER_BELL_pink",
+                        "PURPLEBELL": "LEATHER_BELL_purple",
+                        "MULTIBELL": "LEATHER_BELL_rose",
+                        "INDIGOBELL": "LEATHER_BELL_indigo",
+                        "RAINBOWBELL": "LEATHER_BELL_GRADIENT_rainbow",
+                        "CRIMSONBOW": "BOW_crimson",
+                        "BLUEBOW": "BOW_blue",
+                        "YELLOWBOW": "BOW_yellow",
+                        "CYANBOW": "BOW_cyan",
+                        "REDBOW": "BOW_orange",
+                        "LIMEBOW": "BOW_lime",
+                        "GREENBOW": "BOW_green",
+                        "WHITEBOW": "BOW_white",
+                        "BLACKBOW": "BOW_black",
+                        "SPIKESBOW": "BOW_FOIL_black_gold",
+                        "PINKBOW": "BOW_pink",
+                        "PURPLEBOW": "BOW_purple",
+                        "MULTIBOW": "BOW_rose",
+                        "INDIGOBOW": "BOW_indigo",
+                        "RAINBOWBOW": "BOW_GRADIENT_rainbow",
+                        "CRIMSONNYLON": "NYLON_BELL_crimson",
+                        "BLUENYLON": "NYLON_BELL_blue",
+                        "YELLOWNYLON": "NYLON_BELL_yellow",
+                        "CYANNYLON": "NYLON_BELL_cyan",
+                        "REDNYLON": "NYLON_BELL_orange",
+                        "LIMENYLON": "NYLON_BELL_lime",
+                        "GREENNYLON": "NYLON_BELL_green",
+                        "WHITENYLON": "NYLON_BELL_white",
+                        "BLACKNYLON": "NYLON_BELL_black",
+                        "SPIKESNYLON": "NYLON_BELL_black_gold",
+                        "PINKNYLON": "NYLON_BELL_pink",
+                        "PURPLENYLON": "NYLON_BELL_purple",
+                        "MULTINYLON": "NYLON_BELL_rose",
+                        "INDIGONYLON": "NYLON_BELL_indigo",
+                        "RAINBOWNYLON": "NYLON_BELL_GRADIENT_rainbow"
+                    }
+                    sprite_name = f"{sprites.COLLAR_DATA['spritesheet']}{collar_map[acc]}{cat_sprite}"
+                    new_sprite.blit(
+                        _recolor_lineart(
+                            sprites.sprites[sprite_name],
+                            lineart_color,
+                            gradient_surface,
+                        ),
+                        (0, 0),
+                    )
 
         # reverse, if assigned so
         if cat.pelt.reverse:

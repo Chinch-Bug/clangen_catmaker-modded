@@ -12,7 +12,8 @@ dependencies = [
     "pygame-ce~=2.2",
     "pygame-gui~=0.6",
     "ujson~=5.7",
-    "bidict~=0.23"
+    "bidict~=0.23",
+    "tomli>=2.4.1",
 ]
 
 [dependency-groups]
