@@ -2,7 +2,7 @@
 
 ### By: Chinchbug, Original by KeyRaven 
 
-Current version: 1.0
+Current version: 1.5
 
 ClanGen Catmaker allows you to create cats using [ClanGen's](https://sablesteel.itch.io/clan-gen-fan-edit) and the [Genetic mod's](https://github.com/Chinch-Bug/clangen-genemod) art assets!
 

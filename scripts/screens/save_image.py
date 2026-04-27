@@ -90,21 +90,22 @@ class SaveAsImage(UIWindow):
             starting_height=2
         )
 
-        self.confirm_text = pygame_gui.elements.UITextBox(
-            "",
+        self.confirm_text = pygame_gui.elements.UITextEntryLine(
             scale(pygame.Rect((10, 250), (780, 90))),
+            placeholder_text=self.file_name,
             object_id="#text_box_26_horizcenter_vertcenter_spacing_95",
             container=self,
-            starting_height=2
+            anchors={"centerx": "centerx"}
         )
 
     def save_image(self):
-        file_name = self.file_name
+        if t := self.confirm_text.get_text():
+            self.file_name = t
         file_number = ""
         i = 0
         
         while True:
-            if os.path.isfile(f"{'./saved_images'}/{file_name + file_number}.png"):
+            if os.path.isfile(f"{'./saved_images'}/{self.file_name + file_number}.png"):
                 i += 1
                 file_number = f"_{i}"
             else:
@@ -113,8 +114,8 @@ class SaveAsImage(UIWindow):
         scaled_image = pygame.transform.scale_by(
             self.image_to_save, self.scale_factor)
         pygame.image.save(
-            scaled_image, f"{'./saved_images'}/{file_name + file_number}.png")
-        return f"{file_name + file_number}.png"
+            scaled_image, f"{'./saved_images'}/{self.file_name + file_number}.png")
+        return f"{self.file_name + file_number}.png"
 
     def process_event(self, event) -> bool:
         super().process_event(event)
