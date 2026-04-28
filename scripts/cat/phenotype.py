@@ -514,7 +514,7 @@ class Phenotype(Genotype):
             self.spottype = "fully striped"
 
         if input in ['brokenpinsbraid', 'pinsbraided', 'leopard', 'marbled', 'braided', 'brokenbraid', 'rosetted', "sheetmarble"]:
-            self.bengtype = 'bengal'
+            self.bengtype = 'full bengal'
         elif input in ["partialmarble", "partialbraided", "partialbrokenbraided", "partialrosetted"]:
             self.bengtype = "mild bengal"
         else:
