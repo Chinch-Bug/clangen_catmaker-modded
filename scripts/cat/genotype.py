@@ -176,7 +176,7 @@ class Genotype:
             "brindledbi" : self.brindledbi,
 
             "pseudomerle" : self.pseudomerle,
-            "merlepattern" : self.merlepattern,
+            "merlepattern" : self.merlepattern if self.pseudomerle else None,
 
             "sex": self.sex,
             "dilute": self.dilute,
