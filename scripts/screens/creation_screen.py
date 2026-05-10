@@ -336,7 +336,7 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimerapheno.tortie = True
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
-                global_vars.CREATED_CAT.chimerapheno.tortiepattern = global_vars.CREATED_CAT.chimerapheno.phenotype.tortiepattern
+                global_vars.CREATED_CAT.chimerapheno.tortiepattern = global_vars.CREATED_CAT.chimerapheno.tortiepattern
                 self.build_dropdown_menus()
             elif event.ui_element == self.checkboxes["revtortiec"]:
                 if self.chimtortierev == "rev":
