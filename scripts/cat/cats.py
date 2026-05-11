@@ -479,7 +479,7 @@ class Cat():
             "no_mates": False,
             "genotype": self.phenotype.export(),
             "chimerageno": self.chimerapheno.export() if self.phenotype.chimera else None,
-            "chimera_pattern": self.chimerapheno.chimerapattern if self.phenotype.chimera else None,
+            "chimera_pattern": [self.chimerapheno.chimerapattern] if self.phenotype.chimera else None,
             "passes_genotype" : 1,
             "white_pattern" : self.phenotype.white_pattern[1:] if len(self.phenotype.white_pattern) > 1 else "No",
             "chim_white" : self.chimerapheno.white_pattern[1:] if self.phenotype.chimera and len(self.chimerapheno.white_pattern) > 1 else "No",
