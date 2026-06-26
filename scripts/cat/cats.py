@@ -6,6 +6,7 @@ from scripts.utility import *
 from scripts.game_structure.game_essentials import *
 from scripts.cat.pelts import Pelt
 from .phenotype import Phenotype
+from scripts.cat.sprites import sprites
 
 
 class Cat():
@@ -103,7 +104,7 @@ class Cat():
             else:
                 global_vars.CREATED_CAT.phenotype.fade = 'Homozygous'
 
-            phenotype.saturation = choice([0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6])
+            phenotype.fur_shade = choice([0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6])
 
             phenotype.refone = 'R' + str(randint(1, 11))
             phenotype.refext = 'R' + str(randint(1, 11))
@@ -177,6 +178,7 @@ class Cat():
 
             vitiligo = ['MOON', 'PHANTOM', 'POWDER', 'BLEACHED', 'VITILIGO', 'VITILIGOTWO', 'SMOKEY']
             phenotype.vitiligo = choice([True, False, False, False, False, False, False, False])
+            self.pelt.rusting = {choice(sprites.rusting_sprites): randint(1, 5)*5} if random.random() < 0.25 else None
 
             #white patterns
 
@@ -490,6 +492,7 @@ class Cat():
             "sprite_senior": self.pelt.cat_sprites['senior'],
             "sprite_para_adult": self.pelt.cat_sprites['para_adult'],
             "reverse": self.pelt.reverse,
+            "rusting": self.pelt.rusting,
             "tint": None,
             "white_tint": None,
             "skill_dict": {

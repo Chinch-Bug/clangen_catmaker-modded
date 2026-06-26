@@ -126,7 +126,7 @@ class Genotype:
         self.rednose = False
         self.blacknose = False
 
-        self.saturation = 3
+        self.fur_shade = 3
 
         self.bengal = ""
         self.bengtype = "normal markings"
@@ -230,7 +230,7 @@ class Genotype:
             "pax3" : self.pax3,
 
             "wideband" : self.wideband,
-            "saturation" : self.saturation,
+            "fur_shade" : self.fur_shade,
             "rufousing" : self.rufousing,
             "unders_ruf": self.unders_ruf,
             "bengal" : self.bengal,

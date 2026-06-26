@@ -598,8 +598,9 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             def make_cat(whichmain, whichcolour, whichbase, cat_unders, special=None):
                 is_red = (
                     'red' in whichcolour or 'cream' in whichcolour or 'honey' in whichcolour or 'ivory' in whichcolour or 'apricot' in whichcolour)
+                is_white = (phenotype.white[0] == 'W' or phenotype.pointgene[0] == 'c' or whichcolour == 'white' or phenotype.white_pattern == ['full white'])
 
-                if (phenotype.white[0] == 'W' or phenotype.pointgene[0] == 'c' or whichcolour == 'white' or phenotype.white_pattern == ['full white']):
+                if is_white:
                     whichmain.blit(
                         sprites.sprites['lightbasecolours0'], (0, 0))
                 elif (whichcolour != whichbase and special != 'masked silver'):
@@ -983,6 +984,12 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     mask.blit(make_cat(pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA), colours[0], colours[1], [colours[2], colours[3]], "blue-tipped"), (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
                     whichmain.blit(mask, (0, 0))
 
+                if not is_red and not is_white and cat.pelt.rusting:
+                    for rust, opacity in cat.pelt.rusting.items():
+                        rusting = sprites.sprites[rust + cat_sprite].copy()
+                        rusting.fill((255, 255, 255, int((255/100)*opacity)), special_flags=pygame.BLEND_RGBA_MULT)
+                        whichmain.blit(rusting.premul_alpha(), (0, 0), special_flags=pygame.BLEND_RGB_ADD)
+                    
                 seasondict = {
                     'Greenleaf': 'summer',
                     'Leaf-bare': 'winter'

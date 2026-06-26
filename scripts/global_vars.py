@@ -15,6 +15,7 @@ MANAGER.get_theme().load_theme('resources/text_boxes.json')
 
 
 import scripts.cat.cats
+from scripts.cat.sprites import sprites
 
 CREATED_CAT = scripts.cat.cats.Cat()
 
@@ -31,6 +32,9 @@ def sort_bidict(d: bidict, first_element=None):
     temp.update(sorted_dict)
     return temp
 
+rusting_sprites = bidict({None: "None"})
+for s in sprites.rusting_sprites:
+    rusting_sprites[s] = s.split("_", 1)[-1].replace("_", " ").title()
 
 tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Blotched)", 
                   "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 

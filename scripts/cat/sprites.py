@@ -9,6 +9,7 @@ class Sprites():
     cat_tints = {}
     white_patches_tints = {}
     clan_symbols = []
+    rusting_sprites = []
 
     with open(
         "sprites/dicts/pose_sprite_data.json", "r", encoding="utf-8"
@@ -248,6 +249,10 @@ class Sprites():
             sprites.spritesheet("sprites/genemod/effects/"+x, 'Other/'+x.replace('.png', ""))
         
         
+        for x in os.listdir("sprites/genemod/rusting"):
+            self.spritesheet("sprites/genemod/rusting/"+x, 'Rust/'+x.replace('.png', ""))
+            self.make_group('Rust/'+x.replace('.png', ""), (0, 0), "rusting_"+x.replace('.png', ""))
+            self.rusting_sprites.append("rusting_"+x.replace('.png', ""))
         for x in os.listdir("sprites/genemod/white"):
             sprites.spritesheet("sprites/genemod/white/"+x, 'White/'+x.replace('.png', ""))
             self.make_group('White/'+x.replace('.png', ""), (0, 0), x.replace('.png', ""))

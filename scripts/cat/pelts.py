@@ -339,6 +339,7 @@ class Pelt():
                  paralyzed:bool=False,
                  opacity:int=100,
                  scars:list=None,
+                 rusting:str=None,
                  tint:str="none",
                  skin:str="BLACK",
                  white_patches_tint:str="none",
@@ -349,6 +350,7 @@ class Pelt():
                  para_adult_sprite:int=None,
                  reverse:bool=False,
                  ) -> None:
+        self.rusting = rusting
         self.name = name
         self.colour = colour
         self.white_patches = white_patches

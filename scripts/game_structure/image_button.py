@@ -464,3 +464,6 @@ class IDImageButton(UIImageButton):
         if not self.ids:
             self.disable()
 
+class UIDropDownMenu(pygame_gui.elements.UIDropDownMenu):
+    def set_expand_direction(self, dir):
+        self.menu_states["expanded"].expand_direction = dir

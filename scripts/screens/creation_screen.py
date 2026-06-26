@@ -34,6 +34,7 @@ class CreationScreen(base_screens.Screens):
         self.base_pelt_select = None
         self.cat_platform = None
         self.visable_tab = None
+        self.sliders = {}
         self.dropdown_menus = {}
         self.checkboxes = {}
         self.labels = {}
@@ -629,9 +630,13 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.phenotype.specialred = event.text.lower()
 
                 self.update_cat_image()
-            elif event.ui_element == self.dropdown_menus["saturation_select"]:
+            elif event.ui_element == self.dropdown_menus["fur_shade_select"]:
 
-                global_vars.CREATED_CAT.phenotype.saturation = int(event.text)
+                global_vars.CREATED_CAT.phenotype.fur_shade = int(event.text)
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["rusting"]:
+                global_vars.CREATED_CAT.pelt.rusting = {global_vars.rusting_sprites.inverse[event.text]: self.sliders["rusting"].get_current_value()}
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["vitiligo_select"]:
@@ -740,9 +745,9 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.chimerapheno.specialred = event.text.lower()
 
                 self.update_cat_image()
-            elif event.ui_element == self.dropdown_menus["saturation_selectc"]:
+            elif event.ui_element == self.dropdown_menus["fur_shade_selectc"]:
 
-                global_vars.CREATED_CAT.chimerapheno.saturation = int(
+                global_vars.CREATED_CAT.chimerapheno.fur_shade = int(
                     event.text)
 
                 self.update_cat_image()
@@ -1051,6 +1056,12 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimerapheno.extraeye = None
 
                 self.update_cat_image()
+        elif event.type == pygame_gui.UI_HORIZONTAL_SLIDER_MOVED:
+            if event.ui_element == self.sliders["rusting"]:
+                if global_vars.CREATED_CAT.pelt.rusting:
+                    global_vars.CREATED_CAT.pelt.rusting[list(global_vars.CREATED_CAT.pelt.rusting.keys())[0]] = event.value
+
+                self.update_cat_image()
 
     def show_tab(self, container):
         for x in [self.main_colour_tab, self.tortie_tab, self.tabby_pattern_tab, self.white_pattern_tab, self.chim_main_colour_tab, self.chim_tortie_tab, self.chim_tabby_pattern_tab, self.chim_white_pattern_tab, self.general_tab, self.extras_tab]:
@@ -1327,7 +1338,7 @@ class CreationScreen(base_screens.Screens):
         self.labels["specred"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Special Red:",
                                                              container=self.main_colour_tab,
                                                              object_id="#dropdown_label")
-        self.labels["sat"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Saturation:",
+        self.labels["sat"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Fur Shade:",
                                                          container=self.main_colour_tab,
                                                          object_id="#dropdown_label")
 
@@ -1379,7 +1390,7 @@ class CreationScreen(base_screens.Screens):
         self.labels["specredc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Special Red:",
                                                               container=self.chim_main_colour_tab,
                                                               object_id="#dropdown_label")
-        self.labels["satc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Saturation:",
+        self.labels["satc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Fur Shade:",
                                                           container=self.chim_main_colour_tab,
                                                           object_id="#dropdown_label")
 
@@ -1495,6 +1506,9 @@ class CreationScreen(base_screens.Screens):
                                                                container=self.tortie_tab,
                                                                object_id="#dropdown_label")
         self.labels["Merle Patches"] = pygame_gui.elements.UILabel(pygame.Rect((20, 110), (-1, 25)), "Pseudo-Merle Pattern:",
+                                                                   container=self.tortie_tab,
+                                                                   object_id="#dropdown_label")
+        self.labels["Rusting"] = pygame_gui.elements.UILabel(pygame.Rect((20, 165), (-1, 25)), "Rusting:",
                                                                    container=self.tortie_tab,
                                                                    object_id="#dropdown_label")
         self.labels["remMerle"] = pygame_gui.elements.UILabel(pygame.Rect((240, 110), (-1, 25)), "Remove Pseudo-Merle Patches:",
@@ -1649,31 +1663,34 @@ class CreationScreen(base_screens.Screens):
 
         for ele in self.dropdown_menus:
             self.dropdown_menus[ele].kill()
+        for ele in self.sliders:
+            self.sliders[ele].kill()
+        self.sliders = {}
         self.dropdown_menus = {}
 
         # -------------------------------------------------------------------------------------------------------------
         # General Tab Contents ----------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
 
-        self.dropdown_menus["pelt_length_select"] = pygame_gui.elements.UIDropDownMenu(["Short", "Long", "Short Rexed", "Long Rexed", "Hairless", "Fur-point", "Patchy Brush SH", "Patchy Brush LH"],
+        self.dropdown_menus["pelt_length_select"] = custom_buttons.UIDropDownMenu(["Short", "Long", "Short Rexed", "Long Rexed", "Hairless", "Fur-point", "Patchy Brush SH", "Patchy Brush LH"],
                                                                                        global_vars.CREATED_CAT.pelt.type,
                                                                                        pygame.Rect(
                                                                                            (20, 100), (150, 30)),
                                                                                        container=self.general_tab)
 
-        self.dropdown_menus["ear_type_select"] = pygame_gui.elements.UIDropDownMenu(["Normal", "Folded", "Curled", "Folded Curl"],
+        self.dropdown_menus["ear_type_select"] = custom_buttons.UIDropDownMenu(["Normal", "Folded", "Curled", "Folded Curl"],
                                                                                     global_vars.CREATED_CAT.phenotype.GetEarType(),
                                                                                     pygame.Rect(
                                                                                         (180, 100), (150, 30)),
                                                                                     container=self.general_tab)
 
-        self.dropdown_menus["tail_type_select"] = pygame_gui.elements.UIDropDownMenu(["Full", "3/4", "1/2", "1/3", "Stubby", "None"],
+        self.dropdown_menus["tail_type_select"] = custom_buttons.UIDropDownMenu(["Full", "3/4", "1/2", "1/3", "Stubby", "None"],
                                                                                      global_vars.CREATED_CAT.phenotype.GetTailType(),
                                                                                      pygame.Rect(
                                                                                          (340, 100), (150, 30)),
                                                                                      container=self.general_tab)
 
-        self.dropdown_menus["pose_select"] = pygame_gui.elements.UIDropDownMenu(["Pose " + i for i in global_vars.poses[global_vars.CREATED_CAT.pelt.length][global_vars.CREATED_CAT.age]],
+        self.dropdown_menus["pose_select"] = custom_buttons.UIDropDownMenu(["Pose " + i for i in global_vars.poses[global_vars.CREATED_CAT.pelt.length][global_vars.CREATED_CAT.age]],
                                                                                 "Pose " +
                                                                                 global_vars.CREATED_CAT.pelt.current_poses[
             global_vars.CREATED_CAT.age
@@ -1681,7 +1698,7 @@ class CreationScreen(base_screens.Screens):
             pygame.Rect((180, 35), (140, 30)),
             container=self.general_tab)
 
-        self.dropdown_menus["age_select"] = pygame_gui.elements.UIDropDownMenu(["Newborn", "Kitten", "Adolescent", "Adult", "Senior"],
+        self.dropdown_menus["age_select"] = custom_buttons.UIDropDownMenu(["Newborn", "Kitten", "Adolescent", "Adult", "Senior"],
                                                                                global_vars.CREATED_CAT.age.capitalize(),
                                                                                pygame.Rect(
                                                                                    (20, 35), (140, 30)),
@@ -1697,13 +1714,13 @@ class CreationScreen(base_screens.Screens):
         else:
             lineart = global_vars.lineart[0]
 
-        self.dropdown_menus["lineart_select"] = pygame_gui.elements.UIDropDownMenu(global_vars.lineart,
+        self.dropdown_menus["lineart_select"] = custom_buttons.UIDropDownMenu(global_vars.lineart,
                                                                                    lineart,
                                                                                    pygame.Rect(
                                                                                        (340, 35), (150, 30)),
                                                                                    container=self.general_tab)
         self.dropdown_menus["chimera_shape"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.chimera_patches_shapes.values(),
+            custom_buttons.UIDropDownMenu(global_vars.chimera_patches_shapes.values(),
                                                global_vars.tortie_patches_shapes.get(
                 global_vars.CREATED_CAT.phenotype.chimerapattern.replace(
                     'rev', '')
@@ -1715,13 +1732,13 @@ class CreationScreen(base_screens.Screens):
         # Pattern Tab Contents CHIMERA ----------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
 
-        self.dropdown_menus["color_selectc"] = pygame_gui.elements.UIDropDownMenu(global_vars.colors,
+        self.dropdown_menus["color_selectc"] = custom_buttons.UIDropDownMenu(global_vars.colors,
                                                                                   global_vars.CREATED_CAT.chimerapheno.colour.capitalize(),
                                                                                   pygame.Rect(
                                                                                       (20, 35), (155, 30)),
                                                                                   container=self.chim_main_colour_tab)
 
-        self.dropdown_menus["points_selectc"] = pygame_gui.elements.UIDropDownMenu(global_vars.points,
+        self.dropdown_menus["points_selectc"] = custom_buttons.UIDropDownMenu(global_vars.points,
                                                                                    global_vars.CREATED_CAT.chimerapheno.point,
                                                                                    pygame.Rect(
                                                                                        (400, 35), (175, 30)),
@@ -1755,55 +1772,55 @@ class CreationScreen(base_screens.Screens):
         global_vars.CREATED_CAT.chimerapheno.UpdateEyes()
 
         self.dropdown_menus["extention_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.extention.values(),
+            custom_buttons.UIDropDownMenu(global_vars.extention.values(),
                                                global_vars.extention[global_vars.CREATED_CAT.chimerapheno.ext[0]],
                                                pygame.Rect(
                                                    (210, 90), (175, 30)),
                                                container=self.chim_main_colour_tab)
         self.dropdown_menus["specred_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['None', 'Cameo', 'Pseudo-cinnamon', 'Blue-red', 'Blue-tipped'],
+            custom_buttons.UIDropDownMenu(['None', 'Cameo', 'Pseudo-cinnamon', 'Blue-red', 'Blue-tipped'],
                                                global_vars.CREATED_CAT.chimerapheno.specialred.capitalize(),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.chim_main_colour_tab)
-        self.dropdown_menus["saturation_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
-                                               str(global_vars.CREATED_CAT.chimerapheno.saturation),
+        self.dropdown_menus["fur_shade_selectc"] = \
+            custom_buttons.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
+                                               str(global_vars.CREATED_CAT.chimerapheno.fur_shade),
                                                pygame.Rect(
                                                    (210, 35), (175, 30)),
                                                container=self.chim_main_colour_tab)
 
-        self.dropdown_menus["ref1_selectc"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+        self.dropdown_menus["ref1_selectc"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.refone,
                                                                                  pygame.Rect(
                                                                                      (20, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["ref2_selectc"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+        self.dropdown_menus["ref2_selectc"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.reftwo,
                                                                                  pygame.Rect(
                                                                                      (185, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["ref3_selectc"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+        self.dropdown_menus["ref3_selectc"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.refext,
                                                                                  pygame.Rect(
                                                                                      (375, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["pig1_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
+        self.dropdown_menus["pig1_selectc"] = custom_buttons.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.pigone,
                                                                                  pygame.Rect(
                                                                                      (95, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["pig2_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
+        self.dropdown_menus["pig2_selectc"] = custom_buttons.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.pigtwo,
                                                                                  pygame.Rect(
                                                                                      (260, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["pig3_selectc"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
+        self.dropdown_menus["pig3_selectc"] = custom_buttons.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.pigext,
                                                                                  pygame.Rect(
                                                                                      (450, 155), (75, 30)),
                                                                                  container=self.chim_main_colour_tab)
-        self.dropdown_menus["sectype_selectc"] = pygame_gui.elements.UIDropDownMenu(['N/A', '1', '2', '3', '4', '5', '6'],
+        self.dropdown_menus["sectype_selectc"] = custom_buttons.UIDropDownMenu(['N/A', '1', '2', '3', '4', '5', '6'],
                                                                                     global_vars.CREATED_CAT.chimerapheno.extraeye.replace(
                                                                                         'sectoral', '') if global_vars.CREATED_CAT.chimerapheno.extraeye else 'N/A',
                                                                                     pygame.Rect(
@@ -1814,13 +1831,13 @@ class CreationScreen(base_screens.Screens):
         # Pattern Tab Contents ----------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
 
-        self.dropdown_menus["color_select"] = pygame_gui.elements.UIDropDownMenu(global_vars.colors,
+        self.dropdown_menus["color_select"] = custom_buttons.UIDropDownMenu(global_vars.colors,
                                                                                  global_vars.CREATED_CAT.phenotype.colour.capitalize(),
                                                                                  pygame.Rect(
                                                                                      (20, 35), (175, 30)),
                                                                                  container=self.main_colour_tab)
 
-        self.dropdown_menus["points_select"] = pygame_gui.elements.UIDropDownMenu(global_vars.points,
+        self.dropdown_menus["points_select"] = custom_buttons.UIDropDownMenu(global_vars.points,
                                                                                   global_vars.CREATED_CAT.phenotype.point,
                                                                                   pygame.Rect(
                                                                                       (400, 35), (175, 30)),
@@ -1854,55 +1871,55 @@ class CreationScreen(base_screens.Screens):
         global_vars.CREATED_CAT.phenotype.UpdateEyes()
 
         self.dropdown_menus["extention_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.extention.values(),
+            custom_buttons.UIDropDownMenu(global_vars.extention.values(),
                                                global_vars.extention[global_vars.CREATED_CAT.phenotype.ext[0]],
                                                pygame.Rect(
                                                    (210, 90), (175, 30)),
                                                container=self.main_colour_tab)
         self.dropdown_menus["specred_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['None', 'Cameo', 'Pseudo-cinnamon', 'Blue-red', 'Blue-tipped'],
+            custom_buttons.UIDropDownMenu(['None', 'Cameo', 'Pseudo-cinnamon', 'Blue-red', 'Blue-tipped'],
                                                global_vars.CREATED_CAT.phenotype.specialred.capitalize(),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.main_colour_tab)
-        self.dropdown_menus["saturation_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
-                                               str(global_vars.CREATED_CAT.phenotype.saturation),
+        self.dropdown_menus["fur_shade_select"] = \
+            custom_buttons.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
+                                               str(global_vars.CREATED_CAT.phenotype.fur_shade),
                                                pygame.Rect(
                                                    (210, 35), (175, 30)),
                                                container=self.main_colour_tab)
 
-        self.dropdown_menus["ref1_select"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+        self.dropdown_menus["ref1_select"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                 global_vars.CREATED_CAT.phenotype.refone,
                                                                                 pygame.Rect(
                                                                                     (20, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["ref2_select"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+        self.dropdown_menus["ref2_select"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                 global_vars.CREATED_CAT.phenotype.reftwo,
                                                                                 pygame.Rect(
                                                                                     (185, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["ref3_select"] = pygame_gui.elements.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
+        self.dropdown_menus["ref3_select"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                 global_vars.CREATED_CAT.phenotype.refext,
                                                                                 pygame.Rect(
                                                                                     (375, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["pig1_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
+        self.dropdown_menus["pig1_select"] = custom_buttons.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                 global_vars.CREATED_CAT.phenotype.pigone,
                                                                                 pygame.Rect(
                                                                                     (95, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["pig2_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
+        self.dropdown_menus["pig2_select"] = custom_buttons.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                 global_vars.CREATED_CAT.phenotype.pigtwo,
                                                                                 pygame.Rect(
                                                                                     (260, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["pig3_select"] = pygame_gui.elements.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
+        self.dropdown_menus["pig3_select"] = custom_buttons.UIDropDownMenu(['P11', 'P10', 'P9', 'P8', 'P7', 'P6', 'P5', 'P4', 'P3', 'P2', 'P1', 'blue', 'albino'],
                                                                                 global_vars.CREATED_CAT.phenotype.pigext,
                                                                                 pygame.Rect(
                                                                                     (450, 155), (75, 30)),
                                                                                 container=self.main_colour_tab)
-        self.dropdown_menus["sectype_select"] = pygame_gui.elements.UIDropDownMenu(['N/A', '1', '2', '3', '4', '5', '6'],
+        self.dropdown_menus["sectype_select"] = custom_buttons.UIDropDownMenu(['N/A', '1', '2', '3', '4', '5', '6'],
                                                                                    global_vars.CREATED_CAT.phenotype.extraeye.replace(
                                                                                        'sectoral', '') if global_vars.CREATED_CAT.phenotype.extraeye else 'N/A',
                                                                                    pygame.Rect(
@@ -1915,50 +1932,50 @@ class CreationScreen(base_screens.Screens):
 
         # Tabby Pattern
         self.dropdown_menus["tabby_pattern_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.tabbies.values(),
+            custom_buttons.UIDropDownMenu(global_vars.tabbies.values(),
                                                global_vars.tabbies[global_vars.CREATED_CAT.phenotype.GetTabbySprite(
                                                special="list")[0]],
                                                pygame.Rect(
                                                    (20, 35), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["agouti_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['Solid', 'Agouti', 'Midnight Charcoal', 'Twilight Charcoal'],
+            custom_buttons.UIDropDownMenu(['Solid', 'Agouti', 'Midnight Charcoal', 'Twilight Charcoal'],
                                                global_vars.CREATED_CAT.phenotype.tabtype,
                                                pygame.Rect(
                                                    (210, 35), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["sokoke_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['Normal markings', 'Mild fading', 'Full sokoke'],
+            custom_buttons.UIDropDownMenu(['Normal markings', 'Mild fading', 'Full sokoke'],
                                                global_vars.CREATED_CAT.phenotype.soktype.capitalize(),
                                                pygame.Rect(
                                                    (400, 35), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["wideband_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
+            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
                                                global_vars.CREATED_CAT.phenotype.wbtype.capitalize(),
                                                pygame.Rect(
                                                    (210, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["rufousing_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
                                                global_vars.CREATED_CAT.phenotype.ruftype.capitalize(),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["unders_rufousing_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
                                                global_vars.CREATED_CAT.phenotype.unders_ruftype.capitalize(),
                                                pygame.Rect(
                                                    (400, 145), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["corin_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
+            custom_buttons.UIDropDownMenu(global_vars.corin.values(),
                                                global_vars.corin[global_vars.CREATED_CAT.phenotype.corin[0]],
                                                pygame.Rect(
                                                    (20, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["pangere_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.pangere.values(),
+            custom_buttons.UIDropDownMenu(global_vars.pangere.values(),
                                                global_vars.pangere[global_vars.CREATED_CAT.phenotype.pangere],
                                                pygame.Rect(
                                                    (210, 145), (175, 30)),
@@ -1970,50 +1987,50 @@ class CreationScreen(base_screens.Screens):
 
         # Tabby Pattern
         self.dropdown_menus["tabby_pattern_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.tabbies.values(),
+            custom_buttons.UIDropDownMenu(global_vars.tabbies.values(),
                                                global_vars.tabbies[global_vars.CREATED_CAT.chimerapheno.GetTabbySprite(
                                                special="list")[0]],
                                                pygame.Rect(
                                                    (20, 35), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["agouti_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['Solid', 'Agouti', 'Midnight Charcoal', 'Twilight Charcoal'],
+            custom_buttons.UIDropDownMenu(['Solid', 'Agouti', 'Midnight Charcoal', 'Twilight Charcoal'],
                                                global_vars.CREATED_CAT.chimerapheno.tabtype,
                                                pygame.Rect(
                                                    (210, 35), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["sokoke_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['Normal markings', 'Mild fading', 'Full sokoke'],
+            custom_buttons.UIDropDownMenu(['Normal markings', 'Mild fading', 'Full sokoke'],
                                                global_vars.CREATED_CAT.chimerapheno.soktype.capitalize(),
                                                pygame.Rect(
                                                    (400, 35), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["wideband_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
+            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
                                                global_vars.CREATED_CAT.chimerapheno.wbtype.capitalize(),
                                                pygame.Rect(
                                                    (210, 90), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["rufousing_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
                                                global_vars.CREATED_CAT.chimerapheno.ruftype.capitalize(),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["unders_rufousing_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
+            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
                                                global_vars.CREATED_CAT.chimerapheno.unders_ruftype.capitalize(),
                                                pygame.Rect(
                                                    (400, 145), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["corin_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.corin.values(),
+            custom_buttons.UIDropDownMenu(global_vars.corin.values(),
                                                global_vars.corin[global_vars.CREATED_CAT.chimerapheno.corin[0]],
                                                pygame.Rect(
                                                    (20, 90), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["pangere_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.pangere.values(),
+            custom_buttons.UIDropDownMenu(global_vars.pangere.values(),
                                                global_vars.pangere[global_vars.CREATED_CAT.chimerapheno.pangere],
                                                pygame.Rect(
                                                    (210, 145), (175, 30)),
@@ -2024,7 +2041,7 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["tortie_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
+            custom_buttons.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
                                                global_vars.tortie_patches_shapes[self.selectedtortie.replace(
                                                    "rev", "") if self.selectedtortie else None],
                                                pygame.Rect(
@@ -2036,7 +2053,7 @@ class CreationScreen(base_screens.Screens):
                                                                          container=self.tortie_tab)
 
         self.dropdown_menus["merle_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.merle_patches_shapes.values(),
+            custom_buttons.UIDropDownMenu(global_vars.merle_patches_shapes.values(),
                                                global_vars.merle_patches_shapes[self.selectedmerle],
                                                pygame.Rect(
                                                    (20, 130), (175, 30)),
@@ -2045,8 +2062,21 @@ class CreationScreen(base_screens.Screens):
         self.dropdown_menus['add_merle'] = custom_buttons.UIImageButton(pygame.Rect((200, 130), (30, 30)), "",
                                                                         object_id="#add_button",
                                                                         container=self.tortie_tab)
+
+        self.dropdown_menus["rusting"] = \
+            custom_buttons.UIDropDownMenu(global_vars.rusting_sprites.values(),
+                                            global_vars.rusting_sprites[list(global_vars.CREATED_CAT.pelt.rusting.keys())[0] if global_vars.CREATED_CAT.pelt.rusting else None],
+                                               pygame.Rect((20, 185), (175, 30)),
+                                               container=self.tortie_tab)
+        self.dropdown_menus["rusting"].set_expand_direction("up")
+
+        self.sliders["rusting"] = pygame_gui.elements.UIHorizontalSlider(pygame.Rect((20, 225), (175, 30)), 
+                                                                        start_value=5 if not global_vars.CREATED_CAT.pelt.rusting else list(global_vars.CREATED_CAT.pelt.rusting.values())[0], 
+                                                                        value_range=(0, 25),
+                                                                        container=self.tortie_tab)
+
         self.dropdown_menus["tortie_remove"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.tortiepattern,
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.tortiepattern,
                                                self.selectedtortierem,
                                                pygame.Rect(
                                                    (240, 35), (175, 30)),
@@ -2059,7 +2089,7 @@ class CreationScreen(base_screens.Screens):
                                                                            container=self.tortie_tab)
 
         self.dropdown_menus["merle_remove"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.merlepattern,
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.merlepattern,
                                                self.selectedmerlerem,
                                                pygame.Rect(
                                                    (240, 130), (175, 30)),
@@ -2076,7 +2106,7 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["tortie_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
+            custom_buttons.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
                                                global_vars.tortie_patches_shapes[self.selectedtortiechim.replace(
                                                    "rev", "") if self.selectedtortiechim else None],
                                                pygame.Rect(
@@ -2088,7 +2118,7 @@ class CreationScreen(base_screens.Screens):
                                                                           container=self.chim_tortie_tab)
 
         self.dropdown_menus["merle_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.merle_patches_shapes.values(),
+            custom_buttons.UIDropDownMenu(global_vars.merle_patches_shapes.values(),
                                                global_vars.merle_patches_shapes[self.selectedmerle],
                                                pygame.Rect(
                                                    (20, 130), (175, 30)),
@@ -2097,8 +2127,9 @@ class CreationScreen(base_screens.Screens):
         self.dropdown_menus['add_merlec'] = custom_buttons.UIImageButton(pygame.Rect((200, 130), (30, 30)), "",
                                                                          object_id="#add_button",
                                                                          container=self.chim_tortie_tab)
+
         self.dropdown_menus["tortie_removec"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.tortiepattern,
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.tortiepattern,
                                                self.selectedtortierem,
                                                pygame.Rect(
                                                    (240, 35), (175, 30)),
@@ -2111,7 +2142,7 @@ class CreationScreen(base_screens.Screens):
                                                                             container=self.chim_tortie_tab)
 
         self.dropdown_menus["merle_removec"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.merlepattern,
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.merlepattern,
                                                self.selectedmerlerem,
                                                pygame.Rect(
                                                    (240, 130), (175, 30)),
@@ -2128,7 +2159,7 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["basegame_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.white_patches.values(),
+            custom_buttons.UIDropDownMenu(global_vars.white_patches.values(),
                                                global_vars.white_patches[self.selectedbasegame],
                                                pygame.Rect(
                                                    (20, 35), (175, 30)),
@@ -2139,7 +2170,7 @@ class CreationScreen(base_screens.Screens):
                                                                            container=self.white_pattern_tab)
 
         self.dropdown_menus["genemod_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.genemod_white.values(),
+            custom_buttons.UIDropDownMenu(global_vars.genemod_white.values(),
                                                global_vars.genemod_white[self.selectedgenemod],
                                                pygame.Rect(
                                                    (20, 90), (175, 30)),
@@ -2149,7 +2180,7 @@ class CreationScreen(base_screens.Screens):
                                                                           object_id="#add_button",
                                                                           container=self.white_pattern_tab)
         self.dropdown_menus["white_select"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.white_pattern[1:] if len(global_vars.CREATED_CAT.phenotype.white_pattern) > 1 else ['None'],
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.white_pattern[1:] if len(global_vars.CREATED_CAT.phenotype.white_pattern) > 1 else ['None'],
                                                self.selectedwhite,
                                                pygame.Rect(
                                                    (240, 35), (175, 30)),
@@ -2162,13 +2193,13 @@ class CreationScreen(base_screens.Screens):
                                                                           container=self.white_pattern_tab)
 
         self.dropdown_menus["vitiligo_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.vit.values(),
+            custom_buttons.UIDropDownMenu(global_vars.vit.values(),
                                                global_vars.vit[global_vars.CREATED_CAT.phenotype.white_pattern[0]],
                                                pygame.Rect(
                                                    (20, 145), (175, 30)),
                                                container=self.white_pattern_tab)
 
-        self.dropdown_menus["karpati_select"] = pygame_gui.elements.UIDropDownMenu(['None', 'Heterozygous', 'Homozygous'],
+        self.dropdown_menus["karpati_select"] = custom_buttons.UIDropDownMenu(['None', 'Heterozygous', 'Homozygous'],
                                                                                    global_vars.CREATED_CAT.phenotype.fade,
                                                                                    pygame.Rect(
                                                                                        (240, 145), (190, 30)),
@@ -2179,7 +2210,7 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["basegame_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.white_patches.values(),
+            custom_buttons.UIDropDownMenu(global_vars.white_patches.values(),
                                                global_vars.white_patches[self.selectedbasegamechim],
                                                pygame.Rect(
                                                    (20, 35), (175, 30)),
@@ -2190,7 +2221,7 @@ class CreationScreen(base_screens.Screens):
                                                                             container=self.chim_white_pattern_tab)
 
         self.dropdown_menus["genemod_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.genemod_white.values(),
+            custom_buttons.UIDropDownMenu(global_vars.genemod_white.values(),
                                                global_vars.genemod_white[self.selectedgenemodchim],
                                                pygame.Rect(
                                                    (20, 90), (175, 30)),
@@ -2200,7 +2231,7 @@ class CreationScreen(base_screens.Screens):
                                                                            object_id="#add_button",
                                                                            container=self.chim_white_pattern_tab)
         self.dropdown_menus["white_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.white_pattern[1:] if len(global_vars.CREATED_CAT.chimerapheno.white_pattern) > 1 else ['None'],
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.white_pattern[1:] if len(global_vars.CREATED_CAT.chimerapheno.white_pattern) > 1 else ['None'],
                                                self.selectedwhitechim,
                                                pygame.Rect(
                                                    (240, 35), (175, 30)),
@@ -2213,13 +2244,13 @@ class CreationScreen(base_screens.Screens):
                                                                            container=self.chim_white_pattern_tab)
 
         self.dropdown_menus["vitiligo_selectc"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.vit.values(),
+            custom_buttons.UIDropDownMenu(global_vars.vit.values(),
                                                global_vars.vit[global_vars.CREATED_CAT.chimerapheno.white_pattern[0]],
                                                pygame.Rect(
                                                    (20, 145), (175, 30)),
                                                container=self.chim_white_pattern_tab)
 
-        self.dropdown_menus["karpati_selectc"] = pygame_gui.elements.UIDropDownMenu(['None', 'Heterozygous', 'Homozygous'],
+        self.dropdown_menus["karpati_selectc"] = custom_buttons.UIDropDownMenu(['None', 'Heterozygous', 'Homozygous'],
                                                                                     global_vars.CREATED_CAT.chimerapheno.fade,
                                                                                     pygame.Rect(
                                                                                         (240, 145), (190, 30)),
@@ -2230,7 +2261,7 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["scar_1"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.scars.values(),
+            custom_buttons.UIDropDownMenu(global_vars.scars.values(),
                                                global_vars.scars[
                                                    global_vars.CREATED_CAT.pelt.scar_slot_list[0]
             ],
@@ -2238,7 +2269,7 @@ class CreationScreen(base_screens.Screens):
             container=self.extras_tab)
 
         self.dropdown_menus["scar_2"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.scars.values(),
+            custom_buttons.UIDropDownMenu(global_vars.scars.values(),
                                                global_vars.scars[
                                                    global_vars.CREATED_CAT.pelt.scar_slot_list[1]
             ],
@@ -2246,7 +2277,7 @@ class CreationScreen(base_screens.Screens):
             container=self.extras_tab)
 
         self.dropdown_menus["scar_3"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.scars.values(),
+            custom_buttons.UIDropDownMenu(global_vars.scars.values(),
                                                global_vars.scars[
                                                    global_vars.CREATED_CAT.pelt.scar_slot_list[2]
             ],
@@ -2254,7 +2285,7 @@ class CreationScreen(base_screens.Screens):
             container=self.extras_tab)
 
         self.dropdown_menus["scar_4"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.scars.values(),
+            custom_buttons.UIDropDownMenu(global_vars.scars.values(),
                                                global_vars.scars[
                                                    global_vars.CREATED_CAT.pelt.scar_slot_list[3]
             ],
@@ -2262,35 +2293,39 @@ class CreationScreen(base_screens.Screens):
             container=self.extras_tab)
 
         self.dropdown_menus["accessory"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.accessories.values(),
+            custom_buttons.UIDropDownMenu(global_vars.accessories.values(),
                                                global_vars.accessories[
                                                    global_vars.CREATED_CAT.pelt.acc_slot_list[0]
             ],
             pygame.Rect((20, 145), (240, 30)),
             container=self.extras_tab)
+        self.dropdown_menus["accessory"].set_expand_direction("up")
 
         self.dropdown_menus["accessory1"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.accessories.values(),
+            custom_buttons.UIDropDownMenu(global_vars.accessories.values(),
                                                global_vars.accessories[
                                                    global_vars.CREATED_CAT.pelt.acc_slot_list[1]
             ],
             pygame.Rect((270, 145), (240, 30)),
             container=self.extras_tab)
+        self.dropdown_menus["accessory1"].set_expand_direction("up")
 
         self.dropdown_menus["accessory2"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.accessories.values(),
+            custom_buttons.UIDropDownMenu(global_vars.accessories.values(),
                                                global_vars.accessories[
                                                    global_vars.CREATED_CAT.pelt.acc_slot_list[2]
             ],
             pygame.Rect((20, 200), (240, 30)),
             container=self.extras_tab)
+        self.dropdown_menus["accessory2"].set_expand_direction("up")
 
         self.dropdown_menus["platform_select"] = \
-            pygame_gui.elements.UIDropDownMenu(global_vars.platforms.keys(),
+            custom_buttons.UIDropDownMenu(global_vars.platforms.keys(),
                                                global_vars.CREATED_CAT.platform,
                                                pygame.Rect(
                                                    (270, 200), (270, 30)),
                                                container=self.extras_tab)
+        self.dropdown_menus["platform_select"].set_expand_direction("up")
 
     def update_checkboxes_and_disable_dropdowns(self):
         """ This function updates the state of the checkboxes, and also disables any dropdown menus that
