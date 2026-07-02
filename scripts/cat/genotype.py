@@ -724,6 +724,7 @@ class Genotype:
 
             if not matched:
                 self.wideband = ""
+                self.wbsum = 0
                 for i in range(0, 8):
                     self.wideband += choice(self.odds["wideband"])
                     self.wbsum += int(self.wideband[i])
@@ -745,6 +746,7 @@ class Genotype:
 
             if not matched:
                 self.rufousing = ""
+                self.rufsum = 0
                 for i in range(0, 4):
                     self.rufousing += choice(self.odds["rufousing"])
                     self.rufsum += int(self.rufousing[i])
@@ -766,6 +768,7 @@ class Genotype:
 
             if not matched:
                 self.unders_ruf = ""
+                self.unders_rufsum = 0
                 for i in range(0, 4):
                     self.unders_ruf += choice(self.odds["rufousing"])
                     self.unders_rufsum += int(self.rufousing[i])
@@ -787,6 +790,7 @@ class Genotype:
 
             if not matched:
                 self.spotted = ""
+                self.spotsum = 0
                 for i in range(0, 4):
                     self.spotted += choice(self.odds["spotted"])
                     self.spotsum += int(self.spotted[i])
@@ -808,6 +812,7 @@ class Genotype:
 
             if not matched:
                 self.tickgenes = ""
+                self.ticksum = 0
                 for i in range(0, 4):
                     self.tickgenes += choice(self.odds["tickmod"])
                     self.ticksum += int(self.tickgenes[i])
@@ -829,6 +834,7 @@ class Genotype:
 
             if not matched:
                 self.bengal = ""
+                self.bengsum = 0
                 for i in range(0, 4):
                     self.bengal += choice(self.odds["bengal"])
                     self.bengsum += int(self.bengal[i])
@@ -849,6 +855,7 @@ class Genotype:
                     matched = False
             if not matched:
                 self.sokoke = ""
+                self.soksum = 0
                 for i in range(0, 4):
                     self.sokoke += choice(self.odds["sokoke"])
                     self.soksum += int(self.sokoke[i])
