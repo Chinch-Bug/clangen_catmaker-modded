@@ -683,8 +683,9 @@ class Genotype:
             self.sheeted = self.odds["dense_blotched"] > 0 and randint(1, self.odds["dense_blotched"]) == 1
             if self.breakthrough:
                 self.ticked[1] = "ta"
-                if self.mack[0] == "Mc":
-                    self.mack[1] = "mc" if self.odds["blotched"] > 0 and randint(1, self.odds["blotched"]) == 1 else "Mc"
+                
+            if self.mack[0] == "Mc":
+                self.mack[1] = "mc" if self.odds["blotched"] > 0 and randint(1, self.odds["blotched"]) == 1 else "Mc"
             else:
                 for i in range(2):
                     self.mack[i] = "mc" if self.odds["blotched"] > 0 and randint(1, self.odds["blotched"]) == 1 else "Mc"
@@ -707,6 +708,7 @@ class Genotype:
         soktypes = ["normal markings", "mild fading", "full sokoke"]
             
 
+        self.wbsum = 0
         for i in range(0, 8):
             self.wideband += choice(self.odds["wideband"])
             self.wbsum += int(self.wideband[i])
@@ -729,6 +731,7 @@ class Genotype:
                     self.wideband += choice(self.odds["wideband"])
                     self.wbsum += int(self.wideband[i])
 
+        self.rufsum = 0
         for i in range(0, 4):
             self.rufousing += choice(self.odds["rufousing"])
             self.rufsum += int(self.rufousing[i])
@@ -751,6 +754,7 @@ class Genotype:
                     self.rufousing += choice(self.odds["rufousing"])
                     self.rufsum += int(self.rufousing[i])
 
+        self.unders_rufsum = 0
         for i in range(0, 4):
             self.unders_ruf += choice(self.odds["rufousing"])
             self.unders_rufsum += int(self.unders_ruf[i])
@@ -773,6 +777,7 @@ class Genotype:
                     self.unders_ruf += choice(self.odds["rufousing"])
                     self.unders_rufsum += int(self.rufousing[i])
 
+        self.spotsum = 0
         for i in range(0, 4):
             self.spotted += choice(self.odds["spotted"])
             self.spotsum += int(self.spotted[i])
@@ -795,6 +800,7 @@ class Genotype:
                     self.spotted += choice(self.odds["spotted"])
                     self.spotsum += int(self.spotted[i])
 
+        self.ticksum = 0
         for i in range(0, 4):
             self.tickgenes += choice(self.odds["tickmod"])
             self.ticksum += int(self.tickgenes[i])
@@ -817,6 +823,7 @@ class Genotype:
                     self.tickgenes += choice(self.odds["tickmod"])
                     self.ticksum += int(self.tickgenes[i])
 
+        self.bengsum = 0
         for i in range(0, 4):
             self.bengal += choice(self.odds["bengal"])
             self.bengsum += int(self.bengal[i])
@@ -839,6 +846,7 @@ class Genotype:
                     self.bengal += choice(self.odds["bengal"])
                     self.bengsum += int(self.bengal[i])
 
+        self.soksum = 0
         for i in range(0, 4):
             self.sokoke += choice(self.odds["sokoke"])
             self.soksum += int(self.sokoke[i])
