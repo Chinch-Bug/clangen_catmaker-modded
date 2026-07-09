@@ -718,10 +718,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.wbsum > ranges[0]:
+                if self.wbsum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.wbsum < ranges[index]:
+                if ranges[index-1] > self.wbsum > ranges[index]:
                     matched = False
 
             if not matched:
@@ -741,10 +741,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.rufsum > ranges[0]:
+                if self.rufsum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.rufsum < ranges[index]:
+                if ranges[index-1] > self.rufsum > ranges[index]:
                     matched = False
 
             if not matched:
@@ -764,10 +764,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.unders_rufsum > ranges[0]:
+                if self.unders_rufsum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.unders_rufsum < ranges[index]:
+                if ranges[index-1] > self.unders_rufsum > ranges[index]:
                     matched = False
 
             if not matched:
@@ -787,10 +787,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.spotsum > ranges[0]:
+                if self.spotsum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.spotsum < ranges[index]:
+                if ranges[index-1] > self.spotsum > ranges[index]:
                     matched = False
 
             if not matched:
@@ -810,10 +810,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.ticksum > ranges[0]:
+                if self.ticksum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.ticksum < ranges[index]:
+                if ranges[index-1] > self.ticksum > ranges[index]:
                     matched = False
 
             if not matched:
@@ -833,10 +833,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.bengsum > ranges[0]:
+                if self.bengsum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.bengsum < ranges[index]:
+                if ranges[index-1] > self.bengsum > ranges[index]:
                     matched = False
 
             if not matched:
@@ -856,10 +856,10 @@ class Genotype:
         while not matched:
             matched = True
             if index == 0:
-                if self.soksum > ranges[0]:
+                if self.soksum >= ranges[0]:
                     matched = False
             else:
-                if ranges[index-1] < self.soksum < ranges[index]:
+                if ranges[index-1] > self.soksum > ranges[index]:
                     matched = False
             if not matched:
                 self.sokoke = ""
