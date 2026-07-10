@@ -171,7 +171,7 @@ class Genotype:
             "longtype": self.longtype,
             "eumelanin": self.eumelanin,
             "sexgene" : self.sexgene,
-            "specialred" : self.specialred,
+            "specialred" : self.specialred.replace("pseudo-", ""),
             "tortiepattern" : self.tortiepattern,
             "brindledbi" : self.brindledbi,
 
