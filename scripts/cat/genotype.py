@@ -111,13 +111,11 @@ class Genotype:
         self.poly = ["pd", "pd"]
         self.pax3 = ["NoDBE", "NoDBE"]
 
-        self.wideband = ""
+        self.wideband = 5
         self.wbtype = "medium"
-        self.wbsum = 7
 
-        self.rufousing = ""
+        self.rufousing = 4
         self.ruftype = "medium"
-        self.rufsum = 4
 
         self.unders_ruf = ""
         self.unders_ruftype = "medium"
@@ -257,6 +255,28 @@ class Genotype:
             "somatic" : {},
             "april_fools" : {}
         }
+
+    def poly_eval(self):
+        wbtypes = ["low", "medium", "high", "shaded", "chinchilla"]
+        ruftypes = ["low", "medium", "rufoused"]
+
+        if self.wideband < 4:
+            self.wbtype = wbtypes[0]
+        elif self.wideband < 8:
+            self.wbtype = wbtypes[1]
+        elif self.wideband < 12: 
+            self.wbtype = wbtypes[2]
+        elif self.wideband < 15: 
+            self.wbtype = wbtypes[3]
+        else: 
+            self.wbtype = wbtypes[4]
+
+        if self.rufousing < 3: 
+            self.ruftype = ruftypes[0]
+        elif self.rufousing < 6: 
+            self.ruftype = ruftypes[1]
+        else:
+            self.ruftype = ruftypes[2]
 
     def fill(self):
 
@@ -700,60 +720,12 @@ class Genotype:
 
         # POLYGENES
 
-        wbtypes = ["low", "medium", "high", "shaded", "chinchilla"]
         ruftypes = ["low", "medium", "rufoused"]    
         spottypes = ["fully striped", "slightly broken", "broken stripes", "mostly broken", "spotted"]
         ticktypes = ["full barring", "reduced barring", "agouti"]
         bengtypes = ["normal markings", "mild bengal", "full bengal"]
         soktypes = ["normal markings", "mild fading", "full sokoke"]
             
-
-        self.wbsum = 0
-        for i in range(0, 8):
-            self.wideband += choice(self.odds["wideband"])
-            self.wbsum += int(self.wideband[i])
-        ranges = [6, 10, 12, 14, 17]
-        index = wbtypes.index(self.wbtype)
-        matched = False
-        while not matched:
-            matched = True
-            if index == 0:
-                if self.wbsum >= ranges[0]:
-                    matched = False
-            else:
-                if ranges[index-1] < self.wbsum or self.wbsum > ranges[index]:
-                    matched = False
-
-            if not matched:
-                self.wideband = ""
-                self.wbsum = 0
-                for i in range(0, 8):
-                    self.wideband += choice(self.odds["wideband"])
-                    self.wbsum += int(self.wideband[i])
-
-        self.rufsum = 0
-        for i in range(0, 4):
-            self.rufousing += choice(self.odds["rufousing"])
-            self.rufsum += int(self.rufousing[i])
-        ranges = [3, 6, 9]
-        index = ruftypes.index(self.ruftype)
-        matched = False
-        while not matched:
-            matched = True
-            if index == 0:
-                if self.rufsum >= ranges[0]:
-                    matched = False
-            else:
-                if ranges[index-1] < self.rufsum or self.rufsum > ranges[index]:
-                    matched = False
-
-            if not matched:
-                self.rufousing = ""
-                self.rufsum = 0
-                for i in range(0, 4):
-                    self.rufousing += choice(self.odds["rufousing"])
-                    self.rufsum += int(self.rufousing[i])
-
         self.unders_rufsum = 0
         for i in range(0, 4):
             self.unders_ruf += choice(self.odds["rufousing"])

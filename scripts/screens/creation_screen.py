@@ -593,13 +593,15 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["wideband_select"]:
 
-                global_vars.CREATED_CAT.phenotype.wbtype = event.text.lower()
+                global_vars.CREATED_CAT.phenotype.wideband = int(event.text)
+                global_vars.CREATED_CAT.phenotype.poly_eval()
                 global_vars.CREATED_CAT.phenotype.SilverGoldFinder()
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["rufousing_select"]:
 
-                global_vars.CREATED_CAT.phenotype.ruftype = event.text.lower()
+                global_vars.CREATED_CAT.phenotype.rufousing = int(event.text)
+                global_vars.CREATED_CAT.phenotype.poly_eval()
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["unders_rufousing_select"]:
@@ -706,13 +708,15 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["wideband_selectc"]:
 
-                global_vars.CREATED_CAT.chimerapheno.wbtype = event.text.lower()
+                global_vars.CREATED_CAT.chimerapheno.wideband = int(event.text)
+                global_vars.CREATED_CAT.chimerapheno.poly_eval()
                 global_vars.CREATED_CAT.chimerapheno.SilverGoldFinder()
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["rufousing_selectc"]:
 
-                global_vars.CREATED_CAT.chimerapheno.ruftype = event.text.lower()
+                global_vars.CREATED_CAT.chimerapheno.rufousing = int(event.text)
+                global_vars.CREATED_CAT.chimerapheno.poly_eval()
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["unders_rufousing_selectc"]:
@@ -1951,14 +1955,14 @@ class CreationScreen(base_screens.Screens):
                                                    (400, 35), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["wideband_select"] = \
-            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
-                                               global_vars.CREATED_CAT.phenotype.wbtype.capitalize(),
+            custom_buttons.UIDropDownMenu([str(x) for x in list(range(17))],
+                                               str(global_vars.CREATED_CAT.phenotype.wideband),
                                                pygame.Rect(
                                                    (210, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
         self.dropdown_menus["rufousing_select"] = \
-            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
-                                               global_vars.CREATED_CAT.phenotype.ruftype.capitalize(),
+            custom_buttons.UIDropDownMenu([str(x) for x in list(range(9))],
+                                               str(global_vars.CREATED_CAT.phenotype.rufousing),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.tabby_pattern_tab)
@@ -2006,14 +2010,14 @@ class CreationScreen(base_screens.Screens):
                                                    (400, 35), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["wideband_selectc"] = \
-            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'High', 'Shaded', 'Chinchilla'],
-                                               global_vars.CREATED_CAT.chimerapheno.wbtype.capitalize(),
+            custom_buttons.UIDropDownMenu([str(x) for x in list(range(17))],
+                                               str(global_vars.CREATED_CAT.chimerapheno.wideband),
                                                pygame.Rect(
                                                    (210, 90), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
         self.dropdown_menus["rufousing_selectc"] = \
-            custom_buttons.UIDropDownMenu(['Low', 'Medium', 'Rufoused'],
-                                               global_vars.CREATED_CAT.chimerapheno.ruftype.capitalize(),
+            custom_buttons.UIDropDownMenu([str(x) for x in list(range(9))],
+                                               str(global_vars.CREATED_CAT.chimerapheno.rufousing),
                                                pygame.Rect(
                                                    (400, 90), (175, 30)),
                                                container=self.chim_tabby_pattern_tab)
