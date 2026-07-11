@@ -759,7 +759,7 @@ class Genotype:
             self.unders_ruf += choice(self.odds["rufousing"])
             self.unders_rufsum += int(self.unders_ruf[i])
         ranges = [3, 6, 9]
-        index = ruftypes.index(self.ruftype)
+        index = ruftypes.index(self.unders_ruftype)
         matched = False
         while not matched:
             matched = True
@@ -775,7 +775,7 @@ class Genotype:
                 self.unders_rufsum = 0
                 for i in range(0, 4):
                     self.unders_ruf += choice(self.odds["rufousing"])
-                    self.unders_rufsum += int(self.rufousing[i])
+                    self.unders_rufsum += int(self.unders_ruf[i])
 
         self.spotsum = 0
         for i in range(0, 4):
