@@ -415,11 +415,11 @@ class Phenotype(Genotype):
         self.tabby = ""
 
         def FindPattern():
-            if (self.ticked[0] != 'ta' or self.wbsum > 13):
-                if (self.wbsum > 13):
+            if (self.ticked[0] != 'ta' or self.wideband > 13):
+                if (self.wideband > 13):
                     self.tabby = 'chinchilla'
                 elif (self.ticked[1] == 'Ta' or not self.breakthrough):
-                    if (self.wbsum > 11):
+                    if (self.wideband > 11):
                         self.tabby = 'shaded'
                     elif (self.ticksum > 7):
                         self.tabby = 'agouti'
