@@ -703,7 +703,7 @@ class Phenotype(Genotype):
                     alt_ruf = "_silver"
                     rufousing = "silver"
                 elif genes.pointgene[0] != "C" or genes.agouti[0] == "Apb":
-                    alt_ruf = f"_{int(genes.rufousing/3)}"
+                    alt_ruf = f"_{int(genes.rufousing/4)}"
                     rufousing = "low"
                 else:
                     alt_ruf = f"_{genes.rufousing}"
@@ -775,7 +775,7 @@ class Phenotype(Genotype):
             alt_ruf = "_silver"
             rufousing = "silver"
         elif genes.pointgene[0] not in ["C", "cm"] or special == 'low':
-            alt_ruf = f"_{int(genes.rufousing/3)}"
+            alt_ruf = f"_{int(genes.rufousing/4)}"
             rufousing = "low"
         else:
             alt_ruf = f"_{genes.rufousing}"
