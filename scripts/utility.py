@@ -282,6 +282,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                             "low": 9
                         }
                         unders = sprites.sprites["Tabby_unders" + cat_sprite].copy()
+                        unders.fill((255, 255, 255, 180), special_flags=pygame.BLEND_RGBA_MULT)
                         charc_shading.blit(unders, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
                         opacity = int(25 * modifiers.get(phenotype.banding, 5))
                         charc_shading.set_alpha(opacity)
