@@ -128,12 +128,12 @@ class Cat():
                 phenotype.extraeye = None
             
             tabbies = {"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Blotched)", 
-                  "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
-                  "brokenpinsbraid" : "Broken Pinstripe-Braided", "pinsbraided" : "Pinstripe-Braided", 
-                  "leopard" : "Servaline-Rosseted", "blotched" : "Blotched", "marbled" : "Marbled", "brokenmack" : "Broken Mackerel", 
+                  "fullbar" : "Ticked", "broken pinstripe" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
+                  "broken pinstripe braided" : "Broken Pinstripe-Braided", "pinstripe braided" : "Pinstripe-Braided", 
+                  "leopard" : "Servaline-Rosseted", "blotched" : "Blotched", "marbled" : "Marbled", "broken mackerel" : "Broken Mackerel", 
                   "mackerel" : "Mackerel", "spotted" : "Spotted", "brokenbraid" : "Broken Braided", "braided" : "Braided", 
-                  "rosetted" : "Rosetted", "partialbraided": "Partial Braided", "partialbrokenbraided": "Partial Broken Braided", 
-                  "partialrosetted": "Partial Rosettes", "partialmarble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
+                  "rosetted" : "Rosetted", "partial braided": "Partial Braided", "partial broken braided": "Partial Broken Braided", 
+                  "partial rosetted": "Partial Rosettes", "partial marble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
                   "sheetblotched": "Dense Blotched"}
             phenotype.SetTabbyPattern(choice(list(tabbies.keys())))
 
@@ -147,8 +147,9 @@ class Cat():
                 phenotype.pseudomerle = random.random() < 0.1
             else:
                 phenotype.pseudomerle = False
-            phenotype.wbtype = choice(['low', 'medium', 'high', 'shaded', 'chinchilla'])
-            phenotype.ruftype = choice(['low', 'medium', 'rufoused'])
+            phenotype.wideband = choice(list(range(16)))
+            phenotype.rufousing = choice(list(range(9)))
+            phenotype.poly_eval()
 
             phenotype.ext[0] = choice(['E', 'E', 'E', 'E', choice(['Eg', 'ea', 'ea', 'er', 'ea', 'ec'])])
             phenotype.corin[0] = choice(['N', 'N', 'N', 'N', choice(['sh', 'sh', 'sg', 'fg'])])
@@ -391,7 +392,7 @@ class Cat():
                             clean_white()
                         elif KITgrade == 3:
                             white_pattern.append(choice(['van1', 'van2', 'van3', 'van1', 'van2', 'van3', 'full white']))
-                            white_pattern.append(choice(['break/piebald1', 'break/piebald2']))
+                            white_pattern.append(choice(['break/piebald1', 'break/piebald2', 'break/piebald3']))
                             white_pattern.append(choice([None, 'break/left ear', 'break/right ear', 'break/tail tip', 'break/tail band', 'break/tail rings', 'break/left face', 'break/right face']))
                             clean_white()
                         elif KITgrade == 4:

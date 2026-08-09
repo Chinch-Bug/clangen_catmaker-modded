@@ -10,6 +10,7 @@ class Sprites():
     white_patches_tints = {}
     clan_symbols = []
     rusting_sprites = []
+    empty_indexes = []
 
     with open(
         "sprites/dicts/pose_sprite_data.json", "r", encoding="utf-8"
@@ -46,15 +47,40 @@ class Sprites():
     ) as read_file:
         TORTIE_DATA = ujson.loads(read_file.read())
 
+
     with open(
-        "sprites/dicts/white_patches_sprite_data.json", "r", encoding="utf-8"
+        "sprites/dicts/white_patches_mostly_sprite_data.json", "r", encoding="utf-8"
     ) as read_file:
-        WHITE_DATA = ujson.loads(read_file.read())
+        WHITE_MOSTLY_DATA = ujson.loads(read_file.read())
+    with open(
+        "sprites/dicts/white_patches_high_sprite_data.json", "r", encoding="utf-8"
+    ) as read_file:
+        WHITE_HIGH_DATA = ujson.loads(read_file.read())
+    with open(
+        "sprites/dicts/white_patches_mid_sprite_data.json", "r", encoding="utf-8"
+    ) as read_file:
+        WHITE_MID_DATA = ujson.loads(read_file.read())
+    with open(
+        "sprites/dicts/white_patches_little_sprite_data.json", "r", encoding="utf-8"
+    ) as read_file:
+        WHITE_LITTLE_DATA = ujson.loads(read_file.read())
+    with open(
+        "sprites/dicts/white_patches_vitiligo_sprite_data.json", "r", encoding="utf-8"
+    ) as read_file:
+        WHITE_VITILIGO_DATA = ujson.loads(read_file.read())
 
     with open(
         "sprites/dicts/eye_colour_data.json", "r", encoding="utf-8"
     ) as read_file:
         EYE_DATA = ujson.loads(read_file.read())
+
+    with open(
+        "sprites/dicts/pose_sprite_data.json", "r", encoding="utf-8"
+    ) as read_file:
+        POSE_DATA = ujson.loads(read_file.read())
+    for i, pose in enumerate(POSE_DATA["poses"]):
+        if pose == "":
+            empty_indexes.append(i)
 
     def __init__(self):
         """Class that handles and hold all spritesheets.
@@ -118,6 +144,9 @@ class Sprites():
         :param palettes: list of palette names
         """
         # pulls the defaults from the pose_sprite_data.json file
+        ignore_blank = True
+        if sprites_x or sprites_y:
+            ignore_blank = False
         if not sprites_x:
             sprites_x = self.sheet_layout[0]
         if not sprites_y:
@@ -133,6 +162,9 @@ class Sprites():
                 if no_index:
                     full_name = f"{name}"
                 else:
+                    if i in self.empty_indexes and ignore_blank:
+                        i += 1
+                        continue
                     full_name = f"{name}{i}"
 
                 try:
@@ -212,12 +244,12 @@ class Sprites():
         # if anyone changes lineart for whatever reason update this
         if isinstance(self.size, int):
             pass
-        elif width / 3 == height / 9:
-            self.size = width / 3
+        elif width / 4 == height / 8:
+            self.size = width / 4
         else:
             self.size = 50 # default, what base clangen uses
-            print(f"lineart.png is not 3x7, falling back to {self.size}")
-            print(f"if you are a modder, please update scripts/cat/sprites.py and do a search for 'if width / 3 == height / 7:'")
+            print(f"lineart.png is not 4x6, falling back to {self.size}")
+            print(f"if you are a modder, please update scripts/cat/sprites.py and do a search for 'if width / 4 == height / 8:'")
 
         del width, height # unneeded
 
@@ -314,17 +346,10 @@ class Sprites():
 
         # genemod tabby patterns
 
-        for a, i in enumerate(['mackerel', 'brokenmack', 'spotted', 'blotched', 'fullbar', 'fullbaralt']):
-            self.make_group('Other/tabbypatterns', (a, 0), f'{i}')
-        for a, i in enumerate(['braided', 'brokenbraid', 'rosetted', 'marbled', 'redbar', 'redbaralt']):
-            self.make_group('Other/tabbypatterns', (a, 1), f'{i}')
-        for a, i in enumerate(['pinstripe', 'brokenpins', 'servaline', 'blotchtail', 'agouti']):
-            self.make_group('Other/tabbypatterns', (a, 2), f'{i}')
-        for a, i in enumerate(['pinsbraided', 'brokenpinsbraid', 'leopard', 'blotchbar', 'pinsbar', 'charcoal']):
-            self.make_group('Other/tabbypatterns', (a, 3), f'{i}')
-        for a, i in enumerate(['macktail', 'bengtail', 'partialrosetted', 'sheeted', 'goldengradient', 'tabbypads']):
-            self.make_group('Other/tabbypatterns', (a, 4), f'{i}')
-        
+        for x in os.listdir("sprites/genemod/tabby patterns"):
+            self.spritesheet("sprites/genemod/tabby patterns/"+x, 'Tabbypatterns/'+x.replace('.png', ""))
+            self.make_group('Tabbypatterns/'+x.replace('.png', ""), (0, 0), x.replace('.png', ""))
+
         #genemod point markings
 
         self.make_group('points_spring', (0, 0), 'pointsm')
@@ -333,12 +358,12 @@ class Sprites():
         self.make_group('mocha_spring', (0, 0), 'mocham')
         self.make_group('mocha_summer', (0, 0), 'mochal')
         self.make_group('mocha_winter', (0, 0), 'mochad')
-
-        #genemod karpati
-        for a, x in enumerate(['hetkarpatiwinter', 'hetkarpatispring', 'hetkarpatisummer']):
-            self.make_group('Other/karpati', (a, 0), x)
-        for a, x in enumerate(['homokarpatiwinter', 'homokarpatispring', 'homokarpatisummer']):
-            self.make_group('Other/karpati', (a, 1), x)
+        self.make_group('heterokarpati_spring', (0, 0), 'hetkarpatispring')
+        self.make_group('heterokarpati_summer', (0, 0), 'hetkarpatisummer')
+        self.make_group('heterokarpati_winter', (0, 0), 'hetkarpatiwinter')
+        self.make_group('homokarpati_spring', (0, 0), 'homokarpatispring')
+        self.make_group('homokarpati_summer', (0, 0), 'homokarpatisummer')
+        self.make_group('homokarpati_winter', (0, 0), 'homokarpatiwinter')
 
         #genemod effects
         self.make_group('Other/ghosting', (0, 0), 'ghost')
@@ -357,21 +382,26 @@ class Sprites():
 
         #genemod extra
         self.make_group('Other/ears', (0, 0), 'ears')
+        self.make_group('Other/fold_curl_ears', (0, 0), 'fold_curl_ears')
         self.make_group('Other/noses', (0, 0), 'nose')
-        self.make_group('Other/nose_colours', (0, 0), 'nosecolours', sprites_y=5)
+        self.make_group('Other/nose_colours', (0, 0), 'nosecolours', sprites_x=3, sprites_y=5)
         self.make_group('Other/paw_pads', (0, 0), 'pads')
-        self.make_group('Other/pad_colours', (0, 0), 'padcolours', sprites_y=5)
+        self.make_group('Other/pad_colours', (0, 0), 'padcolours', sprites_x=3, sprites_y=5)
 
         #genemod eyes
 
         for i, x in enumerate(['left', 'right', 'sectoral1', 'sectoral2', 'sectoral3', 'sectoral4', 'sectoral5', 'sectoral6']):
-            self.make_group('Other/eyebase', (i, 0), x, sprites_y=8)
+            self.make_group('Other/eyebase', (i, 0), x)
         
         for i, x in enumerate(['outer', 'inner', 'pupil']):
-            self.make_group('Other/eyesections', (i, 0), f"eye{x}", sprites_y=7)
+            self.make_group('Other/eyesections', (i, 0), f"eye{x}")
         
         data_jsons = (
-            self.WHITE_DATA,
+            self.WHITE_MOSTLY_DATA,
+            self.WHITE_HIGH_DATA,
+            self.WHITE_MID_DATA,
+            self.WHITE_LITTLE_DATA,
+            self.WHITE_VITILIGO_DATA,
             self.TORTIE_DATA,
             self.SCAR_DATA,
             self.SCAR_MISSING_PART_DATA,

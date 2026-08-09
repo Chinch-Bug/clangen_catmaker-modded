@@ -36,13 +36,13 @@ rusting_sprites = bidict({None: "None"})
 for s in sprites.rusting_sprites:
     rusting_sprites[s] = s.split("_", 1)[-1].replace("_", " ").title()
 
-tabbies = bidict({"agouti" : "Agouti", "redbarc" : "Reduced Ticked (Blotched)", "redbar" : "Reduced Ticked", "fullbarc" : "Ticked (Blotched)", 
-                  "fullbar" : "Ticked", "brokenpins" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
-                  "brokenpinsbraid" : "Broken Pinstripe-Braided", "pinsbraided" : "Pinstripe-Braided", 
-                  "leopard" : "Servaline-Rosetted", "blotched" : "Blotched", "marbled" : "Marbled", "ghost" : "'Ghost'", "brokenmack" : "Broken Mackerel", 
-                  "mackerel" : "Mackerel", "spotted" : "Spotted", "brokenbraid" : "Broken Braided", "braided" : "Braided", 
-                  "rosetted" : "Rosetted", "partialbraided": "Partial Braided", "partialbrokenbraided": "Partial Broken Braided", 
-                  "partialrosetted": "Partial Rosettes", "partialmarble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
+tabbies = bidict({"agouti" : "Agouti", "reduced tickedc" : "Reduced Ticked (Blotched)", "reduced ticked" : "Reduced Ticked", "tickedc" : "Ticked (Blotched)", 
+                  "ticked" : "Ticked", "broken pinstripe" : "Broken Pinstripe", "pinstripe" : "Pinstripe", "servaline" : "Servaline", 
+                  "broken pinstripe braided" : "Broken Pinstripe-Braided", "pinstripe braided" : "Pinstripe-Braided", 
+                  "leopard" : "Servaline-Rosetted", "blotched" : "Blotched", "marbled" : "Marbled", "ghost" : "'Ghost'", "broken mackerel" : "Broken Mackerel", 
+                  "mackerel" : "Mackerel", "spotted" : "Spotted", "broken braided" : "Broken Braided", "braided" : "Braided", 
+                  "rosetted" : "Rosetted", "partial braided": "Partial Braided", "partial broken braided": "Partial Broken Braided", 
+                  "partial rosetted": "Partial Rosettes", "partial marble": "Partial Marbled", "sheetmarble": "Sheet Marble", 
                   "sheetblotched": "Dense Blotched"})
 tabbies = sort_bidict(tabbies)
 
@@ -137,25 +137,25 @@ colors = ['Black', 'Blue', 'Red', 'Cream', 'White', 'Albino', 'Chocolate', 'Lila
 
 genemod_white = bidict({None: 'None',
                         'None1': '-Right Front Leg-',
-                        'right front toes' : 'RF Toes', 'right front mitten' : 'RF Mitten', 'right front low sock' : 'RF Low Sock', 'right front high sock' : 'RF High Sock', 'right front bicolour1' : 'RF Bicolour1', 'right front bicolour2' : 'RF Bicolour2', 'break/right front mitten' : 'RF No Mitten', 'break/bracelet right' : 'RF Dark Band',
+                        'right front toes' : 'RF Toes', 'right front mitten' : 'RF Mitten', 'right front low sock' : 'RF Low Sock', 'right front high sock' : 'RF High Sock', 'right front bicolour1' : 'RF Bicolour1', 'right front bicolour2' : 'RF Bicolour2', 'break/bracelet right' : 'RF Dark Band',
                         'None2' : '-Left Front Leg-',
-                        'left front toes' : 'LF Toes', 'left front mitten' : 'LF Mitten', 'left front low sock' : 'LF Low Sock', 'left front high sock' : 'LF High Sock', 'left front bicolour1' : 'LF Bicolour1', 'left front bicolour2' : 'LF Bicolour2', 'break/left front mitten' : 'LF No Mitten', 'break/bracelet left' : 'LF Dark Band',
+                        'left front toes' : 'LF Toes', 'left front mitten' : 'LF Mitten', 'left front low sock' : 'LF Low Sock', 'left front high sock' : 'LF High Sock', 'left front bicolour1' : 'LF Bicolour1', 'left front bicolour2' : 'LF Bicolour2', 'break/bracelet left' : 'LF Dark Band',
                         'None3' : '-Right Back Leg-',
-                        'right back toes' : 'RB Toes', 'right back mitten' : 'RB Mitten', 'right back low sock' : 'RB Low Sock', 'right back high sock' : 'RB High Sock', 'right back bicolour1' : 'RB Bicolour1', 'right back bicolour2' : 'RB Bicolour2', 'break/right back mitten' : 'RB No Mitten',
+                        'right back toes' : 'RB Toes', 'right back mitten' : 'RB Mitten', 'right back low sock' : 'RB Low Sock', 'right back high sock' : 'RB High Sock', 'right back bicolour1' : 'RB Bicolour1', 'right back bicolour2' : 'RB Bicolour2',
                         'None4' : '-Left Back Leg-',
-                        'left back toes' : 'LB Toes', 'left back mitten' : 'LB Mitten', 'left back low sock' : 'LB Low Sock', 'left back high sock' : 'LB High Sock', 'left back bicolour1' : 'LB Bicolour1', 'left back bicolour2' : 'LB Bicolour2', 'break/left back mitten' : 'LB No Mitten',
+                        'left back toes' : 'LB Toes', 'left back mitten' : 'LB Mitten', 'left back low sock' : 'LB Low Sock', 'left back high sock' : 'LB High Sock', 'left back bicolour1' : 'LB Bicolour1', 'left back bicolour2' : 'LB Bicolour2',
                         'None5' : '-Underbelly-',
                         'belly tuft' : 'Belly Tuft', 'chest tuft' : 'Chest Tuft', 'belly spot' : 'Belly Spot', 'locket' : 'Locket', 'belly' : 'Belly', 'bib' : 'Bib', 'chest' : 'Chest', 'beard' : 'Beard', 'underbelly1' : 'Underbelly', 'mask n mantle' : 'Underbelly2',
                         'None6' : '-Head-',
-                        'chin' : 'White Chin', 'break/chin' : 'Dark Chin', 'mustache' : 'Mustache', 'muzzle1': 'Muzzle', 'muzzle2': 'Muzzle 2', 'blaze' : 'Blaze', 'break/nose1' : 'Coloured Nose Patch', 'break/nose2' : 'Coloured Nose', 'break/left ear' : 'No Left Ear', 'break/right ear' : 'No Right Ear', 'break/left face' : 'No Left Mask', 'break/right face' : 'No Right Mask', 'break/bowl cut' : 'Head Patch',
+                        'chin' : 'White Chin', 'mustache' : 'Mustache', 'muzzle1': 'Muzzle', 'muzzle2': 'Muzzle 2', 'blaze' : 'Blaze', 'break/nose1' : 'Coloured Nose Patch', 'break/nose2' : 'Coloured Nose', 'break/left ear' : 'No Left Ear', 'break/right ear' : 'No Right Ear', 'break/left face' : 'No Left Mask', 'break/right face' : 'No Right Mask', 'break/bowl cut' : 'Head Patch',
                         'None7' : '-Dorsal-', 
-                        'dorsal1': 'Thin Stripe', 'dorsal2' : 'Thick Stripe', 'break/inverse thai' : 'Coloured Stripe',
+                        'dorsal1': 'Thin Stripe', 'dorsal2' : 'Thick Stripe', 'break/dorsal stripe' : 'Coloured Stripe',
                         'None8' : '-Full-',
-                        'van1' : 'Van 1', 'van2' : 'Van 2', 'van3' : 'Van 3', 'full white' : 'Full White', 'break/piebald1' : 'Piebald Patches 1', 'break/piebald2' : 'Piebald Patches 2', 'break/left no' : 'Left \'No\'', 'break/right no' : 'Right \'No\'', 
+                        'van1' : 'Van 1', 'van2' : 'Van 2', 'van3' : 'Van 3', 'full white' : 'Full White', 'break/piebald1' : 'Saddle', 'break/piebald2' : 'Piebald Patches 1', 'break/piebald3' : 'Piebald Patches 2', 'break/left no' : 'Left \'No\'', 'break/right no' : 'Right \'No\'', 
                         'None9' : '-Body-',
-                        'belt' : 'White Belt', 'pants' : 'White Pants', 'break/pants' : 'Dark Pants',
+                        'belt' : 'White Belt', 'pants' : 'White Pants',
                         'None10' : '-Tail-',
-                        'tail tip' : 'Tail Tip', 'break/tail tip' : 'No Tail Tip', 'break/tail band': 'Colour Band', 'break/tail rings' : 'Colour Rings', 'thai tail' : 'Partial Tail'
+                        'tail tip' : 'Tail Tip', 'break/tail band': 'Colour Band', 'break/tail rings' : 'Colour Rings', 'thai tail' : 'Partial Tail'
                         })
 
 points = ['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']
@@ -289,24 +289,24 @@ poses = {
             "3": 2
         },
         "kitten": {
-            "1": 3,
-            "2": 4,
-            "3": 5
+            "1": 4,
+            "2": 5,
+            "3": 6
         },
         "adolescent": {
-            "1": 6,
-            "2": 7,
-            "3": 8
+            "1": 8,
+            "2": 9,
+            "3": 10
         },
         "adult": {
-            "1": 12,
-            "2": 13,
-            "3": 14
+            "1": 16,
+            "2": 17,
+            "3": 18
         },
         "senior": {
-            "1": 18,
-            "2": 19,
-            "3": 20
+            "1": 24,
+            "2": 25,
+            "3": 26
         }
     },
     "hairless": {
@@ -316,24 +316,24 @@ poses = {
             "3": 2
         },
         "kitten": {
-            "1": 3,
-            "2": 4,
-            "3": 5
+            "1": 4,
+            "2": 5,
+            "3": 6
         },
         "adolescent": {
-            "1": 6,
-            "2": 7,
-            "3": 8
+            "1": 8,
+            "2": 9,
+            "3": 10
         },
         "adult": {
-            "1": 12,
-            "2": 13,
-            "3": 14
+            "1": 16,
+            "2": 17,
+            "3": 18
         },
         "senior": {
-            "1": 18,
-            "2": 19,
-            "3": 20
+            "1": 24,
+            "2": 25,
+            "3": 26
         }
     },
     "long": {
@@ -343,24 +343,24 @@ poses = {
             "3": 2
         },
         "kitten": {
-            "1": 3,
-            "2": 4,
-            "3": 5
+            "1": 4,
+            "2": 5,
+            "3": 6
         },
         "adolescent": {
-            "1": 9,
-            "2": 10,
-            "3": 11
+            "1": 12,
+            "2": 13,
+            "3": 14
         },
         "adult": {
-            "1": 15,
-            "2": 16,
-            "3": 17
+            "1": 20,
+            "2": 21,
+            "3": 22
         },
         "senior": {
-            "1": 18,
-            "2": 19,
-            "3": 20
+            "1": 24,
+            "2": 25,
+            "3": 26
         }
     }
 }

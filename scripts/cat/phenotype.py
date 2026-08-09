@@ -102,73 +102,77 @@ class Phenotype(Genotype):
         all_patterns = []
 
         if (special == 'redbar'):
-            all_patterns = ['redbaralt']
-        elif(special == 'ghost'):
-            all_patterns = ['fullbaralt']
+            all_patterns = ['reduced barring']
+        elif (special == 'ghost'):
+            all_patterns = ['normal barring']
         elif self.ticked[1] == "Ta" or (not self.breakthrough and self.ticked[0] == "Ta"):
             if (self.ticktype == "agouti"):
                 all_patterns = ['agouti']
             elif (self.ticktype == 'reduced barring'):
-                all_patterns = ['redbar']
+                all_patterns = ['reduced ticked']
             else:
-                all_patterns = ['fullbar']
+                all_patterns = ['ticked']
         elif (self.ticked[0] == "Ta"):
             if (self.bengtype == "normal markings"):
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenpins', 'pinsbar']
+                    all_patterns = ['broken pinstripe', 'breakthrough barring']
                 elif (self.spotsum < 6):
-                    all_patterns = ['pinstripe', 'pinsbar']
+                    all_patterns = ['pinstripe', 'breakthrough barring']
                 else:
-                    all_patterns = ['servaline', 'pinsbar']
+                    all_patterns = ['servaline', 'breakthrough barring']
             else:
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenpinsbraid', 'pinsbar']
+                    all_patterns = ['broken pinstripe braided', 'breakthrough barring']
                 elif (self.spotsum < 6):
-                    all_patterns = ['pinsbraided', 'pinsbar']
+                    all_patterns = ['pinstripe braided', 'breakthrough barring']
                 else:
-                    all_patterns = ['leopard', 'pinsbar']
+                    all_patterns = ['leopard', 'breakthrough barring']
         elif (self.mack[0] == "mc"):
             if (self.bengtype == "normal markings"):
-                all_patterns = ['blotched', 'blotchbar']
+                all_patterns = ['blotched', 'blotched barring']
             elif self.bengtype == "mild bengal":
-                all_patterns = ["marbled", "marbled", 'blotchbar']
+                all_patterns = ["marbled", "marbled", 'blotched barring']
             else:
-                all_patterns = ['marbled', 'blotchbar']
+                all_patterns = ['marbled', 'blotched barring']
         else:
             if (self.bengtype == "normal markings"):
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenmack', 'fullbaralt']
+                    all_patterns = ['broken mackerel', 'normal barring']
                 elif (self.spotsum < 6):
-                    all_patterns = ['mackerel', 'fullbaralt']
+                    all_patterns = ['mackerel', 'normal barring']
                 else:
-                    all_patterns = ['spotted', 'fullbaralt']
+                    all_patterns = ['spotted', 'normal barring']
             elif (self.bengtype == "mild bengal"):
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenbraid', 'fullbaralt']
+                    all_patterns = ['broken braided', 'normal barring']
                 elif (self.spotsum < 6):
-                    all_patterns = ['braided', 'fullbaralt']
+                    all_patterns = ['braided', 'normal barring']
                 else:
-                    all_patterns = ['partialrosetted', 'fullbaralt']
+                    all_patterns = ['partial rosetted', 'normal barring']
             else:
                 if (self.spotsum == 4):
-                    all_patterns = ['brokenbraid', 'fullbaralt']
+                    all_patterns = ['broken braided', 'normal barring']
                 elif (self.spotsum < 6):
-                    all_patterns = ['braided', 'fullbaralt']
+                    all_patterns = ['braided', 'normal barring']
                 else:
-                    all_patterns = ['rosetted', 'fullbaralt']
+                    all_patterns = ['rosetted', 'normal barring']
 
         if all_patterns[0] != "agouti":
             if self.bengtype != "normal markings":
-                tail = "bengtail"
+                tail = "bengal tail"
             else:
                 if self.mack[0] == "mc":
-                    tail = "blotchtail"
+                    tail = "blotched tail"
                 else:
-                    tail = "macktail"
+                    tail = "mackerel tail"
             all_patterns.append(tail)
 
             if special != "list" and (self.wbtype == "chinchilla" or self.corin[0] == "sg"):
                 all_patterns.insert(0, "agouti")
+        if special == "list" and "ticked" in all_patterns[0] and "blotched tail" in all_patterns:
+            all_patterns[0] += "c"
+        if special == "list" and self.breakthrough and self.ticked[0] == "Ta" and self.mack[0] == "mc":
+            all_patterns.insert(0, "ghost")
 
         return all_patterns
 
@@ -484,26 +488,26 @@ class Phenotype(Genotype):
         if input == 'agouti':
             self.ticked = ['Ta', 'Ta']
             self.ticktype = 'agouti'
-        elif input in ['redbarc', 'redbar', 'fullbarc', 'fullbar']:
+        elif input in ['reduced tickedc', 'reduced ticked', 'tickedc', 'ticked']:
             self.ticked = ['Ta', 'ta']
             self.breakthrough = False
             if 'red' in input:
                 self.ticktype = 'reduced barring'
             else:
                 self.ticktype = 'full barring'
-        elif input in ['brokenpins', 'pinstripe', 'servaline', 'brokenpinsbraid', 'pinsbraided', 'leopard', "ghost"]:
+        elif input in ['broken pinstripe', 'pinstripe', 'servaline', 'broken pinstripe braided', 'pinstripe braided', 'leopard', "ghost"]:
             self.ticked = ['Ta', 'ta']
             self.breakthrough = True
         else:
             self.ticked = ['ta', 'ta']
             self.breakthrough = False
 
-        if input in ['redbarc', 'fullbarc', 'blotched', 'marbled', "partialmarble", "sheetmarble", "sheetblotched", "ghost"]:
+        if input in ['reduced tickedc', 'tickedc', 'blotched', 'marbled', "partialmarble", "sheetmarble", "sheetblotched", "ghost"]:
             self.mack = ['mc', 'mc']
         else:
             self.mack = ['Mc', 'Mc']
 
-        if input in ['servaline', 'leopard', 'spotted', 'rosetted', "partialrosetted"]:
+        if input in ['servaline', 'leopard', 'spotted', 'rosetted', "partial rosetted"]:
             self.spotsum = 8
             self.spottype = "spotted"
         elif 'broken' in input:
@@ -513,9 +517,9 @@ class Phenotype(Genotype):
             self.spotsum = 0
             self.spottype = "fully striped"
 
-        if input in ['brokenpinsbraid', 'pinsbraided', 'leopard', 'marbled', 'braided', 'brokenbraid', 'rosetted', "sheetmarble"]:
+        if input in ['broken pinstripe braided', 'pinstripe braided', 'leopard', 'marbled', 'braided', 'broken braided', 'rosetted', "sheetmarble"]:
             self.bengtype = 'full bengal'
-        elif input in ["partialmarble", "partialbraided", "partialbrokenbraided", "partialrosetted"]:
+        elif input in ["partial marble", "partial braided", "partial broken braided", "partial rosetted"]:
             self.bengtype = "mild bengal"
         else:
             self.bengtype = 'normal markings'
@@ -724,7 +728,7 @@ class Phenotype(Genotype):
                     unders_opacity = self.GetSilverUnders(banding)
                 else:
                     unders_colour = self.FindEumUnders(genes, banding, rufousing, self.unders_ruftype)
-                    if self.unders_ruftype == "rufoused" or banding not in ["chinchilla", "shaded"]:
+                    if self.unders_ruftype == "rufoused" or banding in ["medium", "high"]:
                         unders_opacity = 30
                     else:
                         unders_opacity = 20
@@ -821,6 +825,10 @@ class Phenotype(Genotype):
             unders_opacity = self.GetSilverUnders(banding)
         else:
             unders_opacity = self.GetRedUnders(banding)
+            if genes.unders_ruftype == "rufoused":
+                unders_opacity -= 20
+            elif genes.unders_ruftype == "medium":
+                unders_opacity -= 10
         colour = colour + alt_ruf + alt_band
 
         if (genes.specialred in ['blue-red', 'pseudo-cinnamon']) or special == 'blue-tipped':

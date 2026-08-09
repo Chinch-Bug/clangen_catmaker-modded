@@ -55,6 +55,8 @@ class CreationScreen(base_screens.Screens):
         self.selectedwhitechim = 'None'
         self.tortierev = ""
         self.chimtortierev = ""
+        self.whiterev = ""
+        self.chimwhiterev = ""
 
         super().__init__(name)
 
@@ -250,7 +252,7 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["add_basegame"]:
 
                 if self.selectedbasegame:
-                    global_vars.CREATED_CAT.phenotype.white_pattern.append(
+                    global_vars.CREATED_CAT.phenotype.white_pattern.append(("break/" if self.whiterev else "")+
                         self.selectedbasegame)
 
                 self.build_dropdown_menus()
@@ -258,7 +260,7 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["add_genemod"]:
 
                 if self.selectedgenemod and 'None' not in self.selectedgenemod:
-                    global_vars.CREATED_CAT.phenotype.white_pattern.append(
+                    global_vars.CREATED_CAT.phenotype.white_pattern.append(("break/" if self.whiterev and "break/" not in self.selectedgenemod else "")+
                         self.selectedgenemod)
 
                 self.build_dropdown_menus()
@@ -400,6 +402,9 @@ class CreationScreen(base_screens.Screens):
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
                 self.build_dropdown_menus()
+            elif event.ui_element == self.checkboxes["revwhite"]:
+                self.whiterev = not self.whiterev
+                self.update_checkboxes_and_disable_dropdowns()
             elif event.ui_element == self.checkboxes["salmiak"]:
                 if global_vars.CREATED_CAT.phenotype.white[0] == 'wsal':
                     global_vars.CREATED_CAT.phenotype.white[0] = 'w'
@@ -408,6 +413,9 @@ class CreationScreen(base_screens.Screens):
 
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
+            elif event.ui_element == self.checkboxes["revwhitec"]:
+                self.chimwhiterev = not self.chimwhiterev
+                self.update_checkboxes_and_disable_dropdowns()
             elif event.ui_element == self.checkboxes["salmiakc"]:
                 if global_vars.CREATED_CAT.chimerapheno.white[0] == 'wsal':
                     global_vars.CREATED_CAT.chimerapheno.white[0] = 'w'
@@ -434,7 +442,7 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["add_basegamec"]:
                 if self.selectedbasegamechim:
-                    global_vars.CREATED_CAT.chimerapheno.white_pattern.append(
+                    global_vars.CREATED_CAT.chimerapheno.white_pattern.append(("break/" if self.chimwhiterev else "")+
                         self.selectedbasegamechim)
 
                 self.build_dropdown_menus()
@@ -442,7 +450,7 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["add_genemodc"]:
 
                 if self.selectedgenemodchim and 'None' not in self.selectedgenemodchim:
-                    global_vars.CREATED_CAT.chimerapheno.white_pattern.append(
+                    global_vars.CREATED_CAT.chimerapheno.white_pattern.append(("break/" if self.chimwhiterev and "break/" not in self.selectedgenemodchim else "")+
                         self.selectedgenemodchim)
 
                 self.build_dropdown_menus()
@@ -1578,7 +1586,10 @@ class CreationScreen(base_screens.Screens):
         self.labels["basegame"] = pygame_gui.elements.UILabel(pygame.Rect((20, 15), (150, 25)), "Basegame White:",
                                                               container=self.white_pattern_tab,
                                                               object_id="#dropdown_label")
-        self.labels["remwhite"] = pygame_gui.elements.UILabel(pygame.Rect((240, 15), (150, 25)), "Remove White:",
+        self.labels["remwhite"] = pygame_gui.elements.UILabel(pygame.Rect((240, 15), (150, 25)), "Remove Patch:",
+                                                              container=self.white_pattern_tab,
+                                                              object_id="#dropdown_label")
+        self.labels["revwhite"] = pygame_gui.elements.UILabel(pygame.Rect((270, 93), (150, 25)), "Removes White",
                                                               container=self.white_pattern_tab,
                                                               object_id="#dropdown_label")
         self.labels["genemod"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "Added White:",
@@ -1604,6 +1615,9 @@ class CreationScreen(base_screens.Screens):
         self.labels["remwhitec"] = pygame_gui.elements.UILabel(pygame.Rect((240, 15), (150, 25)), "Remove White:",
                                                                container=self.chim_white_pattern_tab,
                                                                object_id="#dropdown_label")
+        self.labels["revwhitec"] = pygame_gui.elements.UILabel(pygame.Rect((270, 93), (150, 25)), "Removes White",
+                                                              container=self.chim_white_pattern_tab,
+                                                              object_id="#dropdown_label")
         self.labels["genemodc"] = pygame_gui.elements.UILabel(pygame.Rect((20, 70), (150, 25)), "Added White:",
                                                               container=self.chim_white_pattern_tab,
                                                               object_id="#dropdown_label")
@@ -2769,9 +2783,21 @@ class CreationScreen(base_screens.Screens):
                                                                                container=self.chim_tabby_pattern_tab)
 
         # -------------------------------------------------------------------------------------------------------------
-        # Patter 3 Tab ------------------------------------------------------------------------------------------------
+        # Pattern 3 Tab ------------------------------------------------------------------------------------------------
         # -------------------------------------------------------------------------------------------------------------
 
+
+        # Reverse white
+        if self.whiterev:
+            self.checkboxes["revwhite"] = custom_buttons.UIImageButton(pygame.Rect((235, 88), (34, 34)),
+                                                                        "",
+                                                                        object_id="#checked_checkbox",
+                                                                        container=self.white_pattern_tab)
+        else:
+            self.checkboxes["revwhite"] = custom_buttons.UIImageButton(pygame.Rect((235, 88), (34, 34)),
+                                                                        "",
+                                                                        object_id="#unchecked_checkbox",
+                                                                        container=self.white_pattern_tab)
         # Salmiak
         if global_vars.CREATED_CAT.phenotype.white[0] == 'wsal':
             self.checkboxes["salmiak"] = custom_buttons.UIImageButton(pygame.Rect((20, 180), (34, 34)),
@@ -2783,6 +2809,17 @@ class CreationScreen(base_screens.Screens):
                                                                       "",
                                                                       object_id="#unchecked_checkbox",
                                                                       container=self.white_pattern_tab)
+        # Reverse white
+        if self.chimwhiterev:
+            self.checkboxes["revwhitec"] = custom_buttons.UIImageButton(pygame.Rect((235, 88), (34, 34)),
+                                                                        "",
+                                                                        object_id="#checked_checkbox",
+                                                                        container=self.chim_white_pattern_tab)
+        else:
+            self.checkboxes["revwhitec"] = custom_buttons.UIImageButton(pygame.Rect((235, 88), (34, 34)),
+                                                                        "",
+                                                                        object_id="#unchecked_checkbox",
+                                                                        container=self.chim_white_pattern_tab)
         # Salmiak
         if global_vars.CREATED_CAT.chimerapheno.white[0] == 'wsal':
             self.checkboxes["salmiakc"] = custom_buttons.UIImageButton(pygame.Rect((20, 180), (34, 34)),
