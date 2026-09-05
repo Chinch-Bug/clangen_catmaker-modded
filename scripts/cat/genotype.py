@@ -3,29 +3,9 @@ import json
 from operator import xor
 import tomllib
 import os
+from scripts.cat.pelts import Pelt
+from scripts.cat.sprites import sprites
 
-maingame_white = {
-    'low': {
-        '1': [None, 'SCOURGE', 'BLAZE', 'TAILTIP', 'TOES', 'LUNA', 'LOCKET', "RIGHTEAR", "LEFTEAR", "ESTRELLA", "BACKSPOT", "EYEBAGS"],
-        '2': ['LITTLE', 'LIGHTTUXEDO', 'BUZZARDFANG', 'TIP', 'PAWS', 'BROKENBLAZE', 'BEARD', 'BIB', 'VEE', 'HONEY', 'TOESTAIL',
-                'RAVENPAW', 'DAPPLEPAW', 'LILTWO', 'MUSTACHE', 'REVERSEHEART', 'SPARKLE', 'REVERSEEYE', "EXTRA", "BLAZEMASK", "TEARS"],
-        '3': ['TUXEDO', 'SAVANNAH', 'FANCY', 'DIVA', 'BEARD', 'DAMIEN', 'BELLY', 'SQUEAKS', 'STAR', 'MISS', 'BOWTIE',
-                'FCTWO', 'FCONE', 'MIA', 'PRINCESS', 'DOUGIE', "TOPCOVER", "WINGS", "WOODPECKER", "FADEBELLY", "ROSINA"],
-        '4': ['TUXEDO', 'SAVANNAH', 'OWL', 'RINGTAIL', 'UNDERS', 'FAROFA', 'VEST', 'FRONT', 'BLOSSOMSTEP', 'DIGIT',
-                'HAWKBLAZE', "FADESPOTS", "MITAINE", "SKUNK", "BULLSEYE"],
-        '5': ['ANY', 'SHIBAINU', 'FAROFA', 'MISTER', 'PANTS', 'TRIXIE', "SPARROW"]
-    },
-    'high': {
-        '1': ['ANY', 'SHIBAINU', 'PANTSTWO', 'MAO', 'TRIXIE'],
-        '2': ['ANY', 'FRECKLES', 'PANTSTWO', 'MASKMANTLE', 'MAO', 'PAINTED', 'BUB', 'SCAR'],
-        '3': ['ANYTWO', 'PEBBLESHINE', 'BROKEN', 'PIEBALD', 'FRECKLES', 'HALFFACE', 'GOATEE', 'PRINCE', 'CAPSADDLE',
-                'REVERSEPANTS', 'GLASS', 'PAINTED', 'COWTWO', 'SAMMY', 'FINN', 'BUSTER', 'CAKE'],
-        '4': ['VAN', 'PEBBLESHINE', 'LIGHTSONG', 'CURVED', 'GOATEE', 'TAIL', 'APRON', 'HALFWHITE', 'APPALOOSA', 'HEART',
-                'MOORISH', 'COW', 'SHOOTINGSTAR', 'PEBBLE', 'TAILTWO', 'BUDDY', 'KROPKA'],
-        '5': ['ONEEAR', 'LIGHTSONG', 'PETAL', 'CHESTSPECK', 'HEARTTWO', 'BOOTS', 'SHOOTINGSTAR', 'EYESPOT',
-                'KROPKA', "BLACKSTAR", "LOVEBUG", "FULLWHITE"]
-    }
-}
 genemod_white = {
     'low': {
         '1': ['chest tuft', 'belly tuft', "left back toes", "right back toes", "left front toes", "right front toes", 'tail tip'],
@@ -586,7 +566,7 @@ class Genotype:
             elif self.white_pattern == ["left front mitten", "right front mitten", "left back mitten", "right back mitten"] and random() < 0.1:
                 self.white = "wg", "wg"
             else:
-                if "dorsal1" in self.white_pattern or "dorsal2" in self.white_pattern:
+                if "dorsal1" in self.white_pattern or "dorsal2" in self.white_pattern or "STRIPE_SMALL" in self.white_pattern or "STRIPE_MID" in self.white_pattern:
                     is_thai = True
 
                 no_breaks = [pat for pat in self.white_pattern[1:] if "break/" not in pat]
@@ -602,11 +582,27 @@ class Genotype:
                     for pat in no_breaks:
                         for i, l in enumerate(["high", "low"]):
                             for k in range(5, 0, -1):
-                                if pat in maingame_white[l][str(k)] and k + 5 - (i*5) > highest:
+                                if pat in Pelt.maingame_white[l][str(k)] and k + 5 - (i*5) > highest:
                                     highest = k + 5 - (i*5)
                                     break
                                 if pat in genemod_white[l][str(k)] and k + 5 - (i*5) > highest:
                                     highest = k + 5 - (i*5)
+                                    break
+                                if pat in list(sprites.WHITE_PATCH_COMBOS["mostly"].keys())+list(chain(*sprites.WHITE_MOSTLY_DATA["sprite_list"])):
+                                    if pick := randint(3, 6) > highest%5:
+                                        highest = pick+5
+                                    break
+                                if pat in list(sprites.WHITE_PATCH_COMBOS["high"].keys())+list(chain(*sprites.WHITE_HIGH_DATA["sprite_list"])):
+                                    if pick := randint(1, 4) > highest%5:
+                                        highest = pick+5
+                                    break
+                                if pat in list(sprites.WHITE_PATCH_COMBOS["mid"].keys())+list(chain(*sprites.WHITE_MID_DATA["sprite_list"])):
+                                    if pick := randint(3, 6) > highest:
+                                        highest = pick
+                                    break
+                                if pat in list(sprites.WHITE_PATCH_COMBOS["little"].keys())+list(chain(*sprites.WHITE_LITTLE_DATA["sprite_list"])):
+                                    if pick := randint(1, 4) > highest:
+                                        highest = pick
                                     break
                     self.whitegrade = highest % 5 + 1
                     if highest < 5:

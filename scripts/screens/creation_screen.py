@@ -656,7 +656,7 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["tortie_select"]:
 
-                self.selectedtortie = global_vars.tortie_patches_shapes.inverse[event.text]
+                self.selectedtortie = event.text
             elif event.ui_element == self.dropdown_menus["tortie_remove"]:
 
                 self.selectedtortierem = event.text
@@ -668,7 +668,7 @@ class CreationScreen(base_screens.Screens):
                 self.selectedmerlerem = event.text
             elif event.ui_element == self.dropdown_menus["tortie_selectc"]:
 
-                self.selectedtortiechim = global_vars.tortie_patches_shapes.inverse[event.text]
+                self.selectedtortiechim = event.text
             elif event.ui_element == self.dropdown_menus["tortie_removec"]:
 
                 self.selectedtortieremchim = event.text
@@ -680,7 +680,7 @@ class CreationScreen(base_screens.Screens):
                 self.selectedmerleremchim = event.text
             elif event.ui_element == self.dropdown_menus["basegame_select"]:
 
-                self.selectedbasegame = global_vars.white_patches.inverse[event.text]
+                self.selectedbasegame = event.text
             elif event.ui_element == self.dropdown_menus["genemod_select"]:
 
                 self.selectedgenemod = global_vars.genemod_white.inverse[event.text]
@@ -689,8 +689,7 @@ class CreationScreen(base_screens.Screens):
                 self.selectedwhite = event.text
             elif event.ui_element == self.dropdown_menus["chimera_shape"]:
 
-                global_vars.CREATED_CAT.phenotype.chimerapattern = global_vars.tortie_patches_shapes.inverse[
-                    event.text]
+                global_vars.CREATED_CAT.phenotype.chimerapattern = event.text
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["tabby_pattern_selectc"]:
@@ -771,7 +770,7 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["basegame_selectc"]:
 
-                self.selectedbasegamechim = global_vars.white_patches.inverse[event.text]
+                self.selectedbasegamechim = event.text
             elif event.ui_element == self.dropdown_menus["genemod_selectc"]:
 
                 self.selectedgenemodchim = global_vars.genemod_white.inverse[event.text]
@@ -1586,7 +1585,7 @@ class CreationScreen(base_screens.Screens):
         self.labels["basegame"] = pygame_gui.elements.UILabel(pygame.Rect((20, 15), (150, 25)), "Basegame White:",
                                                               container=self.white_pattern_tab,
                                                               object_id="#dropdown_label")
-        self.labels["remwhite"] = pygame_gui.elements.UILabel(pygame.Rect((240, 15), (150, 25)), "Remove Patch:",
+        self.labels["remwhite"] = pygame_gui.elements.UILabel(pygame.Rect((290, 15), (150, 25)), "Remove Patch:",
                                                               container=self.white_pattern_tab,
                                                               object_id="#dropdown_label")
         self.labels["revwhite"] = pygame_gui.elements.UILabel(pygame.Rect((270, 93), (150, 25)), "Removes White",
@@ -1612,7 +1611,7 @@ class CreationScreen(base_screens.Screens):
         self.labels["basegamec"] = pygame_gui.elements.UILabel(pygame.Rect((20, 15), (150, 25)), "Basegame White:",
                                                                container=self.chim_white_pattern_tab,
                                                                object_id="#dropdown_label")
-        self.labels["remwhitec"] = pygame_gui.elements.UILabel(pygame.Rect((240, 15), (150, 25)), "Remove White:",
+        self.labels["remwhitec"] = pygame_gui.elements.UILabel(pygame.Rect((290, 15), (150, 25)), "Remove Patch:",
                                                                container=self.chim_white_pattern_tab,
                                                                object_id="#dropdown_label")
         self.labels["revwhitec"] = pygame_gui.elements.UILabel(pygame.Rect((270, 93), (150, 25)), "Removes White",
@@ -1738,11 +1737,8 @@ class CreationScreen(base_screens.Screens):
                                                                                        (340, 35), (150, 30)),
                                                                                    container=self.general_tab)
         self.dropdown_menus["chimera_shape"] = \
-            custom_buttons.UIDropDownMenu(global_vars.chimera_patches_shapes.values(),
-                                               global_vars.tortie_patches_shapes.get(
-                global_vars.CREATED_CAT.phenotype.chimerapattern.replace(
-                    'rev', '')
-            ),
+            custom_buttons.UIDropDownMenu(global_vars.chimera_patches_shapes,
+                                        global_vars.CREATED_CAT.phenotype.chimerapattern,
             pygame.Rect((340, 165), (180, 30)),
             container=self.general_tab)
 
@@ -2059,9 +2055,8 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["tortie_select"] = \
-            custom_buttons.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
-                                               global_vars.tortie_patches_shapes[self.selectedtortie.replace(
-                                                   "rev", "") if self.selectedtortie else None],
+            custom_buttons.UIDropDownMenu(global_vars.tortie_patches_shapes,
+                                               self.selectedtortie.replace("rev", "") if self.selectedtortie else "None",
                                                pygame.Rect(
                                                    (20, 35), (175, 30)),
                                                container=self.tortie_tab)
@@ -2124,9 +2119,8 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["tortie_selectc"] = \
-            custom_buttons.UIDropDownMenu(global_vars.tortie_patches_shapes.values(),
-                                               global_vars.tortie_patches_shapes[self.selectedtortiechim.replace(
-                                                   "rev", "") if self.selectedtortiechim else None],
+            custom_buttons.UIDropDownMenu(global_vars.tortie_patches_shapes,
+                                               self.selectedtortiechim.replace("rev", "") if self.selectedtortiechim else "None",
                                                pygame.Rect(
                                                    (20, 35), (175, 30)),
                                                container=self.chim_tortie_tab)
@@ -2177,13 +2171,12 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["basegame_select"] = \
-            custom_buttons.UIDropDownMenu(global_vars.white_patches.values(),
-                                               global_vars.white_patches[self.selectedbasegame],
-                                               pygame.Rect(
-                                                   (20, 35), (175, 30)),
+            custom_buttons.UIDropDownMenu(global_vars.white_patches,
+                                               str(self.selectedbasegame),
+                                               pygame.Rect((20, 35), (225, 30)),
                                                container=self.white_pattern_tab)
 
-        self.dropdown_menus['add_basegame'] = custom_buttons.UIImageButton(pygame.Rect((200, 35), (30, 30)), "",
+        self.dropdown_menus['add_basegame'] = custom_buttons.UIImageButton(pygame.Rect((250, 35), (30, 30)), "",
                                                                            object_id="#add_button",
                                                                            container=self.white_pattern_tab)
 
@@ -2201,12 +2194,12 @@ class CreationScreen(base_screens.Screens):
             custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.white_pattern[1:] if len(global_vars.CREATED_CAT.phenotype.white_pattern) > 1 else ['None'],
                                                self.selectedwhite,
                                                pygame.Rect(
-                                                   (240, 35), (175, 30)),
+                                                   (290, 35), (225, 30)),
                                                container=self.white_pattern_tab)
-        self.dropdown_menus['remove_white'] = custom_buttons.UIImageButton(pygame.Rect((420, 35), (30, 30)), "",
+        self.dropdown_menus['remove_white'] = custom_buttons.UIImageButton(pygame.Rect((520, 35), (30, 30)), "",
                                                                            object_id="#minus_button",
                                                                            container=self.white_pattern_tab)
-        self.dropdown_menus['clear_white'] = custom_buttons.UIImageButton(pygame.Rect((450, 35), (30, 30)), "",
+        self.dropdown_menus['clear_white'] = custom_buttons.UIImageButton(pygame.Rect((550, 35), (30, 30)), "",
                                                                           object_id="#clear_button",
                                                                           container=self.white_pattern_tab)
 
@@ -2228,13 +2221,12 @@ class CreationScreen(base_screens.Screens):
         # ------------------------------------------------------------------------------------------------------------
 
         self.dropdown_menus["basegame_selectc"] = \
-            custom_buttons.UIDropDownMenu(global_vars.white_patches.values(),
-                                               global_vars.white_patches[self.selectedbasegamechim],
-                                               pygame.Rect(
-                                                   (20, 35), (175, 30)),
+            custom_buttons.UIDropDownMenu(global_vars.white_patches,
+                                               str(self.selectedbasegamechim),
+                                               pygame.Rect((20, 35), (225, 30)),
                                                container=self.chim_white_pattern_tab)
 
-        self.dropdown_menus['add_basegamec'] = custom_buttons.UIImageButton(pygame.Rect((200, 35), (30, 30)), "",
+        self.dropdown_menus['add_basegamec'] = custom_buttons.UIImageButton(pygame.Rect((250, 35), (30, 30)), "",
                                                                             object_id="#add_button",
                                                                             container=self.chim_white_pattern_tab)
 
@@ -2252,12 +2244,12 @@ class CreationScreen(base_screens.Screens):
             custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.white_pattern[1:] if len(global_vars.CREATED_CAT.chimerapheno.white_pattern) > 1 else ['None'],
                                                self.selectedwhitechim,
                                                pygame.Rect(
-                                                   (240, 35), (175, 30)),
+                                                   (290, 35), (225, 30)),
                                                container=self.chim_white_pattern_tab)
-        self.dropdown_menus['remove_whitec'] = custom_buttons.UIImageButton(pygame.Rect((420, 35), (30, 30)), "",
+        self.dropdown_menus['remove_whitec'] = custom_buttons.UIImageButton(pygame.Rect((520, 35), (30, 30)), "",
                                                                             object_id="#minus_button",
                                                                             container=self.chim_white_pattern_tab)
-        self.dropdown_menus['clear_whitec'] = custom_buttons.UIImageButton(pygame.Rect((450, 35), (30, 30)), "",
+        self.dropdown_menus['clear_whitec'] = custom_buttons.UIImageButton(pygame.Rect((550, 35), (30, 30)), "",
                                                                            object_id="#clear_button",
                                                                            container=self.chim_white_pattern_tab)
 

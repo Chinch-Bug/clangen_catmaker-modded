@@ -1,5 +1,6 @@
 import pygame
 import pygame_gui
+import sprites
 from bidict import bidict
 
 # Start PyGame
@@ -52,48 +53,44 @@ corin = bidict({"N": "None", "sh": "Sunshine", "sg": "Extreme Sunshine", "fg": "
 extention = bidict({"E": "Normal", "ea": "Amber", "er": "Russet", "ec": "Carnelian",
                     "Eg": "Chausie Grizzle", 'ecc': 'Carnelian Carrier'})
 
+white_patches = ["None"]
+patches = []
+for patchlist in sprites.WHITE_LITTLE_DATA["sprite_list"]:
+    patches += patchlist
+patches += list(sprites.WHITE_PATCH_COMBOS["little"].keys())
+patches.sort()
+white_patches += patches
 
-white_patches = bidict({None: 'None', 'MAO': 'Mao', 'LUNA': 'Luna', 'CHESTSPECK': 'Chest Speck', 'WINGS': 'Wings',
-                        'PAINTED': 'Painted', 'BLACKSTAR': 'Blackstar', 'LITTLE': 'Little', 'TUXEDO': 'Tuxedo',
-                        'LIGHTTUXEDO': 'Light Tuxedo', 'BUZZARDFANG': 'Buzzardfang', 'TIP': 'Tip', 'BLAZE': 'Blaze',
-                        'BIB': 'Bib', 'VEE': 'Vee', 'PAWS': 'Paws', 'BELLY': 'Belly', 'TAILTIP': 'Tail Tip',
-                        'TOES': 'Toes', 'BROKENBLAZE': 'Broken Blaze', 'LILTWO': 'Lil Two', 'SCOURGE': 'Scourge',
-                        'TOESTAIL': 'Toes Tail', 'RAVENPAW': 'Ravenpaw', 'HONEY': 'Honey', 'FANCY': 'Fancy',
-                        'UNDERS': 'Unders', 'DAMIEN': 'Damien', 'SKUNK': 'Skunk', 'MITAINE': 'Mitaine',
-                        'SQUEAKS': 'Squeaks', 'STAR': 'Star', 'ANY': 'Any', 'ANYTWO': 'Any Two', 'BROKEN': 'Broken',
-                        'FRECKLES': 'Freckles', 'RINGTAIL': 'Ringtail', 'HALFFACE': 'Half Face', 'PANTSTWO': 'Pants 2',
-                        'GOATEE': 'Goatee', 'PRINCE': 'Prince', 'FAROFA': 'Farofa', 'MISTER': 'Mister',
-                        'PANTS': 'Pants', 'REVERSEPANTS': 'Reverse Pants', 'HALFWHITE': 'Half White',
-                        'APPALOOSA': 'Appaloosa', 'PIEBALD': 'Piebald', 'CURVED': 'Curved', 'GLASS': 'Glass',
-                        'MASKMANTLE': 'Mask Mantle', 'VAN': 'Van', 'ONEEAR': 'One Ear', 'LIGHTSONG': 'Lightsong',
-                        'TAIL': 'Tail', 'HEART': 'Heart', 'HEARTTWO': 'Heart 2', 'MOORISH': 'Moorish', 'APRON': 'Apron',
-                        'CAPSADDLE': 'Cap Saddle', 'FULLWHITE': 'Full White', "EXTRA": "Extra", 'PETAL': 'Petal',
-                        "DIVA": "Diva", "SAVANNAH": "Savannah", "FADESPOTS": "Fadespots", "SHIBAINU": "Shiba Inu", 
-                        "TOPCOVER": "Top Cover", "DAPPLEPAW": "Dapplepaw", "BEARD": "Beard", "PEBBLESHINE": "Pebbleshine", 
-                        "OWL": "Owl", "WOODPECKER": "Woodpecker", "MISS": "Miss", "BOOTS": "Boots", "COW": "Cow", 
-                        "COWTWO": "Cow 2", "BUB": "Bub", "BOWTIE": "Bowtie", "MUSTACHE" : "Mustache", "REVERSEHEART": "Reverse Heart", 
-                        "SPARROW": "Sparrow", "VEST": "Vest", "LOVEBUG" : "Lovebug", "TRIXIE": "Trixie", "SPARKLE": "Sparkle", 
-                        "RIGHTEAR" : "Right Ear", "LEFTEAR": "Left Ear", "ESTRELLA": "Estrella", "REVERSEEYE" : "Reverse Eye", 
-                        "BACKSPOT": "Back spot", "EYEBAGS": "Eye Bags", "FADEBELLY": "Fade Belly", "SAMMY": "Sammy", "FRONT" : "Front", 
-                        "BLOSSOMSTEP": "Blossomstep", "BULLSEYE": "Bullseye", "SHOOTINGSTAR" : "Shooting Star", "EYESPOT" : "Eye Spot", 
-                        "PEBBLE": "Pebble", "TAILTWO": "Tail Two", "BUDDY": "Buddy", "FCONE": "FC One", "FCTWO": "FC Two", 
-                        "MIA": "Mia", "DIGIT": "Digit", "SCAR": "Scar", "BUSTER": "Buster", "FINN": "Finn", "KROPKA": "Kropka", 
-                        "HAWKBLAZE": "Hawkblaze", "LOCKET": "Locket", "PRINCESS": "Princess", "ROSINA" : "Rosina", "CAKE" : "Cake", "BLAZEMASK" : 'Blazemask', "TEARS" : "Tears", "DOUGIE" : 'Dougie'})
-white_patches = sort_bidict(white_patches, None)
-tortie_patches_shapes = bidict({"ONE": "One", "TWO": "Two", "THREE": "Three", "FOUR": "Four",  'REDTAIL': "Redtail",
-                                'DELILAH': "Delilah", 'MINIMALONE': "Minimal 1", 'MINIMALTWO': "Minimal 2",
-                                'MINIMALTHREE': "Minimal 3", 'MINIMALFOUR': "Minimal 4", 'OREO': "Oreo", 'SWOOP': "Swoop",
-                                'MOTTLED': "Mottled", 'SIDEMASK': "Sidemask", 'EYEDOT': "Eye dot",
-                                'BANDANA': "Bandana", 'PACMAN': "Pacman", 'STREAMSTRIKE': "Streamstrike",
-                                'ORIOLE': "Oriole", 'ROBIN': "Robin", 'BRINDLE': "Brindle", 'PAIGE': "Paige", 
-                                "ROSETAIL": "Rosetail", "SAFI": "Safi", "HALF": "Half", "CHIMERA": "Chimera", 
-                                "SMUDGED": "Smudged", "DAUB": "Daub", "DAPPLENIGHT": "Dapplenight", "STREAK": "Streak", 
-                                "MASK": "Mask", "CHEST": "Chest", "ARMTAIL": "Armtail", "EMBER": "Ember", "SMOKE": "Smoke", 
-                                "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
-                                "BODY" : "Body", 'HEARTBEAT' : "Heartbeat", 'FRECKLED' : "Freckled", "BLANKET": "Blanket", "CRYPTIC": "Cryptic"})
-tortie_patches_shapes = sort_bidict(tortie_patches_shapes)
+patches = []
+for patchlist in sprites.WHITE_MID_DATA["sprite_list"]:
+    patches += patchlist
+patches += list(sprites.WHITE_PATCH_COMBOS["mid"].keys())
+patches.sort()
+white_patches += patches
+
+patches = []
+for patchlist in sprites.WHITE_HIGH_DATA["sprite_list"]:
+    patches += patchlist
+patches += list(sprites.WHITE_PATCH_COMBOS["high"].keys())
+patches.sort()
+white_patches += patches
+
+patches = []
+for patchlist in sprites.WHITE_MOSTLY_DATA["sprite_list"]:
+    patches += patchlist
+patches += list(sprites.WHITE_PATCH_COMBOS["mostly"].keys())
+patches.sort()
+white_patches += patches
+
+tortie_patches_shapes = ["CRYPTIC"]
+for patchlist in sprites.TORTIE_DATA["sprite_list"]:
+    tortie_patches_shapes += patchlist
+tortie_patches_shapes += list(sprites.TORTIE_PATCH_COMBOS.keys())
+tortie_patches_shapes.sort()
+tortie_patches_shapes.insert(0, "None")
+
 chimera_patches_shapes = tortie_patches_shapes.copy()
-tortie_patches_shapes.update(white_patches)
+tortie_patches_shapes += white_patches
 
 merle_patches_shapes = bidict({None: 'None', 'DELILAH' : "Delilah", 'MOTTLED' : "Mottled", 'EYEDOT' : "Eye dot", 'BANDANA' : "Bandana", 
                                'SMUDGED' : "Smudged", 'EMBER' : "Ember", 'BRINDLE' : "Brindle", 'SAFI' : "Safi", 'BELOVED' : "Beloved", 
@@ -151,7 +148,7 @@ genemod_white = bidict({None: 'None',
                         'None7' : '-Dorsal-', 
                         'dorsal1': 'Thin Stripe', 'dorsal2' : 'Thick Stripe', 'break/dorsal stripe' : 'Coloured Stripe',
                         'None8' : '-Full-',
-                        'van1' : 'Van 1', 'van2' : 'Van 2', 'van3' : 'Van 3', 'full white' : 'Full White', 'break/piebald1' : 'Saddle', 'break/piebald2' : 'Piebald Patches 1', 'break/piebald3' : 'Piebald Patches 2', 'break/left no' : 'Left \'No\'', 'break/right no' : 'Right \'No\'', 
+                        'van1' : 'Van 1', 'van2' : 'Van 2', 'van3' : 'Van 3', 'FULLWHITE' : 'Full White', 'break/piebald1' : 'Saddle', 'break/piebald2' : 'Piebald Patches 1', 'break/piebald3' : 'Piebald Patches 2', 'break/left no' : 'Left \'No\'', 'break/right no' : 'Right \'No\'', 
                         'None9' : '-Body-',
                         'belt' : 'White Belt', 'pants' : 'White Pants',
                         'None10' : '-Tail-',

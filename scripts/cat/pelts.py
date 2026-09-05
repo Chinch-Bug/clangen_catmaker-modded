@@ -20,6 +20,32 @@ class Pelt():
     adult_short_poses = [x for x in all_poses if "adult_short" in x and "para" not in x]
     adult_long_poses = [x for x in all_poses if "adult_long" in x and "para" not in x]
     senior_poses = [x for x in all_poses if "senior" in x]
+
+    maingame_white = {
+        'low': {
+            '1': [None, 'SCOURGE', 'BLAZE', "BLAZE_MID", "BLAZE_SMALL", "BLAZE_MIN", 'TAILTIP', 'TOES', 'LUNA', 'LOCKET', "CHEST_MIN",
+            "LEG_BACK_LEFT_SMALL", "LEG_BACK_LEFT_MIN", "LEG_FRONT_LEFT_SMALL", "LEG_FRONT_LEFT_MIN",
+            "LEG_BACK_RIGHT_SMALL", "LEG_BACK_RIGHT_MIN", "LEG_FRONT_RIGHT_SMALL", "LEG_FRONT_RIGHT_MIN"],
+            '2': ['LITTLE', 'LIGHTTUXEDO', 'BUZZARDFANG', 'TIP', 'PAWS', 'BROKENBLAZE', 'BEARD', 'BIB', 'VEE', 'HONEY', 'TOESTAIL',
+                'RAVENPAW', 'DAPPLEPAW', 'LILTWO', 'REVERSEHEART', 'SPARKLE', 'REVERSEEYE', "CHEST_MID", "CHEST_SMALL",
+                "CHEST_STREAK", "BELLY_MIN"],
+            '3': ['TUXEDO', 'SAVANNAH', 'FANCY', 'DIVA', 'BEARD', "DAMIEN_REDUCED", 'DAMIEN', 'BELLY', 'SQUEAKS', 'STAR', 'MISS', 'BOWTIE',
+                'FCTWO', 'FCONE', 'MIA', 'PRINCESS', 'DOUGIE', 'STREAMSTRIKE'],
+            '4': ['TUXEDO', 'SAVANNAH', 'OWL', 'RINGTAIL', 'UNDERS', 'FAROFA', 'VEST', 'FRONT', 'BLOSSOMSTEP', 'DIGIT',
+                'HAWKBLAZE', "BERRYHEART"],
+            '5': ['ANY', 'SHIBAINU', 'FAROFA', 'MISTER', 'PANTS', 'TRIXIE']
+        },
+        'high': {
+            '1': ['ANY', 'SHIBAINU', 'PANTSTWO', 'MAO', 'TRIXIE'],
+            '2': ['ANY', 'FRECKLES', 'PANTSTWO', 'MASKMANTLE', 'MAO', 'PAINTED', 'BUB', 'SCAR'],
+            '3': ['ANYTWO', 'PEBBLESHINE', 'BROKEN', 'PIEBALD', 'FRECKLES', 'HALFFACE', 'GOATEE', 'PRINCE', 'CAPSADDLE',
+                'REVERSEPANTS', 'GLASS', 'PAINTED', 'COWTWO', 'SAMMY', 'FINN', 'BUSTER', 'CAKE', "FALLEN_LEAVES"],
+            '4': ['VAN', 'PEBBLESHINE', 'LIGHTSONG', 'CURVED', 'GOATEE', 'TAIL', 'APRON', 'HALFWHITE', 'APPALOOSA', 'HEART',
+                'MOORISH', 'COW', 'SHOOTINGSTAR', 'PEBBLE', 'TAILTWO', 'BUDDY', 'KROPKA'],
+            '5': ['ONEEAR', 'LIGHTSONG', 'PETAL', 'CHESTSPECK', 'HEARTTWO', 'BOOTS', 'SHOOTINGSTAR', 'EYESPOT',
+                'KROPKA']
+        }
+    }
     
     sprites_names = {
         "SingleColour": 'single',

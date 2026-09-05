@@ -47,6 +47,14 @@ class Sprites():
     ) as read_file:
         TORTIE_DATA = ujson.loads(read_file.read())
 
+    try:
+        with open(
+            "sprites/dicts/tortie_patches_combos.json", "r", encoding="utf-8"
+        ) as read_file:
+            TORTIE_PATCH_COMBOS = ujson.loads(read_file.read())
+    except FileNotFoundError:
+        # this is probably a mod that ain't adding patch combos
+        TORTIE_PATCH_COMBOS = {}
 
     with open(
         "sprites/dicts/white_patches_mostly_sprite_data.json", "r", encoding="utf-8"
@@ -68,6 +76,14 @@ class Sprites():
         "sprites/dicts/white_patches_vitiligo_sprite_data.json", "r", encoding="utf-8"
     ) as read_file:
         WHITE_VITILIGO_DATA = ujson.loads(read_file.read())
+
+    try:
+        with open(
+            "sprites/dicts/white_patches_combos.json", "r", encoding="utf-8"
+        ) as read_file:
+            WHITE_PATCH_COMBOS = ujson.loads(read_file.read())
+    except FileNotFoundError:
+        WHITE_PATCH_COMBOS = {}
 
     with open(
         "sprites/dicts/eye_colour_data.json", "r", encoding="utf-8"
@@ -178,7 +194,8 @@ class Sprites():
 
                 except ValueError:
                     # Fallback for non-existent sprites
-                    print(f"WARNING: nonexistent sprite - {full_name}")
+                    if "CRYPTIC" not in full_name:
+                        print(f"WARNING: nonexistent sprite - {full_name}")
                     if not self.blank_sprite:
                         self.blank_sprite = pygame.Surface(
                             (self.size, self.size), pygame.HWSURFACE | pygame.SRCALPHA
@@ -253,20 +270,9 @@ class Sprites():
 
         del width, height # unneeded
 
-        for x in [
-            "lineart", "lineartdf", "lineartdead", "lineartur", 
-            "line_sc_overlay", "line_ur_underlay", "line_ur_overlay",
-            "gradient_ur",
-            'whitepatches', 'tortiepatchesmasks', 
-            'scars', 'missingscars',
-            'medcatherbs', 'wild',
-            'collars', 'bellcollars', 'bowcollars', 'nyloncollars',
-            'shadersnewwhite', 'lightingnew', 
-            'fademask', 'fadestarclan', 'fadedarkforest', "fadeunknownresidence",
-
-        ]:
-            self.spritesheet(f"sprites/{x}.png", x)
-
+        for x in ["lineart", "lineart_df", "lineart_sc", "lineart_ur"]:
+            self.spritesheet(f"sprites/{x}_aprilfools.png", x+"_aprilfools")
+        
         for x in os.listdir("sprites/genemod/borders"):
             sprites.spritesheet("sprites/genemod/borders/"+x, 'genemod/'+x.replace('.png', ""))
         for x in os.listdir("sprites/genemod/Base Colours"):
@@ -470,6 +476,17 @@ class Sprites():
             else:
                 self.load_sheet(data["spritesheet"], data["sprite_list"])
 
+
+        self.create_patch_combo(
+            combos=self.TORTIE_PATCH_COMBOS, sheet_name="patches_tortie"
+        )
+
+        # patch combos
+        for category, combos in self.WHITE_PATCH_COMBOS.items():
+            self.create_patch_combo(
+                combos=combos, sheet_name="patches_white_", white_category=category
+            )
+
     def load_sheet(self, spritesheet: str, sprite_names: list[list[str]]):
         """
         Loads sheet data and creates sprite groups.
@@ -484,7 +501,34 @@ class Sprites():
                     name=f"{spritesheet if 'patches' not in spritesheet else ''}{sprite}",
                 )
 
-           
+    def create_patch_combo(
+        self, combos: dict, sheet_name: str, white_category: str = ""
+    ):
+        # pulls the defaults from the pose_sprite_data.json file
+        sprites_x = self.sheet_layout[0]
+        sprites_y = self.sheet_layout[1]
+        for name, patches in combos.items():
+            i = 0
+            for y in range(sprites_y):
+                for x in range(sprites_x):
+                    if i in self.empty_indexes:
+                        i += 1
+                        continue
+
+                    new_patch = pygame.Surface(
+                        (sprites.size, sprites.size),
+                        pygame.HWSURFACE | pygame.SRCALPHA,
+                    )
+
+                    for patch in patches:
+                        addition = self.sprites[f"{patch}{i}".removeprefix("little").removeprefix("mid").removeprefix("high").removeprefix("mostly")]
+                        new_patch.blit(
+                            addition,
+                            (0, 0),
+                        )
+
+                    self.sprites[f"{name}{i}"] = new_patch
+                    i += 1       
 
 # CREATE INSTANCE 
 sprites = Sprites()
