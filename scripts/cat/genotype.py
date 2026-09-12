@@ -1,5 +1,6 @@
 from random import choice, randint, random
 import json
+from itertools import chain
 from operator import xor
 import tomllib
 import os
