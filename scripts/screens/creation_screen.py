@@ -1741,6 +1741,7 @@ class CreationScreen(base_screens.Screens):
                                         global_vars.CREATED_CAT.phenotype.chimerapattern,
             pygame.Rect((340, 165), (180, 30)),
             container=self.general_tab)
+        self.dropdown_menus["chimera_shape"].set_expand_direction("up")
 
         # -------------------------------------------------------------------------------------------------------------
         # Pattern Tab Contents CHIMERA ----------------------------------------------------------------------------------------

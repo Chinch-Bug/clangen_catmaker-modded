@@ -94,7 +94,6 @@ class Cat():
             phenotype.bleach[0] = choice(['Lb', 'Lb', 'Lb', 'Lb', 'Lb', 'lb'])
             phenotype.ghosting[0] = choice(['gh', 'gh', 'gh', 'gh', 'gh', 'Gh'])
             phenotype.satin[0] = choice(['St', 'St', 'St', 'St', 'St', 'st'])
-            phenotype.brindledbi = (random() < 0.1)
 
             phenotype.karp = choice([['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['k', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'k'], ['K', 'K']])
             if global_vars.CREATED_CAT.phenotype.karp == ['k', 'k']:
