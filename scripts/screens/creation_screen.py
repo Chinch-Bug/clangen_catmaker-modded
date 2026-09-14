@@ -2086,7 +2086,7 @@ class CreationScreen(base_screens.Screens):
 
         self.sliders["rusting"] = pygame_gui.elements.UIHorizontalSlider(pygame.Rect((20, 225), (175, 30)), 
                                                                         start_value=5 if not global_vars.CREATED_CAT.pelt.rusting else list(global_vars.CREATED_CAT.pelt.rusting.values())[0], 
-                                                                        value_range=(0, 25),
+                                                                        value_range=(5, 25),
                                                                         container=self.tortie_tab)
 
         self.dropdown_menus["tortie_remove"] = \
