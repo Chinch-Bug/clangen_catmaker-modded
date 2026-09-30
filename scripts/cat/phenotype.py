@@ -178,23 +178,26 @@ class Phenotype(Genotype):
 
     def ChooseTortiePattern(self, spec = None):
         self.def_tortie_low_patterns = ['DELILAH', 'MOTTLED', 'EYEDOT', 'BANDANA', 'SMUDGED', 'EMBER', 'BRINDLE', 'SAFI', 'BELOVED', 'revBODY', 
-                                'MINIMALONE', 'MINIMALTWO', 'SHILOH', 'FRECKLED']
+                                'MINIMALONE', 'MINIMALTWO', 'SHILOH', 'FRECKLED', "revWILDFIRE"]
         self.def_tortie_mid_patterns = ['ONE', 'TWO', 'SMOKE', 'MINIMALTHREE', 'MINIMALFOUR', 'revOREO', "CHIMERA", 'CHEST', 'GRUMPYFACE', 
                                 'SIDEMASK', 'PACMAN', 'BRIE' ,'ORIOLE', 'ROBIN', 'PAIGE', 'HEARTBEAT', "TURTLECRAWL", "LARKPETAL",
                                 "MILQUE"]
         self.def_tortie_high_patterns = ['THREE', 'FOUR', 'REDTAIL', 'STREAK', 'MASK', 'SWOOP', 'ARMTAIL', 'STREAMSTRIKE', 'DAUB',
-                                'ROSETAIL', 'DAPPLENIGHT', 'BLANKET', "CHERRYTAIL", "POWDERSNOW", "BIBFULL_T", "TAILTIPREVERSE_T",
+                                'ROSETAIL', 'DAPPLENIGHT', 'BLANKET', "CHERRYTAIL", "POWDERSNOW", "TAILTIPREVERSE_T",
                                 "UNDERTAIL_T"]
         if random() < 0.2:
             self.def_tortie_low_patterns += ["FRECKLED_SMOKE", "SMOKING_EMBER", "MINIMAL_ONETWO", "MASKED_SHILOH", "FRECKLED_SAFI",
-                                             "SMUDGED_SMOKE", "SMUDGED_SAFI", "BRIE_ONE", "DENSE_BRINDLE", "MINIMAL_ORIOLE"]
+                                             "SMUDGED_SMOKE", "SMUDGED_SAFI", "BRIE_ONE", "DENSE_BRINDLE", "MINIMAL_ORIOLE", "FRECKLE_LINER",
+                                             "SMALL_LINED"]
             self.def_tortie_mid_patterns += ["MASKED_ROBIN", "MASKED_ONE", "RED_SIDE", "RED_ROBIN", "BIRD_TIME", "FRECKLED_BELOVED",
                                              "MINIMAL_TWOTHREE", "MINIMAL_THREEFOUR", "MINIMAL_ALL", "ROBIN_SAFI", "FRECKLED_BIRD",
                                              "FRECKLED_STREAM", "FRECKLED_GRUMP", "FRECKLED_BLANKET", "ARMTAIL_SMOKE", "GRUMPY_SMOKE",
                                              "DAUB_SAFI", "EYEDOT_ONE", "SHILOH_FOUR", "DEARHEART", "EXPANDED_CHIMERA", "BELOVED_BIRD",
-                                             "MOTTLED_SHILOH", "SOL", "OC_TIME"]
+                                             "MOTTLED_SHILOH", "SOL", "OC_TIME", "BLAZING_HEART", "SATURN", "RISING_FIRE", "SIDEPETAL",
+                                             "STROKE", "BRISTLE", "revBLAZING_FIRE", "PHANTOM_MASK", "STARRYNIGHT", "VALENTINES"]
             self.def_tortie_high_patterns += ["MASKED_TAIL", "revFRECKLED_OREO", "PIECEMEAL", "ROBIN_TAIL", "ARMTAIL_ONE", "CHIMERA_THREE",
-                                              "MOTTLED_THREE", "PATCHY_OREO", "ONE_DELILAH", "PANTS_FACE"]
+                                              "MOTTLED_THREE", "PATCHY_OREO", "ONE_DELILAH", "PANTS_FACE", "TWO_TURTLE", "POWDER_HEART",
+                                              "SOCKS", "COZY", "FIVE", "revONESIE", "MULLETED", "ROSE-FOUR"]
             self.def_tortie_high_patterns += ["HALF"]
         tortie_low_patterns = self.def_tortie_low_patterns
         tortie_mid_patterns = self.def_tortie_mid_patterns
@@ -202,8 +205,8 @@ class Phenotype(Genotype):
         tiny_patches = ["BACKSPOT", "SADDLE_SMALL", "BEARD", "BELLY", "BIB", "revBLACKSTAR", "BLAZE", "BLAZE_MIN", "BLAZEMASK", "revBOOTS", "CHESTSPECK", "ESTRELLA",
                         "EYEBAGS", "revEYESPOT", "revHEART", "HONEY", "LEFTEAR_MID", "LEFTEAR_MOSTLY", "LEFTEAR_RING", "LEFTEAR_TIP", "LEFTEAR", "LITTLE", "PAWS", "REVERSEEYE", "REVERSEHEART", 
                         "RIGHTEAR_MID", "RIGHTEAR_MOSTLY", "RIGHTEAR_RING", "RIGHTEAR_TIP", "RIGHTEAR", "SCOURGE", "SPARKLE", "revTAIL", 'revTAILTWO', "TAILTIP", "TEARS", "TIP",
-                        "TOES", "TOESTAIL", "VEE", "HELMET", "TAILTIP_T", "PAW_FR_T", "PAW_FL_CLOVERTAIL", "PAW_BR_WING", "PAW_BL_SPLOTCH", "UNDERPAWS_T", "BELLY_T", "BOTHEARS_T", 
-                        "EYELINER_T"]
+                        "TOES", "TOESTAIL", "MIDTOESTAIL", "MINTOESTAIL", "VEE", "HELMET", "TAILTIP_T", "PAW_FR_T", "PAW_FL_CLOVERTAIL", "PAW_BR_WING", "PAW_BL_SPLOTCH", "UNDERPAWS_T", "BELLY_T", "BOTHEARS_T", 
+                        "EYELINER_T", "LEAKY_EYE"]
         
                 
         chosen = []
@@ -589,11 +592,9 @@ class Phenotype(Genotype):
                 for i in range(len(self.tortiepattern)):
                     if randint(1, round(10/((i+1)*2))) == 1:
                         if 'rev' in self.tortiepattern[i]:
-                            self.tortiepattern[i] = self.tortiepattern[i].replace(
-                                'rev', '')
+                            self.tortiepattern[i] = self.tortiepattern[i].replace('rev', '')
                         else:
-                            self.tortiepattern[i] = 'rev' + \
-                                self.tortiepattern[i]
+                            self.tortiepattern[i] = 'rev' + self.tortiepattern[i]
 
             main = self.FindBlack(self, moons)
             self.maincolour = main[0]

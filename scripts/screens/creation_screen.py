@@ -791,16 +791,13 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.pelt.scar_slot_list[3] = global_vars.scars.inverse[event.text]
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["accessory"]:
-                global_vars.CREATED_CAT.pelt.acc_slot_list[0] = global_vars.accessories.inverse[
-                    event.text]
+                global_vars.CREATED_CAT.pelt.acc_slot_list[0] = event.text
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["accessory1"]:
-                global_vars.CREATED_CAT.pelt.acc_slot_list[1] = global_vars.accessories.inverse[
-                    event.text]
+                global_vars.CREATED_CAT.pelt.acc_slot_list[1] = event.text
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["accessory2"]:
-                global_vars.CREATED_CAT.pelt.acc_slot_list[2] = global_vars.accessories.inverse[
-                    event.text]
+                global_vars.CREATED_CAT.pelt.acc_slot_list[2] = event.text
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["lineart_select"]:
                 if event.text == "StarClan":
@@ -1802,7 +1799,7 @@ class CreationScreen(base_screens.Screens):
             custom_buttons.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
                                                str(global_vars.CREATED_CAT.chimerapheno.fur_shade),
                                                pygame.Rect(
-                                                   (210, 35), (175, 30)),
+                                                   (210, 35), (85, 30)),
                                                container=self.chim_main_colour_tab)
 
         self.dropdown_menus["ref1_selectc"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
@@ -1901,7 +1898,7 @@ class CreationScreen(base_screens.Screens):
             custom_buttons.UIDropDownMenu(['0', '1', '2', '3', '4', '5', '6'],
                                                str(global_vars.CREATED_CAT.phenotype.fur_shade),
                                                pygame.Rect(
-                                                   (210, 35), (175, 30)),
+                                                   (210, 35), (85, 30)),
                                                container=self.main_colour_tab)
 
         self.dropdown_menus["ref1_select"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
@@ -2304,28 +2301,22 @@ class CreationScreen(base_screens.Screens):
             container=self.extras_tab)
 
         self.dropdown_menus["accessory"] = \
-            custom_buttons.UIDropDownMenu(global_vars.accessories.values(),
-                                               global_vars.accessories[
-                                                   global_vars.CREATED_CAT.pelt.acc_slot_list[0]
-            ],
+            custom_buttons.UIDropDownMenu(global_vars.accessories,
+                                        str(global_vars.CREATED_CAT.pelt.acc_slot_list[0]),
             pygame.Rect((20, 145), (240, 30)),
             container=self.extras_tab)
         self.dropdown_menus["accessory"].set_expand_direction("up")
 
         self.dropdown_menus["accessory1"] = \
-            custom_buttons.UIDropDownMenu(global_vars.accessories.values(),
-                                               global_vars.accessories[
-                                                   global_vars.CREATED_CAT.pelt.acc_slot_list[1]
-            ],
+            custom_buttons.UIDropDownMenu(global_vars.accessories,
+                                               str(global_vars.CREATED_CAT.pelt.acc_slot_list[1]),
             pygame.Rect((270, 145), (240, 30)),
             container=self.extras_tab)
         self.dropdown_menus["accessory1"].set_expand_direction("up")
 
         self.dropdown_menus["accessory2"] = \
-            custom_buttons.UIDropDownMenu(global_vars.accessories.values(),
-                                               global_vars.accessories[
-                                                   global_vars.CREATED_CAT.pelt.acc_slot_list[2]
-            ],
+            custom_buttons.UIDropDownMenu(global_vars.accessories_with_collars,
+                                               str(global_vars.CREATED_CAT.pelt.acc_slot_list[2]),
             pygame.Rect((20, 200), (240, 30)),
             container=self.extras_tab)
         self.dropdown_menus["accessory2"].set_expand_direction("up")

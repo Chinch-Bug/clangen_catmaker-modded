@@ -1135,7 +1135,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             gensprite = pygame.Surface(
                 (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
 
-            def ApplyPatchEffects(sprite):
+            def apply_patch_effects(sprite):
                 is_red = ('red' in phenotype.maincolour or 'cream' in phenotype.maincolour or 'honey' in phenotype.maincolour or 'ivory' in phenotype.maincolour or 'apricot' in phenotype.maincolour)
                 if ('masked' in phenotype.silvergold):
                     masked = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
@@ -1180,42 +1180,30 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
             is_white = 'W' in phenotype.white or phenotype.pointgene[0] == 'c' or phenotype.white_pattern == [
                 'full white']
-            if (phenotype.patchmain != "" and 'rev' in phenotype.tortiepattern[0]):
-                gensprite = make_cat(
-                    gensprite, phenotype.patchmain, phenotype.patchcolour, phenotype.patchunders)
-            else:
-                gensprite = make_cat(
-                    gensprite, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders)
+            gensprite = make_cat(gensprite, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders)
 
             if not is_white:
-                gensprite = ApplyPatchEffects(gensprite)
+                gensprite = apply_patch_effects(gensprite)
 
                 if (phenotype.patchmain != ""):
+                    tortpatches = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    isred = ('red' in phenotype.patchmain or 'cream' in phenotype.patchmain or 'honey' in phenotype.patchmain or 'ivory' in phenotype.patchmain or 'apricot' in phenotype.patchmain or 'white' in phenotype.patchmain)
+                    if "rev" in phenotype.tortiepattern[0]:
+                        tortpatches.fill((255, 255, 255))
                     for pattern in phenotype.tortiepattern:
-                        tortpatches = pygame.Surface(
-                            (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                         if 'rev' in pattern:
-                            isred = not (
-                                'red' in phenotype.maincolour or 'cream' in phenotype.maincolour or 'honey' in phenotype.maincolour or 'ivory' in phenotype.maincolour or 'apricot' in phenotype.maincolour)
-                            tortpatches = make_cat(
-                                tortpatches, phenotype.maincolour, phenotype.spritecolour, phenotype.mainunders)
+                            tortpatches.blit(sprites.sprites[pattern.replace('rev', "") + cat_sprite], (0, 0), special_flags=pygame.BLEND_RGBA_SUB)
                         else:
-                            isred = not (
-                                'red' in phenotype.patchmain or 'cream' in phenotype.patchmain or 'honey' in phenotype.patchmain or 'ivory' in phenotype.patchmain or 'apricot' in phenotype.patchmain)
-                            tortpatches = make_cat(
-                                tortpatches, phenotype.patchmain, phenotype.patchcolour, phenotype.patchunders)
-                        if phenotype.caramel == 'caramel' and isred:
-                            tortpatches.blit(
-                                sprites.sprites['caramel0'], (0, 0))
-                        tortpatches = ApplyPatchEffects(tortpatches)
-
-                        tortpatches2 = pygame.Surface(
-                            (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
-                        tortpatches2.blit(
-                            sprites.sprites[pattern.replace('rev', "") + cat_sprite], (0, 0))
-                        tortpatches2.blit(tortpatches, (0, 0),
-                                          special_flags=pygame.BLEND_RGBA_MULT)
-                        gensprite.blit(tortpatches2, (0, 0))
+                            tortpatches.blit(sprites.sprites[pattern + cat_sprite], (0, 0))
+                    if phenotype.caramel == 'caramel' and not isred: 
+                        tortpatches.blit(sprites.sprites['caramel0'], (0, 0))
+                    tortpatches.fill((255, 255, 255, 0), special_flags=pygame.BLEND_RGB_ADD)
+                    tortpatches = apply_patch_effects(tortpatches)
+                    
+                    tortpatches2 = pygame.Surface((sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
+                    tortpatches2 = make_cat(tortpatches2, phenotype.patchmain, phenotype.patchcolour, phenotype.patchunders)
+                    tortpatches.blit(tortpatches2, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+                    gensprite.blit(tortpatches, (0, 0))
 
                 if (phenotype.pseudomerle and not merle and phenotype.silver[0] == "I"):
                     for pattern in phenotype.merlepattern:
@@ -1394,12 +1382,11 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
         if not scars_hidden:
             for scar in cat_scars:
-                if scar in cat.pelt.scars1:
-                    gensprite.blit(
-                        sprites.sprites['scars' + scar + cat_sprite], (0, 0))
-                if scar in cat.pelt.scars3:
-                    gensprite.blit(
-                        sprites.sprites['scars' + scar + cat_sprite], (0, 0))
+                if scar in cat.pelt.general_scars:
+                    sprite_name = (
+                        f"{sprites.SCAR_DATA['spritesheet'][0]}{scar}{cat_sprite}"
+                    )
+                    gensprite.blit(sprites.sprites[sprite_name], (0, 0))
 
         # setting the lineart color to override on accessories & missing bits
         lineart_color = (
@@ -1528,9 +1515,16 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
         if not scars_hidden:
             for scar in cat_scars:
-                if scar in cat.pelt.scars2:
-                    new_sprite.blit(
-                        sprites.sprites['scars_missing_part' + scar + cat_sprite], (0, 0), special_flags=blendmode)
+                sprite_name = f"{sprites.SCAR_DATA['spritesheet'][1]}{scar}{cat_sprite}"
+                new_sprite.blit(
+                    _recolor_lineart(
+                        sprites.sprites[sprite_name],
+                        lineart_color,
+                        gradient_surface,
+                    ),
+                    (0, 0),
+                    special_flags=blendmode,
+                )
 
         # draw accessories
         if not acc_hidden:
@@ -1555,70 +1549,8 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         ),
                         (0, 0),
                     )
-                elif acc in cat.pelt.collars:
-                    collar_map = {
-                        "CRIMSON": "LEATHER_crimson",
-                        "BLUE": "LEATHER_blue",
-                        "YELLOW": "LEATHER_yellow",
-                        "CYAN": "LEATHER_cyan",
-                        "RED": "LEATHER_orange",
-                        "LIME": "LEATHER_lime",
-                        "GREEN": "LEATHER_green",
-                        "WHITE": "LEATHER_white",
-                        "BLACK": "LEATHER_black",
-                        "SPIKES": "LEATHER_SPIKE_black_gold",
-                        "PINK": "LEATHER_pink",
-                        "PURPLE": "LEATHER_purple",
-                        "MULTI": "LEATHER_rose",
-                        "INDIGO": "LEATHER_indigo",
-                        "RAINBOW": "LEATHER_GRADIENT_rainbow",
-                        "CRIMSONBELL": "LEATHER_BELL_crimson",
-                        "BLUEBELL": "LEATHER_BELL_blue",
-                        "YELLOWBELL": "LEATHER_BELL_yellow",
-                        "CYANBELL": "LEATHER_BELL_cyan",
-                        "REDBELL": "LEATHER_BELL_orange",
-                        "LIMEBELL": "LEATHER_BELL_lime",
-                        "GREENBELL": "LEATHER_BELL_green",
-                        "WHITEBELL": "LEATHER_BELL_white",
-                        "BLACKBELL": "LEATHER_BELL_black",
-                        "SPIKESBELL": "LEATHER_BELL_SPIKE_black_gold",
-                        "PINKBELL": "LEATHER_BELL_pink",
-                        "PURPLEBELL": "LEATHER_BELL_purple",
-                        "MULTIBELL": "LEATHER_BELL_rose",
-                        "INDIGOBELL": "LEATHER_BELL_indigo",
-                        "RAINBOWBELL": "LEATHER_BELL_GRADIENT_rainbow",
-                        "CRIMSONBOW": "BOW_crimson",
-                        "BLUEBOW": "BOW_blue",
-                        "YELLOWBOW": "BOW_yellow",
-                        "CYANBOW": "BOW_cyan",
-                        "REDBOW": "BOW_orange",
-                        "LIMEBOW": "BOW_lime",
-                        "GREENBOW": "BOW_green",
-                        "WHITEBOW": "BOW_white",
-                        "BLACKBOW": "BOW_black",
-                        "SPIKESBOW": "BOW_FOIL_black_gold",
-                        "PINKBOW": "BOW_pink",
-                        "PURPLEBOW": "BOW_purple",
-                        "MULTIBOW": "BOW_rose",
-                        "INDIGOBOW": "BOW_indigo",
-                        "RAINBOWBOW": "BOW_GRADIENT_rainbow",
-                        "CRIMSONNYLON": "NYLON_BELL_crimson",
-                        "BLUENYLON": "NYLON_BELL_blue",
-                        "YELLOWNYLON": "NYLON_BELL_yellow",
-                        "CYANNYLON": "NYLON_BELL_cyan",
-                        "REDNYLON": "NYLON_BELL_orange",
-                        "LIMENYLON": "NYLON_BELL_lime",
-                        "GREENNYLON": "NYLON_BELL_green",
-                        "WHITENYLON": "NYLON_BELL_white",
-                        "BLACKNYLON": "NYLON_BELL_black",
-                        "SPIKESNYLON": "NYLON_BELL_black_gold",
-                        "PINKNYLON": "NYLON_BELL_pink",
-                        "PURPLENYLON": "NYLON_BELL_purple",
-                        "MULTINYLON": "NYLON_BELL_rose",
-                        "INDIGONYLON": "NYLON_BELL_indigo",
-                        "RAINBOWNYLON": "NYLON_BELL_GRADIENT_rainbow"
-                    }
-                    sprite_name = f"{sprites.COLLAR_DATA['spritesheet']}{collar_map[acc]}{cat_sprite}"
+                elif acc in cat.pelt.collar_accessories:
+                    sprite_name = f"{sprites.COLLAR_DATA['spritesheet']}{acc}{cat_sprite}"
                     new_sprite.blit(
                         _recolor_lineart(
                             sprites.sprites[sprite_name],

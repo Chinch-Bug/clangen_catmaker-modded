@@ -173,71 +173,28 @@ scars = bidict({None: "None", "ONE": "Chest", "TWO": "Shoulder", "THREE": "Over 
                 "HALFTAIL": "Half Tail", "NOPAW": "Missing Leg",
                 "SNAKE": "Bite: Snake", "TOETRAP": "Toe Trap", "BURNPAWS": "Burnt Paws", "BURNTAIL": "Burnt Tail",
                 "BURNBELLY": "Burnt Belly", "BURNRUMP": "Burnt Rump", "FROSTFACE": "Frostbitten Face",
-                "FROSTTAIL": "Frostbitten Tail", "FROSTMITT": "Frostbitten Paw1", "FROSTSOCK": "Frostbitten Paw2"})
+                "FROSTTAIL": "Frostbitten Tail", "FROSTMITT": "Frostbitten Paw1", "FROSTSOCK": "Frostbitten Paw2",
+                "TNR": "TNR"})
 scars = sort_bidict(scars, None)
 
-accessories = bidict({None: "None", 
-                      "MAPLE LEAF": "Maple Leaf", "HOLLY": "Holly", "BLUE BERRIES": "Blue Berries",
-                      "FORGET ME NOTS": "Forget-me-nots", "RYE STALK": "Rye Stalk", "CATTAIL": "Cattail", 
-                      "POPPY": "Poppy", "ORANGE POPPY": "Orange Poppy", "CYAN POPPY": "Cyan Poppy", 
-                      "WHITE POPPY": "White Poppy", "PINK POPPY": "Pink Poppy", 
+accessories = ["None"]
 
-                      "BLUEBELLS": "Bluebells", "LILY OF THE VALLEY": "Lily of the Valley", 
-                      "SNAPDRAGON": "Snapdragon", "HERBS": "Herbs", "PETALS": "Petals", 
-                      "NETTLE": "Nettle", "HEATHER": "Heather", "GORSE": "Gorse", 
-                      "JUNIPER": "Juniper", "RASPBERRY": "Raspberry", "LAVENDER": "Lavender", 
-                      
-                      "OAK LEAVES": "Oak Leaves", "CATMINT": "Catmint", "MAPLE SEED": "Maple Seed", 
-                      "LAUREL": "Laurel", "BULB WHITE": "White Bulb", "BULB YELLOW": "Yellow Bulb", 
-                      "BULB ORANGE": "Orange Bulb", "BULB PINK": "Pink Bulb", "BULB BLUE": "Blue Bulb", 
-                      "CLOVER": "Clover", "DAISY": "Daisy", 
-                      
-                      "WISTERIA": "Wisteria", "ROSE MALLOW": "Rose Mallow", "PICKLEWEED": "Pickleweed", 
-                      "GOLDEN CREEPING JENNY": "Golden Creeping Jenny", "DESERT WILLOW": "Desert Willow", 
-                      "CACTUS FLOWER": "Cactus Flower", "PRAIRIE FIRE": "Prairie Fire", 
-                      "VERBENA EAR": "Verbena (ear)", "VERBENA PELT": "Verbena (pelt)", 
+for sprite_list in sprites.PLANT_DATA["sprite_list"]:
+    accessories.extend(sprite_list)
 
-                      "DRY HERBS": "Dry Herbs", "DRY CATMINT": "Dry Catmint",
-                      "DRY NETTLES": "Dry Nettles", "DRY LAURELS": "Dry Laurels",
-                      
-                      "RED FEATHERS": "Red Feathers", "BLUE FEATHERS": "Blue Feathers", "JAY FEATHERS": "Jay Feathers",
-                      "GULL FEATHERS": "Gull Feathers", "SPARROW FEATHERS": "Sparrow Feathers",
-                      "MOTH WINGS": "Moth Wings", "ROSY MOTH WINGS": "Rosy Moth Wings", 
-                      "MORPHO BUTTERFLY": "Morpho Butterfly", "MONARCH BUTTERFLY": "Monarch Butterfly", 
-                      "CICADA WINGS": "Cicada Wings", "BLACK CICADA": "Black Cicada", 
-                      "ROAD RUNNER FEATHER": "Road Runner Feather", 
-                      
-                      "CRIMSON": "Crimson Collar",
-                      "BLUE": "Blue Collar", "YELLOW": "Yellow Collar", "CYAN": "Cyan Collar", "RED": "Red Collar",
-                      "LIME": "Lime Collar", "GREEN": "Green Collar", "RAINBOW": "Rainbow Collar",
-                      "BLACK": "Black Collar", "SPIKES": "Spiked Collar", "PINK": "Pink Collar",
-                      "PURPLE": "Purple Collar", "MULTI": "Mulicolored Collar", "WHITE": "White Collar", 
-                      "INDIGO": "Indigo Collar", 
-                      
-                      "CRIMSONBELL": "Crimson Bell Collar",
-                      "BLUEBELL": "Blue Bell Collar", "YELLOWBELL": "Yellow Bell Collar",
-                      "CYANBELL": "Cyan Bell Collar", "REDBELL": "Red Bell Collar", "LIMEBELL": "Lime Bell Collar",
-                      "GREENBELL": "Green Bell Collar", "RAINBOWBELL": "Rainbow Bell Color",
-                      "BLACKBELL": "Black Bell Collar", "SPIKESBELL": "Spiked Bell Collar",
-                      "PINKBELL": "Pink Bell Collar", "PURPLEBELL": "Purple Bell Collar",
-                      "MULTIBELL": "Mulitcolored Bell Color", "WHITEBELL": "White Bell Collar",
-                      "INDIGOBELL": "Indigo Bell Collar", 
-                      
-                      "CRIMSONBOW": "Crimson Bow", "BLUEBOW": "Blue Bow",
-                      "YELLOWBOW": "Yellow Bow", "CYANBOW": "Cyan Bow", "REDBOW": "Red Bow", "LIMEBOW": "Lime Bow",
-                      "GREENBOW": "Green Bow", "RAINBOWBOW": "Rainbow Bow", "BLACKBOW": "Black Bow",
-                      "SPIKESBOW": "Spiked Bow", "PINKBOW": "Pink Bow", "PURPLEBOW": "Purple Bow",
-                      "MULTIBOW": "Multicolored Bow", "WHITEBOW": "White Bow", "INDIGOBOW": "Indigo Bow",
-                      
-                      "CRIMSONNYLON": "Crimson Nylon Collar",
-                      "BLUENYLON": "Blue Nylon Collar", "YELLOWNYLON": "Yellow Nylon Collar",
-                      "CYANNYLON": "Cyan Nylon Collar", "REDNYLON": "Red Nylon Collar",
-                      "LIMENYLON": "Line Nylon Collar", "GREENNYLON": "Green Nylon Collar",
-                      "RAINBOWNYLON": "Rainbow Nylon Collar", "BLACKNYLON": "Black Nylon Collar",
-                      "SPIKESNYLON": "Spiked Nylon Collar", "WHITENYLON": "White Nylon Collar",
-                      "PINKNYLON": "Pink Nylon Collar", "PURPLENYLON": "Purple Nylon Collar",
-                      "MULTINYLON": "Mulicolored Nylon Collar", "INDIGONYLON": "Indigo Nylon Collar"})
-accessories = sort_bidict(accessories, None)
+for sprite_list in sprites.WILD_DATA["sprite_list"]:
+    accessories.extend(sprite_list)
+
+accessories_with_collars = accessories.copy()
+
+if sprites.COLLAR_DATA["palette_map"]:
+    for style_type in sprites.COLLAR_DATA["style_data"]:
+        for style, color_list in style_type.items():
+            for colour in color_list:
+                accessories_with_collars.append(f"{style}_{colour}")
+else:
+    for sprite_list in sprites.COLLAR_DATA["sprite_list"]:
+        accessories_with_collars.extend(sprite_list)
 
 platforms = {"None": None,
              "Greenleaf Plains - Day": "resources/images/platforms/plains/greenleaf_light.png",

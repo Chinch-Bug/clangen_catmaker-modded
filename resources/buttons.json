@@ -23,7 +23,8 @@
         },
         "misc": {
             "shadow_width": "0",
-            "tool_tip_delay": "0"
+            "tool_tip_delay": "0",
+            "auto_scale_images": "1"
         }
     },
     "#random_dice_button":
