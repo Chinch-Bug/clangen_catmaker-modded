@@ -7,6 +7,7 @@ from scripts.game_structure.game_essentials import *
 import traceback
 from scripts.cat.phenotype import Phenotype
 import logging
+from copy import deepcopy
 logger = logging.getLogger(__name__)
 
 
@@ -335,10 +336,6 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                             pattern_sprite.set_alpha(125)
                     stripebase.blit(pattern_sprite, (0, 0))
 
-                if not_red and special != "no_shading" and not is_amber:
-                    stripebase.blit(
-                        sprites.sprites["tabbypads" + cat_sprite], (0, 0))
-
                 charc = pygame.Surface(
                     (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                 charc_shading = pygame.Surface(
@@ -398,8 +395,10 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                     golden_gradient = pygame.Surface(
                         (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                     golden_gradient.fill((255, 255, 255))
-                    stripebase.blit(golden_gradient, (0, 0),
-                                    special_flags=pygame.BLEND_RGB_MAX)
+                    stripebase.blit(golden_gradient, (0, 0), special_flags=pygame.BLEND_RGB_MAX)
+
+                if not_red and special != "no_shading" and not is_amber:
+                    stripebase.blit(sprites.sprites["tabbypads" + cat_sprite], (0, 0))
 
                 if not preset_pattern and len(pattern) > 2:
                     if phenotype.soktype == "full sokoke":
@@ -451,7 +450,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
 
                 return stripebase
 
-            def get_tabby_base(base_string, is_apricot = False):
+            def get_tabby_base(base_string, stripe_colour, is_apricot = False):
                 basecolour, rufousing, wideband = base_string.rsplit("_", 2)
                 next_base = basecolour
                 rufousing = int(rufousing) if rufousing != "silver" else rufousing
@@ -482,7 +481,13 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         next_ruf_block = 0
 
                 main_colour = sprites.sprites[basecolour + ruf_blocks[main_ruf_block] + wb_blocks[main_wb_block]+"0"].get_at((0, 0))
-                final_colour = main_colour
+                final_colour = deepcopy(main_colour)
+
+                shift_by = sprites.sprites[stripe_colour].get_at((0, 0))
+                comp = sprites.sprites[stripe_colour[:-1]+"3"].get_at((0, 0))
+                for i in range(3):
+                    final_colour[i] = max(min(final_colour[i] + int((shift_by[i] - comp[i]) * 0.25 * (4-main_wb_block)), 255), 0)
+                
 
                 if is_apricot and (next_ruf_block < main_ruf_block or rufousing == "silver"):
                     comparison_colour = sprites.sprites[next_base + ruf_blocks[next_ruf_block] + wb_blocks[main_wb_block]+"0"].get_at((0, 0))
@@ -507,7 +512,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
             def TabbyBase(whichcolour, whichbase, cat_unders, special=None):
                 is_red = (
                     'red' in whichcolour or 'cream' in whichcolour or 'honey' in whichcolour or 'ivory' in whichcolour or 'apricot' in whichcolour)
-                whichmain = get_tabby_base(whichbase, "apricot" in whichcolour)
+                whichmain = get_tabby_base(whichbase, stripecolourdict.get(whichcolour[:-1], whichcolour[:-1])+whichcolour[-1], "apricot" in whichcolour)
                 if special != 'copper' and sprite_age > 12 and (phenotype.silver[0] == 'I' and phenotype.corin[0] == 'fg' and (get_current_season() == 'Leaf-fall' or get_current_season() == 'Leaf-bare')):
                     sunshine = pygame.Surface(
                         (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
@@ -737,7 +742,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                         colourbase = pygame.Surface(
                             (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                         if ("black" in whichcolour and phenotype.pointgene[0] == "cm"):
-                            colourbase.blit(get_tabby_base(whichbase.replace("black", "cinnamon")), (0, 0))
+                            colourbase.blit(get_tabby_base(whichbase.replace("black", "cinnamon"), whichcolour), (0, 0))
                         else:
                             colourbase = TabbyBase(
                                 whichcolour, whichbase, cat_unders, special)
@@ -794,7 +799,7 @@ def generate_sprite(cat, life_state=None, scars_hidden=False, acc_hidden=False, 
                                 (sprites.size, sprites.size), pygame.HWSURFACE | pygame.SRCALPHA)
                             colourbase.blit(
                                 sprites.sprites['lightbasecolours0'], (0, 0))
-                            colourbase2.blit(get_tabby_base(whichbase.replace("black", "cinnamon")), (0, 0))
+                            colourbase2.blit(get_tabby_base(whichbase.replace("black", "cinnamon"), whichcolour), (0, 0))
                             colourbase2.set_alpha(150)
                             colourbase.blit(colourbase2, (0, 0))
                         else:

@@ -708,9 +708,6 @@ class Phenotype(Genotype):
             if (self.ext[0] == 'ea' and ((moons > 11 and self.agouti[0] != 'a') or (moons > 23))):
                 return [maincolour] + self.FindRed(genes, moons)[1:]
 
-            if self.fur_shade < 3 and colour in ['blue', 'lilac', 'fawn', 'dove']:
-                colour = "pale_" + colour
-
             rufousing = ""
             alt_ruf = ""
             banding = ""
