@@ -64,17 +64,17 @@ class Cat():
                                 "GRUMPYFACE": "Grumpy Face", "BRIE": "Brie", "BELOVED": "Beloved", "SHILOH" : "Shiloh", 
                                 "BODY" : "Body"}
         self.age = choice(list(self.pelt.current_poses.keys()))
-        length = choice(['Short', 'Long', 'Short Rexed', 'Long Rexed', 'Short', 'Long', 'Short Rexed', 'Long Rexed', 'Hairless', "Patchy Brush SH", "Patchy Brush LH", "Fur-point"])
+        length = choice(['Short', 'Long', 'Short', 'Long', 'Short', 'Long', 'Short Rexed', 'Long Rexed', 'Short', 'Long', 'Short Rexed', 'Long Rexed', 'Hairless', "Patchy Brush SH", "Patchy Brush LH", "Fur-point"])
         self.pelt.set_pelt_length(length)
         self.phenotype.SetFurLength(length.lower())
 
         
 
-        self.phenotype.SetEarType(choice(['normal', 'folded', 'curled', 'folded curl']))
-        self.phenotype.SetTailType(choice(['full', '3/4', '1/2', '1/3', 'stubby', 'none']))
+        self.phenotype.SetEarType(choice(['normal', 'normal', 'normal', 'normal', 'normal', 'folded', 'curled', 'folded curl']))
+        self.phenotype.SetTailType(choice(['full', 'full', 'full', 'full', '3/4', '1/2', '1/3', 'stubby', 'none']))
         
         def SubRandomize(phenotype):
-            phenotype.SetPoints(choice(['Normal', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']))
+            phenotype.SetPoints(choice(['Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Normal', 'Colourpoint', 'Mink', 'Sepia', 'Colourpoint', 'Mink', 'Sepia', 'Point-Albino', 'Sepia-Albino', 'Siamocha', 'Burmocha', 'Mocha', 'Mocha-Albino']))
             phenotype.chimerapattern = choice(list(tortie_patches_shapes.keys()))
             if phenotype.sexgene is not ['O', 'O']:
                 phenotype.sexgene = choice([['o', 'o'], ['o', 'o'], ['O', 'o']])
@@ -82,8 +82,9 @@ class Cat():
                     phenotype.tortie = True
                 else:
                     phenotype.tortie = False
-            phenotype.SetBaseColour(choice(['Black', 'Blue', 'Red', 'Cream', 'White', 'Albino', 'Chocolate', 'Lilac', 'Cinnamon', 'Fawn', 'Dove', 'Platinum', 
-            'Honey', 'Ivory', 'Champagne', 'Lavender', 'Buff', 'Beige']).lower())
+            phenotype.SetBaseColour(choice(['Black', 'Blue', 'Chocolate', 'Lilac', 'Cinnamon', 'Fawn', 'Red', 'Cream', 
+            'Black', 'Blue', 'Chocolate', 'Lilac', 'Cinnamon', 'Fawn', 'Red', 'Cream',
+            'White', 'Albino', 'White', 'Albino', 'Dove', 'Platinum', 'Honey', 'Ivory', 'Champagne', 'Lavender', 'Buff', 'Beige']).lower())
 
             if random() < 0.1:
                 phenotype.specialred = choice(['cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'cameo', 'pseudo-cinnamon', 'blue-red', 'blue-tipped', 'blue-tipped'])
@@ -104,6 +105,7 @@ class Cat():
                 global_vars.CREATED_CAT.phenotype.fade = 'Homozygous'
 
             phenotype.fur_shade = choice([0, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6])
+            phenotype.colour_warmth = choice([0, 1, 1, 2])
 
             phenotype.refone = 'R' + str(randint(1, 11))
             phenotype.refext = 'R' + str(randint(1, 11))

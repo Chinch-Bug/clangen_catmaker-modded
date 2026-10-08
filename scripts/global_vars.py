@@ -82,7 +82,7 @@ patches += list(sprites.WHITE_PATCH_COMBOS["mostly"].keys())
 patches.sort()
 white_patches += patches
 
-tortie_patches_shapes = ["CRYPTIC"]
+tortie_patches_shapes = []
 for patchlist in sprites.TORTIE_DATA["sprite_list"]:
     tortie_patches_shapes += patchlist
 tortie_patches_shapes += list(sprites.TORTIE_PATCH_COMBOS.keys())

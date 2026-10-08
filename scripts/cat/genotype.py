@@ -34,7 +34,7 @@ class Genotype:
         self.eumelanin = ["B", "B"]
         self.sexgene = ["o", "o"]
         self.specialred = "none"
-        self.tortiepattern = []
+        self.tortiepattern = {"0": []}
         self.brindledbi = False
         self.chimera = False
         self.chimerapattern = None
@@ -106,6 +106,7 @@ class Genotype:
         self.blacknose = False
 
         self.fur_shade = 3
+        self.colour_warmth = 1
 
         self.bengal = ""
         self.bengtype = "normal markings"
@@ -210,6 +211,7 @@ class Genotype:
 
             "wideband" : self.wideband,
             "fur_shade" : self.fur_shade,
+            "colour_warmth" : self.colour_warmth,
             "rufousing" : self.rufousing,
             "unders_ruf": self.unders_ruf,
             "bengal" : self.bengal,

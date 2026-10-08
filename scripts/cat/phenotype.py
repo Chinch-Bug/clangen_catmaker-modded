@@ -32,6 +32,7 @@ class Phenotype(Genotype):
         self.reftwo = 'R11'
         self.pigext = 'P11'
         self.refext = 'R1'
+        self.x_colours = [x for x in self.sexgene if x != "Y"]
         
         tortie_patches_shapes = {"ONE": "One", "TWO": "Two", "THREE": "Three", "FOUR": "Four",  'REDTAIL': "Redtail",
                                  'DELILAH': "Delilah", 'MINIMALONE': "Minimal 1", 'MINIMALTWO': "Minimal 2",
@@ -51,7 +52,7 @@ class Phenotype(Genotype):
     def SilverGoldFinder(self):
         self.silvergold = ""
 
-        if (self.agouti[0] == 'a' and 'o' in self.sexgene):
+        if (self.agouti[0] == 'a' and 'o' in self.x_colours):
             if (self.silver[0] == 'I'):
                 if (self.wbtype == 'chinchilla'):
                     self.silvergold = 'masked silver '
@@ -65,7 +66,7 @@ class Phenotype(Genotype):
                     self.silvergold = 'bimetallic '
                 elif (self.corin[0] == 'fg'):
                     self.silvergold = 'silver copper '
-                elif ('o' not in self.sexgene):
+                elif ('o' not in self.x_colours):
                     self.silvergold = 'cameo '
                 else:
                     self.silvergold = 'silver '
@@ -80,7 +81,7 @@ class Phenotype(Genotype):
 
     def ExtFinder(self):
         self.ext_colour = self.colour
-        if('o' in self.sexgene):
+        if('o' in self.x_colours):
             if(self.ext[0] == 'ec'):
                 if(self.ext_colour == ''):
                     pass
@@ -280,6 +281,12 @@ class Phenotype(Genotype):
                         chosen.append(choice(tortie_mid_patterns))
                     else:
                         chosen.append(choice(tortie_low_patterns))
+
+                if randint(1, round(15/((i+1)*2))) == 1:
+                    if 'rev' in chosen[-1]:
+                        chosen[-1] = chosen[-1].replace('rev', '')
+                    else:
+                        chosen[-1] = 'rev' + chosen[-1]
 
         return chosen 
 
@@ -483,7 +490,7 @@ class Phenotype(Genotype):
                 elif (self.tabby == 'blotched'):
                     self.tabby = 'sokoke'
 
-        if ('o' not in self.sexgene or self.agouti[0] != 'a' or self.tabtype != '' or ('smoke' in self.silvergold and self.length == 'shorthaired') or self.ext[0] not in ['Eg', 'E']):
+        if ('o' not in self.x_colours or self.agouti[0] != 'a' or self.tabtype != '' or ('smoke' in self.silvergold and self.length == 'shorthaired') or self.ext[0] not in ['Eg', 'E']):
             FindPattern()
 
         if (self.tortie and self.tabby != '' and not self.brindledbi):
@@ -494,7 +501,7 @@ class Phenotype(Genotype):
         elif (self.tabby != '' and self.point in ['point ', 'mink ', 'siamocha ']):
             if (self.colour == 'seal' or self.colour == 'chocolate'):
                 self.tabby += ' lynx '
-            elif ('o' not in self.sexgene):
+            elif ('o' not in self.x_colours):
                 self.tabby = ''
             else:
                 self.tabby = ' lynx '
@@ -559,55 +566,32 @@ class Phenotype(Genotype):
         else:
             self.agouti = ['A', 'A']
 
-    def SpriteInfo(self, moons):
-        self.maincolour = ""
-        self.mainunders = []
-        self.spritecolour = ""
+    def SpriteInfo(self, moons, x_colour=None):
+        self.basecolour = ""
+        self.tabbyunders = []
+        self.secondarycolour = ""
         self.caramel = ""
-        self.patchmain = ""
-        self.patchunders = []
-        self.patchcolour = ""
 
-        if (self.pseudomerle):
-            if not self.merlepattern:
-                self.merlepattern = self.ChooseTortiePattern(
-                    spec='merle')
+        if x_colour is None:
+            self.x_colours = [x for x in self.sexgene if x != "Y"]
+            x_colour = self.x_colours[-1]
 
-        if self.white[0] == "W" or self.pointgene[0] == "c" or ('DBEalt' not in self.pax3 and 'NoDBE' not in self.pax3) or (self.brindledbi and (('o' not in self.sexgene) or (self.ext[0] == 'ea' and ((moons > 11 and self.agouti[0] != 'a') or (moons > 23))) or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and (self.agouti[0] != 'a' or moons > 5)))):
-            self.spritecolour = "white"
-            self.maincolour = self.spritecolour
-        elif ('o' not in self.sexgene) or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and moons > 0 and (self.agouti[0] != 'a' or moons > 5)):
+        if self.pseudomerle and not self.merlepattern:
+            self.merlepattern = self.ChooseTortiePattern(spec='merle')
+
+        if self.white[0] == "W" or self.pointgene[0] == "c" or ('DBEalt' not in self.pax3 and 'NoDBE' not in self.pax3) or (self.brindledbi and (('o' not in self.x_colours) or (self.ext[0] == 'ea' and ((moons > 11 and self.agouti[0] != 'a') or (moons > 23))) or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and (self.agouti[0] != 'a' or moons > 5)))):
+            self.secondarycolour = "white"
+            self.basecolour = self.secondarycolour
+        elif x_colour == "O" or (self.ext[0] == 'er' and moons > 23) or (self.ext[0] == 'ec' and moons > 0 and (self.agouti[0] != 'a' or moons > 5)):
             main = self.FindRed(self, moons, special=self.ext[0])
-            self.maincolour = main[0]
-            self.spritecolour = main[1]
-            self.mainunders = [main[2], main[3]]
-        elif ('O' not in self.sexgene):
+            self.basecolour = main[0]
+            self.secondarycolour = main[1]
+            self.tabbyunders = [main[2], main[3]]
+        elif x_colour == "o":
             main = self.FindBlack(self, moons)
-            self.maincolour = main[0]
-            self.spritecolour = main[1]
-            self.mainunders = [main[2], main[3]]
-        else:
-            if not self.tortiepattern:
-                self.tortiepattern = self.ChooseTortiePattern()
-                for i in range(len(self.tortiepattern)):
-                    if randint(1, round(10/((i+1)*2))) == 1:
-                        if 'rev' in self.tortiepattern[i]:
-                            self.tortiepattern[i] = self.tortiepattern[i].replace('rev', '')
-                        else:
-                            self.tortiepattern[i] = 'rev' + self.tortiepattern[i]
-
-            main = self.FindBlack(self, moons)
-            self.maincolour = main[0]
-            self.spritecolour = main[1]
-            self.mainunders = [main[2], main[3]]
-            if (self.brindledbi):
-                self.patchmain = "white"
-                self.patchcolour = "white"
-            else:
-                main = self.FindRed(self, moons)
-                self.patchmain = main[0]
-                self.patchcolour = main[1]
-                self.patchunders = [main[2], main[3]]
+            self.basecolour = main[0]
+            self.secondarycolour = main[1]
+            self.tabbyunders = [main[2], main[3]]
 
     def FindEumUnders(self, genes, wideband, rufousing, unders_ruf):
         if(genes.dilute[0] == "d"):
@@ -625,7 +609,7 @@ class Phenotype(Genotype):
         if wideband in ["chinchilla", "shaded"]:
             colour = "lightbasecolours0"
         elif unders_ruf == "rufoused":
-            if colour != "red":
+            if colour != "red" or genes.eumelanin[0] == "bl":
                 colour = "low" + colour + "3"
             else:
                 colour = rufousing + colour + "3"
@@ -830,9 +814,9 @@ class Phenotype(Genotype):
                 if rufousing != "silver":
                     alt_ruf = f"_{genes.rufousing-6}"
 
-        if (genes.ext[0] == "ec" and genes.agouti[0] == "a" and 'o' in genes.sexgene):
+        if (genes.ext[0] == "ec" and genes.agouti[0] == "a" and 'o' in genes.x_colours):
             unders_opacity = 0
-        elif rufousing == "silver" or (genes.ext[0] == "ec" and genes.agouti[0] != "a" and 'o' in genes.sexgene):
+        elif rufousing == "silver" or (genes.ext[0] == "ec" and genes.agouti[0] != "a" and 'o' in genes.x_colours):
             unders_opacity = self.GetSilverUnders(banding)
         else:
             unders_opacity = self.GetRedUnders(banding)

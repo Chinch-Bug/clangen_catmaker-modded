@@ -159,7 +159,6 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.phenotype.tortie = True
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
-                global_vars.CREATED_CAT.phenotype.tortiepattern = global_vars.CREATED_CAT.phenotype.tortiepattern
                 self.build_dropdown_menus()
             elif event.ui_element == self.checkboxes["revtortie"]:
                 if self.tortierev == "rev":
@@ -236,7 +235,7 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["add_tortie"]:
 
                 if self.selectedtortie:
-                    global_vars.CREATED_CAT.phenotype.tortiepattern.append(
+                    global_vars.CREATED_CAT.phenotype.tortiepattern["0"].append(
                         self.tortierev + self.selectedtortie)
 
                 self.build_dropdown_menus()
@@ -267,8 +266,8 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["remove_tortie"]:
 
-                while self.selectedtortierem in global_vars.CREATED_CAT.phenotype.tortiepattern:
-                    global_vars.CREATED_CAT.phenotype.tortiepattern.remove(
+                while self.selectedtortierem in global_vars.CREATED_CAT.phenotype.tortiepattern["0"]:
+                    global_vars.CREATED_CAT.phenotype.tortiepattern["0"].remove(
                         self.selectedtortierem)
 
                 self.selectedtortierem = 'None'
@@ -297,7 +296,7 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["clear_tortie"]:
 
-                global_vars.CREATED_CAT.phenotype.tortiepattern = []
+                global_vars.CREATED_CAT.phenotype.tortiepattern["0"] = []
 
                 self.selectedtortierem = 'None'
 
@@ -339,7 +338,6 @@ class CreationScreen(base_screens.Screens):
                     global_vars.CREATED_CAT.chimerapheno.tortie = True
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
-                global_vars.CREATED_CAT.chimerapheno.tortiepattern = global_vars.CREATED_CAT.chimerapheno.tortiepattern
                 self.build_dropdown_menus()
             elif event.ui_element == self.checkboxes["revtortiec"]:
                 if self.chimtortierev == "rev":
@@ -427,7 +425,7 @@ class CreationScreen(base_screens.Screens):
             elif event.ui_element == self.dropdown_menus["add_tortiec"]:
 
                 if self.selectedtortiechim:
-                    global_vars.CREATED_CAT.chimerapheno.tortiepattern.append(
+                    global_vars.CREATED_CAT.chimerapheno.tortiepattern["0"].append(
                         self.chimtortierev + self.selectedtortiechim)
 
                 self.build_dropdown_menus()
@@ -457,8 +455,8 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["remove_tortiec"]:
 
-                while self.selectedtortieremchim in global_vars.CREATED_CAT.chimerapheno.tortiepattern:
-                    global_vars.CREATED_CAT.chimerapheno.tortiepattern.remove(
+                while self.selectedtortieremchim in global_vars.CREATED_CAT.chimerapheno.tortiepattern["0"]:
+                    global_vars.CREATED_CAT.chimerapheno.tortiepattern["0"].remove(
                         self.selectedtortieremchim)
 
                 self.selectedtortieremchim = 'None'
@@ -487,7 +485,7 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["clear_tortiec"]:
 
-                global_vars.CREATED_CAT.chimerapheno.tortiepattern = []
+                global_vars.CREATED_CAT.chimerapheno.tortiepattern["0"] = []
 
                 self.selectedtortieremchim = 'None'
 
@@ -645,6 +643,11 @@ class CreationScreen(base_screens.Screens):
                 global_vars.CREATED_CAT.phenotype.fur_shade = int(event.text)
 
                 self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["colour_warmth_select"]:
+
+                global_vars.CREATED_CAT.phenotype.colour_warmth = int(event.text)
+
+                self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["rusting"]:
                 global_vars.CREATED_CAT.pelt.rusting = {global_vars.rusting_sprites.inverse[event.text]: self.sliders["rusting"].get_current_value()}
 
@@ -760,6 +763,11 @@ class CreationScreen(base_screens.Screens):
 
                 global_vars.CREATED_CAT.chimerapheno.fur_shade = int(
                     event.text)
+
+                self.update_cat_image()
+            elif event.ui_element == self.dropdown_menus["colour_warmth_selectc"]:
+
+                global_vars.CREATED_CAT.chimerapheno.colour_warmth = int(event.text)
 
                 self.update_cat_image()
             elif event.ui_element == self.dropdown_menus["vitiligo_selectc"]:
@@ -1346,7 +1354,10 @@ class CreationScreen(base_screens.Screens):
         self.labels["specred"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Special Red:",
                                                              container=self.main_colour_tab,
                                                              object_id="#dropdown_label")
-        self.labels["sat"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Fur Shade:",
+        self.labels["sat"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (85, 25)), "Fur Shade:",
+                                                         container=self.main_colour_tab,
+                                                         object_id="#dropdown_label")
+        self.labels["warmth"] = pygame_gui.elements.UILabel(pygame.Rect((300, 15), (85, 25)), "Warmth:",
                                                          container=self.main_colour_tab,
                                                          object_id="#dropdown_label")
 
@@ -1398,7 +1409,10 @@ class CreationScreen(base_screens.Screens):
         self.labels["specredc"] = pygame_gui.elements.UILabel(pygame.Rect((400, 70), (150, 25)), "Special Red:",
                                                               container=self.chim_main_colour_tab,
                                                               object_id="#dropdown_label")
-        self.labels["satc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (150, 25)), "Fur Shade:",
+        self.labels["satc"] = pygame_gui.elements.UILabel(pygame.Rect((210, 15), (85, 25)), "Fur Shade:",
+                                                          container=self.chim_main_colour_tab,
+                                                          object_id="#dropdown_label")
+        self.labels["warmthc"] = pygame_gui.elements.UILabel(pygame.Rect((300, 15), (85, 25)), "Warmth:",
                                                           container=self.chim_main_colour_tab,
                                                           object_id="#dropdown_label")
 
@@ -1801,6 +1815,11 @@ class CreationScreen(base_screens.Screens):
                                                pygame.Rect(
                                                    (210, 35), (85, 30)),
                                                container=self.chim_main_colour_tab)
+        self.dropdown_menus["colour_warmth_selectc"] = \
+            custom_buttons.UIDropDownMenu(['0', '1', '2'],
+                                               str(global_vars.CREATED_CAT.chimerapheno.colour_warmth),
+                                               pygame.Rect((300, 35), (85, 30)),
+                                               container=self.chim_main_colour_tab)
 
         self.dropdown_menus["ref1_selectc"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
                                                                                  global_vars.CREATED_CAT.chimerapheno.refone,
@@ -1899,6 +1918,11 @@ class CreationScreen(base_screens.Screens):
                                                str(global_vars.CREATED_CAT.phenotype.fur_shade),
                                                pygame.Rect(
                                                    (210, 35), (85, 30)),
+                                               container=self.main_colour_tab)
+        self.dropdown_menus["colour_warmth_select"] = \
+            custom_buttons.UIDropDownMenu(['0', '1', '2'],
+                                               str(global_vars.CREATED_CAT.phenotype.colour_warmth),
+                                               pygame.Rect((300, 35), (85, 30)),
                                                container=self.main_colour_tab)
 
         self.dropdown_menus["ref1_select"] = custom_buttons.UIDropDownMenu(['R11', 'R10', 'R9', 'R8', 'R7', 'R6', 'R5', 'R4', 'R3', 'R2', 'R1'],
@@ -2087,7 +2111,7 @@ class CreationScreen(base_screens.Screens):
                                                                         container=self.tortie_tab)
 
         self.dropdown_menus["tortie_remove"] = \
-            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.tortiepattern,
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.phenotype.tortiepattern["0"],
                                                self.selectedtortierem,
                                                pygame.Rect(
                                                    (240, 35), (175, 30)),
@@ -2139,7 +2163,7 @@ class CreationScreen(base_screens.Screens):
                                                                          container=self.chim_tortie_tab)
 
         self.dropdown_menus["tortie_removec"] = \
-            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.tortiepattern,
+            custom_buttons.UIDropDownMenu(['None'] + global_vars.CREATED_CAT.chimerapheno.tortiepattern["0"],
                                                self.selectedtortierem,
                                                pygame.Rect(
                                                    (240, 35), (175, 30)),

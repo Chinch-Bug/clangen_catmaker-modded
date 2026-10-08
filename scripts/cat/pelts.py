@@ -247,7 +247,6 @@ class Pelt():
         self.eye_colour2 = eye_colour2
         self.tortiebase = tortiebase
         self.pattern = pattern
-        self.tortiepattern = tortiepattern
         self.tortiecolour = tortiecolour
         self.vitiligo = vitiligo
         self.length=length
@@ -477,7 +476,6 @@ class Pelt():
         
         self.pattern = random.choice(list(global_vars.tortie_patches_shapes.keys()))
         self.tortiecolour = random.choice(list(global_vars.colors.keys()))
-        self.tortiepattern = random.choice(list(global_vars.tortie_patches_patterns.keys()))
 
     def init_white_patches(self):
          
