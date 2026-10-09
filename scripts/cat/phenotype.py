@@ -525,7 +525,7 @@ class Phenotype(Genotype):
             self.ticked = ['ta', 'ta']
             self.breakthrough = False
 
-        if input in ['reduced tickedc', 'tickedc', 'blotched', 'marbled', "partialmarble", "sheetmarble", "sheetblotched", "ghost"]:
+        if input in ['reduced tickedc', 'tickedc', 'blotched', 'marbled', "partial marble", "sheetmarble", "sheetblotched", "ghost"]:
             self.mack = ['mc', 'mc']
         else:
             self.mack = ['Mc', 'Mc']
