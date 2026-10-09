@@ -667,7 +667,7 @@ class Cat():
             "sprite_senior": self.pelt.cat_sprites['senior'],
             "sprite_para_adult": self.pelt.cat_sprites['para_adult'],
             "reverse": self.pelt.reverse,
-            "rusting": self.pelt.rusting,
+            "rusting": self.pelt.rusting if None not in self.pelt.rusting else None,
             "tint": None,
             "white_tint": None,
             "skill_dict": {
