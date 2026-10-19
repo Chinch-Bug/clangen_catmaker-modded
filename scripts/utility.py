@@ -726,7 +726,7 @@ def create_cat(cat, phenotype, cat_sprite, sprite_age, merle=False):
                 shading.blit(
                     sprites.sprites[phenotype.wbtype + 'shading' + cat_sprite], (0, 0))
             if "silver" in whichbase:
-                shading.set_alpha(150)
+                shading.set_alpha(200)
 
             stripebase.blit(shading, (0, 0))
 
