@@ -207,7 +207,7 @@ class Phenotype(Genotype):
                         "EYEBAGS", "revEYESPOT", "revHEART", "HONEY", "LEFTEAR_MID", "LEFTEAR_MOSTLY", "LEFTEAR_RING", "LEFTEAR_TIP", "LEFTEAR", "LITTLE", "PAWS", "REVERSEEYE", "REVERSEHEART", 
                         "RIGHTEAR_MID", "RIGHTEAR_MOSTLY", "RIGHTEAR_RING", "RIGHTEAR_TIP", "RIGHTEAR", "SCOURGE", "SPARKLE", "revTAIL", 'revTAILTWO', "TAILTIP", "TEARS", "TIP",
                         "TOES", "TOESTAIL", "MIDTOESTAIL", "MINTOESTAIL", "VEE", "HELMET", "TAILTIP_T", "PAW_FR_T", "PAW_FL_CLOVERTAIL", "PAW_BR_WING", "PAW_BL_SPLOTCH", "UNDERPAWS_T", "BELLY_T", "BOTHEARS_T", 
-                        "EYELINER_T", "LEAKY_EYE"]
+                        "EYELINER_T", "LEAKY_EYE", "REV_SHOOTINGSTAR", "TAIL_MID_RING", "TAIL_HIGH_RING", "TAIL_LOW_RING"]
         
                 
         chosen = []
@@ -218,7 +218,7 @@ class Phenotype(Genotype):
         elif spec:
             chosen.append((choice([choice(tortie_high_patterns), choice(tortie_high_patterns), choice(tortie_mid_patterns), choice(tortie_mid_patterns), choice(tortie_low_patterns)])).replace("rev", ""))
 
-        elif randint(1, 100) == 1:
+        elif randint(1, self.odds['cryptic_tortie']) == 1:
             chosen.append('CRYPTIC')
             
         else:
@@ -233,12 +233,13 @@ class Phenotype(Genotype):
                     tortie_mid_patterns = ["revAPPALOOSA", "BLOSSOMSTEP", "BOWTIE", "revBROKEN", "revBUB", "BULLSEYE", "revBUSTER", 
                                         "BUZZARDFANG", "revCOW", "revCOWTWO", "DAMIEN", "DAPPLEPAW", "DIVA", "FCTWO", "revFINN", 
                                         "FRECKLES", "revGLASS", "HAWKBLAZE", "revLOVEBUG", "MITAINE", "PAINTED", "PANTSTWO", 
-                                        "revPEBBLE", "revPIEBALD", "ROSINA", "revSHOOTINGSTAR", "SPARROW", "WOODPECKER"]*2 + tiny_patches
+                                        "revPEBBLE", "revPIEBALD", "ROSINA", "revSHOOTINGSTAR", "SPARROW", "WOODPECKER", "TWO_SPOT",
+                                        "AMORE"]*2 + tiny_patches
                     tortie_high_patterns = ["revANY", "revANYTWO", "BLOSSOMSTEP", "revBUB", "revBUDDY", "revBUSTER", "revCAKE", 
                                         "revCOW", "revCURVED", "DAPPLEPAW", "FCTWO", "FAROFA", "revGOATEE", "revHALFFACE", 
                                         "HAWKBLAZE", "LILTWO", "MISS", "MISTER", "revMOORISH", "OWL", "PANTS", "revPRINCE", 
                                         "REVERSEPANTS", "RINGTAIL", "SAMMY", "SKUNK", "SPARROW", "TOPCOVER", "VEST", "WINGS",
-                                        "ROSINA_REDUCED"]*2 + tiny_patches
+                                        "ROSINA_REDUCED", "BIBFULL_T"]*2 + tiny_patches
                 elif i > 0 and randint(1, 3) == 1:
                     tortie_low_patterns = tiny_patches
                     tortie_mid_patterns = tiny_patches
@@ -288,7 +289,7 @@ class Phenotype(Genotype):
                     else:
                         chosen[-1] = 'rev' + chosen[-1]
 
-        return chosen 
+        return chosen
 
     def SetFurLength(self, type):
         if 'long' in type or 'lh' in type:

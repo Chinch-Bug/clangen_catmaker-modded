@@ -3,6 +3,7 @@
 pseudo_merle = 200
 breakthrough = 50
 dense_blotched = 50
+cryptic_tortie = 100
 
 # All genes are 1/x chances. They can be set to 0 to prevent it from appearing at all
 longhair = 2
