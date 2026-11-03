@@ -47,7 +47,6 @@ class Genotype:
         self.white_pattern = [None]
         self.vitiligo = True
         self.deaf = False
-        self.fevercoat = False
         self.pointgene = ["C", "C"]
         self.silver = ["i", "i"]
         self.agouti = ["a", "a"]
@@ -146,7 +145,6 @@ class Genotype:
 
     def toJSON(self):
         return {
-            "fevercoat" : self.fevercoat,
             "furLength": self.furLength,
             "longtype": self.longtype,
             "eumelanin": self.eumelanin,

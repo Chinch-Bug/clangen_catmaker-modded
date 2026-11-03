@@ -142,10 +142,10 @@ class Cat():
 
             phenotype.soktype = choice(['normal markings', 'normal markings', 'normal markings', 'normal markings','normal markings' , 'full sokoke', 'mild fading', 'mild fading'])
 
-            phenotype.fevercoat = random() < 0.1
+            self.pelt.fevercoat = random() < 0.01
             phenotype.silver[0] = choice(['I', 'i', 'i'])
             if phenotype.silver[0] == 'I':
-                phenotype.pseudomerle = random() < 0.1
+                phenotype.pseudomerle = random() < 0.05
             else:
                 phenotype.pseudomerle = False
             phenotype.wideband = choice(list(range(16)))
@@ -294,8 +294,8 @@ class Cat():
                                 if 'underbelly1' not in white_pattern:
                                     white_pattern.append('belly')
                                 
-                                if random() < 0.2:
-                                    white_pattern.append(choice(['belt', 'BELLY_FULL', 'pants']))
+                                if random() < 0.1:
+                                    white_pattern.append(choice(['belt', 'BELLY_FULL', 'pants', "FLANK_MID"]))
 
                                 #paws
                                 nropaws = choice([4, 4, 4, 4, 3, 3, 2, 2, 1])
@@ -342,8 +342,8 @@ class Cat():
                             while len(white_pattern) < 6:
                                 #chest
                                 white_pattern.append('underbelly1')
-                                if random() < 0.25:
-                                    white_pattern.append(choice(['belt', 'BELLY_FULL', 'pants']))
+                                if random() < 0.15:
+                                    white_pattern.append(choice(['belt', 'BELLY_FULL', 'pants', "FLANK_FULL", "FLANK_MID"]))
 
                                 #paws
                                 nropaws = 4
@@ -655,6 +655,7 @@ class Cat():
                     elif pax3[0] != "NoDBE" and random() < 0.25:
                         white_pattern.append(choice(["BLAZE", "BLAZE_MID", "BLAZE_SMALL", "EYESPOT_L", "EYESPOT_R", "MUZZLE",
                         "UNDEREYE_MAX_L", "UNDEREYE_MAX_R", "UNDEREYE_MIN_L", "UNDEREYE_MIN_R"]))
+
                     if KIT[0] != "wg" and random() < 0.2:
                         valid_legs = []
                         for w in white_pattern:
@@ -754,6 +755,7 @@ class Cat():
             "sprite_senior": self.pelt.cat_sprites['senior'],
             "sprite_para_adult": self.pelt.cat_sprites['para_adult'],
             "reverse": self.pelt.reverse,
+            "fevercoat": self.pelt.fevercoat,
             "rusting": self.pelt.rusting if self.pelt.rusting and None not in self.pelt.rusting else None,
             "tint": None,
             "white_tint": None,

@@ -30,20 +30,21 @@ class Pelt():
                   'RAVENPAW', 'DAPPLEPAW', 'LILTWO', 'REVERSEHEART', 'SPARKLE', 'REVERSEEYE', "CHEST_MID", "CHEST_SMALL",
                   "CHEST_STREAK", "BELLY_MIN", "MINTOESTAIL", "SPARKLECAT", "DAMIEN", "DIVA", "DOCTOR", "FCONE_REDUCED"],
             '3': ['TUXEDO', 'SAVANNAH', 'FANCY', 'DIVA', 'BEARD', "DAMIEN_REDUCED", 'DAMIEN', 'BELLY', 'SQUEAKS', 'STAR', 'MISS',
-                  'FCTWO', 'FCONE', 'MIA', 'PRINCESS', 'DOUGIE', 'STREAMSTRIKE', "NECKTIE", "BOWTIE", "DAMIEN", "FCTWO_REDUCED"],
+                  'FCTWO', 'FCONE', 'MIA', 'PRINCESS', 'DOUGIE', 'STREAMSTRIKE', "NECKTIE", "BOWTIE", "DAMIEN", "FCTWO_REDUCED",
+                  "HUNTSMANGLIDE"],
             '4': ['TUXEDO', 'SAVANNAH', 'OWL', 'RINGTAIL', 'FAROFA', 'VEST', 'FRONT', 'BLOSSOMSTEP', 'DIGIT',
-                  'HAWKBLAZE', "BERRYHEART", "CLIFF", 'DIGIT_REDUCED'],
+                  'HAWKBLAZE', "BERRYHEART", "CLIFF", 'DIGIT_REDUCED', "FUZZSPOT"],
             '5': ['ANY', 'SHIBAINU', 'FAROFA', 'MISTER', 'PANTS', 'TRIXIE']
         },
         'high': {
             '1': ['ANY', 'SHIBAINU', 'PANTSTWO', 'MAO', 'TRIXIE'],
             '2': ['ANY', 'FRECKLES', 'PANTSTWO', 'MASKMANTLE', 'MAO', 'PAINTED', 'BUB', 'SCAR'],
             '3': ['ANYTWO', 'BROKEN', 'PIEBALD', 'FRECKLES', 'HALFFACE', 'GOATEE', 'PRINCE', 'CAPSADDLE',
-                    'REVERSEPANTS', 'GLASS', 'COWTWO', 'SAMMY', 'FINN', 'BUSTER', 'CAKE', "FALLEN_LEAVES"],
+                  'REVERSEPANTS', 'GLASS', 'COWTWO', 'SAMMY', 'FINN', 'BUSTER', 'CAKE', "FALLEN_LEAVES"],
             '4': ['VAN', 'PEBBLESHINE', 'LIGHTSONG', 'CURVED', 'GOATEE', 'TAIL', 'APRON', 'HALFWHITE', 'APPALOOSA', 'HEART',
-                    'MOORISH', 'COW', 'SHOOTINGSTAR', 'PEBBLE', 'TAILTWO', 'BUDDY', 'KROPKA'],
+                  'MOORISH', 'COW', 'SHOOTINGSTAR', 'PEBBLE', 'TAILTWO', 'BUDDY', 'KROPKA'],
             '5': ['ONEEAR', 'LIGHTSONG', 'PETAL', 'CHESTSPECK', 'HEARTTWO', 'BOOTS', 'SHOOTINGSTAR', 'EYESPOT',
-                    'KROPKA']
+                  'KROPKA']
         }
     }
     
@@ -228,7 +229,8 @@ class Pelt():
                  paralyzed:bool=False,
                  opacity:int=100,
                  scars:list=None,
-                 rusting:str=None,
+                 rusting:dict=None,
+                 fevercoat:bool=False,
                  tint:str="none",
                  skin:str="BLACK",
                  white_patches_tint:str="none",
@@ -240,6 +242,7 @@ class Pelt():
                  reverse:bool=False,
                  ) -> None:
         self.rusting = rusting
+        self.fevercoat = fevercoat
         self.name = name
         self.colour = colour
         self.white_patches = white_patches

@@ -178,8 +178,8 @@ class CreationScreen(base_screens.Screens):
                 self.update_cat_image()
                 self.build_dropdown_menus()
             elif event.ui_element == self.checkboxes["fever"]:
-                global_vars.CREATED_CAT.phenotype.fevercoat = not \
-                    global_vars.CREATED_CAT.phenotype.fevercoat
+                global_vars.CREATED_CAT.pelt.fevercoat = not \
+                    global_vars.CREATED_CAT.pelt.fevercoat
                 self.update_checkboxes_and_disable_dropdowns()
                 self.update_cat_image()
             elif event.ui_element == self.checkboxes["black_pupils"]:
@@ -2453,7 +2453,7 @@ class CreationScreen(base_screens.Screens):
 
         # Fever Coat
 
-        if global_vars.CREATED_CAT.phenotype.fevercoat:
+        if global_vars.CREATED_CAT.pelt.fevercoat:
             self.checkboxes["fever"] = custom_buttons.UIImageButton(pygame.Rect((190, 134), (34, 34)),
                                                                     "",
                                                                     object_id="#checked_checkbox",
