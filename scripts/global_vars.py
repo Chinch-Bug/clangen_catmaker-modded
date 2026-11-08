@@ -84,8 +84,9 @@ patches.sort()
 white_patches += patches
 
 tortie_patches_shapes = []
-for patchlist in sprites.TORTIE_DATA["sprite_list"]:
-    tortie_patches_shapes += patchlist
+for sheet in sprites.TORTIE_DATA["sprite_list"].values():
+    for patchlist in sheet:
+        tortie_patches_shapes += patchlist
 tortie_patches_shapes += list(sprites.TORTIE_PATCH_COMBOS.keys())
 tortie_patches_shapes.sort()
 tortie_patches_shapes.insert(0, "None")
