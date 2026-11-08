@@ -55,8 +55,9 @@ extention = bidict({"E": "Normal", "ea": "Amber", "er": "Russet", "ec": "Carneli
 
 white_patches = ["None"]
 patches = []
-for patchlist in sprites.WHITE_LITTLE_DATA["sprite_list"]:
-    patches += patchlist
+for sheet in sprites.WHITE_LITTLE_DATA["sprite_list"].values():
+    for patchlist in sheet:
+        patches += patchlist
 patches += list(sprites.WHITE_PATCH_COMBOS["little"].keys())
 patches.sort()
 white_patches += patches
